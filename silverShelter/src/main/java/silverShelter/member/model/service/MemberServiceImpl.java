@@ -7,7 +7,7 @@ import silverShelter.member.model.mapper.MemberMapper;
 
 @RequiredArgsConstructor
 @Service
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService{
 
 	private final MemberMapper mapper;
 	
