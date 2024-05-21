@@ -1,4 +1,4 @@
-package edu.kh.project.common.config;
+package silverShelter.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
