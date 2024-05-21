@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        
+
+        <form action="/member/login" method="POST" id="login_area">
+
+            <!-- 아이디, 비번 입력 -->
+            <div>
+                <input type="text"
+                        class="memberId"
+                        placeholder="아이디"
+                        name="memberId"
+                        id="memberId">
+                <br>
+                <input type="password"
+                        class="memberPw"
+                        placeholder="비밀번호"
+                        name="memberPw"
+                        id="memberPw">
+                
+            </div>
+
+            <div>
+                <button class="loginBtn"></button>
+            </div>
+
+
+        </form>
+        
+        
+    </main>
+</body>
+</html>
