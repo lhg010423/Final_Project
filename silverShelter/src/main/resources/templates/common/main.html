@@ -4,11 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
 
-	<a href="/member/login">로그인</a>
+
+    <section>
+        <!-- 배경 사진 들어갈 부분 -->
+        <div>
+            <!-- 로고 부분 -->
+            <div>
+
+            </div>
+            
+            <!-- 공백 부분 -->
+            <div></div>
+
+            <div>
+                <a href="/member/login">로그인</a>
+                <!-- nav바 이동 -->
+                <a href="/member/Introduction" class="fa-solid fa-bars">소개로 이동</a>
+            </div>
+        </div>
+
+
+        <a href="/"></a>
+        <!-- board 부분 -->
+        <div>
+            
+        </div>
+    </section>
+	
+
+	  <a href="/member/login">로그인</a>
 	
     <th:block th:replace="~{board/boardList}"></th:block>
+
 </body>
 </html>
