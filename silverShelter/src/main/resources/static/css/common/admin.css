@@ -1,32 +1,78 @@
 /* 페이지 가로, 세로 길이 전체로 적용 */
-html {
+html, body {
     height: 100%;
     width: 100%;
-}
-body {
-    min-height: 100%;
-    min-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+* {
+    border: 1px solid black;
+}
 
-
-.main {
-    /* width: 1920px; */
+main {
     width: 100%;
+    height: 100%;
     display: flex;
-
 }
 
 /* 왼쪽 nav */
 .adminNav {
-    flex-basis: 20%;
-    display: flex;
-    flex-direction: column;
+    width:20%;
+    height: 100%;
+    background-color: #3C3C3B;
+    
+}
 
+/* nav 글자 크기 및 색상 지정 */
+.adminNav a {
+    display: block; /* a태그는 inline 요소라서 높이 변경이 안됨 */
+    color: white;
+    margin: 50px 20px;
+    font-size: 30px;
+    text-decoration: none; /* a태그 밑줄 제거 */
+    font-weight: bold;
 }
 
 /* nav를 제외한 오른쪽 메인 페이지 */
 .adminMain {
-    flex-basis: 80%;
+    width: 80%;
+    height: 100%;
+    background-color: #F2F2F9;
+    display: flex;
+    flex-direction: column;
+}
 
+/* 상단 <span> 부분 공간 */
+.adminHeader {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    
+}
+
+/* 상단 메인 글씨 크기 및 두께 지정 */
+.adminHeader > span {
+    font-size: 50px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* adminHeader 아래 메인 공간지정 */
+.adminBody {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* 좌우 div 크기 지정 */
+.adminLeft, .adminRight {
+    width: 50%;
+    height: auto;
+    margin: 30px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: #ddd;
+    /* box-shadow:#3C3C3B; */
 }
