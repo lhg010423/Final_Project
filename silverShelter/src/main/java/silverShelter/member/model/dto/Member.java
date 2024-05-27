@@ -9,9 +9,9 @@ public class Member {
 	private String memberEmail;
 	private String memberAddress;
 	private String memberTel;
-	private String enrollDate;
-	private String memberDelFl;
-	private String managerCheck;
+	private String enrollDate;   // 
+	private String memberDelFl;  // 회원 탈퇴 여부
+	private String managerCheck; // 관계자 확인
 	
 	
 	

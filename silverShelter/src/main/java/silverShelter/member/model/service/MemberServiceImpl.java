@@ -9,7 +9,7 @@ import silverShelter.member.model.mapper.MemberMapper;
 @Service
 public class MemberServiceImpl implements MemberService{
 
-	private final MemberMapper mapper;
+//	private final MemberMapper mapper;
 	
 	
 }

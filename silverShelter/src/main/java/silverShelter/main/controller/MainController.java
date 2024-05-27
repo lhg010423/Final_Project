@@ -10,4 +10,7 @@ public class MainController {
 	public String mainPage() {
 		return "common/main";
 	}
+	
+	
+	
 }
