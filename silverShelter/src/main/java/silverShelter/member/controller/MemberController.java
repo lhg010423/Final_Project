@@ -28,7 +28,11 @@ public class MemberController {
 		return "/member/login";
 	}
 	
-	
+	@GetMapping("Introduction")
+	public String Introduction() {
+		
+		return "/member/Introduction";
+	}
 	
 	
 }

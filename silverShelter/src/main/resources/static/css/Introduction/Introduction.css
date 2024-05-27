@@ -1,0 +1,56 @@
+*{
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 1px solid red;
+  }
+  
+body{
+
+width: 1920px;
+display: flex;
+flex-direction: column; /* 중심축 방향 세로 */
+align-items: center;    /* 교차축 방향 가운데 정렬 */
+min-height: 100vh;      /* 최소 높이를 화면 비율 100% */ 
+
+}
+
+ /* 화면 너비가 1140px이 되기 전에 적용할 css */
+  /*  == 1140px 이하일 때 적용 */
+@media (max-width : 1140px) {
+main{ width: 100vw; }
+}
+
+main{
+    width: 50vw;
+}
+
+@font-face {
+font-family: 'Pretendard-Regular';
+src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+font-weight: 400;
+font-style: normal;
+}
+ 
+*{
+    font-family: 'Pretendard-Regular';
+}
+img{
+    width: 400px;
+    height: 300px;
+} 
+.room-grade {
+    display: flex;
+    flex-direction: row;
+}
+
+.concierge-service-container {
+    width: 400px; /* 원하는 너비로 설정 */
+    height: auto; /* 높이 자동으로 조절되도록 설정 */
+}
+
+#concierge-service-img {
+    max-width: 100%; /* 부모 요소에 맞추어 최대 너비 설정 */
+    height: auto; /* 높이 자동으로 조절되도록 설정 */
+}
