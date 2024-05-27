@@ -35,4 +35,16 @@ public class MemberController {
 	}
 	
 	
+//	public String login(@ModelAttribute Member inputMember,
+//						RedirectAttributes ra,
+//						Model model,
+//						HttpServletResponse resp
+//			) {
+//		
+//		
+//		return "";
+//	}
+	
+	
+	
 }
