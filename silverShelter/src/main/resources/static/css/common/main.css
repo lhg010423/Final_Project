@@ -1,0 +1,618 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+	
+	/*border:1px solid rgb(255, 206, 206);*/
+	
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+
+   
+    margin: 0;
+ }
+
+
+.navi {
+    position: fixed;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    top: 0;
+
+    width: 100%;
+    height: 10vh;
+
+    background-color: rgba(255, 255, 255, 0);
+
+
+}
+
+
+.logo-div{
+	
+	display: flex;
+	
+	justify-content: center;
+	align-items: center;
+	
+	width: 15vw;
+/*	height: 5vh;*/
+}
+
+
+
+#logo {
+
+	width : 7vw;
+	height: 8vh;     
+}
+
+.login-join {
+
+    display: flex;
+
+    align-items: center;
+
+    font-size: 20px;
+    color: white;
+
+    
+
+    margin-right: 20px;
+    
+
+}
+
+.login-join span{
+    color : white;
+    text-shadow: 
+    -1px -1px 0 #b7b7b7,  
+     1px -1px 0 #b7b7b7,
+    -1px  1px 0 #b7b7b7,
+     1px  1px 0 #b7b7b7;
+}
+.login {
+
+    color: white;
+
+    text-shadow: 
+    -1px -1px 0 #b7b7b7,  
+     1px -1px 0 #b7b7b7,
+    -1px  1px 0 #b7b7b7,
+     1px  1px 0 #b7b7b7;
+
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.joinMember {
+    color: white;
+
+    text-shadow : 
+    -1px -1px 0 #b7b7b7,  
+     1px -1px 0 #b7b7b7,
+    -1px  1px 0 #b7b7b7,
+     1px  1px 0 #b7b7b7;
+
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.hidden-bar {
+    color: rgb(86, 97, 108);
+    margin-left: 15px;
+
+    font-size: 30px;
+
+}
+
+#three-line {
+    font-size: 25px;
+}
+
+.main-balconi {
+
+
+
+    width: 100vw;
+
+    object-fit: cover;
+    /* 이미지가 컨테이너를 꽉 채우도록 함 */
+
+    display: block;
+    /* 불필요한 공백 제거 */
+
+}
+
+.main {
+	
+	
+    width: 99%;
+    height: 100%;
+
+    object-fit: cover;
+        
+   
+
+
+}
+
+/* 네비 CSS */
+.side-nav {
+	
+	position: absolute;
+    height: 100%;
+    width: 0;
+
+    justify-content: space-between;
+
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #242223;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+
+    transform: translateX(0);
+
+    text-align: right;
+
+}
+
+.side-nav .active{
+    transform: translateX(-100%);
+}
+
+.nav-line{
+
+
+    background-color: #DDDDDD;
+    
+    height: 3px;
+    width: 320px;
+
+    margin: 20px 0px 30px 35px;
+   
+
+}
+
+
+.side-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+    margin-right: 30px;
+    min-width: 100px;
+}
+
+.side-nav a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.side-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.side-nav.active {
+    width: 20%;
+    
+    /* 네비가 차지할 공간~ */
+}
+
+/* 네비 CSS end */
+
+.section-1 {
+
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 16rem;
+
+}
+
+
+.info-1 {
+    list-style: none;
+}
+
+.section-1 h2 span {
+
+    font-size: 40px;
+}
+
+.content-1 {
+    font-size: 20px;
+    width: 30vw;
+}
+
+.information {
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+
+    height: 100%;
+}
+
+/*  캐러셀 css*/
+.carousel {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    overflow: hidden;
+
+
+
+    margin-top: 40px;
+
+
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+
+
+
+}
+
+.carousel-item {
+
+    min-width: 100%;
+
+    position: relative;
+    height: 450px;
+}
+
+.img-1 {
+    width: 100%;
+}
+
+.img-2 {
+    width: 100%;
+    height: 95%;
+}
+
+.img-3 {
+    width: 98%;
+    height: 95%;
+}
+
+.carousel-caption {
+
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carousel-indicators {
+
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.indicator.active {
+    background-color: #333;
+}
+
+/* 위까지 캐러셀 css */
+
+.section-2 {
+
+    display: flex;
+    
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100vw;
+
+    height: 100%;
+
+    font-size: 24px;
+
+    padding-top: 16rem;
+}
+
+
+
+
+/* 캐러샐2 */
+
+.my-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    overflow: hidden;
+    
+    background-color: #fff;
+}
+
+.my-carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.my-carousel-item {
+    min-width: 55%; /* 두 개의 이미지가 보이도록 설정 */
+    box-sizing: border-box;
+    position: relative;
+    height: 500px; /* 고정된 높이 설정 */
+
+    padding: 0 1vw 0 1vw;
+}
+
+.my-carousel-item img {
+    width: 100%;
+    height: 100%; /* 부모 요소의 높이에 맞추기 */
+    
+}
+
+.my-carousel-control-prev,
+.my-carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    
+    z-index: 1;
+
+    
+}
+
+.my-carousel-control-prev {
+    left: 10px;
+}
+
+.my-carousel-control-next {
+    right: 10px;
+}
+/* 캐러셀2 end */
+
+/* section 3 , life with golden prestige */
+
+.section-3{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+
+    width: 100vw;
+    height: 120vh;
+
+    font-size: 24px;
+
+}
+
+.h2-cont{
+
+    width: 39vw;
+    margin-left: 1vw;
+}
+
+.lifeWith{
+
+    text-align: center;
+    
+
+}
+
+.info-3{
+    display: flex;
+
+    flex-direction: column;
+}
+
+.content-3{
+
+    font-size: 19px;
+
+    width: 20vw;
+    text-align: center;
+}
+
+.section-3-cont{
+    display: flex;
+    flex-direction: column;
+}
+
+.section-3-1{
+
+   margin-top: 1vh;
+   width: 38vw;
+   height: 26vh;
+}
+
+.section-3-Btn{
+
+    display: flex;
+    flex-direction: row;
+}
+
+.section-3-2{
+    margin :1vh 0 0 0 ;
+
+    width: 60%;
+    height: 95%;
+}
+
+.section-3-3{
+
+	width: 60%;
+	
+    margin : 0 0 0 1vh;
+
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-around;
+
+    text-align: center;
+
+    font-size: 16px;
+}
+
+
+.section-3-4{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1A2050;
+
+    border-radius: 6px;
+    color: #FFFFFF;
+    text-decoration: none;
+
+    height: 5vh;
+}
+
+.section-3-4:hover{
+
+    border-radius: 6px;
+    border: 1px solid #1A2050;
+    background-color: #FFFFFF;
+
+    color: #1A2050;
+}
+
+.section-3-4:active{
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #1A2050;
+
+}
+
+/* section4, health care service*/
+
+.section-4{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	
+	flex-direction: column;
+	
+	margin-top: 3vh;
+}
+
+.section-4-1{
+	text-align: center;
+	width: 45vw;
+	font-size: 36px;
+}
+
+.section-4-2{
+	
+	font-size:20px;
+}
+
+.section-4-3-Btn{
+	width: 36vw;
+}
+
+.section-4-3-doc{
+	width:100%;
+}
+.section-4-3{
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	
+	margin-top: 1vh; 
+}
+
+.section-4-3-1{
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: center;
+	width: 20vw;
+}
+
+.section-4-3-1-1{
+	
+	display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1A2050;
+
+    border-radius: 6px;
+    color: #FFFFFF;
+    text-decoration: none;
+	
+	text-align: center;
+    height: 5vh;
+}
+
+.section-4-3-1-1:hover{
+
+    border-radius: 6px;
+    border: 1px solid #1A2050;
+    background-color: #FFFFFF;
+
+    color: #1A2050;
+}
+
+.section-4-3-1-1:active{
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #1A2050;
+
+}
+
+
+.section-4-3-2{
+	width: 50%;
+	margin : 2vh 0 0 1vw;
+}
