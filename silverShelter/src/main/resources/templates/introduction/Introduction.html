@@ -1,29 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/css/Introduction/Introduction.css">
+    <link rel="stylesheet" href="/css/introduction/introduction.css">
 </head>
 <body>
     
     <main>
-        <!-- 이미지 나오는 div -->
-        <div class="image-container">
-            <img src="" alt="">
-        </div>
-            
+
+                            
         <div>
             <!-- 단지소개/ 입주 안내 div -->
             <div class="facility-info-container">
-                <!-- 시설 관련 div -->
-                <div class="facility-links">
-                    <a href="#">단지소개</a>
-                    <a href="#">입주 안내</a>
-                </div>
-
+                <!-- 조각 들어갈 위치 -->
+                <th:block th:replace="~{Introduction/introductionCommon}"></th:block>
+                
                 <div class="room-grade">
                     <button>클래식</button>
                     <button>프리미엄</button>
@@ -45,9 +39,9 @@
                     <div class="room-description">
                         <h3>
                             실버타운의 클래식룸은 편안하고 아늑한 분위기를 제공합니다. 
-                    
+                            
                             기본적인 편의시설을 완비하여, 집처럼 편안한 휴식을 취할 수 있습니다. 
-                       
+                            
                             경제적이면서도 안락한 숙박을 원하시는 분들께 이상적인 선택입니다. 
                         </h3>
                     </div>
