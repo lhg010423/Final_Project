@@ -20,20 +20,114 @@
         <!-- nav를 제외한 오른쪽 메인 페이지 -->
         <section class="adminMain">
 
+            <!-- 페이지 상단 메인 글씨 -->
             <div class="adminHeader">
                 <span>관리자 페이지 - 회원 정보 조회</span>
             </div>
 
+
+
             <div class="adminBody">
 
-                <div class="adminLeft"></div>
+                <!-- 회원 게시판 출력 -->
+                <div class="adminLeft">
+
+
+                    <table class="list-table">
+
+                        <thead>
+                            <tr>
+                                <!-- 이름, 아이디 검색 가능하게 할 예정 -->
+                                <th>회원 이름</th>
+                                <th>회원 아이디</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            <!-- 회원이 없을 때 -->
+                            <th:block th:if="${#lists.isEmpty(memberList)}">
+                                <tr>
+                                    <th colspan="6">회원이 존재하지 않습니다.</th>
+                                </tr>
+                            </th:block>
+
+                            <!-- 회원이 있을 때 -->
+                            <th:block th:unless="${#lists.isEmpty(memberList)}">
+
+                                <tr th:each="member : ${memberList}" th:object="${member}">
+
+                                    <td>
+
+                                        <!-- 검색 X -->
+                                        <button id="memberId"
+                                        th:name="*{memberNo}" th:text="*{memberName}"></button>
+                                        
+                                        
+
+                                    </td>
+
+
+                                    <td th:text="*{memberId}">회원 아이디</td>
+
+                                </tr>
+                            </th:block>
+
+
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- <div class="pagination-area">
+
+                        <ul class="pagination" th:unless="${param.key}" th:object="${pagination}"></ul>
+
+                    </div> -->
+
+
+
+
+
+
+
+                </div>
                 
-                <div class="adminRight"></div>
+                <!-- 회원 상세 정보 -->
+                <div class="adminRight">
+
+                    <h2>회원 상세 정보</h2>
+                    <form action="/admin/adminSelect" method="POST" id="memberForm">
+
+                        <label for="name">이름 : </label>
+                        <input type="text" id="nameInput" name="name"><br>
+
+                        <label for="id">아이디 : </label>
+                        <span id="idInput"></span>
+                    
+                        <label for="pw">비밀번호 : </label>
+
+
+
+                        <br>
+                        <button type="submit">저장</button>
+
+                    </form>
+
+
+                </div>
+
+
             </div>
 
         </section>
         
     </main>
+
+
+    <script src="/js/admin.js"></script>
 
 </body>
 </html>
