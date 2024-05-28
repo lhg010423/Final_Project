@@ -10,14 +10,7 @@ ALTER USER silver_shelter DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 ROLLBACK;
 COMMIT;
 
-INSERT INTO "MEMBER"
-VALUES(SEQ_MEMBER_NO.NEXTVAL, 'admin', 'admin', '관리자', 'admin@kh.com',
-			NULL, '010-1111-2222', DEFAULT, DEFAULT, '1',
-			NULL, NULL);
 
--- 회원 삭제
-DELETE FROM "MEMBER"
-WHERE MEMBER_NO = 2;
 
 -- 테이블 삭제
 DROP TABLE "MEMBER";
@@ -656,13 +649,7 @@ REFERENCES "MEMBER" (
 COMMIT;
 
 ----------------------------------------------------------------------------------
-CREATE SEQUENCE SEQ_BOARD_CODE NOCACHE;
-CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
 
-
-INSERT INTO "MEMBER"
-VALUES(SEQ_MEMBER_NO.NEXTVAL, 'admin', 'admin', '관리자', 'admin@kh.com',
-			NULL, '01011112222', DEFAULT, DEFAULT, 'Y');
 
 
 
