@@ -1,3 +1,20 @@
+document.addEventListener("DOMContentLoaded", async function() {
+    // 드롭다운 메뉴의 변경 이벤트를 처리합니다.
+    var selectElement = document.getElementById('section-select');
+    if (selectElement) { // 요소가 존재하는지 확인
+        selectElement.addEventListener('change', function() {
+            var sectionId = this.value;
+            showSection(sectionId);
+        });
+    }
+        // 외부 HTML 파일을 가져와서 탭 내용을 표시합니다.
+        await loadTabContent('medicalCenterIntro.html');
+
+        // 초기에 보여질 탭 설정
+        var defaultTab = 'infoTab'; // 초기 탭 설정
+        showTab(defaultTab); // 초기 탭에 대한 내용 표시  
+});
+
 // 드롭다운
 function showSection(sectionId) {
     // 모든 섹션을 숨깁니다.
@@ -12,22 +29,6 @@ function showSection(sectionId) {
         selectedSection.style.display = 'flex';
     }
 }
-
-// 페이지 로드 시 초기 설정
-document.addEventListener("DOMContentLoaded", function() {
-    loadTabContent('medicalCenterIntro.html');
-    // 초기에 보여질 탭 설정
-    var defaultTab = 'infoTab'; // 초기 탭 설정
-    showTab(defaultTab); // 초기 탭에 대한 내용 표시
-        // 드롭다운 메뉴의 변경 이벤트를 처리합니다.
-        var selectElement = document.getElementById('section-select');
-        if (selectElement) { // 요소가 존재하는지 확인
-            selectElement.addEventListener('change', function() {
-                var sectionId = this.value;
-                showSection(sectionId);
-            });
-        }    
-});
 
 // 탭 클릭 이벤트 처리
 document.getElementById('infoTab').addEventListener('click', function() {
@@ -56,15 +57,14 @@ document.getElementById('funeralTab').addEventListener('click', function() {
 });
 
 // 외부 HTML 파일을 가져와서 탭 내용을 표시하는 함수
-function loadTabContent(htmlFile) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', htmlFile, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById('tabContentContainer').innerHTML = xhr.responseText;
-        }
-    };
-    xhr.send();
+async function loadTabContent(htmlFile) {
+    try {
+        const response = await fetch(htmlFile);
+        const html = await response.text();
+        document.getElementById('tabContentContainer').innerHTML = html;
+    } catch (error) {
+        console.error('Error fetching HTML file:', error);
+    }
 }
 
 function showTab(tabId) {
