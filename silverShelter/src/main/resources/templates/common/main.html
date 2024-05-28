@@ -7,22 +7,24 @@
 
     <script src="https://kit.fontawesome.com/f4ca9edfa4.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/main.css">
+	<!-- main css -->
+    <link rel="stylesheet" href="/css/common/main.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
 
 </head>
 <body>
     <section class="main-balconi">
         <nav class="navi">
-            <div class="logo">
-                <a href="#">
-                    <img src="/Logo4.png" alt="Logo" class="logo">
+        	<div class="logo-div">
+                <a href="/" class="logo-div2">
+                    <img src="/images/main/Logo4.png" alt="Logo" id="logo">
                 </a>
-            </div>
+			</div>
             
-            <div class="hide"></div>
+			<!-- <div class="hide"></div>-->
     
             <div class="login-join">
-                <a href="#" class="login">로그인</a>
+                <a href="/member/login" class="login">로그인</a>
                 
                 <span> &nbsp;| &nbsp; </span>
                 
@@ -36,7 +38,7 @@
             </div>
         </nav>
     
-        <img src="/main.png" class="main">
+        <img src="/images/main/main.png" class="main">
     </section>
     
     <div id="sideNav" class="side-nav">
@@ -44,11 +46,9 @@
             <a href="javascript:void(0)" class="closebtn">&times;</a>
         </div>
         
-        <div class="nav-line">
-            <div class="nav-line2"></div>
-        </div>
+        <div class="nav-line"></div>
         <div>
-            <a href="#">입주정보</a>
+            <a href="/member/Introduction">입주정보</a>
         </div>
         <div>
             <a href="#">시설소개</a>
@@ -111,25 +111,25 @@
                     <div>
                     <br>
                     완벽히 자유롭기에 삶이 더욱 생생해지는 곳, <br>
-                    궁극의 삶이 가능해지는 프리미엄 시니어 레지던스, Golden Prestage입니다.
+                    궁극의 삶이 가능해지는 프리미엄 시니어 레지던스<br>Golden Prestage입니다.
                     </div>
                 </div>
             </ul>
            
-            <br>
+			<br><br>
 
             <div class="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/greenDoorOpen.png" alt="이미지 1" class="img-1">
+                        <img src="/images/main/greenDoorOpen.png" alt="이미지 1" class="img-1">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="/sofa.png" alt="이미지 2" class="img-2">
+                        <img src="/images/main/sofa.png" alt="이미지 2" class="img-2">
                     </div>
 
                     <div class="carousel-item">
-                        <img src="/park.png" alt="이미지 3" class="img-3">
+                        <img src="/images/main/park.png" alt="이미지 3" class="img-3">
                     </div>
                 </div>
 
@@ -142,37 +142,207 @@
         </div>
     </section>
 
-    <section>
-        <h2 class="section-2">
-            <span>L</span>
-            <span>i</span>
-            <span>f</span>
-            <span>e</span>
-            <span>&nbsp;</span>
-
-            <span>i</span>
-            <span>n</span>
-            <span>&nbsp;</span>
-
-            <span>G</span>
-            <span>o</span>
-            <span>l</span>
-            <span>d</span>
-            <span>e</span>
-            <span>n</span>
-            <span>&nbsp;</span>
-
-            <span>P</span>
-            <span>r</span>
-            <span>e</span>
-            <span>s</span>
-            <span>t</span>
-            <span>i</span>
-            <span>g</span>
-            <span>e</span>
-        </h2>
+    <section class="section-2">
+		<div class="lifeIn">
+	        <h2>
+	            <span>L</span>
+	            <span>i</span>
+	            <span>f</span>
+	            <span>e</span>
+	            <span>&nbsp;</span>
+	
+	            <span>i</span>
+	            <span>n</span>
+	            <span>&nbsp;</span>
+	
+	            <span>G</span>
+	            <span>o</span>
+	            <span>l</span>
+	            <span>d</span>
+	            <span>e</span>
+	            <span>n</span>
+	            <span>&nbsp;</span>
+	
+	            <span>P</span>
+	            <span>r</span>
+	            <span>e</span>
+	            <span>s</span>
+	            <span>t</span>
+	            <span>i</span>
+	            <span>g</span>
+	            <span>e</span>
+	        </h2>
+		</div>
+		
+		<ul class="info-2">
+			<br><br>
+			<div class="content-1">
+				<div>
+					이전에 없던 새로운 시니어 문화와 라이프 스타일을 선도합니다.
+		
+				</div>
+			</div>
+		</ul>
+		
+		<br>
+		
+		<div class="my-carousel">
+			<button class="my-carousel-control-prev" onclick="prevSlide()">&#10094;</button>
+			<div class="my-carousel-inner">
+				<div class="my-carousel-item">
+					<img src="/images/main/bathRoom.jpg" alt="이미지 1">
+				</div>
+				<div class="my-carousel-item">
+					<img src="/images/main/chair.png" alt="이미지 2">
+				</div>
+				<div class="my-carousel-item">
+					<img src="/images/main/frontConcierge.png" alt="이미지 3">
+				</div>
+				<div class="my-carousel-item">
+					<img src="/images/main/roomservice.png" alt="이미지 4">
+				</div>
+			</div>
+			<button class="my-carousel-control-next" onclick="nextSlide()">&#10095;</button>
+		</div>
 
     </section>
+	
+	<!-- 시설소개 파티션 -->
+	<section class="section-3">
+	
+	        <div class="h2-cont">
+	            <h2 class="lifeWith">
+	                <span>L</span>
+	                <span>i</span>
+	                <span>f</span>
+	                <span>e</span>
+	                <span>&nbsp;</span>
+	
+	                <span>W</span>
+	                <span>i</span>
+	                <span>t</span>
+	                <span>h</span>
+	                <span>&nbsp;</span>
+	
+	                <span>G</span>
+	                <span>o</span>
+	                <span>l</span>
+	                <span>d</span>
+	                <span>e</span>
+	                <span>n</span>
+	                <span>&nbsp;</span>
+	
+	                <span>P</span>
+	                <span>r</span>
+	                <span>e</span>
+	                <span>s</span>
+	                <span>t</span>
+	                <span>i</span>
+	                <span>g</span>
+	                <span>e</span>
+	            </h2>
+	        </div>
+	
+	        <div>
+	            <ul class="info-3">
+	                <br><br>
+	                 <div class="content-3">
+	                     <div>
+	                        생활 속에서 누리는 지구 반대편의 삶.<br>
+	                        고객 중심의 라이프 솔루션을 약속합니다.
+	                    </div>
+	                 </div>
+	             </ul>
+	        </div> 
+	
+	        <br>
+	
+	        <div class="section-3-cont">
+	            <img src="/images/main/beigeSky.png" class="section-3-1">
+	
+	            <div class="section-3-Btn">
+	                
+	                <img src="/images/main/beigeSunshine.png" class="section-3-2">
+	                
+	                <span class="section-3-3">
+	                    품격있는 사람들의 자격<br>
+	                    Golden Prestige를 소개합니다.
+	                    <br>
+	                    <br>
+	                    <br>
+	                    <a href="#" class="section-3-4">시설소개</a>
+	                </span>
+	            
+	            </div>    
+	        </div>
+		</section>
+	
+	<!-- 의료센터 파티션 파티션 -->
+	<section class="section-4">
+		
+		<div>
+			<h2 class="section-4-1">
+	            <span>H</span>
+                <span>e</span>
+                <span>a</span>
+                <span>l</span>
+				<span>t</span>
+				<span>h</span>
+                <span>&nbsp;</span>
+
+                <span>C</span>
+                <span>a</span>
+                <span>r</span>
+                <span>e</span>
+                <span>&nbsp;</span>
+
+                <span>S</span>
+                <span>e</span>
+                <span>r</span>
+                <span>v</span>
+                <span>i</span>
+                <span>c</span>
+                <span>e</span>
+                <span>&nbsp;</span>
+ 			</h2>
+        </div>
+		
+        <div>
+            <ul>
+                <br><br>
+             <div>
+             	<div class="section-4-2">
+					온 하루를 상주하는 전담 의사의 응급 케어<br>
+					개인별 맞춤형 건강관리 서비스를 제공합니다.
+            	</div>
+				
+             </div>
+			 
+         	</ul>
+        </div> 
+			
+        <br>
+			
+        <div class="section-4-3-Btn">
+            <img src="/images/main/doctor.png" class="section-4-3-doc">
+
+            <div class="section-4-3">
+				<span class="section-4-3-1">
+					고객에게 전해받은 온기로<br>
+					따뜻하고 감사하게 진료합니다.<br><br>	
+					<a href="#" class="section-4-3-1-1">의료센터</a>
+				</span>
+				<img src="/images/main/doctorHand.png"
+					 class="section-4-3-2">
+                
+            </div>    
+        </div>
+		
+	</section>
+	
+	<!-- 커뮤니티 파티션 -->
+	<section> </section>
+	
     <th:block th:replace="~{common/common}"></th:block>
 
 
@@ -186,12 +356,8 @@
             
             <!-- 공백 부분 -->
             <div></div>
-
+			<div style="height: 100px;"></div>
             <div>
-                <a href="/member/login">로그인</a>
-                <!-- nav바 이동 -->
-                <a href="/member/Introduction" class="fa-solid fa-bars">소개로 이동</a>
-
                 <a href="/admin/adminMain">관리자 페이지</a>
             </div>
         </div>
@@ -205,12 +371,15 @@
     </section>
 	
 
-	  <a href="/member/login">로그인</a>
+	  
 	
     <th:block th:replace="~{board/boardList}"></th:block>
 
-    <div style="height: 500px;"></div>
+    <div style="height: 100px;"></div>
+	
+	<!--footer-->
+	 <th:block th:replace="~{/common/footer.html}"></th:block>
    
-   <script src="/main.js"> </script>
+   <script src="/js/common/main.js"> </script>
 </body>
 </html>
