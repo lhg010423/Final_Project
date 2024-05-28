@@ -20,10 +20,11 @@ public class Member {
 	private String memberEmail;
 	private String memberAddress;
 	private String memberTel;
+	private String guardianTel;  // 보호자 전화번호
 	private String enrollDate;   // 회원 가입일
 	private String memberDelFl;  // 회원 탈퇴 여부
 	private int memberRole;      // 관리자 계정 판별
-//	private String managerCheck; // 관계자 확인
+//	private String caregiversName;
 	
 	
 	

@@ -101,18 +101,44 @@
                     <h2>회원 상세 정보</h2>
                     <form action="/admin/adminSelect" method="POST" id="memberForm">
 
-                        <label for="name">이름 : </label>
-                        <input type="text" id="nameInput" name="name"><br>
+                        <div id="name-area">
+                            <label for="name">이름 : </label>
+                            <span id="nameInput" name="name"></span><br>
+                        </div>
+                            
+                        <div id="id-area">
+                            <label for="id">아이디 : </label>
+                            <span id="idInput"></span><br>
+                        </div>
+                            
+                        <div id="tel-area">
+                            <label for="tel">전화번호 : </label>
+                            <span id="telInput"></span>
+                        </div>
 
-                        <label for="id">아이디 : </label>
-                        <span id="idInput"></span>
-                    
-                        <label for="pw">비밀번호 : </label>
+                        <div id="gdtel-area">
+                            <label for="gdtel">보호자 전화번호 : </label>
+                            <span id="gdtelInput"></span>
+                        </div>
+
+                        <div id="postCode-area">
+                            <label for="postCode">우편번호 : </label>
+                            <span id="postCode"></span>
+                        </div>
+
+                        <div id="address-area">
+                            <label for="address">주소 : </label>
+                            <span id="address"></span>
+                        </div>
+
+                        <div id="detailAddress-area">
+                            <label for="detailAddress">상세주소 : </label>
+                            <span id="detailAddress"></span>
+                        </div>
 
 
 
-                        <br>
-                        <button type="submit">저장</button>
+
 
                     </form>
 
