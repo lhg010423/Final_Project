@@ -1,6 +1,6 @@
 package silverShelter.admin.controller;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -85,13 +85,38 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("adminSelect")
-	public Member adminSelect(@RequestBody Member member,
-								Model model) {
+	public Map<String, Object> adminSelect(@RequestBody Member member) {
 		
-		log.info("member {}" , member);
+		// js로 다시 보낼 map
+		Map<String, Object> map = new HashMap<>();
+		
+		// 회원 상세정보 조회
+		Member memberInfo = service.adminDetailSelect(member);
+		
+		String memberAddress = memberInfo.getMemberAddress();
+		
+		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호
+		map.put("memberName", memberInfo.getMemberName());
+		map.put("memberId", memberInfo.getMemberId());
+		map.put("memberEmail", memberInfo.getMemberEmail());
+		map.put("memberTel", memberInfo.getMemberTel());
+		map.put("guardianTel", memberInfo.getGuardianTel());
+		
+		if(memberAddress != null) {
+			
+			String[] arr = memberAddress.split("\\^\\^\\^");
+			
+			map.put("postCode", arr[0]);
+			map.put("address", arr[1]);
+			map.put("detailAddress", arr[2]);
+		}
 		
 		
-		return service.adminDetailSelect(member);
+		log.info("member {}" , map);
+		
+		
+		
+		return map;
 	}
 	
 	
