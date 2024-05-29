@@ -23,61 +23,7 @@
 	    <img src="/images/main/main.png" class="main">
 	    
 	<th:block th:replace="~{common/mainNav}"></th:block>
-    <!-- <section class="main-balconi">
-        <nav class="navi">
-        	<div class="logo-div">
-                <a href="/" class="logo-div2">
-                    <img src="/images/main/Logo4.png" alt="Logo" id="logo">
-                </a>
-			</div>
-            
-			 <div class="hide"></div>
-    
-            <div class="login-join">
-                <a href="/member/login" class="login">로그인</a>
-                
-                <span> &nbsp;| &nbsp; </span>
-                
-                <a href="#" class="joinMember">회원가입</a>
-                
-                <div>
-                    <a href="#" class="hidden-bar">
-                        <i class="fa-solid fa-bars" id="three-line"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    
-    </section> -->
-	
-	
-	
-	
-<!--    
-	<div id="sideNav" class="side-nav">
-        <div>
-            <a href="javascript:void(0)" class="closebtn">&times;</a>
-        </div>
-        
-        <div class="nav-line"></div>
-        <div>
-            <a href="/introduction/introduction">입주정보</a>
-        </div>
-        <div>
-            <a href="">시설소개</a>
-        </div>
-        <div>
-            <a href="#">의료센터</a>
-        </div>
-        <div>
-            <a href="#">커뮤니티</a>
-        </div>
-        <div>    
-            <a href="#">게시판</a>
-        </div>
-    </div>
--->
-
+   
     <section class="information">
         <div class="section-1">
             <h2 class="our">
@@ -284,7 +230,7 @@
 	                    <br>
 	                    <br>
 	                    <br>
-	                    <a href="#" class="section-3-4">시설소개</a>
+	                    <a href="/communication/communication" class="section-3-4">시설소개</a>
 	                </span>
 	            
 	            </div>    
@@ -412,10 +358,22 @@
 			
 			<div class="section-5-4">
 				<img src="/images/main/golf.png">
-				
+				<!-- 날씨 API -->
 				<div class="section-5-4-1">
-					날씨 API 올겅미
-				
+
+					<div class="weather-container">
+						<!-- 현재 날씨 이모티콘 -->
+						<img id="weatherIcon">
+
+					</div>
+
+					<!-- 현재 기온 -->
+					<p id="temperature"></p>
+					<!-- 강수확률 -->
+					<p id="precipitation"></p>
+					<!-- 하늘 정보 -->
+					<span id="skyInformation"></span>					
+						
 					<a href="#" class="section-5-4-2">커뮤니티</a>
 				</div>
 			</div>

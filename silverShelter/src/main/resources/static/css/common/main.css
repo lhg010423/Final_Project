@@ -7,7 +7,7 @@
 
 * {
 	
-	/*border:1px solid rgb(255, 206, 206);*/
+	border:1px solid rgb(255, 206, 206);
 	
     font-family: 'Pretendard-Regular';
     color: #3C3C3B;
@@ -662,7 +662,18 @@
 	margin-right: 5vw;
 }
 
+.weather-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+}
 
+.weather-container img {
+    width: 100%;
+    height: 100%;
+}
 
 
 
