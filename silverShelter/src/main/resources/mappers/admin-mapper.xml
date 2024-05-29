@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="silverShelter.admin.model.mapper.AdminMapper">
+<mapper namespace="com.silver.shelter.admin.model.mapper.AdminMapper">
 
 
 	
@@ -8,9 +8,9 @@
 	<!-- <typeAlias alias="member" type="silverShelter.member.model.dto.Member"/> -->
 	
 	<!-- 탈퇴하지 않은 회원 수 조회 -->
-	<select id="memberALlCount">
+	<select id="memberAllCount">
 		SELECT COUNT(*)
-		FROM "MEMBER"
+		FROM MEMBER
 		WHERE MEMBER_DEL_FL = 'N'
 	</select>
 

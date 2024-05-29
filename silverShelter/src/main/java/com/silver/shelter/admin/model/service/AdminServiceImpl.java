@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService{
 	public Map<String, Object> memberAllSelect(int cp) {
 		
 		// 탈퇴하지 않은 회원 수 조회
-		int memberCount = mapper.memberALlCount();
+		int memberCount = mapper.memberAllCount();
 		
 		// memberCount + cp 을 이용해 pagination 생성
 		Pagination pagination = new Pagination(cp, memberCount);
