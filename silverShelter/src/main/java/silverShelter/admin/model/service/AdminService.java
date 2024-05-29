@@ -9,15 +9,17 @@ public interface AdminService {
 
 	
 	/** 회원 목록 조회
+	 * @param cp 
 	 * @return
 	 */
-	Map<String, Object> memberALlSelect();
+	Map<String, Object> memberAllSelect(int cp);
 
 	/** 
 	 * @param paramMap
+	 * @param cp 
 	 * @return
 	 */
-	Map<String, Object> memberSearchSelect(Map<String, Object> paramMap);
+	Map<String, Object> memberSearchSelect(Map<String, Object> paramMap, int cp);
 
 	/** 회원 상세조회
 	 * @param member
