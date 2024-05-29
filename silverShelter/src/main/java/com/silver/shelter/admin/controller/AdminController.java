@@ -44,7 +44,7 @@ public class AdminController {
 	 */
 	@GetMapping("adminSelect")
 	public String adminSelect(
-//			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			Model model,
 			@RequestParam Map<String, Object> paramMap
 			) {
@@ -55,17 +55,16 @@ public class AdminController {
 		
 		// 검색 안했을 때
 		if(paramMap.get("key") == null) {
-			map = service.memberALlSelect();
+			map = service.memberAllSelect(cp);
 			
 			
 		// 검색 했을 때
+		} else {
+			map = service.memberSearchSelect(paramMap, cp);
+		
 		}
 		
-//		else {
-//			map = service.memberSearchSelect(paramMap);
-//		
-//		}
-		
+		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("memberList", map.get("memberList"));
 		
 		
@@ -96,12 +95,14 @@ public class AdminController {
 		
 		String memberAddress = memberInfo.getMemberAddress();
 		
-		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호
+		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
 		map.put("memberName", memberInfo.getMemberName());
 		map.put("memberId", memberInfo.getMemberId());
 		map.put("memberEmail", memberInfo.getMemberEmail());
 		map.put("memberTel", memberInfo.getMemberTel());
 		map.put("guardianTel", memberInfo.getGuardianTel());
+		map.put("caregiversName", memberInfo.getCaregiversName());
+		map.put("roomNo", memberInfo.getRoomNo());
 		
 		if(memberAddress != null) {
 			

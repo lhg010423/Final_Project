@@ -20,10 +20,12 @@ public class Member {
 	private String memberEmail;
 	private String memberAddress;
 	private String memberTel;
-	private String guardianTel;  // 보호자 전화번호
-	private String enrollDate;   // 회원 가입일
-	private String memberDelFl;  // 회원 탈퇴 여부
-	private int memberRole;      // 관리자 계정 판별
+	private String guardianTel;    // 보호자 전화번호
+	private String enrollDate;     // 회원 가입일
+	private String memberDelFl;    // 회원 탈퇴 여부
+	private int memberRole;        // 관리자 계정 판별
+	private String caregiversName; // 요양사 이름
+	private int roomNo;            // 방 번호
 //	private String caregiversName;
 	
 	
