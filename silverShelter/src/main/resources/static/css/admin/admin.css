@@ -130,7 +130,7 @@ tbody td {
 
 
 /* 위에 게시판을 제외한 pagination, 검색창 공간 */
-.pagination-area {
+.bottom-area {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
@@ -146,12 +146,25 @@ tbody td {
     padding: 40px;
 }
 
+/* select, 검색창, 검색하기버튼 세로크기 및 색상 지정 */
+.boardSearch * {
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    background-color: white;
+    outline: none;
+}
+
+
 /* 검색창 왼쪽 select태그 */
 #searchKey {
     width: 100px;
 }
 
-
+/* 검색창 크기 지정 */
 #searchQuery {
     width: 200px;
 }
@@ -215,4 +228,16 @@ tbody td {
     border: 1px solid #ddd;
     box-shadow: 0 3px 3px rgba(0,0,0,0.2);
     box-sizing: border-box;
+}
+
+.updateBtn {
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.2); */
+    box-sizing: border-box;
+    background-color: #1A2050;
+    outline: none;
+    color: white;
 }

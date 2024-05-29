@@ -15,6 +15,9 @@ WHERE MEMBER_NO = 15;
 
 COMMIT;
 
+-- MEMBER 테이블의 MEMBER_ID에 UNIQUE 추가하기 ---     아직 적용안함
+ALTER TABLE MEMBER ADD CONSTRAINT uc_member_id UNIQUE (MEMBER_ID);
+
 
 
 
@@ -89,6 +92,8 @@ INSERT INTO "BOARD_TYPE"
 VALUES(9, '회원 서류');
 
 
+
+
 BEGIN
 	FOR I IN 1..2000 LOOP
 		
@@ -114,8 +119,8 @@ BEGIN
 					SEQ_BOARD_NO.CURRVAL || '번째 게시글',
 					SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용 입니다',
 					DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT,
-					CEIL( DBMS_RANDOM.VALUE(1, 9) ),
-					1
+					CEIL( DBMS_RANDOM.VALUE(1, 9) ),  -- BOARD_CODE 1~9번 게시판
+					1 -- MEMBER_NO
 		);
 					
 	END LOOP;
@@ -129,17 +134,29 @@ SELECT MEMBER_NAME, MEMBER_ID, MEMBER_PW,
 --		JOIN "CAREGIVERS" USING(CAREGIVERS_NO)
 		WHERE MEMBER_NO = 2;
 
+
+
+-- 기존 회원에 요양사 추가하기
 UPDATE MEMBER
-SET CAREGIVERS_NO = 1,
-    ROOM_NO = 101
+SET CAREGIVERS_NO = 1
 WHERE MEMBER_NO = 2;
 
+
+-- 기존 회원에 주소 추가하기        우편번호^^^주소^^^상세주소
+-- 사이에 ^^^ 꼭써야함 그걸로 3가지 구분하는거
 UPDATE "MEMBER" 
 SET MEMBER_ADDRESS = '12345^^^서울 종로^^^101동 101호'
 WHERE MEMBER_NO = 2;
 
 
+-- 기존 회원에 방 번호 추가하기
+UPDATE "MEMBER"
+SET ROOM_NO = 301
+WHERE MEMBER_NO = 2;
 
+
+
+-- 방 타입 데이터 추가하기
 INSERT INTO "ROOM_TYPE"
 VALUES(1, 'VIP', '700000000');
 
@@ -149,23 +166,66 @@ VALUES(2, '프리미엄', '500000000');
 INSERT INTO "ROOM_TYPE"
 VALUES(3, '클래식', '300000000');
 
+
+
+
+
 COMMIT;
 
 
 
+
+DELETE FROM "ROOM";
+
+
+-- 컬럼 삭제하기
+ALTER TABLE ROOM_TYPE
+DROP COLUMN ROOM_PRICE;
+
+
+-- 테이블 삭제안하고 컬럼명 및 주석 추가하기
+ALTER TABLE ROOM
+ADD OCCUPIED CHAR(1) DEFAULT 'N' NOT NULL;
+COMMENT ON COLUMN ROOM.OCCUPIED IS '방 입실 여부 (Y, N)';
+
+
+
+-- 방추가하는 반복문 - 이제 쓸일 없음 (방번호, 방타입, 입실여부N)
 BEGIN
-	FOR I IN 101..110 LOOP
+	FOR I IN 301..330 LOOP
 		
 		INSERT INTO "ROOM"
-		VALUES(I, 3);
+		VALUES(I, 3, DEFAULT);
 		
 	END LOOP;
 END;
 
 
 
+-- 방 타입마다 남은 방 개수 구하는 SELECT문 중요***************************************
+SELECT
+    FLOOR(ROOM_NO / 100) AS BUILDING_NUMBER,
+    COUNT(*) AS EMPTY_ROOMS
+FROM
+    ROOM
+WHERE
+    OCCUPIED = 'N'
+GROUP BY
+    FLOOR(ROOM_NO / 100)
+ORDER BY
+    BUILDING_NUMBER;
 
 
+-- 방 타입마다 전체 방 개수 구하는 SELECT문 중요***************************************
+SELECT
+    FLOOR(ROOM_NO / 100) AS BUILDING_NUMBER,
+    COUNT(*) AS EMPTY_ROOMS
+FROM
+    ROOM
+GROUP BY
+    FLOOR(ROOM_NO / 100)
+ORDER BY
+    BUILDING_NUMBER;
 
 
 

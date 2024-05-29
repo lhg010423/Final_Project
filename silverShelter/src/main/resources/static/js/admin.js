@@ -43,6 +43,13 @@ document.getElementById("memberId").addEventListener("click", e => {
             const detailAddress = document.getElementById("detailAddress");
             detailAddress.innerText = result.detailAddress;
 
+            const caregiversName = document.getElementById("caregiversName");
+            caregiversName.innerText = result.caregiversName;
+
+            const roomNo = document.getElementById("roomNo");
+            roomNo.innerText = result.roomNo;
+
+
 
         }
     })
