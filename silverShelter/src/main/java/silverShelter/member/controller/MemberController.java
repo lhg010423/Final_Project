@@ -2,6 +2,7 @@ package silverShelter.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -28,12 +29,24 @@ public class MemberController {
 		return "/member/login";
 	}
 	
+	
 	@GetMapping("Introduction")
 	public String Introduction() {
 		
 		return "/member/Introduction";
 	}
 	
+	@GetMapping("foundId")
+	public String foundId() {
+		
+		return "member/foundId";
+	}
+	
+	@GetMapping("foundPw")
+	public String foundPw() {
+		
+		return "member/foundPw";
+	}
 	
 //	public String login(@ModelAttribute Member inputMember,
 //						RedirectAttributes ra,
