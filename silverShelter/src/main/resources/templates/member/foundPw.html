@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+	<!-- header Nav 용 css-->
+		<th:block th:replace="~{common/common}"></th:block>
+		
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+	
+</head>
+<body>
+	
+	<th:block th:replace="~{common/mainNav}"></th:block>
+	<th:block th:replace="~{common/headerNav}"></th:block>
+	
+	<form action="#" method="POST" id="foundPwArea">
+				
+		<div class="foundPwTitle">
+			비밀번호 찾기
+		</div>
+		               
+			<div class="text"> Gonden Prestige Corperation</div>
+						
+			    <section>
+		        	 아이디<input type="text"
+	                            class="memberIde"
+	                            placeholder="아이디를 입력해주세요"
+	                            name="memberId"
+	                            id="memberId"
+	   						    autocomplete="off">
+		            <br>
+		            
+					전화번호
+						<input type="text"
+			                   class="memberTel"
+			            	   placeholder= "전화번호를 입력해주세요"
+			                   name="memberTel"
+			                   id="memberTel"
+							   autocomplete="off">
+		                        
+		          </section>
+							
+							
+				  <div class="lineDiv"></div>
+					
+	              <div class="btnDiv">
+	              	<button class="foundPwBtn" type="submit">아이디 찾기</button>
+				  </div>
+	
+	</form>
+	
+	<!--footer-->
+	<th:block th:replace="~{common/footer}"></th:block>
+</body>
+</html>

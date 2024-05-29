@@ -6,6 +6,8 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/css/introduction/introduction.css">
+
+    <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
     
@@ -16,12 +18,12 @@
             <!-- 단지소개/ 입주 안내 div -->
             <div class="facility-info-container">
                 <!-- 조각 들어갈 위치 -->
-                <th:block th:replace="~{Introduction/introductionCommon}"></th:block>
+                <th:block th:replace="~{introduction/introductionCommon}"></th:block>
                 
                 <div class="room-grade">
-                    <button>클래식</button>
-                    <button>프리미엄</button>
-                    <button>vip</button>
+                    <button id="classic-btn">클래식</button>
+                    <button id="premium-btn">프리미엄</button>
+                    <button id="vip-btn">VIP</button>
                 </div>
             </div>
             
@@ -29,21 +31,23 @@
 
                 <div class="room-image-container">
 
-                    <img src="/images/Introduction/classic.webp" alt="" id="classic-img">
+                    <img src="/images/Introduction/classic.webp" alt="" id="room-img">
                     
                 </div>
                 
                 <div class="room-info-container">
-                    <h1>◾ 클래식룸</h1>
+                    <h1 id="roomTitle">◾ 클래식룸</h1>
                     
                     <div class="room-description">
-                        <h3>
+
+                        <h3 id="roomIntroduction"> 
                             실버타운의 클래식룸은 편안하고 아늑한 분위기를 제공합니다. 
                             
                             기본적인 편의시설을 완비하여, 집처럼 편안한 휴식을 취할 수 있습니다. 
                             
                             경제적이면서도 안락한 숙박을 원하시는 분들께 이상적인 선택입니다. 
                         </h3>
+
                     </div>
 
                 </div>
@@ -109,13 +113,13 @@
                     <div class="floor-plan-details">
                         <h1>공급 / 전용면적</h1>
     
-                        <h4>230.69㎡/179.79㎡(전용률78%)</h4>
+                        <h4 id="roomArea">230.69㎡/179.79㎡(전용률78%)</h4>
                     </div>
                     
                     <div class="room-count">
                         <h1>방수 / 욕실 수</h1>
     
-                        <h4>5/3 개</h4>
+                        <h4 id="roomCount">5/3 개</h4>
                     </div>
     
                     <div class="building-usage">
@@ -129,6 +133,10 @@
     </main>
 	
 	<!--footer-->
-		 <th:block th:replace="~{/common/footer.html}"></th:block>
+    <th:block th:replace="~{/common/footer.html}"></th:block>
+
+    <!-- 방 소개 script -->
+    <script src="/js/introduction/introduction.js"></script>
+
 </body>
 </html>

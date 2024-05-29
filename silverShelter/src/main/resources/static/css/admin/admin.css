@@ -1,0 +1,243 @@
+/* 페이지 가로, 세로 길이 전체로 적용 */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 공간 확인용 */
+* {
+    /* border: 1px solid black; */
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* 왼쪽 nav */
+.adminNav {
+    width:20%;
+    height: 100%;
+    background-color: #3C3C3B;
+    
+}
+
+/* nav 글자 크기 및 색상 지정 */
+.adminNav a {
+    display: block; /* a태그는 inline 요소라서 높이 변경이 안됨 */
+    color: white;
+    margin: 50px 20px;
+    font-size: 30px;
+    text-decoration: none; /* a태그 밑줄 제거 */
+    font-weight: bold;
+}
+
+/* nav를 제외한 오른쪽 메인 페이지 */
+.adminMain {
+    width: 80%;
+    height: 100%;
+    background-color: #F2F2F9;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 <span> 부분 공간 */
+.adminHeader {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    
+}
+
+/* 상단 메인 글씨 크기 및 두께 지정 */
+.adminHeader > span {
+    font-size: 50px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* adminHeader 아래 메인 공간지정 */
+.adminBody {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* 좌우 div 크기 지정 */
+.adminLeft, .adminRight {
+    width: 50%;
+    height: auto;
+    margin: 30px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: #ddd;
+    box-sizing: border-box;
+    /* display: flex; */
+    /* box-shadow:#3C3C3B; */
+}
+
+/* 게시판 공간 띄우기 */
+.table-area {
+
+    box-sizing: border-box;
+    padding: 50px;
+    height: 70%;
+}
+
+
+/* 왼쪽 게시글 위치 지정 */
+.list-table {
+    box-sizing: border-box;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: space-evenly; */
+    border-collapse: collapse; /* 테이블 사이 공백 없애기 */
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 50px;
+}
+
+thead th {
+    width: 50%;
+    height: 40px;
+    border-top: 1px solid black;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody td {
+    height: 40px;
+    text-align: center; /* 가로 가운데 정렬 */
+    vertical-align: middle; /* 세로 가운데 정렬 */
+}
+
+#memberId {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+
+/* 위에 게시판을 제외한 pagination, 검색창 공간 */
+.bottom-area {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 30%;
+    background-color: gray;
+    
+}
+
+/* 하단 검색창 공간 */
+.boardSearch {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px;
+}
+
+/* select, 검색창, 검색하기버튼 세로크기 및 색상 지정 */
+.boardSearch * {
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    background-color: white;
+    outline: none;
+}
+
+
+/* 검색창 왼쪽 select태그 */
+#searchKey {
+    width: 100px;
+}
+
+/* 검색창 크기 지정 */
+#searchQuery {
+    width: 200px;
+}
+
+
+
+
+
+
+
+
+
+/* ********************************************************************** */
+
+.adminRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch; /* 세로공간 모두 채움 */
+}
+
+.adminRight h2 {
+    padding: 20px;
+    text-align: center;
+}
+
+#memberForm {
+    /* width: calc(100% - 40px);
+    height: calc(90% - 40px); */
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* label, span태그 공간 지정 */
+#memberForm > div{
+    height: 40px;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    /* justify-content: center; */
+}
+
+/*  */
+#memberForm label {
+    width: 25%;
+    /* justify-content: flex-end; */
+    text-align: left;
+    padding-right: 10px;
+}
+
+
+#memberForm span {
+    width: 40%;
+    height: 40px;
+    /* align-items: stretch; */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+.updateBtn {
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.2); */
+    box-sizing: border-box;
+    background-color: #1A2050;
+    outline: none;
+    color: white;
+}

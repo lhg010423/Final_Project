@@ -4,37 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	
+	<!-- header Nav 용 css-->
+	<th:block th:replace="~{common/common}"></th:block>
+	
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+	
+	<link rel="stylesheet" href="/css/member/login.css">
 </head>
 <body>
-    <main>
+	
+	<th:block th:replace="~{common/mainNav}"></th:block>
+	<th:block th:replace="~{common/headerNav}"></th:block>
+		
+    
+        
+	<article class="login-form">
         
 
-        <form action="/member/login" method="POST" id="login_area">
-
-            <!-- 아이디, 비번 입력 -->
-            <div>
-                <input type="text"
-                        class="memberId"
-                        placeholder="아이디"
-                        name="memberId"
-                        id="memberId">
-                <br>
-                <input type="password"
-                        class="memberPw"
-                        placeholder="비밀번호"
-                        name="memberPw"
-                        id="memberPw">
-                
-            </div>
+        
+        <form action="/member/login" method="POST" id="loginArea">
             
-            <div>
-                <button class="loginBtn"></button>
-            </div>
-
-
+            <!-- 아이디, 비번 입력 -->
+                <div class="loginTitle">
+					로그인
+				</div>
+                
+				<div class="text"> Gonden Prestige Corperation</div>
+				
+				    <section>
+                        <input type="text"
+                                class="memberId"
+                                placeholder="아이디를 입력해주세요"
+                                name="memberId"
+                                id="memberId"
+								autocomplete="off">
+                        <br>
+                        <input type="password"
+                                class="memberPw"
+                                placeholder="비밀번호를 입력해주세요"
+                                name="memberPw"
+                                id="memberPw">
+                        
+                    </section>
+					
+					<div class="saveId" >
+					<div>
+                    	<input type="checkbox">
+						<span>아이디 저장</span>
+					</div>
+					</div>
+					
+					<div class="lineDiv"></div>
+					
+                    <div class="btnDiv">
+                        <button class="loginBtn">로그인</button>
+						<a href="#" class="signupBtn">회원가입</a>
+                    </div>
+					
         </form>
-        
-        
-    </main>
+		
+     <div>
+		<a href="/member/foundId"> 아이디 찾기</a> | <a href="/member/foundPw">비밀번호 찾기</a>
+	 </div>   
+	
+	</article>
+	
+	<!--footer-->
+	<th:block th:replace="~{common/footer}"></th:block>
+	
+	
+	
+
+   
 </body>
 </html>

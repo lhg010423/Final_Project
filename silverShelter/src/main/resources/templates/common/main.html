@@ -7,64 +7,23 @@
 
     <script src="https://kit.fontawesome.com/f4ca9edfa4.js" crossorigin="anonymous"></script>
 
-
 	<!-- main css -->
-    <link rel="stylesheet" href="/css/common/main.css">
+	<link rel="stylesheet" href="/css/common/main.css">
+	
+	<!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+	
 	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
 
 </head>
 <body>
-    <section class="main-balconi">
-        <nav class="navi">
-        	<div class="logo-div">
-                <a href="/" class="logo-div2">
-                    <img src="/images/main/Logo4.png" alt="Logo" id="logo">
-                </a>
-			</div>
-            
-			<!-- <div class="hide"></div>-->
-    
-            <div class="login-join">
-                <a href="/member/login" class="login">로그인</a>
-                
-                <span> &nbsp;| &nbsp; </span>
-                
-                <a href="#" class="joinMember">회원가입</a>
-                
-                <div>
-                    <a href="#" class="hidden-bar">
-                        <i class="fa-solid fa-bars" id="three-line"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    
-        <img src="/images/main/main.png" class="main">
-    </section>
-    
-    <div id="sideNav" class="side-nav">
-        <div>
-            <a href="javascript:void(0)" class="closebtn">&times;</a>
-        </div>
-        
-        <div class="nav-line"></div>
-        <div>
-            <a href="/member/Introduction">입주정보</a>
-        </div>
-        <div>
-            <a href="#">시설소개</a>
-        </div>
-        <div>
-            <a href="#">의료센터</a>
-        </div>
-        <div>
-            <a href="#">커뮤니티</a>
-        </div>
-        <div>    
-            <a href="#">게시판</a>
-        </div>
-    </div>
-
+	
+	<th:block th:replace="~{common/headerNav}"></th:block>
+		
+	    <img src="/images/main/main.png" class="main">
+	    
+	<th:block th:replace="~{common/mainNav}"></th:block>
+   
     <section class="information">
         <div class="section-1">
             <h2 class="our">
@@ -271,7 +230,7 @@
 	                    <br>
 	                    <br>
 	                    <br>
-	                    <a href="#" class="section-3-4">시설소개</a>
+	                    <a href="/communication/communication" class="section-3-4">시설소개</a>
 	                </span>
 	            
 	            </div>    
@@ -342,7 +301,124 @@
 	</section>
 	
 	<!-- 커뮤니티 파티션 -->
-	<section> </section>
+	<section class="section-5"> 
+		
+		<div>
+			<h2 class="section-5-1">
+	            <span>C</span>
+	            <span>o</span>
+	            <span>m</span>
+	            <span>m</span>
+				<span>u</span>
+				<span>n</span>
+				<span>i</span>
+				<span>t</span>
+				<span>y</span>
+	            <span>&nbsp;</span>
+	
+	            <span>A</span>
+	            <span>n</span>
+	            <span>d</span>
+	            <span>&nbsp;</span>
+	
+	            <span>C</span>
+	            <span>u</span>
+	            <span>l</span>
+	            <span>t</span>
+	            <span>u</span>
+	            <span>r</span>
+	            <span>e</span>
+	            <span>&nbsp;</span>
+			</h2>
+	    </div>
+		
+	    <div>
+	        <ul>
+	            <br>
+				<br>
+	         <div>
+	         	<div class="section-5-2">
+					다채로운 휘트니스와 문화 프로그램으로<br>
+					건강한 취미와 배움을 제공합니다.
+	        	</div>
+				
+	         </div>
+			 
+	     	</ul>
+	    </div> 
+			
+	    <br>
+			
+	    <div class="section-5-3">
+			<div class="section-5-3-1">
+	        	<img src="/images/main/dojagee.png" class="section-5-3-1-1">
+	        	<img src="/images/main/fabric.png" class="section-5-3-1-2">
+			</div>
+		</div>	
+			
+			<div class="section-5-4">
+				<img src="/images/main/golf.png">
+				<!-- 날씨 API -->
+				<div class="section-5-4-1">
+
+					<div class="weather-container">
+						<!-- 현재 날씨 이모티콘 -->
+						<img id="weatherIcon">
+
+					</div>
+
+					<!-- 현재 기온 -->
+					<p id="temperature"></p>
+					<!-- 강수확률 -->
+					<p id="precipitation"></p>
+					<!-- 하늘 정보 -->
+					<span id="skyInformation"></span>					
+						
+					<a href="#" class="section-5-4-2">커뮤니티</a>
+				</div>
+			</div>
+		
+		</div>
+	
+	</section>
+	
+	<!-- 게시판 -->
+	<section class="section-6">
+		
+		<span class="section-6-1">Notice</span>
+	    
+		<ul class="section-6-2">
+			<li>
+				<a class="section-6-2-1">
+					<p class="p-6-2-1"></p>
+					<span class="span6-2-1"></span>
+					
+				</a>	
+			</li>
+
+			<li>
+				<a class="section-6-2-2">
+					<p class="p-6-2-2"></p>
+					<span class="span-6-2-2"></span>
+					
+				</a>
+			</li>
+			
+			<li>
+				<a class="section-6-2-3">
+					<p class="p-6-2-3"></p>
+					<span span="6-2-3"></span>
+				</a>
+			</li>
+		</ul>
+		
+	</section>
+	
+	<div class="section-6-3">
+		<a href="#" alt="게시판">
+			<span>더 보기 〉</span>
+		</a>
+	</div>
 	
     <th:block th:replace="~{common/common}"></th:block>
 
@@ -366,22 +442,26 @@
 
 
         <a href="/"></a>
-        <!-- board 부분 -->
-        <div>
-            
-        </div>
+               
     </section>
 	
 
 	  
 	
-    <th:block th:replace="~{board/boardList}"></th:block>
+   
 
     <div style="height: 100px;"></div>
 	
 	<!--footer-->
-	 <th:block th:replace="~{/common/footer.html}"></th:block>
+	 <th:block th:replace="~{common/footer}"></th:block>
+	 
+	 
+	 <!-- main JS -->
+	 <script src="/js/common/main.js"></script>
+	 
+   <!-- mainNav JS -->
+   <script src="/js/common/mainNav.js"> </script>
    
-   <script src="/js/common/main.js"> </script>
+   
 </body>
 </html>

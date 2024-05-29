@@ -23,10 +23,32 @@ document.getElementById("memberId").addEventListener("click", e => {
 
 
             const nameInput = document.getElementById("nameInput");
-            nameInput.value = result.memberName;
+            nameInput.innerText = result.memberName;
 
             const idInput = document.getElementById("idInput");
             idInput.innerText = result.memberId;
+
+            const telInput = document.getElementById("telInput");
+            telInput.innerText = result.memberTel;
+
+            const gdtelInput = document.getElementById("gdtelInput");
+            gdtelInput.innerText = result.guardianTel;
+
+            const postCode = document.getElementById("postCode");
+            postCode.innerText = result.postCode;
+
+            const address = document.getElementById("address");
+            address.innerText = result.address;
+
+            const detailAddress = document.getElementById("detailAddress");
+            detailAddress.innerText = result.detailAddress;
+
+            const caregiversName = document.getElementById("caregiversName");
+            caregiversName.innerText = result.caregiversName;
+
+            const roomNo = document.getElementById("roomNo");
+            roomNo.innerText = result.roomNo;
+
 
 
         }
