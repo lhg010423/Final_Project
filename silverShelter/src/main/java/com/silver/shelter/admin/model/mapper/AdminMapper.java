@@ -12,11 +12,10 @@ import com.silver.shelter.member.model.dto.Member;
 public interface AdminMapper {
 
 	
-	
 	/** 탈퇴하지 않은 회원 수 조회
 	 * @return
 	 */
-	int memberALlCount();
+	int memberAllCount();
 
 	
 	/** 회원 목록 조회
