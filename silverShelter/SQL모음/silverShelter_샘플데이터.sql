@@ -1,8 +1,34 @@
+/* 계정 생성 (관리자 계정으로 접속) */
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+
+CREATE USER silver_shelter IDENTIFIED BY silver1234;
+
+GRANT CONNECT, RESOURCE TO silver_shelter;
+
+ALTER USER silver_shelter DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
+
+--------------------------------------------------------------------------------------------
+-- 회원 삭제
+DELETE FROM "MEMBER"
+WHERE MEMBER_NO = 15;
+
+
+COMMIT;
+
+CREATE SEQUENCE SEQ_BOARD_CODE NOCACHE;
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
+CREATE SEQUENCE SEQ_CAREGIVERS_NO NOCACHE;
+
+
+-- 번호, ID, PW, 이름, 이메일,
+-- 주소, 전화번호, 보호자전화번호, 가입일, 탈퇴여부,
+-- 관리자계정판별, 요양사번호, 방번호
+
 -- 관리자 계정 생성
 INSERT INTO "MEMBER"
 VALUES(SEQ_MEMBER_NO.NEXTVAL, 'admin', 'admin', '관리자', 'admin@kh.com',
-			NULL, '010-1111-2222', DEFAULT, DEFAULT, '1',
-			NULL, NULL);
+			NULL, '010-1111-2222', '010-2222-3333', DEFAULT, DEFAULT,
+			'1', NULL, NULL);
 
 -- 회원 삭제
 DELETE FROM "MEMBER"
@@ -26,9 +52,115 @@ VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01', 'pass01', '유저일', 'user01@kh.com',
 			NULL, '010-1234-5678', DEFAULT, DEFAULT, DEFAULT,
 			NULL, NULL);
 	
+			NULL, '010-1234-5678', '010-4235-2456', DEFAULT, DEFAULT,
+			DEFAULT, NULL, NULL);
+			
 -- 요양사 추가
 INSERT INTO "CAREGIVERS"
 VALUES(SEQ_CAREGIVERS_NO.NEXTVAL, '이춘자', 50, 'F', '010-1234-5678', 20, 'MOR');
 
 
 COMMIT;
+
+
+INSERT INTO "BOARD_TYPE"
+VALUES(1, '공지게시판');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(2, '자유게시판');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(3, '문의게시판');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(4, '회원 정보');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(5, '요양사 정보');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(6, '병원 예약');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(7, '클럽 예약');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(8, '게스트룸');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(9, '회원 서류');
+
+
+BEGIN
+	FOR I IN 1..2000 LOOP
+		
+		INSERT INTO "BOARD"
+		VALUES(SEQ_BOARD_NO.NEXTVAL,
+					 SEQ_BOARD_NO.CURRVAL || '번째 게시글',
+					 SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용 입니다',
+					 DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+					 CEIL( DBMS_RANDOM.VALUE(0,1) ), -- BOARD_CODE(게시판종류)
+					 1 -- MEMBER_NO(작성회원번호)
+		);
+		
+	END LOOP;
+END;
+
+
+-- 게시글 데이터
+BEGIN
+	FOR I IN 1..300 LOOP
+		
+		INSERT INTO "BOARD"
+		VALUES(SEQ_BOARD_NO.NEXTVAL,
+					SEQ_BOARD_NO.CURRVAL || '번째 게시글',
+					SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용 입니다',
+					DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+					CEIL( DBMS_RANDOM.VALUE(1, 9) ),
+					1
+		);
+					
+	END LOOP;
+END;
+
+
+SELECT MEMBER_NAME, MEMBER_ID, MEMBER_PW,
+			MEMBER_EMAIL, MEMBER_ADDRESS, MEMBER_TEL,
+			GUARDIAN_TEL
+		FROM "MEMBER"
+--		JOIN "CAREGIVERS" USING(CAREGIVERS_NO)
+		WHERE MEMBER_NO = 2;
+
+UPDATE MEMBER
+SET CAREGIVERS_NO = 1,
+    ROOM_NO = 101
+WHERE MEMBER_NO = 2;
+
+UPDATE "MEMBER" 
+SET MEMBER_ADDRESS = '12345^^^서울 종로^^^101동 101호'
+WHERE MEMBER_NO = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

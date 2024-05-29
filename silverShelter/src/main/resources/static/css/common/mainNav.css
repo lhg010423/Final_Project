@@ -1,0 +1,71 @@
+.side-nav {
+	
+	position: absolute;
+    height: 100%;
+    width: 0;
+
+    justify-content: space-between;
+
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #242223;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+
+    transform: translateX(0);
+
+    text-align: right;
+
+}
+
+.side-nav .active{
+    transform: translateX(-100%);
+}
+
+.nav-line{
+
+
+    background-color: #DDDDDD;
+    
+    height: 3px;
+    width: 320px;
+
+    margin: 20px 0px 30px 35px;
+   
+
+}
+
+
+.side-nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+
+    margin-right: 30px;
+    min-width: 100px;
+}
+
+.side-nav a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.side-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.side-nav.active {
+    width: 20%;
+    
+    /*네비가 차지할 공간~*/ 
+}

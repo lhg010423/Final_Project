@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+	
+	<!-- header Nav 용 css-->
+	<th:block th:replace="~{common/common}"></th:block>
+	
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+	
+	
 </head>
 <body>
+	
+	<th:block th:replace="~{common/mainNav}"></th:block>
+	<th:block th:replace="~{common/headerNav}"></th:block>
+		
     <main>
         
+	<div style="height: 500px;"></div>
+        <h1>로그인</h1>
 
+        <span>Golden prestige</span>
         <form action="/member/login" method="POST" id="login_area">
 
             <!-- 아이디, 비번 입력 -->
@@ -28,7 +43,7 @@
             </div>
             
             <div>
-                <button class="loginBtn"></button>
+                <button class="loginBtn">로그인</button>
             </div>
 
 
@@ -36,5 +51,15 @@
         
         
     </main>
+	
+	<div style="height: 500px;"></div>
+	
+	<!--footer-->
+	<th:block th:replace="~{common/footer}"></th:block>
+	
+	
+	
+
+   
 </body>
 </html>
