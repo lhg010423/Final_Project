@@ -40,7 +40,7 @@ main {
 
     justify-content: center;
 }
-/* 리스트 중앙 배치 */
+/* 스텝퍼 리스트 중앙 배치 */
 .step-container{
     display: flex;
     justify-content: center;
