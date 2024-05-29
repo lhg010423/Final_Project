@@ -32,62 +32,83 @@
                 <!-- 회원 게시판 출력 -->
                 <div class="adminLeft">
 
-
-                    <table class="list-table">
-
-                        <thead>
-                            <tr>
-                                <!-- 이름, 아이디 검색 가능하게 할 예정 -->
-                                <th>회원 이름</th>
-                                <th>회원 아이디</th>
-                            </tr>
-                        </thead>
-
-
-                        <tbody>
-
-                            <!-- 회원이 없을 때 -->
-                            <th:block th:if="${#lists.isEmpty(memberList)}">
+                    <div class="table-area">
+                        
+                        <table class="list-table">
+                            
+                            <thead>
                                 <tr>
-                                    <th colspan="6">회원이 존재하지 않습니다.</th>
+                                    <!-- 이름, 아이디 검색 가능하게 할 예정 -->
+                                    <th>회원 이름</th>
+                                    <th>회원 아이디</th>
                                 </tr>
-                            </th:block>
-
-                            <!-- 회원이 있을 때 -->
-                            <th:block th:unless="${#lists.isEmpty(memberList)}">
-
-                                <tr th:each="member : ${memberList}" th:object="${member}">
-
-                                    <td>
-
-                                        <!-- 검색 X -->
-                                        <button id="memberId"
-                                        th:name="*{memberNo}" th:text="*{memberName}"></button>
+                            </thead>
+                            
+                            
+                            <tbody>
+                                
+                                <!-- 회원이 없을 때 -->
+                                <th:block th:if="${#lists.isEmpty(memberList)}">
+                                    <tr>
+                                        <th colspan="6">회원이 존재하지 않습니다.</th>
+                                    </tr>
+                                </th:block>
+                                
+                                <!-- 회원이 있을 때 -->
+                                <th:block th:unless="${#lists.isEmpty(memberList)}">
+                                    
+                                    <tr th:each="member : ${memberList}" th:object="${member}">
+                                        
+                                        <td>
+                                            <!-- 검색 X -->
+                                            <button id="memberId"
+                                            th:name="*{memberNo}" th:text="*{memberName}"></button>
+                                        </td>
+                                        <td th:text="*{memberId}">회원 아이디</td>
                                         
                                         
+                                        <!-- <td>
+                                            
+                                            
+                                            <button id="memberId"
+                                            th:name="*{memberNo}" th:text="*{memberId}"></button>
+                                            
+                                        </td> -->
+                                        
+                                        
+                                        
+                                    </tr>
+                                </th:block>
+                                
+                                
+                                
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                        
 
-                                    </td>
-
-
-                                    <td th:text="*{memberId}">회원 아이디</td>
-
-                                </tr>
-                            </th:block>
+                    <div class="pagination-area">
 
 
 
-                        </tbody>
+                        <form th:action="@{/admin/adminSelect}" method="get" class="boardSearch">
 
-                    </table>
+                            <select name="key" id="searchKey">
+                                <option value="n">이름</option>
+                                <option value="i">아이디</option>
+                                <option value="ni">이름+아이디</option>
+                            </select>
 
+                            <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
 
-                    <!-- <div class="pagination-area">
+                            <button>검색하기</button>
+                        </form>
 
-                        <ul class="pagination" th:unless="${param.key}" th:object="${pagination}"></ul>
-
-                    </div> -->
-
-
+                    </div>
+                        
+                    
+                        
 
 
 
@@ -102,37 +123,37 @@
                     <form action="/admin/adminSelect" method="POST" id="memberForm">
 
                         <div id="name-area">
-                            <label for="name">이름 : </label>
+                            <label for="name">이름</label>
                             <span id="nameInput" name="name"></span><br>
                         </div>
                             
                         <div id="id-area">
-                            <label for="id">아이디 : </label>
+                            <label for="id">아이디</label>
                             <span id="idInput"></span><br>
                         </div>
                             
                         <div id="tel-area">
-                            <label for="tel">전화번호 : </label>
+                            <label for="tel">전화번호</label>
                             <span id="telInput"></span>
                         </div>
 
                         <div id="gdtel-area">
-                            <label for="gdtel">보호자 전화번호 : </label>
+                            <label for="gdtel">보호자 전화번호</label>
                             <span id="gdtelInput"></span>
                         </div>
 
                         <div id="postCode-area">
-                            <label for="postCode">우편번호 : </label>
+                            <label for="postCode">우편번호</label>
                             <span id="postCode"></span>
                         </div>
 
                         <div id="address-area">
-                            <label for="address">주소 : </label>
+                            <label for="address">주소</label>
                             <span id="address"></span>
                         </div>
 
                         <div id="detailAddress-area">
-                            <label for="detailAddress">상세주소 : </label>
+                            <label for="detailAddress">상세주소</label>
                             <span id="detailAddress"></span>
                         </div>
 
