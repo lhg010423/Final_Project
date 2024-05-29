@@ -1,5 +1,5 @@
 * {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     padding: 0;
     margin: 0;
 }
@@ -15,11 +15,12 @@ button {
 }
 
 #mediNav * {
-    width: 110px;
+    width: 190px;
     height: 70px;
     text-align: center;
     line-height: 70px;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .selected-tab {
@@ -34,8 +35,21 @@ main {
 }
 
 #section-select {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+}
+
+#sectionBtn1, #sectionBtn2{
+    background-color: white;
+    font-size: 25px;
+    border: none;
+}
+
+.sectionBtnClicked {
+    border-bottom: 1px solid #1A2050;
 }
 
 #section1 {
@@ -57,13 +71,20 @@ main {
     line-height: 50px;
     background-color: #1A2050;
     color: white;
-    font-size: 30px;
+    font-size: 25px;
+}
+
+.sec {
+    display: none;
+}
+#floors *:active {
+    background-color: white;
+    color: #1A2050;
 }
 
 #floorImg {
     width: 500px;
     height: 400px;
-    background-color: blue;
 }
 
 #departments {
@@ -73,20 +94,36 @@ main {
 }
 
 #departments * {
-    width: 200px;
-    height: 80px;
+    width: 180px;
+    height: 70px;
     text-align: center;
     line-height: 50px;
     background-color: #1A2050;
     color: white;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 #section2 {
     display: flex;
+    display: none;
 }
 
 #departmentsIntro {
     width: 510px;
     height: 1000px;
+}
+
+#sec2, #sec3, #sec4 {
+    display: none;
+}
+
+#floorImg * {
+    width: 500px;
+    height: 400px;
+}
+
+#mediHeaderImg {
+    width: 1000px;
+    height: 300px;
+    object-fit: cover;
 }
