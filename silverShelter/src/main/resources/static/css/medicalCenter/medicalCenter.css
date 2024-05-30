@@ -21,6 +21,7 @@ button {
     line-height: 70px;
     cursor: pointer;
     font-size: 20px;
+    border-radius: 10px;
 }
 
 .selected-tab {
@@ -35,26 +36,40 @@ main {
 }
 
 #section-select {
-    margin-top: 40px;
-    margin-bottom: 40px;
     display: flex;
     width: 400px;
+    height: 100px;
     justify-content: space-between;
 }
 
-#sectionBtn1, #sectionBtn2{
-    background-color: white;
+#sectionBtn1, #sectionBtn2 {
     font-size: 25px;
-    border: none;
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    width: 200px;
+    height: 100px;
+    transition: 0.2s;
+    border-style: none;
+    background-color: white;
+}
+
+#sectionBtn1:hover, #sectionBtn2:hover {
+    border-bottom: 20px solid #252e74;
 }
 
 .sectionBtnClicked {
-    border-bottom: 1px solid #1A2050;
+    border-bottom: 20px solid #252e74;
 }
 
-#section1 {
+#section1, #section2 {
+    display: none;
     justify-content: center;
     background-color: white;
+}
+
+#section1.active, #section2.active {
     display: flex;
 }
 
@@ -68,18 +83,25 @@ main {
     width: 100px;
     height: 80px;
     text-align: center;
-    line-height: 50px;
-    background-color: #1A2050;
-    color: white;
+    line-height: 80px;
     font-size: 25px;
+    transition: 0.2s;
+    border: 0.5px solid black;
 }
 
-.sec {
-    display: none;
+#departments * {
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 25px;
+    transition: 0.2s;
+    border: 0.5px solid black;
 }
-#floors *:active {
-    background-color: white;
-    color: #1A2050;
+
+#floors *:hover, .floorChecked {
+    background-color: #232e7e;
+    color: white;
 }
 
 #floorImg {
@@ -91,39 +113,43 @@ main {
     display: flex;
     flex-direction: column;
     height: fit-content;
+    margin-right: 20px;
 }
 
-#departments * {
-    width: 180px;
-    height: 70px;
-    text-align: center;
-    line-height: 50px;
-    background-color: #1A2050;
+#departments *:hover, .dep-floorChecked {
+    background-color: #232e7e;
     color: white;
-    font-size: 25px;
-}
-
-#section2 {
-    display: flex;
-    display: none;
 }
 
 #departmentsIntro {
     width: 510px;
-    height: 1000px;
-}
-
-#sec2, #sec3, #sec4 {
-    display: none;
+    height: auto;
 }
 
 #floorImg * {
     width: 500px;
     height: 400px;
+    display: none;
+}
+
+.sec {
+    display: none;
+}
+
+.sec.active {
+    display: block;
+}
+
+#floor-sec1 {
+    display: block;
 }
 
 #mediHeaderImg {
     width: 1000px;
     height: 300px;
     object-fit: cover;
+}
+
+#sec21 {
+    font-size: 17px;
 }

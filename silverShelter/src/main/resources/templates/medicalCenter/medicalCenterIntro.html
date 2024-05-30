@@ -1,35 +1,84 @@
-
-    <main>
-        <div id="section-select">
-            <button id="sectionBtn1" onclick="showSection('section1')" class="sectionBtn sectionBtnClicked">의료센터 평면도</button>
-            <button id="sectionBtn2" onclick="showSection('section2')" class="sectionBtn">진료과목</button>
+<main>
+    <div id="section-select">
+        <button id="sectionBtn1" onclick="showSection('section1', 'sectionBtn1')" class="sectionBtn sectionBtnClicked">의료센터 평면도</button>
+        <button id="sectionBtn2" onclick="showSection('section2', 'sectionBtn2')" class="sectionBtn">진료과목</button>
+    </div>
+    <div id="section1" class="section active">
+        <div id="floors">
+            <button id="1f" class="floor floorChecked" onclick="showFloor('floor-sec1', '1f')">1F</button>
+            <button id="2f" class="floor" onclick="showFloor('floor-sec2', '2f')">2F</button>
+            <button id="3f" class="floor" onclick="showFloor('floor-sec3', '3f')">3F</button>
+            <button id="4f" class="floor" onclick="showFloor('floor-sec4', '4f')">4F</button>
         </div>
-        <div id="section1" class="section">
-            <div id="floors">
-                <button onclick="showFloor('sec1')">1F</button>
-                <button onclick="showFloor('sec2')">2F</button>
-                <button onclick="showFloor('sec3')">3F</button>
-                <button onclick="showFloor('sec4')">4F</button>
+        <div id="floorImg">
+            <img id="floor-sec1" class="sec floor-sec" src="/images/medicalCenter/1f.png">
+            <img id="floor-sec2" class="sec floor-sec" src="/images/medicalCenter/2f.png">
+            <img id="floor-sec3" class="sec floor-sec" src="/images/medicalCenter/3f.png">
+            <img id="floor-sec4" class="sec floor-sec" src="/images/medicalCenter/4f.png">
+        </div>
+    </div>
+    <div id="section2" class="section">
+        <div id="departments">
+            <button id="1dep" class="floor dep-floor floorChecked" onclick="showDep('dep-sec21', '1dep')">재활의학과</button>
+            <button id="2dep" class="floor dep-floor" onclick="showDep('dep-sec22', '2dep')">내과</button>
+            <button id="3dep" class="floor dep-floor" onclick="showDep('dep-sec23', '3dep')">한방과</button>
+            <button id="4dep" class="floor dep-floor" onclick="showDep('dep-sec24', '4dep')">가정의학과</button>
+        </div>
+        <div id="departmentsIntro">
+            <div id="dep-sec21" class="sec dep-sec active">
+                <h3>재활의학과 개요</h3>
+                <p>재활의학과는 신체 기능 회복과 삶의 질 향상을 목표로 하는 의료 분야입니다. 저희 병원의 재활의학과는 다양한 재활 치료 경험과 전문적인 지식을 가진 의료진들이 환자의 건강을 돕고 있습니다. 또한, 개인 맞춤형 재활 치료와 종합적인 접근을 통해 환자의 기능 회복과 일상생활 복귀를 돕고, 지속적인 관리와 예방에도 최선을 다하고 있습니다.</p>
+                <h4>재활의학과 진료항목</h4>
+                <ul>
+                    <li>근골격계 재활</li>
+                    <li>신경계 재활</li>
+                    <li>소아 재활</li>
+                    <li>스포츠 재활</li>
+                    <li>심장 재활</li>
+                    <li>호흡 재활</li>
+                    <li>암 재활</li>
+                </ul>
             </div>
-            <div id="floorImg">
-                <img id="sec1" class="sec" src="../../static/images/medicalCenter/1f.png">
-                <img id="sec2" class="sec" src="../../static/images/medicalCenter/2f.png">
-                <img id="sec3" class="sec" src="../../static/images/medicalCenter/3f.png">
-                <img id="sec4" class="sec" src="../../static/images/medicalCenter/4f.png">
+            <div id="dep-sec22" class="sec dep-sec">
+                <h3>내과 개요</h3>
+                <p>내과는 체내 기관 및 시스템의 질병과 장애를 진단, 치료, 예방하는 의료 분야입니다. 저희 병원의 내과는 폭넓은 진료 경험과 전문적인 지식을 가진 의료진들이 함께하여 환자의 건강을 돕고 있습니다. 또한 정확한 진단과 개인 맞춤형 치료를 통해 환자의 건강을 지키고, 질병 예방 및 건강 유지에 최선을 다하고 있습니다.</p>
+                <h4>내과 진료항목</h4>
+                <ul>
+                    <li>만성 질환 관리</li>
+                    <li>호흡기 질환</li>
+                    <li>소화기 질환</li>
+                    <li>신장 질환</li>
+                    <li>내분비 질환</li>
+                    <li>기타 질환</li>
+                </ul>
+            </div>
+            <div id="dep-sec23" class="sec dep-sec">
+                <h3>한방과 개요</h3>
+                <p>한방과는 전통 한의학에 기반하여 체내 균형과 조화를 이루도록 돕는 의료 분야입니다. 저희 병원의 한방과는 풍부한 진료 경험과 전문적인 지식을 가진 한의사들이 환자의 건강을 돕고 있습니다. 또한 개인 맞춤형 치료와 예방을 통해 환자의 건강을 지키며, 다양한 한방 치료법을 활용하여 최선의 결과를 도출하고 있습니다.</p>
+                <h4>한방과 진료항목</h4>
+                <ul>
+                    <li>한약 치료</li>
+                    <li>침구 치료</li>
+                    <li>추나요법</li>
+                    <li>한방 다이어트</li>
+                    <li>한방 미용</li>
+                    <li>기타 질환</li>
+                </ul>
+            </div>
+            <div id="dep-sec24" class="sec dep-sec">
+                <h3>가정의학과 개요</h3>
+                <p>가정의학과는 개인과 가족의 건강을 지속적이고 포괄적으로 관리하는 전문 분야입니다. 환자가 아플 때나 건강할 때 모두 건강을 책임지는 의료 서비스를 제공합니다. 가정의학과에서는 급성 및 만성 질환의 진단과 치료, 향후 관리뿐만 아니라 건강 증진 및 유지, 질병 예방을 위한 상담과 관리를 제공합니다.</p>
+                <h4>가정의학과 진료 항목</h4>
+                <ul>
+                    <li>생활습관 관리</li>
+                    <li>예방적 진료</li>
+                    <li>만성질환 예방 및 관리</li>
+                    <li>중증 질환 치료 후 관리</li>
+                    <li>평생건강 관리</li>
+                    <li>만성 통증 관리</li>
+                    <li>정신건강 관리</li>
+                </ul>
             </div>
         </div>
-        <div id="section2" class="section">
-            <div id="departments">
-                <button onclick="showFloor('sec21')">재활의학과</button>
-                <button onclick="showFloor('sec22')">내과</button>
-                <button onclick="showFloor('sec23')">한방과</button>
-                <button onclick="showFloor('sec24')">가정의학과</button>
-            </div>
-            <div id="departmentsIntro">
-                <img id="sec21" class="sec" src="../../static/images/medicalCenter/1f.png">
-                <img id="sec22" class="sec" src="../../static/images/medicalCenter/2f.png">
-                <img id="sec23" class="sec" src="../../static/images/medicalCenter/3f.png">
-                <img id="sec24" class="sec" src="../../static/images/medicalCenter/4f.png">
-            </div>
-        </div>
-    </main>
+    </div>
+</main>
