@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/signUpForm.css">
+
+    <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+    <main>
+        <section class="signUp-Form">
+
+            <div class="agreement-head">
+                <h1>회원 정보 입력</h1>
+            </div>
+    
+            <div class="step-container">
+
+                <article class="step-item">
+                    <h1>1</h1>
+                </article>
+                
+                <div class="i-div">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+                <br>
+                <article class="step-item">
+                    <h1>2</h1>
+                </article>
+                
+                <div class="i-div">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+                <br>
+                <article class="step-item">
+                    <h1>3</h1>
+                </article>
+                
+                <div class="i-div">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+                <br>
+                <article class="step-item">
+                    <h1>4</h1>
+                </article>
+            </div>
+
+            
+            <!-- ---------------------------정보입력란-------------------------------- -->
+
+            <div class="form-header">
+                <div class="notice">
+                    <div>* 은 필수 입력 항목입니다.</div>
+                    
+                </div>
+                <div class="line-div"></div>
+            </div>
+            <!-- 입력양식 -->
+            <form id="info-form" action="#" method="POST">
+        
+                <!-- 아이디컨테이너 -->
+                <div class="id-container">
+
+                    <label for="memberId" class="id-label">
+                        <span class="star">*</span>&nbsp;
+                        <span>아이디</span>
+                    </label>
+                        
+                    <div>
+                        <input type="text" 
+                               placeholder="아이디" 
+                               autocomplete="off"
+                               id="memberId">
+                    </div>
+                </div>
+
+                <!-- 비밀번호 컨테이너 -->
+                <div class="pw-container">
+
+                    <label for="memberPw" class="pw-label">
+                        <span class="star">*</span> 
+                        <span>비밀번호</span> 
+                    </label>
+                    
+                    <div>
+                        <input type="password"
+                               placeholder="비밀번호" 
+                               id="memberPw">
+                    </div>
+                </div>
+                
+                <!-- 비밀번호 확인 컨테이너 -->
+                <div class="pwConfirm-container">    
+                    <label for="memberPw-confirm" class="pwConfirm-label">
+                        <span class="star">*</span> <span>비밀번호 확인</span>
+                    </label> 
+
+                    <div>
+                        <input type="password" placeholder="비밀번호 확인" id="memberPw-confirm">
+                    </div>
+                </div>
+                
+                <!-- 이름컨테이너 -->
+                <div class="memberName-container">
+                    <label for="memberName" class="memberName-label">
+                        &nbsp;<span>성함</span>
+                    </label>
+
+                    <div>
+                        <input type="text" placeholder="성함" id="memberName">
+                    </div>
+                </div>    
+
+                <!-- 전화번호 컨테이너 -->
+                <div class="tel-container">
+                    <label for="memberTel" class="tel-label">
+                        &nbsp;<span>휴대폰 번호</span>
+                    </label>
+
+                    <div>
+                        <input type="text" 
+                               placeholder="휴대폰 번호" 
+                               autocomplete="off"
+                               id="memberTel">
+                    </div>
+                </div>
+                
+                <!-- 이메일 컨테이너 -->
+                <div class="email-container">
+                    <label for="memberEmail" class="email-label">
+                        &nbsp;<span>이메일</span>
+                    </label>    
+                
+                    <div>
+                        <input type="text" placeholder="이메일" autocomplete="off" id="memberEmail">
+                    </div>
+                </div>
+
+                <!-- 보호자 연락처 -->
+                <div class="guardian-tel-container">    
+                    <label for="guardianTel" class="guardian-tel-label">
+                        <span class="star">*</span> <span>보호자 연락처</span>
+                    </label> 
+
+                    <div>
+                        <input type="text" placeholder="보호자 연락처" autocomplete="off" id="guardianTel">
+                    </div>
+                </div>
+
+
+                <fieldset class="addr-fieldset">
+                    <div class="add-div-1">
+                        <span>주소</span> <button class="addr-search-btn">검색</button>
+                    </div>
+
+                    <div>
+                        <input type="text" name="memberAddress" id="postcode" placeholder="우편번호">
+                    </div>
+
+                    <div>
+                        <input type="text" name="memberAddress" id="roadAddress" placeholder="도로명 / 지번 주소">
+                    </div>
+                    
+                    <div>
+                        <span id="guide" style="color:#999;display:none"></span>
+                        <input type="text" name="memberAddress" id="detailAddress" placeholder="상세주소">
+                    </div>
+                </fieldset>
+                
+
+                <div class="prev-next-btn-container">
+                    <a href="#" id="beforeBtn"><span>이전</span></a>
+                    <button type="submit" id="submitBtn">다음</button>
+                </div>
+
+
+
+            </form>
+        </section>
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+    
+    <script></script>
+</body>
+</html>
