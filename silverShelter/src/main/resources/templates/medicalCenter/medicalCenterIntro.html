@@ -1,7 +1,7 @@
 <main>
     <div id="section-select">
         <button id="sectionBtn1" onclick="showSection('section1', 'sectionBtn1')" class="sectionBtn sectionBtnClicked">의료센터 평면도</button>
-        <button id="sectionBtn2" onclick="showSection('section2', 'sectionBtn2')" class="sectionBtn">진료과목</button>
+<button id="sectionBtn2" onclick="showSection('section2', 'sectionBtn2'); showDep('dep-sec21', '1dep')" class="sectionBtn">진료과목</button>
     </div>
     <div id="section1" class="section active">
         <div id="floors">
@@ -25,7 +25,7 @@
             <button id="4dep" class="floor dep-floor" onclick="showDep('dep-sec24', '4dep')">가정의학과</button>
         </div>
         <div id="departmentsIntro">
-            <div id="dep-sec21" class="sec dep-sec active">
+            <div id="dep-sec21" class="sec dep-sec floorChecked1">
                 <h3>재활의학과 개요</h3>
                 <p>재활의학과는 신체 기능 회복과 삶의 질 향상을 목표로 하는 의료 분야입니다. 저희 병원의 재활의학과는 다양한 재활 치료 경험과 전문적인 지식을 가진 의료진들이 환자의 건강을 돕고 있습니다. 또한, 개인 맞춤형 재활 치료와 종합적인 접근을 통해 환자의 기능 회복과 일상생활 복귀를 돕고, 지속적인 관리와 예방에도 최선을 다하고 있습니다.</p>
                 <h4>재활의학과 진료항목</h4>

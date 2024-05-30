@@ -62,6 +62,7 @@ function showDep(sectionId, floorId) {
     if (sections && floors) {
         for (var i = 0; i < sections.length; i++) {
             sections[i].style.display = 'none';
+            sections[i].classList.remove('floorChecked1');
         }
         for (var j = 0; j < floors.length; j++) {
             floors[j].classList.remove('floorChecked');
@@ -72,7 +73,8 @@ function showDep(sectionId, floorId) {
     var selectedSection = document.getElementById(sectionId);
     console.log(selectedSection);
     if (selectedSection) {
-        selectedSection.style.display = 'flex';
+        selectedSection.style.display = 'inline';
+        selectedSection.classList.add('floorChecked1');
         selectedFloor.classList.add('floorChecked');
         console.log("Displayed floor with ID:", sectionId);
     } else {
@@ -144,8 +146,8 @@ function showTab(tabId) {
     }
 }
 
-var sectionSelected = document.getElementByClassName('sectionBtnClicked');
+var sectionSelected = document.getElementsByClassName('sectionBtnClicked');
 if (sectionSelected.length > 0) {
-    showFloor('floor-sec1', '1f');
     showSection('section1', 'sectionBtn1');
+    showFloor('floor-sec1', '1f');
 }

@@ -43,15 +43,15 @@ main {
 }
 
 #sectionBtn1, #sectionBtn2 {
+    border-style: none;
     font-size: 25px;
     border-top: 5px solid white;
-    border-bottom: 5px solid white;
+    border-bottom: 5px solid #1A2050;
     border-left: 5px solid white;
     border-right: 5px solid white;
     width: 200px;
     height: 100px;
     transition: 0.2s;
-    border-style: none;
     background-color: white;
 }
 
@@ -104,11 +104,6 @@ main {
     color: white;
 }
 
-#floorImg {
-    width: 500px;
-    height: 400px;
-}
-
 #departments {
     display: flex;
     flex-direction: column;
@@ -127,21 +122,13 @@ main {
 }
 
 #floorImg * {
-    width: 500px;
-    height: 400px;
+    width: 800px;
+    height: 570px;
     display: none;
-}
-
-.sec {
-    display: none;
-}
-
-.dep-sec.active {
-    display: block;
 }
 
 #floor-sec1 {
-    display: block;
+    display: flex;
 }
 
 #mediHeaderImg {
@@ -150,6 +137,58 @@ main {
     object-fit: cover;
 }
 
-#sec21 {
-    font-size: 17px;
+#departmentIntro {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px;
+    display: flex;
+}
+
+#dep-sec21.active, #dep-sec22.active, #dep-sec23.active, #dep-sec24.active {
+    border: 1px solid #ccc;
+    padding: 70px;
+    border-radius: 10px;
+    margin: 50px;
+    width: 800px;
+    height: 570px;
+}
+
+.dep-sec {
+    display: none;
+}
+
+#dep-sec21 h3, #dep-sec22 h3, #dep-sec23 h3, #dep-sec24 h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#dep-sec21 p, #dep-sec22 p, #dep-sec23 p, #dep-sec24 p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+#dep-sec21 h4, #dep-sec22 h4, #dep-sec23 h4, #dep-sec24 h4 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+#dep-sec21 ul, #dep-sec22 ul, #dep-sec23 ul, #dep-sec24 ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+#dep-sec21 ul li, #dep-sec22 ul li, #dep-sec23 ul li, #dep-sec24 ul li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.floorChecked1 {
+    border: 1px solid #ccc;
+    padding: 70px;
+    border-radius: 10px;
+    margin: 50px;
+    width: 800px;
+    height: 570px;
 }
