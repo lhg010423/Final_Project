@@ -1,0 +1,49 @@
+.stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.stepper .step {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: white;
+    margin: 0 10px;
+    font-size: 25px;
+}
+
+.stepper .step.active {
+    background-color: #1A2050;
+    width: 75px;
+    height: 75px;
+}
+
+.stepper .line {
+    width: 50px;
+    height: 2px;
+    background-color: #ccc;
+}
+
+.stepper .line.active {
+    background-color: #1A2050;
+}
+
+.step-content {
+    display: none;
+}
+
+.step-content.active {
+    display: block;
+}
+
+#step-title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 60px;
+}
