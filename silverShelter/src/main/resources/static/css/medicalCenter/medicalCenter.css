@@ -136,7 +136,7 @@ main {
     display: none;
 }
 
-.sec.active {
+.dep-sec.active {
     display: block;
 }
 
