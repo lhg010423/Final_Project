@@ -1,7 +1,10 @@
 package com.silver.shelter.documentSubmission.model.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.silver.shelter.documentSubmission.model.dto.DocumentSubmisson;
 
+@Mapper
 public interface DocumentSubmissonMapper {
 
 	
