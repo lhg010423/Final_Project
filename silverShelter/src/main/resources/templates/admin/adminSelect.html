@@ -62,14 +62,21 @@
                                         <td>
                                             <!-- 검색 X -->
 
-                                            <a>
-                                                
-                                            </a>
+                                            <!-- <button type="button"
+                                                th:text="*{memberName}"
+                                                onclick="memberDetail(`*{memberNo}`, `*{pagination.currentPage}`)"
+                                            ></button> -->
+                                            
+                                            <!-- <button type="button"
+                                            id="memberBtn"
+                                            data-memberNo="${memberNo}" data-cp="${pagination.currentPage}"
+                                            onclick="memberDetail()"
+                                            ></button> -->
 
-                                            <button id="memberId"
-                                            th:name="*{memberNo}" th:text="*{memberName}"></button>
 
-                                            <!-- <button th:name="*"></button> -->
+                                            <!-- <button id="memberId"
+                                            th:name="*{memberNo}" th:text="*{memberName}"></button> -->
+
 
                                         </td>
                                         <td th:text="*{memberId}">회원 아이디</td>
@@ -267,7 +274,7 @@
     </main>
 
 
-    <script src="/js/admin.js"></script>
+    <script src="/js/admin/admin.js"></script>
 
 </body>
 </html>

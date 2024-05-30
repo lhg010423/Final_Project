@@ -46,12 +46,15 @@ public class AdminController {
 	public String adminSelect(
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			Model model,
+//			@RequestParam Member memberNo,
 			@RequestParam Map<String, Object> paramMap
+			
 			) {
 		
 		
 		Map<String, Object> map = null;
 				
+//		paramMap.put("memberNo", memberNo);
 		
 		// 검색 안했을 때
 		if(paramMap.get("key") == null) {
@@ -67,8 +70,8 @@ public class AdminController {
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("memberList", map.get("memberList"));
 		
-		
-//		log.info((String) map.get("memberList"));
+		System.out.println(map.get("memberList"));
+		System.out.println(map.get("pagination"));
 		
 		return "admin/adminSelect";
 	}
@@ -85,13 +88,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("adminSelect")
-	public Map<String, Object> adminSelect(@RequestBody Member member) {
+	public Map<String, Object> adminSelect(@RequestBody Map<String, Object> paramMap) {
 		
 		// js로 다시 보낼 map
 		Map<String, Object> map = new HashMap<>();
 		
 		// 회원 상세정보 조회
-		Member memberInfo = service.adminDetailSelect(member);
+		Member memberInfo = service.adminDetailSelect(paramMap);
 		
 		String memberAddress = memberInfo.getMemberAddress();
 		
@@ -115,8 +118,6 @@ public class AdminController {
 		
 		
 		log.info("member {}" , map);
-		
-		
 		
 		return map;
 	}
