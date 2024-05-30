@@ -12,7 +12,9 @@ import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService{
@@ -76,9 +78,15 @@ public class AdminServiceImpl implements AdminService{
 
 	// 회원 상세 조회
 	@Override
-	public Member adminDetailSelect(Member member) {
+	public Member adminDetailSelect(Map<String, Object> paramMap) {
 		
-		Member memberList = mapper.adminDetailSelect(member);
+		Member memberList = mapper.adminDetailSelect(paramMap);
+		
+		log.info((String) paramMap.get(memberList.getMemberNo()));
+		
+		System.out.println("memberList @@@@@@@@@" + memberList);
+		
+//		log.info((String)memberList);
 		
 		return memberList;
 	}

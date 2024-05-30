@@ -1,6 +1,5 @@
 package com.silver.shelter.admin.model.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.silver.shelter.member.model.dto.Member;
@@ -22,10 +21,10 @@ public interface AdminService {
 	Map<String, Object> memberSearchSelect(Map<String, Object> paramMap, int cp);
 
 	/** 회원 상세조회
-	 * @param member
+	 * @param paramMap
 	 * @return
 	 */
-	Member adminDetailSelect(Member member);
+	Member adminDetailSelect(Map<String, Object> paramMap);
 	
 	
 	
