@@ -60,6 +60,8 @@
     -1px  1px 0 #b7b7b7,
      1px  1px 0 #b7b7b7;
 }
+
+
 .login {
 
     color: white;
@@ -85,6 +87,72 @@
 
     font-size: 20px;
     text-decoration: none;
+}
+
+#logonDiv{
+	display: flex;
+	
+	flex-direction: column;
+	justify-content: center;
+	
+	height: 100%;
+}
+
+
+.myInfo{
+	position: relative;
+	margin: 1vh 1vw 0 0;	
+	color:  #000000;
+	
+	width: 100%;
+	
+}
+
+#memberName{
+	
+	text-decoration: none;
+}
+#logonDropdown{
+	display: block;
+	
+	text-decoration: none;
+	
+	
+	border:1px solid #000000;
+	border-radius: 12px;
+	padding: 8px 16px;
+	
+	display: none;
+	position: absolute;
+	
+	
+	background-color: #fefefe;
+	 
+	 
+	box-shadow: 0 4px 8px rbga(0, 0, 0, 0.2);;
+	
+	z-index: 1;
+	
+	top: 85px;
+	left : 1;
+	
+	
+}
+
+
+
+
+.modalLine{
+	width: 80%;
+	
+	border: 1px solid #000000;
+	margin: 8px 0;
+}
+
+#myInfoBtn,
+#logoutBtn{
+	
+	text-decoration: none;
 }
 
 .hidden-bar {

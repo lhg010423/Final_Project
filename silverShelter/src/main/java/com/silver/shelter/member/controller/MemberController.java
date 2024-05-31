@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.member.model.dto.Member;
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@SessionAttributes("{loginMember}")
+@SessionAttributes({"loginMember"})
 @RequestMapping("member")
 public class MemberController {
 
@@ -38,6 +39,26 @@ public class MemberController {
 		return "/member/login";
 	}
 	
+	@GetMapping("logout")
+	public String logout(SessionStatus status,
+						 RedirectAttributes ra){
+	
+		status.setComplete();
+		
+		ra.addFlashAttribute("message", "로그아웃되었습니다");
+		
+		return "redirect:/";
+	}
+	
+	
+	/** 로그인 메서드
+	 * @param inputMember
+	 * @param ra
+	 * @param model
+	 * @param saveId
+	 * @param resp
+	 * @return
+	 */
 	@PostMapping("login")
 	public String login(@ModelAttribute Member inputMember,
 						RedirectAttributes ra,
@@ -50,13 +71,14 @@ public class MemberController {
 		
 		if(loginMember == null) {
 			
-			ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해주세요");
-		}else {
+			ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인하세요");
+						
 			
-			
+			return "redirect:/member/login";
 		}
 		
 		if(loginMember != null) {
+			//log.debug("adsfasdfasdfasdf");
 			
 			model.addAttribute("loginMember", loginMember);
 		
@@ -64,6 +86,7 @@ public class MemberController {
 			
 			cookie.setPath("/");
 			
+			// 만료기간
 			if (saveId != null) {
 				
 				cookie.setMaxAge( 60* 60 * 24 * 30);
