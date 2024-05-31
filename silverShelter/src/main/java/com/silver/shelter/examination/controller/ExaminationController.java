@@ -46,6 +46,11 @@ public class ExaminationController {
 		return count;
 	}
 	
+	/** g히힛
+	 * @param documentSubmisson
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@PostMapping("submit")
 	public int submitDocument(Examination documentSubmisson) throws Exception {
