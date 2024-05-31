@@ -7,6 +7,7 @@
 
     <!-- 왼쪽 nav 부분 및 전체페이지 공간지정 css -->
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/adminSelect.css}">
 
 </head>
 <body>
@@ -57,40 +58,15 @@
                                 <!-- 회원이 있을 때 -->
                                 <th:block th:unless="${#lists.isEmpty(memberList)}">
                                     
-                                    <tr th:each="member : ${memberList}" th:object="${member}">
+                                    <tr th:each="member : ${memberList}" th:object="${member}" id="memberBtn">
                                         
                                         <td>
-                                            <!-- 검색 X -->
-
-                                            <!-- <button type="button"
-                                                th:text="*{memberName}"
-                                                onclick="memberDetail(`*{memberNo}`, `*{pagination.currentPage}`)"
-                                            ></button> -->
-                                            
-                                            <!-- <button type="button"
-                                            id="memberBtn"
-                                            data-memberNo="${memberNo}" data-cp="${pagination.currentPage}"
-                                            onclick="memberDetail()"
-                                            ></button> -->
-
-
-                                            <!-- <button id="memberId"
-                                            th:name="*{memberNo}" th:text="*{memberName}"></button> -->
-
-
-                                        </td>
-                                        <td th:text="*{memberId}">회원 아이디</td>
-                                        
-                                        
-                                        <!-- <td>
-                                            
-                                            
                                             <button id="memberId"
-                                            th:name="*{memberNo}" th:text="*{memberId}"></button>
-                                            
-                                        </td> -->
-                                        
-                                        
+                                            th:name="*{memberNo}" th:text="*{memberName}"></button>
+                                        </td>
+
+                                        <td th:text="${member.memberId}"></td>
+
                                         
                                     </tr>
                                 </th:block>
@@ -112,7 +88,7 @@
                             <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
                                 
                                 <!-- 첫페이지 이동 -->
-                                <li><a th:href="@{/admin/adminSelect(cp=1)}"></a>&lt;&lt;</li>
+                                <li><a th:href="@{/admin/adminSelect(cp=1)}">&lt;&lt;</a></li>
 
                                 <!-- 이전 목록 마지막 번호로 이동 -->
                                 <li><a th:href="@{/admin/adminSelect(cp=*{prevPage})}">&lt;</a></li>
@@ -132,7 +108,7 @@
                                 <li><a th:href="@{/admin/adminSelect(cp=*{nextPage})}">&gt;</a></li>
 
                                 <!-- 끝 페이지로 이동 -->
-                                <li><a th:href="@{/admin/adminSelect(cp=*{maxPage})}"></a></li>
+                                <li><a th:href="@{/admin/adminSelect(cp=*{maxPage})}">&gt;&gt;</a></li>
 
 
                             </ul>
@@ -144,7 +120,7 @@
                                 <li><a th:href="@{/admin/adminSelect(cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
 
                                 <!-- 이전 목록 마지막 번호로 이동 -->
-                                <li><a th:href="@{/admin/adminSelect(cp=*{prevPage}, key${param.key}, query=${param.query})}">&lt;</a></li>
+                                <li><a th:href="@{/admin/adminSelect(cp=${pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
 
                                 <!-- 특정페이지로 이동 -->
                                 <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
@@ -256,9 +232,9 @@
                             <span id="roomNo"></span>
                         </div>
 
-                        <div>
+                        <!-- <div>
                             <button class="updateBtn">수정하기</button>
-                        </div>
+                        </div> -->
 
 
                     </form>

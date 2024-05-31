@@ -1,3 +1,33 @@
+/* 내정보 드랍다운 */
+document.addEventListener("DOMContentLoaded", function() {
+    
+    var memberName = document.getElementById("memberName");
+    var logonDropdown = document.getElementById("logonDropdown");
+
+    memberName.onmouseover = function() {
+        logonDropdown.style.display = "block";
+    }
+
+    memberName.onmouseout = function() {
+        setTimeout(function() {
+            if (!logonDropdown.matches(':hover')) {
+                logonDropdown.style.display = "none";
+            }
+        }, 250);
+    }
+
+    logonDropdown.onmouseover = function() {
+        logonDropdown.style.display = "block";
+    }
+
+    logonDropdown.onmouseout = function() {
+        logonDropdown.style.display = "none";
+    }
+});
+/* ------------------------------------ */
+
+
+/* 캐러셀 1*/
 document.addEventListener('DOMContentLoaded', function() {
 
 	const indicators = document.querySelectorAll('.indicator');
@@ -75,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }); /* 캐러샐2 end */
     
  
-// 날씨 API 
+/* --------------------- 날씨 API -------------------------- */ 
 
 function getCurrentDate(){
     const today = new Date();

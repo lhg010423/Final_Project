@@ -1,0 +1,6 @@
+/* 게시판 상단 */
+thead th {
+    width: 50%;
+    height: 40px;
+    border-top: 1px solid black;
+}

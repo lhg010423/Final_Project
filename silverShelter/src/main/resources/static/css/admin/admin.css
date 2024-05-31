@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* 페이지 가로, 세로 길이 전체로 적용 */
 html, body {
     height: 100%;
@@ -7,9 +14,9 @@ html, body {
 }
 
 /* 공간 확인용 */
-* {
-    /* border: 1px solid black; */
-}
+/* * {
+    border: 1px solid black; 
+} */
 
 main {
     width: 100%;
@@ -103,11 +110,7 @@ main {
     padding: 50px;
 }
 
-thead th {
-    width: 50%;
-    height: 40px;
-    border-top: 1px solid black;
-}
+
 
 tr {
     border-bottom: 1px solid #ddd;
@@ -132,12 +135,47 @@ tbody td {
 /* 위에 게시판을 제외한 pagination, 검색창 공간 */
 .bottom-area {
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     flex-direction: column;
     height: 30%;
     background-color: gray;
     
 }
+
+/* Pagination 리스트 점제거 후 위치 지정 */
+.pagination {
+    list-style: none; /* 리스트 점 제거 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* pagination 각 번호 간격 띄우기 */
+.pagination li {
+    padding: 0;
+}
+
+/* Pagination 밑줄 없애고 색상 변경 */
+.pagination a {
+    /* text-decoration-line: none; */
+    color: black;
+    text-decoration: none; /* 링크에 밑줄 제거 */
+    padding: 5px 10px; /* 페이지 번호의 패딩 설정 */
+    cursor: pointer;
+}
+
+/* pagination 현제 페이지 번호 색상 지정 */
+.current {
+    background-color: #1A2050;
+    /* width: 30px; */
+    color: white !important;
+    /* background-color: #e9e9e9; */
+    border: none; 
+    border-radius: 20px; 
+}
+
+
 
 /* 하단 검색창 공간 */
 .boardSearch {
