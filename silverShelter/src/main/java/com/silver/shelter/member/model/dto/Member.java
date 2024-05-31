@@ -26,6 +26,9 @@ public class Member {
 	private int memberRole;        // 관리자 계정 판별
 	private String caregiversName; // 요양사 이름
 	private int roomNo;            // 방 번호
+	private String examStatus;     // 심사 승인 여부
+	private String examDate;       // 심사 신청일
+//	private int examNo;
 //	private String caregiversName;
 	
 	
