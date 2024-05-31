@@ -151,7 +151,7 @@ function validateStep(stepIndex) {
     return true;
 }
 
-// 스텝별 유효성검사 메시지 함수
+// 스텝별 유효성검사 메시지 함수 실행
 function getValidationMessage(stepIndex) {
     if (stepIndex === 0) {
         return '모든 약관을 동의해주세요';
