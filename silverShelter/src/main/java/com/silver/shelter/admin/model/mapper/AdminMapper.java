@@ -34,10 +34,10 @@ public interface AdminMapper {
 	List<Member> memberSearchSelect(Map<String, Object> paramMap, RowBounds rowBounds);
 
 	/** 회원 상세 조회
-	 * @param paramMap
+	 * @param memberNo
 	 * @return
 	 */
-	Member adminDetailSelect(Map<String, Object> paramMap);
+	Member adminDetailSelect(int memberNo);
 
 
 	/** 탈퇴하지 않았고 검색조건에 맞는 회원 수 조회
@@ -45,6 +45,9 @@ public interface AdminMapper {
 	 * @return
 	 */
 	int memberSearchCount(Map<String, Object> paramMap);
+
+
+	List<Member> documentSelect();
 
 
 }

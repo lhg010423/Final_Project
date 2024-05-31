@@ -46,6 +46,8 @@ public class AdminServiceImpl implements AdminService{
 		
 		return map;
 	}
+	
+	
 	// 서비스 키 발급, 오픈api reponse 할때 xml json 타입 구분
 	// 자바스크립트로 하는거만 배웠는데 자바로 되어있는거 한번보기
 	// 공공데이터에서 맞는 api를 검색해서 맞는거를 찾아야함 주소를 사용해야해서
@@ -57,6 +59,8 @@ public class AdminServiceImpl implements AdminService{
 		// 탈퇴하지 않았고 검색조건에 맞는 회원 수 조회하기
 		int memberCount = mapper.memberSearchCount(paramMap);
 		
+		log.info("memberCount {}" + memberCount);
+		
 		
 		Pagination pagination = new Pagination(cp, memberCount);
 		
@@ -65,12 +69,12 @@ public class AdminServiceImpl implements AdminService{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		
-		List<Member> boardList = mapper.memberSearchSelect(paramMap, rowBounds);
+		List<Member> memberList = mapper.memberSearchSelect(paramMap, rowBounds);
 		
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("pagination", pagination);
-		map.put("boardList", boardList);
+		map.put("memberList", memberList);
 		
 		return map;
 	}
@@ -78,17 +82,31 @@ public class AdminServiceImpl implements AdminService{
 
 	// 회원 상세 조회
 	@Override
-	public Member adminDetailSelect(Map<String, Object> paramMap) {
+	public Member adminDetailSelect(int memberNo) {
 		
-		Member memberList = mapper.adminDetailSelect(paramMap);
 		
-		log.info((String) paramMap.get(memberList.getMemberNo()));
 		
-		System.out.println("memberList @@@@@@@@@" + memberList);
+		return mapper.adminDetailSelect(memberNo);
+	}
+	
+	
+	
+	
+
+	/** 회원 서류관리 게시판 조회
+	 *
+	 */
+	@Override
+	public Map<String, Object> documentSelect() {
 		
-//		log.info((String)memberList);
+		Map<String, Object> map = new HashMap<>();
 		
-		return memberList;
+		List<Member> documentList = mapper.documentSelect();
+		
+		map.put("documentList", documentList);
+		
+		
+		return map;
 	}
 	
 	

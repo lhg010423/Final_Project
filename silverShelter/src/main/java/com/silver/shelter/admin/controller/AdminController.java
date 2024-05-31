@@ -1,6 +1,7 @@
 package com.silver.shelter.admin.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -39,22 +40,25 @@ public class AdminController {
 	
 	
 	
-	/** 회원 정보 조회
+
+	/** 회원 정보 조회 및 검색
+	 * @param cp
+	 * @param model : 게시글 회원 조회에 사용할 데이터 전달용
+	 * @param paramMap : 안에 key, query값이 있음, 검색할 경우에만 사용
 	 * @return
 	 */
 	@GetMapping("adminSelect")
 	public String adminSelect(
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			Model model,
-//			@RequestParam Member memberNo,
+//			@RequestParam(value="memberNo", required = false) int memberNo,
 			@RequestParam Map<String, Object> paramMap
 			
 			) {
 		
-		
+		// 회원 조회한 결과 저장용 Map
 		Map<String, Object> map = null;
-				
-//		paramMap.put("memberNo", memberNo);
+		
 		
 		// 검색 안했을 때
 		if(paramMap.get("key") == null) {
@@ -70,6 +74,7 @@ public class AdminController {
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("memberList", map.get("memberList"));
 		
+		// 그냥 확인용 코드
 		System.out.println(map.get("memberList"));
 		System.out.println(map.get("pagination"));
 		
@@ -79,25 +84,39 @@ public class AdminController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	/** 회원 상세 조회
+	 * @param paramMap
+	 * @return
+	 */
 	@ResponseBody
 	@PostMapping("adminSelect")
-	public Map<String, Object> adminSelect(@RequestBody Map<String, Object> paramMap) {
+	public Map<String, Object> adminSelect(
+			@RequestBody int memberNo
+			) {
 		
+//			@RequestBody Member memberNo
 		// js로 다시 보낼 map
 		Map<String, Object> map = new HashMap<>();
 		
+		
+//		System.out.println("memberNo : " + memberNo);
+		
 		// 회원 상세정보 조회
-		Member memberInfo = service.adminDetailSelect(paramMap);
+		Member memberInfo = service.adminDetailSelect(memberNo);
+
+		if (memberInfo == null) {
+	        // 회원 정보가 없는 경우
+	        map.put("error", "회원 정보를 찾을 수 없습니다.");
+	        return map;
+	    }
 		
-		String memberAddress = memberInfo.getMemberAddress();
 		
+//		log.info("memberInfo {}"+ memberInfo);
+		
+		System.out.println("memberInfo 테스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +  memberInfo);
+		
+		
+
 		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
 		map.put("memberName", memberInfo.getMemberName());
 		map.put("memberId", memberInfo.getMemberId());
@@ -107,7 +126,9 @@ public class AdminController {
 		map.put("caregiversName", memberInfo.getCaregiversName());
 		map.put("roomNo", memberInfo.getRoomNo());
 		
-		if(memberAddress != null) {
+		if(memberInfo.getMemberAddress() != null) {
+			
+			String memberAddress = memberInfo.getMemberAddress();
 			
 			String[] arr = memberAddress.split("\\^\\^\\^");
 			
@@ -116,8 +137,11 @@ public class AdminController {
 			map.put("detailAddress", arr[2]);
 		}
 		
+		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
+
 		
-		log.info("member {}" , map);
+		log.info("member {}", map.get("memberInfo"));
+		
 		
 		return map;
 	}
@@ -140,7 +164,42 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("adminDocument")
-	public String adminDocument() {
+	public String adminDocument(
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model,
+//			@RequestParam(value="memberNo", required = false) int memberNo,
+			@RequestParam Map<String, Object> paramMap
+			) {
+		
+		Map<String, Object> map = null;
+		
+		map = service.documentSelect();
+		
+		
+		// 검색 안했을 때
+		if(paramMap.get("key") == null) {
+			map = service.memberAllSelect(cp);
+			
+			
+		// 검색 했을 때
+		} else {
+			map = service.memberSearchSelect(paramMap, cp);
+		
+		}
+		
+		model.addAttribute("pagination", map.get("pagination"));
+//		model.addAttribute("memberList", map.get("memberList"));
+//				model.addAttribute("memberDetail", memberDetail);
+		
+		System.out.println(map.get("memberList"));
+		System.out.println(map.get("pagination"));
+		
+		
+		
+		model.addAttribute("documentList", map.get("memberList"));
+
+//		log.info((String) map.get("documentList"));
+		
 		return "admin/adminDocument";
 	}
 	
