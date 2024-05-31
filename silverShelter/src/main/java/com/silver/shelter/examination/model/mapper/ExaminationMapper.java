@@ -16,6 +16,11 @@ public interface ExaminationMapper {
 	 * */
 	int checkApplicantInfo(Examination applicantInfo);
 
+	
+	/** 심사 테이블
+	 * @param documentSubmisson
+	 * @return
+	 */
 	int insertApplicantInfo(Examination documentSubmisson);
 
 	int insertDocument(List<Document> docList);
