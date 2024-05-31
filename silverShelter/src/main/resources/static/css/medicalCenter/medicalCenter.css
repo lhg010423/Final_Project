@@ -1,7 +1,15 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 * {
     /* border: 1px solid red; */
     padding: 0;
     margin: 0;
+    font-family: 'Pretendard-Regular';
 }
 
 button {
@@ -20,16 +28,28 @@ button {
     text-align: center;
     line-height: 70px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 25px;
     border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
+#mediNav *:hover{
+    background-color: #1A2050;
+    color: white;
+}
 .selected-tab {
     background-color: #1A2050;
     color: white;
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.underTabPage {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,15 +63,16 @@ main {
 }
 
 #sectionBtn1, #sectionBtn2 {
+    border-style: none;
     font-size: 25px;
+    font-weight: bold;
     border-top: 5px solid white;
-    border-bottom: 5px solid white;
+    border-bottom: 5px solid #1A2050;
     border-left: 5px solid white;
     border-right: 5px solid white;
     width: 200px;
     height: 100px;
     transition: 0.2s;
-    border-style: none;
     background-color: white;
 }
 
@@ -85,8 +106,10 @@ main {
     text-align: center;
     line-height: 80px;
     font-size: 25px;
+    font-weight: bold;
     transition: 0.2s;
     border: 0.5px solid black;
+    cursor: pointer;
 }
 
 #departments * {
@@ -95,18 +118,15 @@ main {
     text-align: center;
     line-height: 80px;
     font-size: 25px;
+    font-weight: bold;
     transition: 0.2s;
     border: 0.5px solid black;
+    cursor: pointer;
 }
 
 #floors *:hover, .floorChecked {
     background-color: #232e7e;
     color: white;
-}
-
-#floorImg {
-    width: 500px;
-    height: 400px;
 }
 
 #departments {
@@ -122,34 +142,299 @@ main {
 }
 
 #departmentsIntro {
-    width: 510px;
+    width: auto;
     height: auto;
+    display: flex;
 }
 
 #floorImg * {
-    width: 500px;
-    height: 400px;
+    width: 800px;
+    height: 570px;
     display: none;
-}
-
-.sec {
-    display: none;
-}
-
-.dep-sec.active {
-    display: block;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #floor-sec1 {
-    display: block;
+    display: flex;
 }
 
 #mediHeaderImg {
     width: 1000px;
-    height: 300px;
+    height: 600px;
     object-fit: cover;
 }
 
-#sec21 {
-    font-size: 17px;
+#departmentIntro {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px;
+    display: flex;
+}
+
+#dep-sec21.active, #dep-sec22.active, #dep-sec23.active, #dep-sec24.active {
+    border: 1px solid #ccc;
+    padding: 70px;
+    border-radius: 10px;
+    margin: 50px;
+    width: 800px;
+    height: 570px;
+}
+
+.dep-sec {
+    display: none;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    margin-top: 50px;
+}
+
+#dep-sec21 ul, #dep-sec22 ul, #dep-sec23 ul, #dep-sec24 ul {
+    list-style-type: circle;
+    padding-left: 20px;
+
+}
+
+li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.floorChecked1 {
+    border: 1px solid #ccc;
+    padding: 70px;
+    border-radius: 10px;
+    width: 600px;
+    height: auto;
+}
+
+.mediDepImg {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.mediDepImg1 {
+    width: 200px;
+    margin-bottom: 50px;
+}
+
+.doctorIntroDiv {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.doctorIntroImg {
+    width: 250px;
+    height: 250px;
+    margin-right: 15px;
+}
+
+.doctorIntroArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.docNameIntro {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.docNameIntro1 {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.docIntro {
+    text-align: center;
+}
+
+/* 로그인 전 진료예약 */
+#doctorMatchingTitle {
+    margin: 50px;
+}
+
+#doctorMatchingLoginForm {
+    border: #ccc 0.5px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+#doctorMatchingLoginForm * {
+    text-align: center;
+}
+
+#doctorMatchingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#doctorMatchingMainLogo {
+    width: 200px;
+
+}
+
+#doctorMatchingIntro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: #ccc solid 0.5px;
+    height: 800px;
+    margin-left: 30px;
+}
+
+#signupIntro1, #signupIntro2 {
+    width: 600px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#signupemoji {
+    width: 200px;
+    margin-bottom: 100px;
+}
+
+
+/* 로그인 후 진료예약 */
+.reservation-content {
+    display: none;
+}
+.reservation-active {
+    background-color: #4CAF50; /* 활성화된 버튼의 배경색 */
+    color: white; /* 활성화된 버튼의 글자색 */
+    display: flex;
+}
+#doctorMatchingPage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+#doctorMatchingTitle {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form {
+    text-align: center;
+}
+
+.memberId {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.saveId {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.saveId input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.btnDiv {
+    margin-top: 20px;
+}
+
+.loginBtn, .signupBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginBtn:hover, .signupBtn:hover {
+    background-color: #0056b3;
+}
+
+/* 진료예약 페이지 스타일 */
+
+#reservationPage h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#reservationForm {
+    text-align: center;
+}
+
+.reservation-content {
+    display: none;
+}
+
+.reservation-active {
+    display: flex;
+}
+
+.resImg {
+    display: flex;
+    margin: 10px;
+}
+
+.resImg img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.resImgIntro {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.resImgIntro:hover {
+    color: #007bff;
+}
+
+#resNextButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#resNextButton:hover {
+    background-color: #0056b3;
 }
