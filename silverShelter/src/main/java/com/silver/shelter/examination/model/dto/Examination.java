@@ -1,4 +1,4 @@
-package com.silver.shelter.documentSubmission.model.dto;
+package com.silver.shelter.examination.model.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,8 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DocumentSubmisson {
-
+public class Examination {
+	
+	// 심사 고유번호
+	private int examId; 
 	// Step 2 fields
 	// 방 이름 			
     private String selectedRoom;
@@ -42,4 +44,5 @@ public class DocumentSubmisson {
     private String contactPhone;
     // 유저 이메일
     private String contactEmail;
+
 }

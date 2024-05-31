@@ -3,19 +3,19 @@ const obj = {
         fullAgreement: false
     },
     step2: {
+        contactName: '',
+        contactPhone: '',
+        contactEmail: ''
+    },
+    step3: {
         selectedRoom: 'classic',
         selectedOccupants: ''
     },
-    step3: {
+    step4: {
         healthCheckup: null,
         familyRelationship: null,
         residentRegistration: null,
         idCardCopy: null
-    },
-    step4: {
-        contactName: '',
-        contactPhone: '',
-        contactEmail: ''
     }
 };
 
@@ -23,7 +23,7 @@ let currentStep = 0;
 const steps = document.querySelectorAll('.step');
 const lines = document.querySelectorAll('.line');
 const contents = document.querySelectorAll('.step-content');
-const titles = ["약관동의", "객실 선택", "서류 제출", "연락처 정보"];
+const titles = ["약관동의", "신청자 정보", "객실 선택", "서류 제출"];
 
 function showStep(stepIndex) {
     steps.forEach((step, index) => {
@@ -52,23 +52,71 @@ function changeStep(stepChange) {
 
     const newStep = currentStep + stepChange;
 
-    if (newStep >= 0 && newStep < steps.length) {
+    if (newStep === 2 && stepChange === 1) {
+        // step2로 이동할 때 신청자 정보 확인 및 비동기 요청
+        fetch('/examination/checkApplicantInfo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contactName: obj.step2.contactName,
+                contactPhone: obj.step2.contactPhone,
+                contactEmail: obj.step2.contactEmail
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log("data: ", data);
+            if (data > 0) {
+                alert('이미 신청한 회원입니다. 메인 페이지로 이동합니다.');
+                location.href = "/";
+            } else {
+                // 스텝 변경 및 UI 업데이트
+                currentStep = newStep;
+                showStep(currentStep);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        })
+        .catch(error => {
+            console.error('요청 중 오류 발생:', error);
+            alert('요청 중 오류가 발생했습니다. 다시 시도해주세요.');
+        });
+    } else if (newStep >= 0 && newStep < steps.length) {
+        // 스텝 변경 및 UI 업데이트
         currentStep = newStep;
         showStep(currentStep);
-
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } else if (newStep === steps.length) {
 
         // 모든 스텝이 유효한 경우 제출 처리
         if (validateStep(currentStep)) {
-            
             submitExamination(); // 서버로 제출 이벤트
 
         } else {
             alert(getValidationMessage(currentStep));
         }
     }
+
+    // if (newStep >= 0 && newStep < steps.length) {
+    //     currentStep = newStep;
+    //     showStep(currentStep);
+
+    //     window.scrollTo({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
+
+    // } else if (newStep === steps.length) {
+
+    //     // 모든 스텝이 유효한 경우 제출 처리
+    //     if (validateStep(currentStep)) {
+            
+    //         submitExamination(); // 서버로 제출 이벤트
+
+    //     } else {
+    //         alert(getValidationMessage(currentStep));
+    //     }
+    // }
 }
 
 // step별 유효성 검사 함수
@@ -77,25 +125,28 @@ function validateStep(stepIndex) {
         // 약관 동의 스텝
         const individualAgreementCheckboxes = document.querySelectorAll(".individual-agreement");
         return Array.from(individualAgreementCheckboxes).every(cb => cb.checked);
+
     } else if (stepIndex === 1) {
-        // 객실 선택 스텝
-        return obj.step2.selectedRoom !== '' && obj.step2.selectedOccupants !== '';
-    } else if (stepIndex === 2) {
-        // 서류 제출 스텝
-        return obj.step3.healthCheckup !== null &&
-               obj.step3.familyRelationship !== null &&
-               obj.step3.residentRegistration !== null &&
-               obj.step3.idCardCopy !== null;
-    } else if (stepIndex === 3) {
-        // 연락처 정보 스텝
+        // 신청자 정보 스텝
         const contactName = document.getElementById('contact-name').value;
         const contactPhone = document.getElementById('contact-phone').value;
         const contactEmail = document.getElementById('contact-email').value;
-        obj.step4.contactName = contactName;
-        obj.step4.contactPhone = contactPhone;
-        obj.step4.contactEmail = contactEmail;
+        obj.step2.contactName = contactName;
+        obj.step2.contactPhone = contactPhone;
+        obj.step2.contactEmail = contactEmail;
         return contactName !== '' && contactPhone !== '' && contactEmail !== '';
-    }
+        
+    } else if (stepIndex === 2) {
+        // 객실 선택 스텝
+        return obj.step3.selectedRoom !== '' && obj.step3.selectedOccupants !== '';
+
+    } else if (stepIndex === 3) {
+        // 서류 제출 스텝
+        return obj.step4.healthCheckup !== null &&
+               obj.step4.familyRelationship !== null &&
+               obj.step4.residentRegistration !== null &&
+               obj.step4.idCardCopy !== null;
+    } 
 
     return true;
 }
@@ -105,11 +156,11 @@ function getValidationMessage(stepIndex) {
     if (stepIndex === 0) {
         return '모든 약관을 동의해주세요';
     } else if (stepIndex === 1) {
-        return '객실 정보를 모두 입력해주세요';
+        return '신청자 정보를 모두 입력해주세요';
     } else if (stepIndex === 2) {
-        return '모든 서류를 제출해주세요';
+        return '객실 정보를 모두 입력해주세요';
     } else if (stepIndex === 3) {
-        return '연락처 정보를 모두 입력해주세요';
+        return '모든 서류를 제출해주세요';
     }
     return '';
 }
@@ -133,7 +184,7 @@ function handleFileChange(event, containerId) {
         file = null;
     }
 
-    obj.step3[inputId] = file;
+    obj.step4[inputId] = file;
 }
 
 // 제출 파일 삭제 시 핸들러
@@ -189,15 +240,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            obj.step2.selectedRoom = room;
+            obj.step3.selectedRoom = room;
         });
     });
 
     occupantsSelect.addEventListener("change", function() {
-        obj.step2.selectedOccupants = occupantsSelect.value;
+        console.log(occupantsSelect.value);
+        obj.step3.selectedOccupants = occupantsSelect.value;
     });
 
-    document.querySelector(`.tab-button[data-room="${obj.step2.selectedRoom}"]`).click();
+    document.querySelector(`.tab-button[data-room="${obj.step3.selectedRoom}"]`).click();
 
     // 건강검진 기록부 파일이 변경되었을 때 파일명을 표시하고 객체에 파일을 저장
     document.getElementById("healthCheckup").addEventListener("change", function(event) {
@@ -226,23 +278,24 @@ function submitExamination() {
     
     // step1 데이터는 동의여부 논리값일 뿐이므로 제외함
 
-    // step2 데이터 추가
-    formData.append('selectedRoom', obj.step2.selectedRoom);
-    formData.append('selectedOccupants', obj.step2.selectedOccupants);
+    // step2 연락처 데이터 추가
+    formData.append('contactName', obj.step2.contactName);
+    formData.append('contactPhone', obj.step2.contactPhone);
+    formData.append('contactEmail', obj.step2.contactEmail);
 
-    // step3 파일 데이터 추가
-    formData.append('healthCheckup', obj.step3.healthCheckup);
-    formData.append('familyRelationship', obj.step3.familyRelationship);
-    formData.append('residentRegistration', obj.step3.residentRegistration);
-    formData.append('idCardCopy', obj.step3.idCardCopy);
+    // step3 방 데이터 추가
+    formData.append('selectedRoom', obj.step3.selectedRoom);
+    formData.append('selectedOccupants', obj.step3.selectedOccupants);
 
-    // step4 연락처 데이터 추가
-    formData.append('contactName', obj.step4.contactName);
-    formData.append('contactPhone', obj.step4.contactPhone);
-    formData.append('contactEmail', obj.step4.contactEmail);
+    // step4 파일 데이터 추가
+    formData.append('healthCheckup', obj.step4.healthCheckup);
+    formData.append('familyRelationship', obj.step4.familyRelationship);
+    formData.append('residentRegistration', obj.step4.residentRegistration);
+    formData.append('idCardCopy', obj.step4.idCardCopy);
 
 
-    fetch("/documentSubmission/submit", {
+
+    fetch("/examination/submit", {
         method: "POST",
         body: formData,
         headers: {
@@ -264,5 +317,5 @@ function submitExamination() {
         console.error('제출 중 에러 발생:', error);
         alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
     });
-    
+
 }
