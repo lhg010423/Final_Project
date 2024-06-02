@@ -24,8 +24,8 @@
 				#{examPhone},
 				DEFAULT,
 				SYSDATE,
-				#{selectedOccupants},
-				#{selectedRoom}
+				#{examRoomCapacity},
+				#{examRoomType}
 		)
 	</insert>
 	
