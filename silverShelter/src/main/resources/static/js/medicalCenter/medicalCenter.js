@@ -102,6 +102,63 @@ if (tabSelected.length > 0) {
     loadTabContent('medicalCenterIntro', 'section1');
 }
 
+function showFloor(sectionId, floorId) {
+    console.log("Trying to show floor with ID:", sectionId);
+    console.log("Trying to show floor with ID:", floorId);
+    var selectedFloor = document.getElementById(floorId);
+    var sections = document.getElementsByClassName('floor-sec');
+    var floors = document.getElementsByClassName('floor');
+
+
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        
+        for (var j = 0; j < floors.length; j++) {
+            floors[j].classList.remove('floorChecked');
+            console.log(floors[j].classList);
+        }
+    }
+
+    var selectedSection = document.getElementById(sectionId);
+    console.log(selectedSection);
+    if (selectedSection) {
+        selectedSection.style.display = 'flex';
+        selectedFloor.classList.add('floorChecked');
+        console.log("Displayed floor with ID:", sectionId);
+    } else {
+        console.error("No floor found with ID:", sectionId);
+    }
+}
+
+function showDep(sectionId, floorId) {
+    console.log("Trying to show floor with ID:", sectionId);
+    console.log("Trying to show floor with ID:", floorId);
+    var selectedFloor = document.getElementById(floorId);
+    var sections = document.getElementsByClassName('dep-sec');
+    var floors = document.getElementsByClassName('dep-floor');
+
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+            sections[i].classList.remove('floorChecked1');
+        
+        for (var j = 0; j < floors.length; j++) {
+            floors[j].classList.remove('floorChecked');
+            console.log(floors[j].classList);
+        }
+    }
+
+    var selectedSection = document.getElementById(sectionId);
+    console.log(selectedSection);
+    if (selectedSection) {
+        selectedSection.style.display = 'inline';
+        selectedSection.classList.add('floorChecked1');
+        selectedFloor.classList.add('floorChecked');
+        console.log("Displayed floor with ID:", sectionId);
+    } else {
+        console.error("No floor found with ID:", sectionId);
+    }
+}
+
 // -------------------------------------------------------------------------------------------------
 // 진료예약
     // 모든 버튼 요소와 콘텐츠 요소를 가져오기
