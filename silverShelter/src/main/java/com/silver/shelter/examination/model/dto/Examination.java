@@ -21,9 +21,9 @@ public class Examination {
 	private int examId; 
 	// Step 2 fields
 	// 방 이름 			
-    private String selectedRoom;
+    private String examRoomType;
     // 방 수 
-    private String selectedOccupants;
+    private String examRoomCapacity;
 
     // Step 3 fields (files)
     // 제출용 서류 
@@ -39,10 +39,10 @@ public class Examination {
 
     // Step 4 fields
     // 유저 이름
-    private String contactName;
+    private String examName;
     // 유저 휴대폰 번호
-    private String contactPhone;
+    private String examPhone;
     // 유저 이메일
-    private String contactEmail;
+    private String examEmail;
 
 }
