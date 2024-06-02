@@ -279,13 +279,13 @@ function submitExamination() {
     // step1 데이터는 동의여부 논리값일 뿐이므로 제외함
 
     // step2 연락처 데이터 추가
-    formData.append('contactName', obj.step2.contactName);
-    formData.append('contactPhone', obj.step2.contactPhone);
-    formData.append('contactEmail', obj.step2.contactEmail);
+    formData.append('contactName', obj.step2.examName);
+    formData.append('contactPhone', obj.step2.examPhone);
+    formData.append('contactEmail', obj.step2.examEmail);
 
     // step3 방 데이터 추가
-    formData.append('selectedRoom', obj.step3.selectedRoom);
-    formData.append('selectedOccupants', obj.step3.selectedOccupants);
+    formData.append('selectedRoom', obj.step3.examRoomType);
+    formData.append('selectedOccupants', obj.step3.examRoomCapacity);
 
     // step4 파일 데이터 추가
     formData.append('healthCheckup', obj.step4.healthCheckup);

@@ -5,9 +5,9 @@
 	<!-- 중복 신청인지 확인 -->
 	<select id="checkApplicantInfo">
 		SELECT COUNT(*) FROM "EXAMINATION"
-		WHERE EXAM_NAME = #{contactName}
-		AND EXAM_PHONE = #{contactPhone}
-		AND EXAM_EMAIL = #{contactEmail}
+		WHERE EXAM_NAME = #{examName}
+		AND EXAM_PHONE = #{examPhone}
+		AND EXAM_EMAIL = #{examEmail}
 	</select>
 	
 	<!--  심사 테이블 입력 -->
@@ -19,9 +19,9 @@
 		
 		INSERT INTO "EXAMINATION"
 		VALUES( #{examId},
-				#{contactName},
-				#{contactEmail},
-				#{contactPhone},
+				#{examName},
+				#{examEmail},
+				#{examPhone},
 				DEFAULT,
 				SYSDATE,
 				#{selectedOccupants},

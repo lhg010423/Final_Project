@@ -1,7 +1,6 @@
 package com.silver.shelter.admin.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.silver.shelter.admin.model.service.AdminService;
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -150,16 +150,6 @@ public class AdminController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/** 회원 서류 관리
 	 * @return
 	 */
@@ -173,35 +163,84 @@ public class AdminController {
 		
 		Map<String, Object> map = null;
 		
-		map = service.documentSelect();
-		
 		
 		// 검색 안했을 때
 		if(paramMap.get("key") == null) {
-			map = service.memberAllSelect(cp);
+			map = service.examinationAllSelect(cp);
 			
 			
 		// 검색 했을 때
 		} else {
-			map = service.memberSearchSelect(paramMap, cp);
+			map = service.examinationSearchSelect(paramMap, cp);
 		
 		}
 		
 		model.addAttribute("pagination", map.get("pagination"));
-//		model.addAttribute("memberList", map.get("memberList"));
-//				model.addAttribute("memberDetail", memberDetail);
+		model.addAttribute("examinationList", map.get("examinationList"));
 		
-		System.out.println(map.get("memberList"));
 		System.out.println(map.get("pagination"));
-		
-		
-		
-		model.addAttribute("documentList", map.get("memberList"));
-
-//		log.info((String) map.get("documentList"));
+		System.out.println(map.get("examinationList"));
 		
 		return "admin/adminDocument";
 	}
+	
+	
+	
+	
+	/** 회원 상세 조회
+	 * @param paramMap
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("adminDocument")
+	public Map<String, Object> adminDocument(
+			@RequestBody int examId
+			) {
+		
+//			@RequestBody Member memberNo
+		// js로 다시 보낼 map
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		// 회원 상세정보 조회
+		Examination examInfo = service.examinationDetailSelect(examId);
+
+		if (examInfo == null) {
+	        // 회원 정보가 없는 경우
+	        map.put("error", "회원 정보를 찾을 수 없습니다.");
+	        return map;
+	    }
+		
+		
+//		log.info("memberInfo {}"+ memberInfo);
+		
+		System.out.println("examInfo 테스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +  examInfo);
+		
+		
+
+		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
+		map.put("examId", examInfo.getExamId());
+		map.put("examName", examInfo.getExamName());
+		map.put("examEmail", examInfo.getExamEmail());
+		map.put("examPhone", examInfo.getExamPhone());
+		map.put("examStatus", examInfo.getExamStatus());
+		map.put("examDate", examInfo.getExamDate());
+		map.put("examRoom", examInfo.getExamRoom());
+
+		System.out.println("examMap 테스트@@@@@@@@@@@@@@@@@" + map); // 잘됨
+		
+		return map;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/** 예약

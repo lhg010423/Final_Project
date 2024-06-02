@@ -65,8 +65,8 @@ public class ExaminationServiceImpl implements ExaminationService{
 				&& !documentSubmisson.getIdCardCopy().isEmpty()) {
 				
 				
-				String contactName = documentSubmisson.getContactName();
-				String contactPhone = documentSubmisson.getContactPhone();
+				String contactName = documentSubmisson.getExamName();
+				String contactPhone = documentSubmisson.getExamPhone();
 				
 				Path contactDir = Paths.get(documentsFolderPath, 
 								  Utility.createExamFolderName(contactName, contactPhone));

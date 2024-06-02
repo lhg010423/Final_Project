@@ -37,20 +37,36 @@
                             <thead>
                                 <tr>
                                     <th>회원 이름</th>
-                                    <th>회원 아이디</th>
+                                    <th>회원 이메일</th>
                                     <th>심사 승인 여부</th>
+                                    <th>방/인원수</th>
                                     <th>심사 신청일</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
-                                <th:block th:unless="${#lists.isEmpty(documentList)}">
+                                <!-- 서류가 없을 때 -->
+                                <th:block th:if="${#lists.isEmpty(examinationList)}">
+                                    <tr>
+                                        <th colspan="6">서류가 존재하지 않습니다.</th>
+                                    </tr>
 
-                                    <tr th:each="document : ${documentList}" th:object="${member}">
-                                        <td th:text="${document.memberName}"></td>
-                                        <td th:text="${document.memberId}"></td>
-                                        <td th:text="${document.examStatus}"></td>
-                                        <td th:text="${document.examDate}"></td>
+                                </th:block>
+
+
+                                <!-- 서류가 있을 때 -->
+                                <th:block th:unless="${#lists.isEmpty(examinationList)}">
+
+                                    <tr th:each="ex : ${examinationList}" th:object="${examination}">
+                                        <td>
+                                            <button id="examName"
+                                                th:name="${ex.examId}" th:text="${ex.examName}">
+                                            </button>
+                                        </td>
+                                        <td th:text="${ex.examEmail}"></td>
+                                        <td th:text="${ex.examStatus}"></td>
+                                        <td th:text="${ex.examRoom}"></td>
+                                        <td th:text="${ex.examDate}"></td>
                                     </tr>
                                     
                                 </th:block>
@@ -74,7 +90,7 @@
                                 <li><a th:href="@{/admin/adminDocument(cp=1)}">&lt;&lt;</a></li>
 
                                 <!-- 이전 목록 마지벅 페이지로 이동 -->
-                                <li><a th:href="@{/admin/adminDocument(cp=*{prevPage})}">&lt;</a></li>
+                                <li><a th:href="@{/admin/adminDocument(cp=${pagination.prevPage})}">&lt;</a></li>
 
                                 <!-- 특정 페이지로 이동 -->
                                 <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
@@ -99,7 +115,7 @@
                             
 
                             <!-- 목록 조회(검색O) -->
-                            <ul class="pagination" th:if="${param.key}" th:object="${pagination}" th:unless="${#lists.isEmpty(documentList)}">
+                            <ul class="pagination" th:if="${param.key}" th:object="${pagination}" th:unless="${#lists.isEmpty(examinationList)}">
 
                                 <!-- 첫 페이지로 이동 -->
                                 <li><a th:href="@{/admin/adminDocument(cp=1,
@@ -150,7 +166,7 @@
                         <form th:action="@{/admin/adminDocument}" method="get" class="boardSearch">
                             <select name="key" id="searchKey">
                                 <option value="n">이름</option>
-                                <option value="i">아이디</option>
+                                <option value="e">이메일</option>
                             </select>
 
                             <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
@@ -169,13 +185,43 @@
 
                 </div>
                 
-                <div class="adminRight"></div>
+                <!-- 오른쪽 페이지 -->
+                <div class="adminRight">
+
+                    <h2>회원 서류 심사</h2>
+                    <form action="/admin/adminDocument" method="POST" id="memberForm">
+
+                        <div id="name-area">
+                            <label for="name">이름</label>
+                            <span id="nameSpan" name="name"></span>
+                        </div>
+
+                        <div id="tel-area">
+                            <label for="tel">전화번호</label>
+                            <span id="telSpan"></span>
+                        </div>
+
+
+                        <div id="document1">
+                            <label for="docuemnt-name">가족관계증명</label>
+                            <button class="button" onclick="openDocument('')"></button>
+                        </div>
+
+
+                    </form>
+
+
+
+
+                </div>
             </div>
 
 
         </section>
         
     </main>
+
+    <script src="/js/admin/adminDocument.js"></script>
 
 </body>
 </html>

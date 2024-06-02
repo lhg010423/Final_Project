@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.silver.shelter.admin.model.mapper.AdminMapper;
 import com.silver.shelter.board.model.dto.Pagination;
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ public class AdminServiceImpl implements AdminService{
 		int offset = (cp - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
+		// 회원 서류 관리 페이지에서 Examination테이블의 값들을 축력함
 		List<Member> memberList = mapper.memberAllSelect(rowBounds);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -93,21 +95,69 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 
-	/** 회원 서류관리 게시판 조회
+	/** 심사 서류 관리 게시판 조회 검색X
 	 *
 	 */
 	@Override
-	public Map<String, Object> documentSelect() {
+	public Map<String, Object> examinationAllSelect(int cp) {
+		
+		// 전체 서류 수
+		int examinationCount = mapper.examinationAllCount();
+		
+		// memberCount + cp 을 이용해 pagination 생성
+		Pagination pagination = new Pagination(cp, examinationCount);
+		
+		// 페이징 처리
+		int limit = pagination.getLimit();
+		int offset = (cp - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		// 심사 서류 관리 페이지에서 Examination테이블의 값들을 축력함
+		List<Examination> examinationList = mapper.examinationAllSelect(rowBounds);
 		
 		Map<String, Object> map = new HashMap<>();
 		
-		List<Member> documentList = mapper.documentSelect();
+		map.put("pagination", pagination);
+		map.put("examinationList", examinationList);
+
+		return map;
+	}
+
+
+	/** 심사 서류 관리 게시판 조회 검색O
+	 *
+	 */
+	@Override
+	public Map<String, Object> examinationSearchSelect(Map<String, Object> paramMap, int cp) {
 		
-		map.put("documentList", documentList);
+		// 검색한 서류 수
+		int examinationCount = mapper.examinationSearchCount(paramMap);
+		
+		Pagination pagination = new Pagination(cp, examinationCount);
+		
+		int limit = pagination.getLimit();
+		int offset = (cp - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Examination> examinationList = mapper.examinationSearchSelect(paramMap, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pagination", pagination);
+		map.put("examinationList", examinationList);
 		
 		
 		return map;
 	}
+
+
+	@Override
+	public Examination examinationDetailSelect(int examId) {
+		return mapper.examinationDetailSelect(examId);
+	}
+
+
+
 	
 	
 	
