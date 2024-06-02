@@ -24,6 +24,9 @@ public class Examination {
     private String examRoomType;
     // 방 수 
     private String examRoomCapacity;
+    // 방타입/방인원
+    private String examRoom;
+
 
     // Step 3 fields (files)
     // 제출용 서류 
@@ -44,5 +47,10 @@ public class Examination {
     private String examPhone;
     // 유저 이메일
     private String examEmail;
+    // 심사 승인 여부
+    private String examStatus;
+    // 심사 신청일
+    private String examDate;
+
 
 }

@@ -3,6 +3,7 @@ package com.silver.shelter.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
 public interface AdminService {
@@ -27,10 +28,27 @@ public interface AdminService {
 	 */
 	Member adminDetailSelect(int memberNo);
 
-	/** 서류 조회
+
+
+	/** 심사 서류 관리 게시글 조회 검색X
+	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> documentSelect();
+	Map<String, Object> examinationAllSelect(int cp);
+
+
+	/** 심사 서류 관리 게시글 조회 검색O
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> examinationSearchSelect(Map<String, Object> paramMap, int cp);
+
+	/** 심사 서류 관리 상세조회
+	 * @param examId
+	 * @return
+	 */
+	Examination examinationDetailSelect(int examId);
 	
 	
 	

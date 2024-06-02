@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
 @Mapper
@@ -47,7 +48,43 @@ public interface AdminMapper {
 	int memberSearchCount(Map<String, Object> paramMap);
 
 
-	List<Member> documentSelect();
+	
+
+	/** 심사 서류 관리 페이지 게시글 수 조회X
+	 * @return
+	 */
+	int examinationAllCount();
+
+	/** 심사 서류 관리 페이지에서 조회할 게시글 검색X
+	 * @return
+	 */
+	List<Examination> examinationAllSelect(RowBounds rowBounds);
+
+
+	/** 심사 서류 관리 페이지 게시글 수 조회O
+	 * @param paramMap
+	 * @return
+	 */
+	int examinationSearchCount(Map<String, Object> paramMap);
+
+
+	/** 심서 서류 관리 페이지에서 조회할 게시글 검색O
+	 * @param paramMap 
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Examination> examinationSearchSelect(Map<String, Object> paramMap, RowBounds rowBounds);
+
+
+	/** 심서 서류 관리 상세 페이지
+	 * @param examId
+	 * @return
+	 */
+	Examination examinationDetailSelect(int examId);
+
+
+
+
 
 
 }

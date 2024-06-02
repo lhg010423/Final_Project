@@ -82,14 +82,77 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 
-	<select id="documentSelect">
-		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_ID, EXAM_STATUS,
-		TO_CHAR(EXAM_DATE, 'YYYY"."MM"."DD  HH24":"MI":"SS') EXAM_DATE
-		FROM "MEMBER"
-		JOIN "EXAMINATION" USING(EXAM_ID)
-		WHERE MEMBER_ROLE = 2
-		ORDER BY MEMBER_NO DESC
+
+	<!-- 심사 서류 관리 페이지 게시글 수 조회X -->
+	<select id="examinationAllCount">
+		SELECT COUNT(*)
+		FROM "EXAMINATION"
 	</select>
+	
+	
+	
+	
+	<!-- 심사 서류 관리 페이지 전체 게시글 조회하기 (승인여부가 N이고 심사고유번호가 낮을수록 상단에 출력됨  -->
+	<select id="examinationAllSelect">
+		SELECT EXAM_ID, EXAM_NAME, EXAM_EMAIL, EXAM_ROOM_TYPE || '/' || EXAM_ROOM_CAPACITY AS EXAM_ROOM,
+			EXAM_STATUS, EXAM_DATE
+		FROM "EXAMINATION"
+		ORDER BY EXAM_STATUS, EXAM_ID <!-- 승인여부 : N, 심사고유번호 -->
+	</select>
+	
+	
+	<!-- 심사 서류 관리 페이지 게시글 수 조회O -->
+	<select id="examinationSearchCount">
+		SELECT COUNT(*)
+		FROM "EXAMINATION"
+		
+		<choose>
+			
+			<!-- 이름으로 검색 -->
+			<when test='key == "n"'>
+				WHERE EXAM_NAME LIKE '%' || #{query} || '%'
+			</when>
+			
+			<!-- 이메일으로 검색 -->
+			<when test='key == "n"'>
+				WHERE EXAM_EMAIL LIKE '%' || #{query} || '%'
+			</when>
+			
+		</choose>
+	</select>
+	
+	
+	<!-- 심사 서류 관리 페이지 검색한 게시글 조회하기 -->
+	<select id="examinationSearchSelect">
+		SELECT EXAM_ID, EXAM_NAME, EXAM_EMAIL, EXAM_ROOM_TYPE || '/' || EXAM_ROOM_CAPACITY AS EXAM_ROOM,
+			EXAM_STATUS, EXAM_DATE
+		FROM "EXAMINATION"
+		
+		<choose>
+			
+			<!-- 이름으로 검색 -->
+			<when test='key == "n"'>
+				WHERE EXAM_NAME LIKE '%' || #{query} || '%'
+			</when>
+			
+			<!-- 이메일으로 검색 -->
+			<when test='key == "e"'>
+				WHERE EXAM_EMAIL LIKE '%' || #{query} || '%'
+			</when>
+			
+		</choose>
+		ORDER BY EXAM_STATUS, EXAM_ID
+	</select>
+	
+	
+	<!-- 심사 서류 관리 상세 조회 -->
+	<select id="examinationDetailSelect" resultType="Examination">
+		SELECT EXAM_ID, EXAM_NAME, EXAM_EMAIL, EXAM_PHONE,
+			EXAM_STATUS, EXAM_DATE, EXAM_ROOM_TYPE || '/' || EXAM_ROOM_CAPACITY AS EXAM_ROOM
+		FROM "EXAMINATION"
+		WHERE EXAM_ID = #{examId}
+	</select>
+	
 	
 
 </mapper>
