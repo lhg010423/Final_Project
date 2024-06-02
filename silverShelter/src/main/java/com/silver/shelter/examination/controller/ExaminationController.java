@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ExaminationController {
 
 	private final ExaminationService service;
-	/** 서류 제출 
+	/** 서류 제출 이동
 	 * @return
 	 */
 	@GetMapping("examination")
@@ -46,7 +46,7 @@ public class ExaminationController {
 		return count;
 	}
 	
-	/** g히힛
+	/** 서류 제출 
 	 * @param documentSubmisson
 	 * @return
 	 * @throws Exception

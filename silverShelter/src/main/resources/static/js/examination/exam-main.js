@@ -3,13 +3,13 @@ const obj = {
         fullAgreement: false
     },
     step2: {
-        contactName: '',
-        contactPhone: '',
-        contactEmail: ''
+        examName: '',
+        examPhone: '',
+        examEmail: ''
     },
     step3: {
-        selectedRoom: 'classic',
-        selectedOccupants: ''
+        examRoomType: 'classic',
+        examRoomCapacity: ''
     },
     step4: {
         healthCheckup: null,
@@ -60,14 +60,13 @@ function changeStep(stepChange) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                contactName: obj.step2.contactName,
-                contactPhone: obj.step2.contactPhone,
-                contactEmail: obj.step2.contactEmail
+                examName: obj.step2.examName,
+                examPhone: obj.step2.examPhone,
+                examEmail: obj.step2.examEmail
             })
         })
         .then(response => response.json())
         .then(data => {
-            
             console.log("data: ", data);
             if (data > 0) {
                 alert('이미 신청한 회원입니다. 메인 페이지로 이동합니다.');
@@ -99,24 +98,6 @@ function changeStep(stepChange) {
             alert(getValidationMessage(currentStep));
         }
     }
-
-    // if (newStep >= 0 && newStep < steps.length) {
-    //     currentStep = newStep;
-    //     showStep(currentStep);
-
-    //     window.scrollTo({ top: 0, behavior: 'smooth' }); // 스크롤을 페이지 상단으로 이동
-
-    // } else if (newStep === steps.length) {
-
-    //     // 모든 스텝이 유효한 경우 제출 처리
-    //     if (validateStep(currentStep)) {
-            
-    //         submitExamination(); // 서버로 제출 이벤트
-
-    //     } else {
-    //         alert(getValidationMessage(currentStep));
-    //     }
-    // }
 }
 
 // step별 유효성 검사 함수
@@ -128,17 +109,17 @@ function validateStep(stepIndex) {
 
     } else if (stepIndex === 1) {
         // 신청자 정보 스텝
-        const contactName = document.getElementById('contact-name').value;
-        const contactPhone = document.getElementById('contact-phone').value;
-        const contactEmail = document.getElementById('contact-email').value;
-        obj.step2.contactName = contactName;
-        obj.step2.contactPhone = contactPhone;
-        obj.step2.contactEmail = contactEmail;
-        return contactName !== '' && contactPhone !== '' && contactEmail !== '';
+        const examName = document.getElementById('contact-name').value;
+        const examPhone = document.getElementById('contact-phone').value;
+        const examEmail = document.getElementById('contact-email').value;
+        obj.step2.examName = examName;
+        obj.step2.examPhone = examPhone;
+        obj.step2.examEmail = examEmail;
+        return examName !== '' && examPhone !== '' && examEmail !== '';
         
     } else if (stepIndex === 2) {
         // 객실 선택 스텝
-        return obj.step3.selectedRoom !== '' && obj.step3.selectedOccupants !== '';
+        return obj.step3.examRoomType !== '' && obj.step3.examRoomCapacity !== '';
 
     } else if (stepIndex === 3) {
         // 서류 제출 스텝
@@ -194,7 +175,6 @@ function removeFile(inputId) {
     handleFileChange({ target: input }, `${inputId}-file-name`);
 }
 
-
 showStep(currentStep);
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -240,16 +220,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            obj.step3.selectedRoom = room;
+            obj.step3.examRoomType = room;
         });
     });
 
     occupantsSelect.addEventListener("change", function() {
         console.log(occupantsSelect.value);
-        obj.step3.selectedOccupants = occupantsSelect.value;
+        obj.step3.examRoomCapacity = occupantsSelect.value;
     });
 
-    document.querySelector(`.tab-button[data-room="${obj.step3.selectedRoom}"]`).click();
+    document.querySelector(`.tab-button[data-room="${obj.step3.examRoomType}"]`).click();
 
     // 건강검진 기록부 파일이 변경되었을 때 파일명을 표시하고 객체에 파일을 저장
     document.getElementById("healthCheckup").addEventListener("change", function(event) {
@@ -275,33 +255,28 @@ document.addEventListener("DOMContentLoaded", function() {
 // submit 이벤트 함수
 function submitExamination() {
     const formData = new FormData();
-    
+
     // step1 데이터는 동의여부 논리값일 뿐이므로 제외함
 
     // step2 연락처 데이터 추가
-    formData.append('contactName', obj.step2.contactName);
-    formData.append('contactPhone', obj.step2.contactPhone);
-    formData.append('contactEmail', obj.step2.contactEmail);
+    formData.append('examName', obj.step2.examName);
+    formData.append('examPhone', obj.step2.examPhone);
+    formData.append('examEmail', obj.step2.examEmail);
 
     // step3 방 데이터 추가
-    formData.append('selectedRoom', obj.step3.selectedRoom);
-    formData.append('selectedOccupants', obj.step3.selectedOccupants);
+    formData.append('examRoomType', obj.step3.examRoomType);
+    formData.append('examRoomCapacity', obj.step3.examRoomCapacity);
 
     // step4 파일 데이터 추가
-    formData.append('healthCheckup', obj.step4.healthCheckup);
-    formData.append('familyRelationship', obj.step4.familyRelationship);
-    formData.append('residentRegistration', obj.step4.residentRegistration);
-    formData.append('idCardCopy', obj.step4.idCardCopy);
-
-
+    Object.keys(obj.step4).forEach(key => {
+        if (obj.step4[key]) {
+            formData.append(key, obj.step4[key]);
+        }
+    });
 
     fetch("/examination/submit", {
         method: "POST",
         body: formData,
-        headers: {
-            // FormData 객체를 사용할 때는 Content-Type 헤더를 설정하지 않음.
-            // -> 브라우저가 자동으로 설정함
-        }
     })
     .then(response => {
         if (!response.ok) {
@@ -317,5 +292,4 @@ function submitExamination() {
         console.error('제출 중 에러 발생:', error);
         alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
     });
-
 }
