@@ -1,52 +1,20 @@
-<th:block th:if="${loginMember == null}">
+<th:block th:if="${session.loginMember == null}">
     <div id="doctorMatchingPage">
         <h1 id="doctorMatchingTitle">Golden Prestage 의료센터에 오신 것을 환영합니다</h1>
         <div id="doctorMatchingLoginForm">
             <div id="doctorMatchingLogin">
                 <article class="login-form">
 
-                    <form action="/member/login" method="POST" id="loginArea">
+                    <form action="/member/login" method="GET" id="loginArea">
                         
                         <!-- 아이디, 비번 입력 -->
                         <img id="doctorMatchingMainLogo" src="/images/main/Logo4.png">
                             <h1>서비스를 이용하시려면 로그인이 필요합니다.</h1>
                             
-                            
                             <div class="text">Golden Prestige Corperation</div>
+                            <button id="docLoginBtn">로그인 페이지로 이동</button>
                             
-                                <section>
-                                    <input type="text"
-                                            class="memberId"
-                                            placeholder="아이디를 입력해주세요"
-                                            name="memberId"
-                                            id="memberId"
-                                            autocomplete="off">
-                                    <br>
-                                    <!-- <input type="password"
-                                            class="memberPw"
-                                            placeholder="비밀번호를 입력해주세요"
-                                            name="memberPw"
-                                            id="memberPw"> -->
-                                    
-                                </section>
-                                
-                                <div class="saveId" >
-                                <div>
-                                    <input type="checkbox" id="saveId">
-                                    <span>아이디 저장</span>
-                                </div>
-                                </div>
-                                
-                                <div class="btnDiv">
-                                    <button class="loginBtn">로그인</button>
-                                    <a href="#" class="signupBtn">회원가입</a>
-                                </div>
-                                
                     </form>
-                    
-                <div>
-                    <a href="/member/foundId"> 아이디 찾기</a> | <a href="/member/foundPw">비밀번호 찾기</a>
-                </div>   
                 
                 </article>
             </div>
@@ -58,47 +26,77 @@
         </div>
     </div>
 </th:block>
-<!-- <th:block th:if="${loginMember != null}"> -->
-    
-<!-- </th:block> -->
+<th:block th:if="${session.loginMember != null}">
 <div id="reservationPage">
     <h1>온라인 진료예약</h1>
     <div id="reservationForm">
-        <div id="reservation-content2" class="reservation-content reservation-active section2-2">
+        <div id="reservation-content2" class="reservation-content section2-2">
             <div id="resTitle">
                 <h2>진료과 선택</h2>
             </div>
             <div id="resimgs">
-                <div class="resImg">
+                <div class="resImg" data-image="/images/medicalCenter/재활의학과.png">
                     <img src="/images/medicalCenter/재활의학과.png" alt="재활의학과">
                     <h4 class="resImgIntro">재활의학과</h4>
                 </div>
-                <div class="resImg">
+                <div class="resImg" data-image="/images/medicalCenter/내과.png">
                     <img src="/images/medicalCenter/내과.png" alt="내과">
-                    <h4 class="resImgIntro">내과</h4>
+                    <h4 class="resImgIntro">내과</h4>   
                 </div>
-                <div class="resImg">
+                <div class="resImg" data-image="/images/medicalCenter/한방과.png">
                     <img src="/images/medicalCenter/한방과.png" alt="한방과">
                     <h4 class="resImgIntro">한방과</h4>
                 </div>
-                <div class="resImg">
+                <div class="resImg" data-image="/images/medicalCenter/가정의학과.png">
                     <img src="/images/medicalCenter/가정의학과.png" alt="가정의학과">
                     <h4 class="resImgIntro">가정의학과</h4>
                 </div>
             </div>
             <button id="resNextButton">Next</button>
         </div>
-        <div id="reservation-content3" class="reservation-content section2-3">This is Reservation 3</div>
+        <div id="reservation-content3" class="reservation-content section2-3">
+            
+        </div>
         <div id="reservation-content4" class="reservation-content section2-4">This is Reservation 4</div>
-        <div id="btn-reserve">
-            <div id="reservation-toggleButton1">환자정보
-                <div id="reservation-person">이형구<br>010-1234-5678</div>
+        <div id="btn-reserve"> 
+            <div id="reservation-toggleButton1">
+                <div id="res-numTitle">
+                    <h1 class="res-num">1</h1>
+                    <h2 class="res-num-title">환자정보</h2>
+                </div>
+                <div id="reservation-person">
+                    <ul>
+                        <li>
+                            <h3 th:text="${session.loginMember.memberName}"></h3>
+                        </li>
+                        <li>
+                            <h3 th:text="${session.loginMember.memberTel}"></h3>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <button class="reservation-toggleButton" data-target="2">진료과</button>
-            <button class="reservation-toggleButton" data-target="3">의료진</button>
-            <button class="reservation-toggleButton" data-target="4">진료일시</button>
+            <button class="reservation-toggleButton reservation-active" data-target="2">
+                <div id="res-numTitle1">
+                    <h1 class="res-num">2</h1>
+                    <h2 class="res-num-title">진료과</h2>
+                </div>
+                <img id="toggleButtonImage" src="/images/medicalCenter/재활의학과.png" alt="진료과 이미지">
+            </button>
+            <button class="reservation-toggleButton" data-target="3">
+                <div id="res-numTitle2">
+                    <h1 class="res-num">3</h1>
+                    <h2 class="res-num-title">의료진</h2>
+                </div>
+                </button>
+            <button class="reservation-toggleButton" data-target="4">
+                <div id="res-numTitle3">
+                    <h1 class="res-num">4</h1>
+                    <h2 class="res-num-title">진료일시</h2>
+                </div>
+            </button>
         </div>
     </div>
 </div>
 </div>
 </div>
+</th:block>

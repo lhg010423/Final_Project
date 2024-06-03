@@ -32,6 +32,7 @@ button {
     border-radius: 10px;
     font-weight: bold;
     transition: 0.3s;
+    margin-bottom: 80px;
 }
 
 #mediNav *:hover{
@@ -234,6 +235,16 @@ li {
     margin-bottom: 50px;
 }
 
+#docLoginBtn {
+    width: 300px;
+    height: 70px;
+    background-color: #1A2050;
+    color: white;
+    font-size: 25px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
 .doctorIntroDiv {
     display: flex;
     margin-top: 20px;
@@ -272,7 +283,8 @@ li {
 
 /* 로그인 전 진료예약 */
 #doctorMatchingTitle {
-    margin: 50px;
+    margin-top: 80px;
+    padding-bottom: 100px;
 }
 
 #doctorMatchingLoginForm {
@@ -280,7 +292,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 20px;
 }
 
 #doctorMatchingLoginForm * {
@@ -296,7 +308,6 @@ li {
 
 #doctorMatchingMainLogo {
     width: 200px;
-
 }
 
 #doctorMatchingIntro {
@@ -389,13 +400,7 @@ li {
     align-items: center;
     padding: 40px;
     border: #333 1px solid;
-}
-
-.reservation-active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
+    margin-top: 100px;
 }
 
 .reservation-content {
@@ -412,8 +417,8 @@ li {
 }
 
 #resTitle {
-    padding-right: 900px;
-    padding-bottom: 40px;
+    padding-right: 850px;
+    padding-bottom: 70px;
     font-size: 30px;
 }
 
@@ -421,8 +426,9 @@ li {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 90px;
+    margin-right: 50px;
 }
 
 .resImg {
@@ -434,6 +440,7 @@ li {
     border-radius: 5px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .resImg img {
@@ -450,17 +457,21 @@ li {
 
 #resNextButton {
     margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #1A2050;
+    padding: 20px 50px;
+    background-color: #232e7e;
     color: #fff;
-    border: none;
+    border: white solid 0.6px;
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 25px;
+    border-radius: 10px;
 }
 
 #resNextButton:hover {
-    box-shadow: 3px #333;
+    color: #1A2050;
+    background-color: #fff;
+    border: #ccc 0.6px solid;
 }
 
 #btn-reserve {
@@ -474,10 +485,23 @@ li {
     padding-bottom: 20px;
     background-color: #1A2050;
     color: #fff;
-    border: none;
     cursor: pointer;
     transition: 0.3s;
     font-size: 30px;
+    border: #fff solid 1px;
+}
+
+.reservation-active {
+    width: 300px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 30px;
+    color: white;
+    background-color: #232e7e;
+    cursor: none;
+    border: #232e7e solid 1px;
 }
 
 #reservation-toggleButton1 {
@@ -486,19 +510,75 @@ li {
     padding-bottom: 20px;
     background-color: #1A2050;
     color: #fff;
-    border: none;
-    text-align: center;
     font-size: 30px;
+    border: #fff solid 1px;
 }
 
 .reservation-toggleButton:hover {
-    color: #1A2050;
-    background-color: #fff;
-    border: #333 solid 1px;
+    color: white;
+    background-color: #232e7e;
     cursor: pointer;
+    border: #232e7e solid 1px;
 }
 
 #reservation-person {
     color: white;
-    margin-top: 10px;
+    text-align: center;
+}
+
+#reservation-person * {
+    color: white;
+}
+
+#toggleButtonImage {
+    width: 100px;
+    filter: invert(100%);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#toggleButtonImage:hover {
+    filter: invert(100%);
+}
+
+#res-numTitle {
+    display: flex;
+    align-items: last baseline;
+}
+
+#res-numTitle1, #res-numTitle2, #res-numTitle3 {
+    display: flex;
+    align-items: last baseline;
+}
+
+#res-numTitle h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#res-numTitle1 h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#res-numTitle2 h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#res-numTitle3 h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#btn-reserve3 h1, h2 {
+    color: white;
+}
+
+#btn-reserve4 h1 {
+    font-size: 40px;
+}
+
+#btn-reserve h2 {
+    font-size: 30px;
 }
