@@ -87,6 +87,7 @@
 	<select id="examinationAllCount">
 		SELECT COUNT(*)
 		FROM "EXAMINATION"
+		WHERE EXAM_STATUS = 'N'
 	</select>
 	
 	
@@ -97,6 +98,7 @@
 		SELECT EXAM_ID, EXAM_NAME, EXAM_EMAIL, EXAM_ROOM_TYPE || '/' || EXAM_ROOM_CAPACITY AS EXAM_ROOM,
 			EXAM_STATUS, EXAM_DATE
 		FROM "EXAMINATION"
+		WHERE EXAM_STATUS = 'N'
 		ORDER BY EXAM_STATUS, EXAM_ID <!-- 승인여부 : N, 심사고유번호 -->
 	</select>
 	
@@ -105,18 +107,19 @@
 	<select id="examinationSearchCount">
 		SELECT COUNT(*)
 		FROM "EXAMINATION"
-		
+		WHERE EXAM_STATUS = 'N'
 		<choose>
 			
 			<!-- 이름으로 검색 -->
 			<when test='key == "n"'>
-				WHERE EXAM_NAME LIKE '%' || #{query} || '%'
+				AND EXAM_NAME LIKE '%' || #{query} || '%'
 			</when>
 			
 			<!-- 이메일으로 검색 -->
 			<when test='key == "n"'>
-				WHERE EXAM_EMAIL LIKE '%' || #{query} || '%'
+				AND EXAM_EMAIL LIKE '%' || #{query} || '%'
 			</when>
+			
 			
 		</choose>
 	</select>
@@ -127,21 +130,23 @@
 		SELECT EXAM_ID, EXAM_NAME, EXAM_EMAIL, EXAM_ROOM_TYPE || '/' || EXAM_ROOM_CAPACITY AS EXAM_ROOM,
 			EXAM_STATUS, EXAM_DATE
 		FROM "EXAMINATION"
-		
+		WHERE EXAM_STATUS = 'N'
 		<choose>
 			
 			<!-- 이름으로 검색 -->
 			<when test='key == "n"'>
-				WHERE EXAM_NAME LIKE '%' || #{query} || '%'
+				AND EXAM_NAME LIKE '%' || #{query} || '%'
 			</when>
 			
 			<!-- 이메일으로 검색 -->
 			<when test='key == "e"'>
-				WHERE EXAM_EMAIL LIKE '%' || #{query} || '%'
+				AND EXAM_EMAIL LIKE '%' || #{query} || '%'
 			</when>
 			
+			
+			
 		</choose>
-		ORDER BY EXAM_STATUS, EXAM_ID
+		ORDER BY EXAM_ID
 	</select>
 	
 	
