@@ -46,9 +46,9 @@ document.querySelectorAll(".examName").forEach(button => {
     })
 })
 
-function updateButtonValue(examId) {
-    var button = document.getElementById("examStatusBtn");
-    button.value = examId;
+// function updateButtonValue(examId) {
+//     var button = document.getElementById("examStatusBtn");
+//     button.value = examId;
 
 
 
@@ -78,5 +78,28 @@ function updateButtonValue(examId) {
     
 // }
 
+// 수정함
+function updateButtonValue(examId) {
+    var button = document.getElementById("examStatusBtn");
+    button.value = examId;
+
+    //  지우면 안된 아직 하는중
+    document.getElementById("examStatusBtn").addEventListener("click", function() {
+        
+        fetch("/admin/adminDocument", {
+            method: "UPDATE",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ examId: examId })
+        })
+        .then(resp => resp.json())
+        .then(result => {
+            if(result == null) {
+                alert("변경 실패");
+            } else {
+                alert("변경 성공");
+            }
+        });
+    });
+}
 
 
