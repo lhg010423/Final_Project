@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- main css -->
+    <link rel="stylesheet" href="/css/common/main.css">
+    <!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/communication/reservation.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
     <script>
 
@@ -15,14 +22,99 @@
       });
 
     </script>
-    
-    <title>캘린더</title>
 
+    <title>캘린더</title>
 </head>
-<body>
-    <h2>연결 확인 할게요</h2>
-    <div id='calendar'></div>
+<body> 
+  <main>
+
+    <th:block th:replace="~{common/headerNav}"></th:block>   
+    <th:block th:replace="~{common/mainNav}"></th:block>   
     
+    <section>
+        <div class="guest-info-container">
+          <!-- 조각 들어갈 위치 -->
+          <th:block th:replace="communication/communicationCommon"></th:block>
+          <div class="guest-room-section">
+            <div class="guest-room-header">
+              <h1>게스트룸</h1>   
+            </div>
+            <div class="guest-room-img-container">
+              <img src="/images/communication/guestRoom.webp" alt="Guest Room">
+            </div>
+            <form action="">
+              <div class="selection-container">
+                <div class="calendar-time-container">
+                  <!-- 캘린더 -->
+                  <div id='calendar'></div>
+                  <div class="check-container">
+                    <div class="time-title">
+                      <p>시간</p>
+                    </div>
+                    <div class="time-selection">
+                      <div class="time-option">
+                        <input type="radio" id="time-09" name="time">
+                        <label for="time-09">09:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-10" name="time">
+                        <label for="time-10">10:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-11" name="time">
+                        <label for="time-11">11:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-12" name="time">
+                        <label for="time-12">12:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-13" name="time">
+                        <label for="time-13">13:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-14" name="time">
+                        <label for="time-14">14:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-15" name="time">
+                        <label for="time-15">15:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-16" name="time">
+                        <label for="time-16">16:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-17" name="time">
+                        <label for="time-17">17:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-18" name="time">
+                        <label for="time-18">18:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-19" name="time">
+                        <label for="time-19">19:00</label>
+                      </div>
+                      <div class="time-option">
+                        <input type="radio" id="time-20" name="time">
+                        <label for="time-20">20:00</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button id="reserve-button">예약하기</button>
+
+              </div>
+
+            </form>
+          </div>
+      </div>
+    </section>
+  </main>
+    <!--footer-->
+    <th:block th:replace="~{/common/footer.html}"></th:block>
     <script src="/js/communication/reservation.js"></script>
 </body>
 </html>
