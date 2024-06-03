@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     const resNextButton = document.getElementById('resNextButton');
-    
+    // function updateReservationView(3);
 
 
 
