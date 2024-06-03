@@ -17,7 +17,7 @@
 				<!-- 로그인 됐을 때 -->
 				<th:block th:if="${session.loginMember != null}" id="logonDiv">
 					<div class="myInfo" th:object="${session.loginMember}">
-						<a href="#" id="memberName" th:text="*{memberName}">성함</a>&nbsp;님
+						<a href="#" id="memberName" th:text="*{memberName}" class="memberName">성함</a>&nbsp;님
 						<br>환영합니다
 					</div>
 						

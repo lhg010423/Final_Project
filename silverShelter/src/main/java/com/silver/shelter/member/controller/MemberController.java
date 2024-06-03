@@ -108,11 +108,37 @@ public class MemberController {
 		return "/member/Introduction";
 	}
 	
+	/** 아이디 찾기 화면으로 가는 메서드
+	 * @return
+	 */
 	@GetMapping("foundId")
 	public String foundId() {
 		
-		return "member/foundId";
+		return "/member/foundId";
 	}
+	
+	
+   @PostMapping("idResult") 
+   public String foundId(@ModelAttribute Member member,
+		   				 Model model,
+		   				 RedirectAttributes ra) {
+	  
+	   String result = service.foundId(member);
+	   String message = null;
+	   
+	   if(result.equals("not correct")) {
+		   message = "일치하는 사용자의 정보가 없습니다. 입력 정보를 확인하세요";
+		   ra.addFlashAttribute("message", message);
+		   return "redirect:/member/foundId";
+		   
+	   }else {
+		   model.addAttribute("memberId", result);
+		   return "/member/idResult";
+	   }
+	   
+		   
+	 }
+	 
 	
 	@GetMapping("foundPw")
 	public String foundPw() {
@@ -120,15 +146,7 @@ public class MemberController {
 		return "member/foundPw";
 	}
 	
-//	public String login(@ModelAttribute Member inputMember,
-//						RedirectAttributes ra,
-//						Model model,
-//						HttpServletResponse resp
-//			) {
-//		
-//		
-//		return "";
-//	}
+
 	
 	
 	

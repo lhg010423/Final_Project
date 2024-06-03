@@ -9,4 +9,8 @@ public interface MemberMapper {
 
 	Member login(String memberId);
 
+	int foundIdCount(Member member);
+
+	Member foundId(Member member);
+
 }
