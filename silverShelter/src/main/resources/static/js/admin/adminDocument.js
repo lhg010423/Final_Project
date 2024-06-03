@@ -50,30 +50,33 @@ function updateButtonValue(examId) {
     var button = document.getElementById("examStatusBtn");
     button.value = examId;
 
-    fetch("/admin/adminDocument", {
+
+
+
+    
+//  지우면 안된 아직 하는중
+//     document.getElementById("examStatusBtn").addEventListener("click", {
         
-    })
-
-}
-
-// function examStatus() {
-
-//     var select = document.getElementById("examStatus");
-//     var selectValue = select.options[select.selectedIndex].value;
-
-//     fetch(`/admin/adminDocument?key=${selectValue}`, {
-//         method : "GET",
-//         headers : {"Content-Type" : "application/json"}
-//     })
-//     .then(resp => resp.json())
-//     .then(result => {
-
-//         if(result == null) {
-//             alert("값 없음");
-//             return;
+//         fetch("/admin/adminDocument", {
+//             method : "UPDATE",
+//             headers : {"Content-Type" : "application/json"},
+//             body : examId
+//         })
+//         .then(resp => resp.json())
+//         .then(result => {
+            
+//             if(result == null) {
+//                 alert("변경 실패");
+//             }
+//             else {
+//             }
+            
 //         }
-
-
+        
 //     })
-
+    
+    
 // }
+
+
+
