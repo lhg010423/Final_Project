@@ -157,15 +157,20 @@ function showDep(sectionId, floorId) {
 // 진료예약
 
 document.addEventListener("DOMContentLoaded", function() {
+    let isReservationPageInitialized = false;
+
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
-        if (reservationPage) {
+        if (reservationPage && !isReservationPageInitialized) {
+            console.log("initializeReservationButtons: reservationPage 존재 확인");
+            isReservationPageInitialized = true;
+
             // 모든 버튼 요소와 콘텐츠 요소를 가져오기
             const reservationButtons = document.querySelectorAll(".reservation-toggleButton");
             const reservationContents = document.querySelectorAll(".reservation-content");
-            console.log("모든 버튼과 콘텐츠 요소를 가져오기 성공3");
+            console.log("모든 버튼과 콘텐츠 요소를 가져오기 성공");
             console.log(reservationContents);
-            updateReservationView(2);
+            updateReservationView('2');
 
             // 각 버튼에 클릭 이벤트 핸들러 등록
             reservationButtons.forEach(button => {
@@ -204,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 console.log("버튼 활성화 설정 성공: " + button.getAttribute("data-target"));
                             } else {
                                 button.classList.remove("reservation-active");
+                                console.log("나머지 다지움");
                             }
                         } catch (error) {
                             console.error("버튼 활성화 상태 초기화 오류:", error);
@@ -215,8 +221,25 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error("화면 업데이트 오류:", error);
                 }
             }
+
+            // resImg 클릭 이벤트 핸들러 등록
+            const resImgs = document.querySelectorAll('.resImg');
+            const toggleButtonImage = document.getElementById('toggleButtonImage');
+
+            resImgs.forEach(resImg => {
+                resImg.addEventListener('click', function () {
+                    const newImageSrc = this.getAttribute('data-image');
+                    if (newImageSrc) {
+                        toggleButtonImage.src = newImageSrc;
+                    } else {
+                        console.error("Image source attribute 'data-image' not found.");
+                    }
+                });
+            });
+
         } else {
-            console.log("reservationPage 요소가 존재하지 않습니다.");
+            console.log("initializeReservationButtons: reservationPage 요소가 존재하지 않거나 이미 초기화됨.");
+            isReservationPageInitialized = false; // 페이지가 사라졌을 때 초기화 상태 리셋
         }
     }
 
@@ -225,14 +248,21 @@ document.addEventListener("DOMContentLoaded", function() {
         for (const mutation of mutationsList) {
             if (mutation.type === 'childList' || mutation.type === 'attributes') {
                 const reservationPage = document.getElementById("reservationPage");
-                if (reservationPage) {
-                    console.log("reservationPage가 보입니다.");
+                if (reservationPage && !isReservationPageInitialized) {
+                    console.log("MutationObserver: reservationPage가 보입니다.");
                     initializeReservationButtons();
-                    observer.disconnect(); // 함수 실행 후 관찰 중지
+                } else if (!reservationPage && isReservationPageInitialized) {
+                    console.log("MutationObserver: reservationPage가 보이지 않습니다.");
+                    isReservationPageInitialized = false;
                 }
             }
         }
     });
+
+    const resNextButton = document.getElementById('resNextButton');
+    
+
+
 
     // DOM에 추가되거나 속성이 변경될 때 감지
     observer.observe(document.body, { 
@@ -240,4 +270,9 @@ document.addEventListener("DOMContentLoaded", function() {
         attributes: true, 
         subtree: true 
     });
+
+    // 초기 로드 시 reservationPage 확인 및 초기화
+    if (document.getElementById("reservationPage")) {
+        initializeReservationButtons();
+    }
 });
