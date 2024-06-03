@@ -101,5 +101,3 @@ function updateButtonValue(examId) {
         });
     });
 }
-
-
