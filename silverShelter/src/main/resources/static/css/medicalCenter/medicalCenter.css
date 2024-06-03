@@ -399,13 +399,16 @@ li {
     justify-content: center;
     align-items: center;
     padding: 40px;
-    border: #333 1px solid;
     margin-top: 100px;
 }
 
 .reservation-content {
     display: none;
     text-align: center;
+    border: #333 1px solid;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 50px;
 }
 
 #reservation-content-inside {
@@ -581,4 +584,8 @@ li {
 
 #btn-reserve h2 {
     font-size: 30px;
+}
+
+#res-dep-choice {
+    color: #333;
 }

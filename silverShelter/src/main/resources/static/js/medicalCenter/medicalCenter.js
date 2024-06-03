@@ -157,7 +157,10 @@ function showDep(sectionId, floorId) {
 // 진료예약
 
 document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOMContentLoaded 이벤트가 트리거되었습니다.");
+
     let isReservationPageInitialized = false;
+    let selectedDepartment = ''; // 선택된 진료과를 저장할 변수
 
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
@@ -169,7 +172,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const reservationButtons = document.querySelectorAll(".reservation-toggleButton");
             const reservationContents = document.querySelectorAll(".reservation-content");
             console.log("모든 버튼과 콘텐츠 요소를 가져오기 성공");
-            console.log(reservationContents);
             updateReservationView('2');
 
             // 각 버튼에 클릭 이벤트 핸들러 등록
@@ -186,42 +188,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             });
 
-            // 화면을 업데이트하는 함수
-            function updateReservationView(target) {
-                try {
-                    // 모든 콘텐츠를 순회하면서 보이기/숨기기 설정
-                    console.log("화면 업데이트 함수 시작");
-                    reservationContents.forEach(content => {
-                        try {
-                            console.log("콘텐츠 순회 시작");
-                            content.style.display = content.id === `reservation-content${target}` ? "block" : "none";
-                            console.log("콘텐츠 순회 성공: " + content.id);
-                        } catch (error) {
-                            console.error("콘텐츠 순회 오류:", error);
-                        }
-                    });
-
-                    // 모든 버튼의 활성화 상태 초기화
-                    reservationButtons.forEach(button => {
-                        try {
-                            if (button.getAttribute("data-target") === target) {
-                                button.classList.add("reservation-active");
-                                console.log("버튼 활성화 설정 성공: " + button.getAttribute("data-target"));
-                            } else {
-                                button.classList.remove("reservation-active");
-                                console.log("나머지 다지움");
-                            }
-                        } catch (error) {
-                            console.error("버튼 활성화 상태 초기화 오류:", error);
-                        }
-                    });
-                    
-                    console.log("화면 업데이트 함수 성공: " + target);
-                } catch (error) {
-                    console.error("화면 업데이트 오류:", error);
-                }
-            }
-
             // resImg 클릭 이벤트 핸들러 등록
             const resImgs = document.querySelectorAll('.resImg');
             const toggleButtonImage = document.getElementById('toggleButtonImage');
@@ -229,8 +195,11 @@ document.addEventListener("DOMContentLoaded", function() {
             resImgs.forEach(resImg => {
                 resImg.addEventListener('click', function () {
                     const newImageSrc = this.getAttribute('data-image');
+                    const departmentName = this.querySelector('h4').innerText; // 진료과 이름 가져오기
                     if (newImageSrc) {
                         toggleButtonImage.src = newImageSrc;
+                        selectedDepartment = departmentName; // 선택된 진료과 저장
+                        console.log("선택된 진료과: " + selectedDepartment);
                     } else {
                         console.error("Image source attribute 'data-image' not found.");
                     }
@@ -240,6 +209,45 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             console.log("initializeReservationButtons: reservationPage 요소가 존재하지 않거나 이미 초기화됨.");
             isReservationPageInitialized = false; // 페이지가 사라졌을 때 초기화 상태 리셋
+        }
+    }
+
+    // 화면을 업데이트하는 함수
+    function updateReservationView(target) {
+        try {
+            const reservationContents = document.querySelectorAll(".reservation-content");
+            const reservationButtons = document.querySelectorAll(".reservation-toggleButton");
+
+            // 모든 콘텐츠를 순회하면서 보이기/숨기기 설정
+            console.log("화면 업데이트 함수 시작");
+            reservationContents.forEach(content => {
+                try {
+                    console.log("콘텐츠 순회 시작");
+                    content.style.display = content.id === `reservation-content${target}` ? "block" : "none";
+                    console.log("콘텐츠 순회 성공: " + content.id);
+                } catch (error) {
+                    console.error("콘텐츠 순회 오류:", error);
+                }
+            });
+
+            // 모든 버튼의 활성화 상태 초기화
+            reservationButtons.forEach(button => {
+                try {
+                    if (button.getAttribute("data-target") === target) {
+                        button.classList.add("reservation-active");
+                        console.log("버튼 활성화 설정 성공: " + button.getAttribute("data-target"));
+                    } else {
+                        button.classList.remove("reservation-active");
+                        console.log("버튼 비활성화 설정: " + button.getAttribute("data-target"));
+                    }
+                } catch (error) {
+                    console.error("버튼 활성화 상태 초기화 오류:", error);
+                }
+            });
+
+            console.log("화면 업데이트 함수 성공: " + target);
+        } catch (error) {
+            console.error("화면 업데이트 오류:", error);
         }
     }
 
@@ -259,16 +267,42 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // resNextButton 클릭 이벤트 핸들러 등록
     const resNextButton = document.getElementById('resNextButton');
-    // function updateReservationView(3);
+    if (resNextButton != null) {
+        console.log("resNextButton 존재 확인");
+        resNextButton.addEventListener('click', function () {
+            console.log("resNextButton 클릭 이벤트 시작");
+            
+            if (selectedDepartment === '') {
+                console.error("진료과를 선택해주세요.");
+                alert("진료과를 선택해주세요."); // 사용자에게 진료과 선택을 요청
+                return;
+            }
 
+            // 폼 생성 및 제출
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/medicalCenter/'; // 서버 엔드포인트로 변경
 
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'selectedDepartment';
+            input.value = selectedDepartment;
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+        });
+    } else {
+        console.error("resNextButton 요소를 찾을 수 없습니다.");
+    }
 
     // DOM에 추가되거나 속성이 변경될 때 감지
-    observer.observe(document.body, { 
-        childList: true, 
-        attributes: true, 
-        subtree: true 
+    observer.observe(document.body, {
+        childList: true,
+        attributes: true,
+        subtree: true
     });
 
     // 초기 로드 시 reservationPage 확인 및 초기화
