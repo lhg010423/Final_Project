@@ -35,10 +35,16 @@
                         <table class="list-table">
 
                             <thead>
+                                    
                                 <tr>
                                     <th>회원 이름</th>
                                     <th>회원 이메일</th>
-                                    <th>심사 승인 여부</th>
+                                    <th>심사 승인 여부
+                                        <!-- <select name="key" id="examStatus" onchange="examStatus()">
+                                            <option value="Y">심사 승인 여부 Y</option>
+                                            <option value="N">심사 승인 여부 N</option>
+                                        </select> -->
+                                    </th>
                                     <th>방/인원수</th>
                                     <th>심사 신청일</th>
                                 </tr>
@@ -57,16 +63,16 @@
                                 <!-- 서류가 있을 때 -->
                                 <th:block th:unless="${#lists.isEmpty(examinationList)}">
 
-                                    <tr th:each="ex : ${examinationList}" th:object="${examination}">
+                                    <tr th:each="examination : ${examinationList}" th:object="${examination}">
                                         <td>
-                                            <button id="examName"
-                                                th:name="${ex.examId}" th:text="${ex.examName}">
+                                            <button class="examName"
+                                                th:name="*{examId}" th:text="*{examName}">
                                             </button>
                                         </td>
-                                        <td th:text="${ex.examEmail}"></td>
-                                        <td th:text="${ex.examStatus}"></td>
-                                        <td th:text="${ex.examRoom}"></td>
-                                        <td th:text="${ex.examDate}"></td>
+                                        <td th:text="${examination.examEmail}"></td>
+                                        <td th:text="${examination.examStatus}"></td>
+                                        <td th:text="${examination.examRoom}"></td>
+                                        <td th:text="${examination.examDate}"></td>
                                     </tr>
                                     
                                 </th:block>
@@ -164,12 +170,12 @@
 
 
                         <form th:action="@{/admin/adminDocument}" method="get" class="boardSearch">
-                            <select name="key" id="searchKey">
+                            <select name="key" class="searchKey">
                                 <option value="n">이름</option>
                                 <option value="e">이메일</option>
                             </select>
 
-                            <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+                            <input type="text" name="query" class="searchQuery" placeholder="검색어를 입력해주세요.">
 
                             <button>검색하기</button>
 
@@ -201,10 +207,29 @@
                             <span id="telSpan"></span>
                         </div>
 
-
                         <div id="document1">
+                            <label for="docuemnt-name">건강검진 기록부</label>
+                            <button class="button" onclick="openDocument('')"></button>
+                        </div>
+
+                        <div id="document2">
                             <label for="docuemnt-name">가족관계증명</label>
                             <button class="button" onclick="openDocument('')"></button>
+                        </div>
+
+                        <div id="document3">
+                            <label for="docuemnt-name">주민등록본</label>
+                            <button class="button" onclick="openDocument('')"></button>
+                        </div>
+
+                        <div id="document4">
+                            <label for="docuemnt-name">신분증복사본</label>
+                            <button class="button" onclick="openDocument('')"></button>
+                        </div>
+
+                        <!-- 심사 승인 여부 버튼 -->
+                        <div id="btn-area">
+                            <button id="examStatusBtn" value="exValue">심사 승인 여부</button>
                         </div>
 
 

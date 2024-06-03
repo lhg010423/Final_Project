@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,12 +95,8 @@ public class AdminController {
 			@RequestBody int memberNo
 			) {
 		
-//			@RequestBody Member memberNo
 		// js로 다시 보낼 map
 		Map<String, Object> map = new HashMap<>();
-		
-		
-//		System.out.println("memberNo : " + memberNo);
 		
 		// 회원 상세정보 조회
 		Member memberInfo = service.adminDetailSelect(memberNo);
@@ -111,10 +108,7 @@ public class AdminController {
 	    }
 		
 		
-//		log.info("memberInfo {}"+ memberInfo);
-		
 		System.out.println("memberInfo 테스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +  memberInfo);
-		
 		
 
 		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
@@ -214,7 +208,7 @@ public class AdminController {
 		
 //		log.info("memberInfo {}"+ memberInfo);
 		
-		System.out.println("examInfo 테스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +  examInfo);
+		System.out.println("examInfo 테스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" +  examInfo); // 잘됨
 		
 		
 

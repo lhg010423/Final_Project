@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지 게시판</title>
+
+    <!-- main css -->
+	<link rel="stylesheet" href="/css/common/main.css">
+	
+	<!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+
+    <link rel="stylesheet" href="/css/board/board.css">
+
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/headerNav}"></th:block>
+
+        <!-- <img src="/images/main/main.png" class="main"> -->
+        <th:block th:replace="~{common/mainNav}"></th:block>
+
+        <!-- header 를 제외한 나머지 공간 -->
+        <section class="boardMain">
+
+            <!-- 상단 공백 -->
+            <div></div>
+
+
+
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+    </main>
+</body>
+</html>
