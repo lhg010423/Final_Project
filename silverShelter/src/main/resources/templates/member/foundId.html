@@ -1,55 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>아이디 찾기</title>
+	
 	<!-- header Nav 용 css-->
-		<th:block th:replace="~{common/common}"></th:block>
-		
+	<th:block th:replace="~{common/common}"></th:block>
+	
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
-	
 </head>
 <body>
 	
 	<th:block th:replace="~{common/mainNav}"></th:block>
 	<th:block th:replace="~{common/headerNav}"></th:block>
 	
-	<form action="#" method="POST" id="foundIdArea">
+	<div style="height: 13vh;"></div>
+	
+	<form action="/member/idResult" method="POST" id="foundIdArea">
 				
 		<div class="foundIdTitle">
 			아이디 찾기
 		</div>
 		               
-			<div class="text"> Gonden Prestige Corperation</div>
+		<div class="text"> Golden Prestige Corporation</div>
 						
-			    <section>
-		        	 성함<input type="text"
-	                           class="memberName"
-	                           placeholder="성함을 입력해주세요"
-	                           name="memberName"
-	                           id="memberName"
-	   						   autocomplete="off">
-		            <br>
-		            
-					이메일 &nbsp;<input type="text"
-			                   class="memberEmail"
-			            	   placeholder= "이메일을입력해주세요"
-			                   name="memberEmail"
-			                   id="memberEmail"
-							   autocomplete="off">
-		                        
-		          </section>
+		<section>
+			성함 <input type="text"
+				class="memberName"
+				placeholder="성함을 입력해주세요"
+				name="memberName"
+				id="memberName"
+				autocomplete="off"
+				style="color: #000;">
+			<br>
+			이메일&nbsp;&nbsp; <input type="text"
+				class="memberEmail"
+				placeholder="이메일을 입력해주세요"
+				name="memberEmail"
+				id="memberEmail"
+				autocomplete="off">
+		</section>
 							
-							
-				  <div class="lineDiv"></div>
+		<div class="lineDiv"></div>
 					
-	              <div class="btnDiv">
-	              	<button class="foundIdBtn" type="submit">아이디 찾기</button>
-				  </div>
-	
+		<div class="btnDiv">
+			<button id="foundIdBtn" class="foundIdBtn" type="submit">아이디 찾기</button>
+		</div>
 	</form>
 	
 	<!--footer-->

@@ -46,5 +46,22 @@ public class MemberServiceImpl implements MemberService{
 		  
 		  return loginMember;
 		 }
+
+	// 아이디 찾기 
+	@Override
+	public String foundId(Member member) {
+		int result = mapper.foundIdCount(member);
+		
+		if (result > 0) {
+			
+			Member findMember = mapper.foundId(member);
+			
+			return findMember.getMemberId();
+		}else {
+			return "not correct";
+		}
+		
+				
+	}
 	
 }

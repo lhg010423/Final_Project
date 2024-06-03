@@ -6,4 +6,6 @@ public interface MemberService {
 
 	Member login(Member inputMember);
 
+	String foundId(Member member);
+
 }
