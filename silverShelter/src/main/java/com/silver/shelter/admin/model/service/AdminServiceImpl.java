@@ -5,13 +5,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.silver.shelter.admin.model.mapper.AdminMapper;
 import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,8 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService{
 
-	private final AdminMapper mapper;
 	
+	private final JavaMailSender mailSender;
+	private final AdminMapper mapper;
+	private final SpringTemplateEngine templateEngine;
 	
 	// 회원 목록 조회 / 검색 X
 	@Override
@@ -157,15 +165,75 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
+	// 서류 승인 
+	@Override
+	public int updateAdminDocument(int examId) {
 
-	
-	
-	
-	
-	
-	
-	
-	
+		return mapper.updateAdminDocument(examId);
+	}
+	@Override
+	public String signUpAdminDocument(String HtmlName,int examId) {
+		// 서류 통과 클라이언트 조회 
+				Examination exam = mapper.examinationDetailSelect(examId);
+				
+				log.info("서류 통과된 클라이언트 정보는? :"+exam);
+				
+				// 회원가입 폼 url만들기  
+				String url = createSignUpUrl();
+				
+				url += "/"+exam.getExamId();
+				
+				log.info("url 주소는 어떻게 되지? "+url);
+				
+				try {
+					
+					String subject = "[goldenPrestige]에서 전송합니다."; 
+					
+					
+					MimeMessage mimeMessage = mailSender.createMimeMessage();
+					
+					MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					
+					helper.setTo(exam.getExamEmail()); 
+					helper.setSubject(subject);
+					
+					helper.setText( loadHtml(url, HtmlName),true);
+					
+					helper.addInline("logo", new ClassPathResource("static/images/main/Logo4.png"));
+					
+					//메일 전송 
+					mailSender.send(mimeMessage);
+					
+				} catch(Exception e) {
+					
+					e.printStackTrace();
+					
+					return null;
+				}
+				
+				
+
+		return url;
+	}
 	
 
+
+
+	private String loadHtml(String url, String htmlName) {
+		
+		Context context = new Context();
+		
+		context.setVariable("url", url);
+		
+		return templateEngine.process("email/" + htmlName, context);
+	}
+
+
+	public String createSignUpUrl() {
+		
+		String url = "http://localhost/signUp";
+		
+		return url;
+	}
+	
 }

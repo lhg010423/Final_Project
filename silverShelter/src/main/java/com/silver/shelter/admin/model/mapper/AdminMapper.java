@@ -83,6 +83,13 @@ public interface AdminMapper {
 	Examination examinationDetailSelect(int examId);
 
 
+	/** 서류 승인 
+	 * @param examId
+	 * @return
+	 */
+	int updateAdminDocument(int examId);
+
+
 
 
 
