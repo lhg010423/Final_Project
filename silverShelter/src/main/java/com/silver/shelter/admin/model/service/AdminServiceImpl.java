@@ -38,12 +38,23 @@ public class AdminServiceImpl implements AdminService{
 		// 탈퇴하지 않은 회원 수 조회
 		int memberCount = mapper.memberAllCount();
 		
-		// memberCount + cp 을 이용해 pagination 생성
+		// memberCount와 cp를 이용해 Pagination 객체 생성
+		// cp는 현재 페이지 번호, memberCount는 전체 게시글 수를 나타냅니다.
 		Pagination pagination = new Pagination(cp, memberCount);
-		
-		// 페이징 처리
+
+		// 페이징 처리를 위해 한 페이지에 보여줄 게시글 수(limit)와
+		// 현재 페이지에서 보여줄 게시글 목록의 시작 위치(offset) 계산
+		// limit은 한 페이지에 보여줄 게시글 수입니다.
 		int limit = pagination.getLimit();
+
+		// offset은 현재 페이지에서 보여줄 게시글 목록의 시작 위치를 계산합니다.
+		// 예를 들어, 현재 페이지(cp)가 2이고, 한 페이지에 10개의 게시글을 보여줄 경우,
+		// offset은 (2 - 1) * 10 = 10이 됩니다. 즉, 11번째 게시글부터 보여줍니다.
+		// -1하는 이유는 현재페이지 시작이 1인데 이걸 인덱스로 사용하기 위해 -1을 함
 		int offset = (cp - 1) * limit;
+
+		// MyBatis의 RowBounds 객체를 생성하여 페이징 처리에 필요한 offset과 limit 설정
+		// RowBounds는 MyBatis에서 페이징 처리를 위해 사용하는 클래스입니다.
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		// 회원 서류 관리 페이지에서 Examination테이블의 값들을 축력함
