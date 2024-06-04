@@ -121,32 +121,47 @@ public class Pagination {
 	private void calculate() {
 		
 		
-		// 전체 페이지 수 구하기
-		//                 올림         전체게시글수 / 한페이지 번호수(10)
-		// 전체 게시글 수가 105면 105/10 = 10.5 여기서 소수점 올리고 정수로 바꿈
-		// 전체 페이지 수 11 page
-		maxPage = (int)Math.ceil( (double)listCount / limit );
-		
-		
-		
-		startPage = (currentPage -1) / pageSize * pageSize + 1;
-		
-		endPage = pageSize -1 + startPage;
-		
-		if(endPage > maxPage) endPage = maxPage;
-		
-		if(currentPage <= pageSize) {
-			prevPage = 1;
-		} else {
-			prevPage = startPage -1;
-		}
-		
-		
-		if(endPage == maxPage) {
-			nextPage = maxPage;
-		} else {
-			nextPage = endPage + 1;
-		}
+		// 전체 페이지 수 계산
+	    // 전체 게시글 수를 한 페이지에 보여줄 게시글 수로 나누고, 올림하여 정수로 변환합니다.
+	    // 예를 들어, 게시글 수가 105개이고 페이지당 10개의 게시글을 보여줄 경우, 총 페이지 수는 11페이지가 됩니다.
+	    maxPage = (int)Math.ceil((double)listCount / limit);
+	    
+	    
+	    // 현재 페이지 그룹의 시작 페이지 번호 계산
+	    // (현재 페이지 번호 - 1)을 페이지 그룹의 크기로 나누고, 페이지 그룹의 크기만큼 곱한 후 1을 더합니다.
+	    // 예를 들어, 현재 페이지가 15이고, 페이지 그룹 크기가 10이라면, 시작 페이지는 11이 됩니다.
+	    startPage = (currentPage - 1) / pageSize * pageSize + 1;
+	    
+	    
+	    // 현재 페이지 그룹의 끝 페이지 번호 계산
+	    // 시작 페이지 번호에 페이지 그룹 크기를 더한 후 1을 뺍니다.
+	    // 예를 들어, 시작 페이지가 11이고, 페이지 그룹 크기가 10이라면, 끝 페이지는 20이 됩니다.
+	    endPage = startPage + pageSize - 1;
+	    
+	    
+	    // 끝 페이지 번호가 전체 페이지 수를 넘지 않도록 설정
+	    // 만약 끝 페이지가 전체 페이지 수를 초과하면, 끝 페이지 번호를 전체 페이지 수로 설정합니다.
+	    if (endPage > maxPage) endPage = maxPage;
+	    
+	    
+	    // 이전 페이지 그룹의 마지막 페이지 번호 계산
+	    // 현재 페이지가 첫 번째 페이지 그룹에 속할 경우, 이전 페이지 그룹의 마지막 페이지는 1로 설정합니다.
+	    // 그렇지 않은 경우, 시작 페이지에서 1을 뺀 값을 이전 페이지 그룹의 마지막 페이지 번호로 설정합니다.
+	    if (currentPage <= pageSize) {
+	        prevPage = 1; // 첫 페이지 그룹일 경우 1로 설정
+	    } else {
+	        prevPage = startPage - 1; // 그렇지 않으면 이전 페이지 그룹의 마지막 페이지 번호
+	    }
+	    
+	    
+	    // 다음 페이지 그룹의 시작 페이지 번호 계산
+	    // 끝 페이지가 전체 페이지 수와 같을 경우, 다음 페이지 그룹의 시작 페이지는 전체 페이지 수로 설정합니다.
+	    // 그렇지 않은 경우, 끝 페이지에 1을 더한 값을 다음 페이지 그룹의 시작 페이지 번호로 설정합니다.
+	    if (endPage == maxPage) {
+	        nextPage = maxPage; // 마지막 페이지 그룹일 경우 전체 페이지 수로 설정
+	    } else {
+	        nextPage = endPage + 1; // 그렇지 않으면 다음 페이지 그룹의 시작 페이지 번호
+	    }
 		
 		
 		

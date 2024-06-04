@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.silver.shelter.board.model.mapper.AdminMapper">
+
+	
+	<!-- 게시판 종류 조회,
+		각각 별칭으로 지정한 이유 : BoardType DTO가 없어서 자동 매칭이 안됨 -->
+	<select id="selectBoardTypeList">
+		SELECT BOARD_CODE "boardCode", BOARD_NAME "boardName"
+		FROM "BOARD_TYPE"
+		ORDER BY BOARD_CODE
+	</select>
+	
+	
+	<!-- 공지게시판 삭제되지 않은 게시글 전체 수 조회  검색X -->
+	<!-- <select id="noticeAllCount">
+		SELECT COUNT(*)
+		FROM "BOARD"
+		WHERE BOARD_CODE = 1
+		AND BOARD_DEL_FL = N
+	</select> -->
+	
+	
+	<!-- 삭제되지 않은 공지 게시글 전체 조회  검색X -->
+<!-- 	<select id="noticeAllSelect">
+		SELECT BOARD_TITLE, MEMBER_NAME, BOARD_WRITE_DATE, READ_COUNT, LIKE_COUNT
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_CODE = 1
+		AND BOARD_DEL_FL = 'N'
+	</select> -->
+
+	
+	<!-- <select id="noticeSearchCount">
+		SELECT COUNT(*)
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_CODE = 1
+		AND BOARD_DEL_FL = N
+		
+		<choose>
+		
+			게시글 제목 검색
+			<when test='key == "t"'>
+				AND BOARD_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			
+			작성자 이름 검색
+			<when test='key == "n"'>
+				AND MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+			
+			작성자 아이디 검색
+			<when test='key == "i"'>
+				AND MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+			
+			
+		</choose>
+		
+	</select> -->
+	
+	
+	
+
+</mapper>
