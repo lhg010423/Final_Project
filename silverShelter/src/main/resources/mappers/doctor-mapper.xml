@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.silver.shelter.medicalCenter.model.mapper.DoctorMapper">
+
+    <select id="findDoctorsByMajorName" resultType="com.silver.shelter.medicalCenter.model.dto.Doctor">
+        SELECT d.DOCTOR_NAME, d.DOCTOR_PROFILE
+        FROM DOCTOR d
+        JOIN DOCTOR_MAJOR dm ON d.MAJOR_CODE = dm.MAJOR_CODE
+        WHERE dm.MAJOR_NAME = #{majorName}
+    </select>
+</mapper>
