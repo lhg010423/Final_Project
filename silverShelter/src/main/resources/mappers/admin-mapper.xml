@@ -159,5 +159,11 @@
 	</select>
 	
 	
+	<update id="updateAdminDocument">
+			UPDATE EXAMINATION
+			SET EXAM_STATUS = 'Y'
+			WHERE EXAM_ID = #{examId}
+	
+	</update>
 
 </mapper>

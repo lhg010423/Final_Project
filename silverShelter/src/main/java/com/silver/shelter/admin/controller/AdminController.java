@@ -189,7 +189,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("adminDocument")
 	public Map<String, Object> adminDocument(
-			@RequestBody int examId
+			@RequestBody Map<String, Integer> paramMap
 			) {
 		
 //			@RequestBody Member memberNo
@@ -198,7 +198,7 @@ public class AdminController {
 		
 		
 		// 회원 상세정보 조회
-		Examination examInfo = service.examinationDetailSelect(examId);
+		Examination examInfo = service.examinationDetailSelect(paramMap.get("examId"));
 
 		if (examInfo == null) {
 	        // 회원 정보가 없는 경우
@@ -229,10 +229,38 @@ public class AdminController {
 	
 	
 
+	/** 서류 심사 
+	 * @param examId
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("updateAdminDocument")
+	public int updateAdminDocument(@RequestBody Map<String, Integer> map) {
+		
+
+		return service.updateAdminDocument(map.get("examId"));
+	}
 	
 	
-	
-	
+	/** 서류 심사 통과 시 이메일 전송
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("signUpAdminDocument")
+	public int signUpAdminDocument(@RequestBody Map<String, Integer> map) {
+		
+		String url = service.signUpAdminDocument("signUp",map.get("examId"));
+		
+		log.info("url 주소는? : "+ url);
+		
+		if(url != null) {
+			
+			return 1;
+		}
+		
+		return 0;
+	}
 	
 	
 	

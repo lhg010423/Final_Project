@@ -17,7 +17,7 @@ document.querySelectorAll(".examName").forEach(button => {
         fetch("/admin/adminDocument", {
             method : "POST",
             headers : {"Content-Type" : "application/json"},
-            body : examId
+            body : JSON.stringify({"examId" : examId})
         })
         .then(resp => resp.json())
         .then(result => {
@@ -35,7 +35,7 @@ document.querySelectorAll(".examName").forEach(button => {
                 
                 
                 // 상세페이지 버튼에 회원을 구분하는 심사 번호 값 넣기
-                updateButtonValue("examId");
+                updateButtonValue(examId);
 
 
             }
@@ -46,10 +46,11 @@ document.querySelectorAll(".examName").forEach(button => {
     })
 })
 
-// function updateButtonValue(examId) {
-//     var button = document.getElementById("examStatusBtn");
-//     button.value = examId;
-
+function updateButtonValue(examId) {
+    console.log("버튼에서 ",examId);
+    var button = document.getElementById("examStatusBtn");
+    button.name = examId;
+}
 
 
 
@@ -79,25 +80,70 @@ document.querySelectorAll(".examName").forEach(button => {
 // }
 
 // 수정함
-function updateButtonValue(examId) {
-    var button = document.getElementById("examStatusBtn");
-    button.value = examId;
-
-    //  지우면 안된 아직 하는중
-    document.getElementById("examStatusBtn").addEventListener("click", function() {
+// function updateButtonValue(examId) {
+//     var button = document.getElementById("examStatusBtn");
+//     button.value = examId;
+//     console.log(examId);
+//     //  지우면 안된 아직 하는중
+//     document.getElementById("examStatusBtn").addEventListener("click", function() {
         
-        fetch("/admin/adminDocument", {
-            method: "UPDATE",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ examId: examId })
-        })
-        .then(resp => resp.json())
-        .then(result => {
-            if(result == null) {
-                alert("변경 실패");
-            } else {
-                alert("변경 성공");
-            }
-        });
-    });
-}
+//         fetch("/admin/adminDocument", {
+//             method: "UPDATE",
+//             headers: {"Content-Type": "application/json"},
+//             body: JSON.stringify({ examId: examId })
+//         })
+//         .then(resp => resp.json())
+//         .then(result => {
+//             if(result == null) {
+//                 alert("변경 실패");
+//             } else {
+//                 alert("변경 성공");
+//             }
+//         });
+//     });
+// }
+
+const examStatusBtn= document.querySelector("#examStatusBtn");
+
+examStatusBtn.addEventListener("click", (e) => {
+    
+
+    fetch("/admin/updateAdminDocument", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body: JSON.stringify({"examId" : e.target.name})
+    })
+    .then(resp => resp.json())
+    .then(result => {
+
+        if(result == 0) {
+            alert("서류심사 실패")
+        
+        } else{
+            alert("서류 심사 통과")
+
+            fetch("/admin/signUpAdminDocument",{
+                method : "POST",
+                headers : {"Content-Type" : "application/json"},
+                body: JSON.stringify({"examId" : e.target.name})              
+            })
+            .then(resp2 => resp2.json())
+            .then(count => {
+                console.log("값이 어떻게 넘어오려나",count);
+                if(count == 0){
+                    alert("이메일 전송 실패..")
+
+                } else {
+                    alert("이메일이 전송되었습니다.")
+
+                }
+            })
+
+        }
+
+        location.href = location.pathname;
+    })
+
+    
+});
+

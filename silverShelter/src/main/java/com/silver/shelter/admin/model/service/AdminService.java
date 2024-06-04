@@ -1,6 +1,5 @@
 package com.silver.shelter.admin.model.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.silver.shelter.examination.model.dto.Examination;
@@ -49,7 +48,19 @@ public interface AdminService {
 	 * @return
 	 */
 	Examination examinationDetailSelect(int examId);
-	
+
+	/** 서류 승인 
+	 * @param examId
+	 * @return
+	 */
+	int updateAdminDocument(int examId);
+
+	/** 서류 통과 시 이메일 전송 
+	 * @param integer
+	 * @return
+	 */
+	String signUpAdminDocument(String HtmlName, int examId);
+
 	
 	
 	
