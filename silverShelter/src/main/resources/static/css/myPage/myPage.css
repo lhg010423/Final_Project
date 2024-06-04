@@ -1,0 +1,158 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+*{
+    /*border: 1px solid rgb(255, 249, 249);*/
+
+    font-family: 'Pretendard-Regular';
+    margin:0;
+}
+
+.section-1-empty{
+    height: 15vh;
+}
+
+.section-2-banner{
+
+    width: 100vw;
+    height: 15vh;
+    
+}
+
+#banner{
+
+    display: block;
+
+    width: 60.5%;
+
+    height: 101%;
+    
+    transform: translate( 32.55% , 41.5%);
+}
+
+.overlay{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    
+    top:45%;
+    left:50%;
+    width: 60vw; 
+    height: 33vh; 
+
+    
+
+    text-align: center;
+
+    border: 1px solid rgb(235, 235, 235);
+
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px); 
+     
+}
+
+.overlay > h2{
+
+    font-size: 50px;
+}
+.overlay > span{
+	
+	font-size : 35px;
+}
+
+.memberN{
+	color:black;
+}
+
+.section-3-banner-forMyPage{
+
+    display: flex;
+    
+    width: 100%;
+    height: 10vh;
+
+    transform: translate( 0 ,100%);
+}
+
+.myPageNavi{
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: center;
+    width: 100%;
+
+
+}
+
+.li-1{
+    width: 33%;
+    text-align: right;
+}
+
+.li-2{
+    width: 33%;
+    text-align: center;
+}
+
+.li-3{
+    width: 33%;
+    text-align: left;
+}
+
+.myPageNavi li{
+    list-style-type: none;
+}
+
+
+
+#changeInfo:hover{
+
+    border-bottom: 2px solid #1A2050;
+}
+
+#changeInfo:active, #changeInfo:focus{
+
+    border-bottom: 2px solid #1A2050;  
+}
+
+#myReserv:hover{
+
+    border-bottom: 2px solid #1A2050;
+}
+
+#myReserv:active, #myReserv:focus{
+
+    border-bottom: 2px solid #1A2050;  
+}
+
+#secession:hover{
+
+    border-bottom: 2px solid #1A2050;
+}
+
+#secession:active, #myReserv:focus{
+
+    border-bottom: 2px solid #1A2050;  
+}
+
+li a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #000;
+    font-weight: 600;
+}
+
+.container-2{
+	
+	margin-top: 10vh;
+}
