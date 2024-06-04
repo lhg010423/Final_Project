@@ -189,13 +189,21 @@ document.addEventListener("DOMContentLoaded", function() {
             // resImg 클릭 이벤트 핸들러 등록
             const resImgs = document.querySelectorAll('.resImg');
             const toggleButtonImage = document.getElementById('toggleButtonImage');
+            const toggleButtonImageIntro = document.getElementById('toggleButtonImageIntro');
+            const selectedDepartmentInput = document.getElementById('selectedDepartment');
 
             resImgs.forEach(resImg => {
                 resImg.addEventListener('click', function () {
                     const newImageSrc = this.getAttribute('data-image');
                     if (newImageSrc) {
+                        const koreanText = newImageSrc.match(/[\u3131-\uD79D]+/g).join("");
                         toggleButtonImage.src = newImageSrc;
-                        console.log("토글 버튼 이미지는 ", newImageSrc);
+                        console.log("토글 버튼 이미지는 ", koreanText);
+                        lastSelectedDepartment = koreanText;
+                        toggleButtonImageIntro.innerText = koreanText;
+                                        const department = this.getAttribute('data-image');
+                        selectedDepartmentInput.value = department; // 선택된 진료과 값을 hidden input에 저장
+
                     } else {
                         console.error("Image source attribute 'data-image' not found.");
                     }
@@ -243,9 +251,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
             console.log("화면 업데이트 함수 성공: " + target);
 
-
         } catch (error) {
             console.error("화면 업데이트 오류:", error);
+        }
+
+        if (target === '3') {
+            fetch(`/medicalCenter/reservation/doctorChoice?departmentName=${lastSelectedDepartment}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector("#reservation-content3").innerHTML = html;
+                })
+                .catch(error => console.error("Error fetching doctor info:", error));
         }
     }
 
@@ -263,10 +279,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.log("resNextButton 존재 확인");
                         resNextButton.addEventListener('click', function () {
                             console.log("resNextButton 클릭 이벤트 시작");
-                                        // 'resNextButton' 클릭 이벤트 핸들러 내에서 전역 변수에 선택된 진료과를 업데이트합니다.
-                            lastSelectedDepartment = target;
                             console.log("lastSelectedDepartment:", lastSelectedDepartment);
                             updateReservationView('3');
+
                         });
                     } else {
                         console.error("resNextButton 요소를 찾을 수 없습니다.");

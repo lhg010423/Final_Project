@@ -586,6 +586,11 @@ li {
     font-size: 30px;
 }
 
-#res-dep-choice {
+#res-dep-choice, #res-dep-choice1 {
     color: #333;
 }
+
+#toggleButtonImageIntro, #res-dep-choice1 {
+    color: white;
+}
+
