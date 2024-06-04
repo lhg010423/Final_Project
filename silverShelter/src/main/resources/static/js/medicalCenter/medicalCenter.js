@@ -258,7 +258,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (target === '3') {
             fetch(`/medicalCenter/reservation/doctorChoice?departmentName=${lastSelectedDepartment}`)
                 .then(response => response.text())
-                .then(html => {
+                .then(html => { 
+                    console.log("html값", html);
                     document.querySelector("#reservation-content3").innerHTML = html;
                 })
                 .catch(error => console.error("Error fetching doctor info:", error));
