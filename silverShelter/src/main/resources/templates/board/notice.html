@@ -27,9 +27,10 @@
 
             <!-- a태그있는 상단 공간 -->
             <div class="boardHeader">
-                <a href="/board/notice">공지게시판</a>
-                <a href="/board/free">자유게시판</a>
-                <a href="/board/inquiry">문의게시판</a>
+                <th:block th:each="boardType : ${application.boardTypeList}">
+                    <a th:text="${boardType.boardName}"
+                        th:href="*{/board/{boardCode}(boardCode = ${boardType.boardCode})}">게시판 이름</a>
+                </th:block>
             </div>
 
             <!-- 상단 a태그 공간을 제외한 나머지 공간 전부 -->
