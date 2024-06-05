@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,32 +32,36 @@ public class BoardController {
 	 * @param paramMap : 검색창의 key, query 값이 있음
 	 * @return
 	 */
-//	@GetMapping("notice")
-//	public String notice(
-//			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
-//			Model model,
-//			@RequestParam Map<String, Object> paramMap
-//			) {
-//		
-//		// 공지 게시글 조회한 결과 저장용 Map
-//		Map<String, Object> map = null;
-//		
-//		// 검색 안했을 때
-//		if(paramMap.get("key") == null) {
-//			map = service.noticeAllSelect(cp);
-//			
-//		// 검색 했을 때
-//		} else {
-//			map = service.noticeSearchSelect(paramMap, cp);
-//			
-//		}
-//		
-//		
-//		
-//		
-//		
-//		return "/board/notice";
-//	}
+	@GetMapping("{boardCode:[0-9]+}")
+	public String notice(
+			@PathVariable("boardCode") int boardCode,
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model,
+			@RequestParam Map<String, Object> paramMap
+			) {
+		
+		// 공지 게시글 조회한 결과 저장용 Map
+		Map<String, Object> map = null;
+		
+		// 검색 안했을 때
+		if(paramMap.get("key") == null) {
+			map = service.boardAllSelect(boardCode, cp);
+			
+		// 검색 했을 때
+		} else {
+			
+			paramMap.put("boardCode", boardCode);
+			
+			map = service.boardSearchSelect(paramMap, cp);
+			
+		}
+		
+		model.addAttribute("pagination", map.get("pagination"));
+		model.addAttribute("boardList", map.get("boardList"));
+		
+		
+		return "board/boardList";
+	}
 	
 	
 	

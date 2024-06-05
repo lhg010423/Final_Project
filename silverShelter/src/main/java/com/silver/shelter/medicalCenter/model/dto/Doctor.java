@@ -19,4 +19,5 @@ public class Doctor {
 	private String doctorName;
 	private String doctorTel;
 	private String doctorProfile;
+	private String doctorSpeciality;
 }
