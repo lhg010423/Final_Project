@@ -18,10 +18,46 @@ public interface BoardMapper {
 	List<Map<String, Object>> selectBoardTypeList();
 
 	
-	/** 삭제되지 않은 공지게시글 전체 수 조회 검색X
+	/** 삭제되지 않은 전체 게시글 수 조회
+	 * @param boardCode
 	 * @return
 	 */
-//	int noticeAllCount();
+	int boardAllCount(int boardCode);
+
+	
+	/** 삭제되지 않은 전체 게시글 조회
+	 * @param boardCode
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Board> boardAllSelect(int boardCode, RowBounds rowBounds);
+	
+	
+	
+	/** 삭제되지 않은 검색한 게시글 수 조회
+	 * @param paramMap
+	 * @return
+	 */
+	int boardSearchCount(Map<String, Object> paramMap);
+
+	
+	
+	/** 삭제되지 않은 검색한 게시글 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	List<Board> boardSearchSelect(Map<String, Object> paramMap, int cp);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/** 삭제되지 않은 공지게시글 전체 조회 검색X
 	 * @param rowBounds
@@ -34,6 +70,14 @@ public interface BoardMapper {
 	 * @return
 	 */
 	int noticeSearchCount(Map<String, Object> paramMap);
+
+
+
+
+	
+
+
+
 
 
 }
