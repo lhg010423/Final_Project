@@ -501,7 +501,7 @@
 	
 	position: sticky;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     width: 16vw;
     height: 18vh;
@@ -519,8 +519,8 @@
 	text-align: left;
 }
 #weatherIcon {
-    width: 55%;
-    height: 90%;
+    width: 30%;
+    height: auto;
 }
 
 #temperature{

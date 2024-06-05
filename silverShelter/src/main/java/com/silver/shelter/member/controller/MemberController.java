@@ -1,9 +1,12 @@
 package com.silver.shelter.member.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.member.model.service.MemberService;
 
@@ -28,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	private final MemberService service;
-	
+	private final AdminService adminService;
 	
 	
 	/** 로그인 페이지로 이동
@@ -145,9 +149,16 @@ public class MemberController {
 		
 		return "member/foundPw";
 	}
-	
-
-	
-	
+//	"http://loscalhost/member/signUp/411104RSORMD!@$/17"
+	@GetMapping("signUp/{path:[A-Za-z0-9!@$^]+}/{examId:[0-9]+}")
+	public String signUp(@PathVariable("path")String path,
+						 @PathVariable("examId")int examId,
+						 Model model) {
+		
+		log.info("test2 : " + path);
+		log.info("test : " + examId);
+		
+		return "member/signUp";
+	}
 	
 }
