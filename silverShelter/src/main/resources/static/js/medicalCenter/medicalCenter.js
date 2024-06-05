@@ -110,11 +110,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 const docChoices = document.querySelectorAll('.doc-choice');
                 docChoices.forEach(docChoice => {
                     docChoice.addEventListener('click', function() {
+
+
+
+
+
                         const doctorData = this.getAttribute('data-doctor');
+                        
+                        const d = document.querySelector('.doc-choice-name');
+                        const doo = d.getAttribute('text');
+                        console.log('d',doo);
+
+
                         console.log(doctorData);
-                        const doctor = JSON.parse(doctorData); // &quot;를 "로 대체하여 JSON 파싱
-                        lastSelectedDoctor = doctor.doctorName;
-                        lastSelectedDoctorImage = doctor.doctorProfile;
+                        lastSelectedDoctor = doctorData.doctorName;
+                        lastSelectedDoctorImage = doctorData.doctorProfile;
                     });
                 });
 
