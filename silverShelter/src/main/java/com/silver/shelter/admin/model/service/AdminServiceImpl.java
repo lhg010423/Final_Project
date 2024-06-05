@@ -31,6 +31,7 @@ public class AdminServiceImpl implements AdminService{
 	private final AdminMapper mapper;
 	private final SpringTemplateEngine templateEngine;
 	
+	
 	// 회원 목록 조회 / 검색 X
 	@Override
 	public Map<String, Object> memberAllSelect(int cp) {
@@ -242,8 +243,27 @@ public class AdminServiceImpl implements AdminService{
 
 	public String createSignUpUrl() {
 		
-		String url = "http://localhost/signUp";
+		String url = "http://localhost/member/signUp/";
 		
+		for(int i=0; i <6; i++) {
+			int numberPath = (int)(Math.random()*5);
+			
+			url+=numberPath;
+			
+		}
+		
+		for(int i=0; i<6; i++) {
+			
+			char messagePath = (char)(Math.random() * 26 + 65);
+			url+= messagePath;
+		}
+		
+		
+		String specialPath = "!@$^";
+		
+		url+=specialPath;
+		
+		log.info("url주소 어떻게 되는지 알려주세요"+url);
 		return url;
 	}
 	
