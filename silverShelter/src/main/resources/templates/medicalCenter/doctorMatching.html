@@ -28,7 +28,7 @@
 </th:block>
 <th:block th:if="${session.loginMember != null}">
 <div id="reservationPage">
-    <h1>온라인 진료예약</h1>
+    <h1 id="doc-mat-title">온라인 진료예약</h1>
     <div id="reservationForm">
         <div id="reservation-content2" class="reservation-content section2-2">
             <div id="resTitle">
@@ -53,13 +53,13 @@
                 </div>
             </div>
             <input type="hidden" id="selectedDepartment" value="">
-            <button id="resNextButton">Next</button>
+            <button id="resNextButton">다음</button>
         </div>
         <div id="reservation-content3" class="reservation-content section2-3">
 
         </div>
         <div id="reservation-content4" class="reservation-content section2-4">
-
+            <span>아리ㅣㅏㄹㄴ이ㅏ러</span>
         </div>
         <div id="btn-reserve">
             <div id="reservation-toggleButton1">
@@ -91,6 +91,8 @@
                     <h1 class="res-num">3</h1>
                     <h2 class="res-num-title">의료진</h2>
                 </div>
+                <img id="toggleButtonImage" alt="">
+                <h3 id="toggleButtonImageIntro"></h3>
                 </button>
             <button class="reservation-toggleButton" data-target="4">
                 <div id="res-numTitle3">
