@@ -23,5 +23,6 @@ public class Board {
 	private String boardYn;
 	private int boardCode;
 	private int memberNo;
+	private String memberName;     // 작성자
 	
 }
