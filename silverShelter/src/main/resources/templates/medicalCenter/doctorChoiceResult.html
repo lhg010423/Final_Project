@@ -1,6 +1,10 @@
 <div id="resTitle2">
     <h2 id="res-dep-choice1">의료진 선택</h2>
     <div id="doc-choice">
+        <div th:each="doctor : ${doctors}">
+            <div th:text="${doctor.doctorName}"></div>
+        </div>
+        <h1 name="majorName" id="majorName"></h1>
         <div class="doc-intro">
             <div class="doc-intro-left">
                 <div class="doc-name"></div>
