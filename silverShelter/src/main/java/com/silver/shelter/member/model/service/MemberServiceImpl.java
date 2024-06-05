@@ -1,5 +1,7 @@
 package com.silver.shelter.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,26 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 				
+	}
+
+	@Override
+	public int secession(Map<String, String> map, Member loginMember) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		String encPw = mapper.findPw(memberNo);
+		String pwInput = map.get("pwInput");
+		
+		boolean flag = bcrypt.matches(pwInput, encPw);
+		
+		int result = 0;
+		
+		if(bcrypt.matches(pwInput, encPw)) {
+			mapper.secession(memberNo);
+			
+			result = 1;
+		}
+		return result;
 	}
 	
 }

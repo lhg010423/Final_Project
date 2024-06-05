@@ -1,5 +1,8 @@
 package com.silver.shelter.myPage.model.service;
 
-public class myPageServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class myPageServiceImpl implements myPageService{
 
 }

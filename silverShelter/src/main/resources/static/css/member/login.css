@@ -98,11 +98,12 @@
 	width: 38vw;
  }
  
- .btnDiv{
+ /*.btnDiv{
 	display: flex;
 	width:38vw;
 	height: 0;
- }
+	
+ }*/
  
  .loginBtn{
 	color: #FFFFFF;

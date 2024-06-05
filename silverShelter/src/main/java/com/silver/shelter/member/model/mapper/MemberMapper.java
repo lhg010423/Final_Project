@@ -13,4 +13,8 @@ public interface MemberMapper {
 
 	Member foundId(Member member);
 
+	String findPw(int memberNo);
+
+	void secession(int memberNo);
+
 }

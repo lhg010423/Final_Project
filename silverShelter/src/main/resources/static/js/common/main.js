@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
 /* 캐러샐2 */
 document.addEventListener('DOMContentLoaded', function() {
 
-    const carouselInner = document.querySelector('.my-carousel-inner');
-    const totalSlides = document.querySelectorAll('.my-carousel-item').length;
+    const carouselInner = document.querySelector('.carousel-inner2');
+    const totalSlides = document.querySelectorAll('.carousel-items').length;
     const slideWidth = 50; // 두 개의 이미지가 보이므로 각 슬라이드의 너비는 50%
     let currentIndex = 0;
     let offset = 0;
