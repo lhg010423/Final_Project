@@ -464,7 +464,6 @@ li {
     background-color: #232e7e;
     color: #fff;
     border: white solid 0.6px;
-    border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
     font-size: 25px;
@@ -590,7 +589,99 @@ li {
     color: #333;
 }
 
+#res-dep-choice1 {
+    font-size: 45px;
+    padding-bottom: 40px;
+    font-weight: bold;
+}
+
+
 #toggleButtonImageIntro {
     color: white;
 }
 
+.doc-choice-profile {
+    width: 300px;
+    border-radius: 5px;
+}
+
+#doc-choice1 {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    margin-right: 60px;
+    border: #ccc;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+    0 2px 2px rgba(0,0,0,0.11), 
+    0 4px 4px rgba(0,0,0,0.11), 
+    0 6px 8px rgba(0,0,0,0.11),
+    0 8px 16px rgba(0,0,0,0.11);
+}
+
+#doc-choice1:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+}
+
+.doc-intro-left {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.doc-choice-name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.doc-choice-speciality {
+    font-size: 25px;
+    text-align: left;
+    margin: 30px;
+}
+
+#doc-choice2 {
+    display: flex;
+}
+
+#doc-mat-title {
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+#doc-choice-next {
+    margin-top: 20px;
+    padding: 20px 50px;
+    background-color: #232e7e;
+    color: #fff;
+    border: white solid 0.6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 25px;
+    border-radius: 10px;
+    width: 145;
+    height: 72;
+}
+
+#doc-choice-next:hover {
+    color: #1A2050;
+    background-color: #fff;
+    border: #ccc 0.6px solid;
+}
+
+#resTitle2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

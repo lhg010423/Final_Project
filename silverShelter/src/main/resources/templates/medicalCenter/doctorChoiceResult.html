@@ -1,18 +1,15 @@
 <div id="resTitle2">
-    <h2 id="res-dep-choice1">의료진 선택</h2>
-    <div id="doc-choice">
+    <div id="res-dep-choice1">의료진 선택</div>
+    <div id="doc-choice2">
         <div th:each="doctor : ${doctors}">
-            <div th:text="${doctor.doctorName}"></div>
-        </div>
-        <h1 name="majorName" id="majorName"></h1>
-        <div class="doc-intro">
-            <div class="doc-intro-left">
-                <div class="doc-name"></div>
-                <div class="able-day"></div>
-                <div class="doc-dep-intro"></div>
-            </div>
-            <div class="doc-intro-right">
+            <div id="doc-choice1" class="doc-choice" th:data-doctor="${doctor}">
+                <div class="doc-intro-left">
+                    <div class="doc-choice-name" th:text="${doctor.doctorName}"></div>
+                    <div class="doc-choice-speciality">진료 분야 : <span th:text="${doctor.doctorSpeciality}"></span></div>
+                </div>
+                <img class="doc-choice-profile" th:src="@{${doctor.doctorProfile}}" alt="Doctor Profile Image"/>
             </div>
         </div>
     </div>
+    <div id="doc-choice-next">다음</div>
 </div>

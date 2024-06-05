@@ -6,7 +6,7 @@
 <mapper namespace="com.silver.shelter.medicalCenter.model.mapper.DoctorMapper">
 
     <select id="findDoctorsByMajorName" resultType="com.silver.shelter.medicalCenter.model.dto.Doctor">
-        SELECT d.DOCTOR_NAME, d.DOCTOR_PROFILE
+        SELECT d.DOCTOR_NAME, d.DOCTOR_PROFILE, d.DOCTOR_SPECIALITY
         FROM DOCTOR d
         JOIN DOCTOR_MAJOR dm ON d.MAJOR_CODE = dm.MAJOR_CODE
         WHERE dm.MAJOR_NAME = #{majorName}

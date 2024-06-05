@@ -1,164 +1,8 @@
-function showTab(tabId) {
-    var tabs = document.getElementsByClassName('tab');
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove('selected-tab');
-    }
-
-    var selectedTab = document.getElementById(tabId);
-    if (selectedTab) {
-        selectedTab.classList.add('selected-tab');
-    }
-}
-
-async function loadTabContent(htmlFile, sectionId = null) {
-    try {
-        const response = await fetch(htmlFile);
-        const html = await response.text();
-        const tabContentContainer = document.getElementById('tabContentContainer');
-        if (tabContentContainer) {
-            tabContentContainer.innerHTML = html;
-            if (sectionId != null) {
-                // 섹션을 보여주는 로직을 이곳에서 호출
-                console.info("이게됨?");
-                if(sectionId == 'section1') {
-                showSection(sectionId, "sectionBtn1");
-                }
-                // 이후에 추가적으로 필요한 작업 수행
-                // 예: showFloor, showDep 등의 함수 호출
-            } else {
-                console.info("응안돼");
-            }
-        } else {
-            console.error('tabContentContainer 요소를 찾을 수 없습니다.');
-        }
-    } catch (error) {
-        console.error('Error fetching HTML file:', error);
-    }
-}
-
-function showSection(sectionId, sectionBtnId) {
-    console.log("Trying to show section with ID:", sectionId);
-    var sections = document.getElementsByClassName('section');
-    var btns = document.getElementsByClassName('sectionBtn');
-    var sectionBtn = document.getElementById(sectionBtnId);
-
-    console.log(sections);
-    console.log(btns);
-    console.log(sectionBtn);
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].style.display = 'none';
-        }
-        for (var j = 0; j < btns.length; j++) {
-            btns[j].classList.remove('sectionBtnClicked');
-            console.log("답=" + btns[j].classList);
-        }
-
-
-    var selectedSection = document.getElementById(sectionId);
-    if (selectedSection != null && sectionBtn != null) {
-        selectedSection.style.display = 'flex';
-        sectionBtn.classList.add('sectionBtnClicked');
-        console.log("Displayed section with ID:", sectionId);
-    } else {
-        console.log("안됨");
-    }
-}
-
-document.getElementById('infoTab').addEventListener('click', function () {
-    showTab('infoTab');
-    loadTabContent('medicalCenterIntro', 'section1');
-});
-
-document.getElementById('doctorTab').addEventListener('click', function () {
-    showTab('doctorTab');
-    loadTabContent('doctorMatching', 'section2-2');
-});
-
-document.getElementById('careGiverTab').addEventListener('click', function () {
-    showTab('careGiverTab');
-    loadTabContent('careGiverMatching', 'section3-1');
-});
-
-document.getElementById('checkTab').addEventListener('click', function () {
-    showTab('checkTab');
-    loadTabContent('ReservationCheck', 'section4-1');
-});
-
-document.getElementById('funeralTab').addEventListener('click', function () {
-    showTab('funeralTab');
-    loadTabContent('funeralService', 'section5-1');
-});
-
-var tabSelected = document.getElementsByClassName('selected-tab');
-if (tabSelected.length > 0) {
-    loadTabContent('medicalCenterIntro', 'section1');
-}
-
-function showFloor(sectionId, floorId) {
-    console.log("Trying to show floor with ID:", sectionId);
-    console.log("Trying to show floor with ID:", floorId);
-    var selectedFloor = document.getElementById(floorId);
-    var sections = document.getElementsByClassName('floor-sec');
-    var floors = document.getElementsByClassName('floor');
-
-
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].style.display = 'none';
-        
-        for (var j = 0; j < floors.length; j++) {
-            floors[j].classList.remove('floorChecked');
-            console.log(floors[j].classList);
-        }
-    }
-
-    var selectedSection = document.getElementById(sectionId);
-    console.log(selectedSection);
-    if (selectedSection) {
-        selectedSection.style.display = 'flex';
-        selectedFloor.classList.add('floorChecked');
-        console.log("Displayed floor with ID:", sectionId);
-    } else {
-        console.error("No floor found with ID:", sectionId);
-    }
-}
-
-function showDep(sectionId, floorId) {
-    console.log("Trying to show floor with ID:", sectionId);
-    console.log("Trying to show floor with ID:", floorId);
-    var selectedFloor = document.getElementById(floorId);
-    var sections = document.getElementsByClassName('dep-sec');
-    var floors = document.getElementsByClassName('dep-floor');
-
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].style.display = 'none';
-            sections[i].classList.remove('floorChecked1');
-        
-        for (var j = 0; j < floors.length; j++) {
-            floors[j].classList.remove('floorChecked');
-            console.log(floors[j].classList);
-        }
-    }
-
-    var selectedSection = document.getElementById(sectionId);
-    console.log(selectedSection);
-    if (selectedSection) {
-        selectedSection.style.display = 'inline';
-        selectedSection.classList.add('floorChecked1');
-        selectedFloor.classList.add('floorChecked');
-        console.log("Displayed floor with ID:", sectionId);
-    } else {
-        console.error("No floor found with ID:", sectionId);
-    }
-}
-
-// -------------------------------------------------------------------------------------------------
-// 진료예약
-    // 모든 버튼 요소와 콘텐츠 요소를 가져오기
-// 진료예약
-
 document.addEventListener("DOMContentLoaded", function() {
     let isReservationPageInitialized = false;
     let lastSelectedDepartment = ''; // 전역 변수로 선택된 진료과를 저장할 변수를 선언합니다.
+    let lastSelectedDoctor = '';
+    let lastSelectedDoctorImage = '';
 
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
@@ -201,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.log("토글 버튼 이미지는 ", koreanText);
                         lastSelectedDepartment = koreanText;
                         toggleButtonImageIntro.innerText = koreanText;
-                                        const department = this.getAttribute('data-image');
+                        const department = this.getAttribute('data-image');
                         selectedDepartmentInput.value = department; // 선택된 진료과 값을 hidden input에 저장
 
                     } else {
@@ -217,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // 화면을 업데이트하는 함수
-    function updateReservationView(target) {
+    async function updateReservationView(target) {
         try {
             const reservationContents = document.querySelectorAll(".reservation-content");
             const reservationButtons = document.querySelectorAll(".reservation-toggleButton");
@@ -256,13 +100,41 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         if (target === '3') {
-            fetch(`/medicalCenter/reservation/doctorChoice?departmentName=${lastSelectedDepartment}`)
-                .then(response => response.text())
-                .then(html => { 
-                    console.log("html값", html);
-                    document.querySelector("#reservation-content3").innerHTML = html;
-                })
-                .catch(error => console.error("Error fetching doctor info:", error));
+            try {
+                const response = await fetch(`/medicalCenter/reservation/doctorChoice?departmentName=${lastSelectedDepartment}`);
+                const html = await response.text();
+                console.log("html값", html);
+                document.querySelector("#reservation-content3").innerHTML = html;
+
+                // doc-choice 이벤트 핸들러 등록
+                const docChoices = document.querySelectorAll('.doc-choice');
+                docChoices.forEach(docChoice => {
+                    docChoice.addEventListener('click', function() {
+                        const doctorData = this.getAttribute('data-doctor');
+                        console.log(doctorData);
+                        const doctor = JSON.parse(doctorData); // &quot;를 "로 대체하여 JSON 파싱
+                        lastSelectedDoctor = doctor.doctorName;
+                        lastSelectedDoctorImage = doctor.doctorProfile;
+                    });
+                });
+
+                // doc-choice-next 클릭 이벤트 핸들러 등록
+                const docChoiceNextButton = document.getElementById('doc-choice-next');
+                if (docChoiceNextButton != null) {
+                    console.log("doc-choice-next 존재 확인");
+                    docChoiceNextButton.addEventListener('click', function () {
+                        console.log("doc-choice-next 클릭 이벤트 시작");
+                        console.log("lastSelected:", lastSelectedDoctor);
+                        console.log("lastSelected:", lastSelectedDoctorImage);
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching doctor info:", error);
+            }
+        }
+
+        if (target === '4') {
+            // '4' target 관련 추가 작업이 필요하다면 여기에 작성합니다.
         }
     }
 
@@ -282,7 +154,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             console.log("resNextButton 클릭 이벤트 시작");
                             console.log("lastSelectedDepartment:", lastSelectedDepartment);
                             updateReservationView('3');
-
                         });
                     } else {
                         console.error("resNextButton 요소를 찾을 수 없습니다.");
@@ -307,3 +178,152 @@ document.addEventListener("DOMContentLoaded", function() {
         initializeReservationButtons();
     }
 });
+
+document.getElementById('infoTab').addEventListener('click', function () {
+    showTab('infoTab');
+    loadTabContent('medicalCenterIntro', 'section1');
+});
+
+document.getElementById('doctorTab').addEventListener('click', function () {
+    showTab('doctorTab');
+    loadTabContent('doctorMatching', 'section2-2');
+});
+
+document.getElementById('careGiverTab').addEventListener('click', function () {
+    showTab('careGiverTab');
+    loadTabContent('careGiverMatching', 'section3-1');
+});
+
+document.getElementById('checkTab').addEventListener('click', function () {
+    showTab('checkTab');
+    loadTabContent('ReservationCheck', 'section4-1');
+});
+
+document.getElementById('funeralTab').addEventListener('click', function () {
+    showTab('funeralTab');
+    loadTabContent('funeralService', 'section5-1');
+});
+
+var tabSelected = document.getElementsByClassName('selected-tab');
+if (tabSelected.length > 0) {
+    loadTabContent('medicalCenterIntro', 'section1');
+}
+
+function showTab(tabId) {
+    var tabs = document.getElementsByClassName('tab');
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('selected-tab');
+    }
+
+    var selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+        selectedTab.classList.add('selected-tab');
+    }
+}
+
+async function loadTabContent(htmlFile, sectionId = null) {
+    try {
+        const response = await fetch(htmlFile);
+        const html = await response.text();
+        const tabContentContainer = document.getElementById('tabContentContainer');
+        if (tabContentContainer) {
+            tabContentContainer.innerHTML = html;
+            if (sectionId != null) {
+                // 섹션을 보여주는 로직을 이곳에서 호출
+                console.info("이게됨?");
+                if(sectionId == 'section1') {
+                    showSection(sectionId, "sectionBtn1");
+                }
+                // 이후에 추가적으로 필요한 작업 수행
+                // 예: showFloor, showDep 등의 함수 호출
+            } else {
+                console.info("응안돼");
+            }
+        } else {
+            console.error('tabContentContainer 요소를 찾을 수 없습니다.');
+        }
+    } catch (error) {
+        console.error('Error fetching HTML file:', error);
+    }
+}
+
+function showSection(sectionId, sectionBtnId) {
+    console.log("Trying to show section with ID:", sectionId);
+    var sections = document.getElementsByClassName('section');
+    var btns = document.getElementsByClassName('sectionBtn');
+    var sectionBtn = document.getElementById(sectionBtnId);
+
+    console.log(sections);
+    console.log(btns);
+    console.log(sectionBtn);
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+    }
+    for (var j = 0; j < btns.length; j++) {
+        btns[j].classList.remove('sectionBtnClicked');
+        console.log("답=" + btns[j].classList);
+    }
+
+    var selectedSection = document.getElementById(sectionId);
+    if (selectedSection != null && sectionBtn != null) {
+        selectedSection.style.display = 'flex';
+        sectionBtn.classList.add('sectionBtnClicked');
+        console.log("Displayed section with ID:", sectionId);
+    } else {
+        console.log("안됨");
+    }
+}
+
+function showFloor(sectionId, floorId) {
+    console.log("Trying to show floor with ID:", sectionId);
+    console.log("Trying to show floor with ID:", floorId);
+    var selectedFloor = document.getElementById(floorId);
+    var sections = document.getElementsByClassName('floor-sec');
+    var floors = document.getElementsByClassName('floor');
+
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+    }
+    for (var j = 0; j < floors.length; j++) {
+        floors[j].classList.remove('floorChecked');
+        console.log(floors[j].classList);
+    }
+
+    var selectedSection = document.getElementById(sectionId);
+    console.log(selectedSection);
+    if (selectedSection) {
+        selectedSection.style.display = 'flex';
+        selectedFloor.classList.add('floorChecked');
+        console.log("Displayed floor with ID:", sectionId);
+    } else {
+        console.error("No floor found with ID:", sectionId);
+    }
+}
+
+function showDep(sectionId, floorId) {
+    console.log("Trying to show floor with ID:", sectionId);
+    console.log("Trying to show floor with ID:", floorId);
+    var selectedFloor = document.getElementById(floorId);
+    var sections = document.getElementsByClassName('dep-sec');
+    var floors = document.getElementsByClassName('dep-floor');
+
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+        sections[i].classList.remove('floorChecked1');
+    }
+    for (var j = 0; j < floors.length; j++) {
+        floors[j].classList.remove('floorChecked');
+        console.log(floors[j].classList);
+    }
+
+    var selectedSection = document.getElementById(sectionId);
+    console.log(selectedSection);
+    if (selectedSection) {
+        selectedSection.style.display = 'inline';
+        selectedSection.classList.add('floorChecked1');
+        selectedFloor.classList.add('floorChecked');
+        console.log("Displayed floor with ID:", sectionId);
+    } else {
+        console.error("No floor found with ID:", sectionId);
+    }
+}
