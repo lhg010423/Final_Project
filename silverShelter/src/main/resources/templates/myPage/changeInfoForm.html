@@ -13,7 +13,7 @@
 
 
                     <label for="memberId" class="id-label">
-                        <span class="star">*</span>&nbsp;
+                        <span class="star"></span>&nbsp;
                         <span>아이디</span>
                     </label>
                         
@@ -23,12 +23,13 @@
 							   type="text" 
                                placeholder="아이디" 
                                autocomplete="off"
-                               id="memberId">
+                               id="memberId"
+							   readonly />
 							   
                         <br>
                         <span style="font-size: 12px;
                                      letter-spacing: -1px;"
-                              class="signUp-message" id="idMessage" >* 6~20자 이내의 소문자 알파벳과 숫자로 입력하세요</span>
+                              class="signUp-message" id="idMessage" >* 아이디는 변경할 수 없습니다</span>
                     </div>
                 </div>
 
@@ -44,7 +45,8 @@
                         <input type="password"
                                placeholder="비밀번호"
                                maxlength="20"
-                               id="memberPw">
+                               id="memberPw"
+							   class="memberPw">
                         <br>
                         <span style="font-size: 12px;
                                      letter-spacing: -1px;"
@@ -61,8 +63,10 @@
                     <div>
                         <input type="password" 
                                placeholder="비밀번호 확인" 
-                               id="memberPwConfirm"
-                               maxlength="20">
+							   maxlength="20"
+							   id="memberPwConfirm"
+							   class="memberPwConfirm"
+                               >
                     </div>
                 </div>
                 
@@ -77,7 +81,8 @@
                         <input th:value="${session.loginMember.memberName}"
 							   type="text" 
 							   placeholder="성함" 
-							   id="memberName">
+							   id="memberName"
+							   readonly />
                     </div>
                 </div>    
 
@@ -117,7 +122,11 @@
                     </label> 
 
                     <div id="guardianTelInputDiv">
-                        <input type="text" placeholder="'-'를 포함하여 입력해주세요" autocomplete="off" id="guardianTel">
+                        <input th:value="${session.loginMember.guardianTel}"
+							   type="text" 
+							   placeholder="'-'를 포함하여 입력해주세요"
+							   autocomplete="off" 
+							   id="guardianTel">
                         <br>
                         <span style="font-size: 12px;
                                      letter-spacing: -1px;"
@@ -138,20 +147,20 @@
                     <br>
 
                     <div>
-                        <input type="text" name="memberAddress" id="postcode" placeholder="우편번호">
+                        <input type="text" name="memberAddress" id="postcode" placeholder="우편번호" autocomplete="off">
                     </div>
 
                     <br>
 
                     <div>
-                        <input type="text" name="memberAddress" id="roadAddress" placeholder="도로명 / 지번 주소">
+                        <input type="text" name="memberAddress" id="roadAddress" placeholder="도로명 / 지번 주소" autocomplete="off">
                     </div>
                     
                     <br>
 
                     <div>
                         <span id="guide" style="color:#999;display:none"></span>
-                        <input type="text" name="memberAddress" id="detailAddress" placeholder="상세주소">
+                        <input type="text" name="memberAddress" id="detailAddress" placeholder="상세주소" autocomplete="off">
                     </div>
                 </fieldset>
                 

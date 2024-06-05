@@ -11,7 +11,7 @@
 	<!-- 로그인 -->
 	<select id="login" resultType='Member'>
 		SELECT MEMBER_ID, MEMBER_NO, MEMBER_EMAIL, MEMBER_NAME, MEMBER_PW,
-		MEMBER_TEL, MEMBER_ADDRESS
+		MEMBER_TEL, MEMBER_ADDRESS, GUARDIAN_TEL
 		FROM "MEMBER"
 		WHERE MEMBER_ID = #{memberId}
 		AND MEMBER_DEL_FL ='N'
@@ -31,5 +31,18 @@
 		AND MEMBER_EMAIL =#{memberEmail}
 	
 	</select>
+	
+	<select id="findPw">
+	
+		SELECT MEMBE_PW
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<update id="secession">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_FL = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
  
 </mapper>

@@ -175,7 +175,7 @@
 
 /* 캐러샐2 */
 
-.my-carousel {
+.carousel2 {
     position: relative;
     width: 100%;
     max-width: 1920px;
@@ -184,12 +184,12 @@
     background-color: #fff;
 }
 
-.my-carousel-inner {
+.carousel-inner2 {
     display: flex;
     transition: transform 0.5s ease;
 }
 
-.my-carousel-item {
+.carousel-items {
     min-width: 55%; /* 두 개의 이미지가 보이도록 설정 */
     box-sizing: border-box;
     position: relative;
@@ -198,14 +198,14 @@
     padding: 0 1vw 0 1vw;
 }
 
-.my-carousel-item img {
+.carousel-items img {
     width: 100%;
     height: 100%; /* 부모 요소의 높이에 맞추기 */
     
 }
 
-.my-carousel-control-prev,
-.my-carousel-control-next {
+.carousel-control-prev2,
+.carousel-control-next2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -220,11 +220,11 @@
     
 }
 
-.my-carousel-control-prev {
+.carousel-control-prev2 {
     left: 10px;
 }
 
-.my-carousel-control-next {
+.carousel-control-next2 {
     right: 10px;
 }
 /* 캐러셀2 end */

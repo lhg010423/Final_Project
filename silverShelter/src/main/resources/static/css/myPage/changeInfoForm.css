@@ -104,7 +104,7 @@
     padding-top:23px;
 }
 
-#memberPw{
+.memberPw{
     width: 35vw;
     height: 5vh;
 
@@ -133,7 +133,7 @@
     width: 10vw;
 }
 
-#memberPwConfirm{
+.memberPwConfirm{
     width: 35vw;
     height: 5vh;
 
