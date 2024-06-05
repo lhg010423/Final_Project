@@ -152,13 +152,11 @@ public class MemberController {
 //	"http://loscalhost/member/signUp/411104RSORMD!@$/17"
 	@GetMapping("signUp/{path:[A-Za-z0-9!@$^]+}/{examId:[0-9]+}")
 	public String signUp(@PathVariable("path")String path,
-						 @PathVariable("examId")int examId,
-						 Model model) {
+						 @PathVariable("examId")int examId) {
 		
-		log.info("test2 : " + path);
-		log.info("test : " + examId);
-		
+
 		return "member/signUp";
 	}
 	
+
 }
