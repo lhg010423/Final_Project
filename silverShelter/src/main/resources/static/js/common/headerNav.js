@@ -54,9 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
         logonDropdown.onmouseout = function() {
             logonDropdown.style.display = "none";
         }
-    } else {
-        console.error("Element(s) not found: memberName or logonDropdown");
-    }
+    } 
 });
 
 

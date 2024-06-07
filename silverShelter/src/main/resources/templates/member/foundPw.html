@@ -6,7 +6,9 @@
     <title>Document</title>
 
 	<!-- header Nav 용 css-->
-		<th:block th:replace="~{common/common}"></th:block>
+	<th:block th:replace="~{common/common}"></th:block>
+	
+		
 		
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
@@ -19,13 +21,13 @@
 	
 	<div style="height: 13vh;"></div>
 	
-	<form action="#" method="POST" id="foundPwArea">
+	<form action="/member/checkIdMail" method="POST" id="foundPwArea">
 				
 		<div class="foundPwTitle">
 			비밀번호 찾기
 		</div>
 		               
-			<div class="text"> Gonlen Prestige Corperation</div>
+			<div class="text"> Golden Prestige Corperation</div>
 						
 			    <section>
 		        	 아이디 &nbsp;<input type="text"
@@ -45,17 +47,20 @@
 							   autocomplete="off">
 		                        
 		          </section>
-							
-							
-				  <div class="lineDiv"></div>
 					
 	              <div class="btnDiv">
-	              	<button class="foundPwBtn" type="submit">비밀번호 찾기</button>
+	              	<button id="foundPwBtn" class="foundPwBtn" type="button">정보 조회</button>
 				  </div>
 	
 	</form>
 	
+	<th:block th:replace="~{member/changePwModal}"></th:block>
+	
 	<!--footer-->
 	<th:block th:replace="~{common/footer}"></th:block>
+	
+	<!--foundPw 용 JS-->
+	<script src="/js/member/foundPw.js"></script>
+	
 </body>
 </html>

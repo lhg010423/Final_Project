@@ -1,5 +1,6 @@
 package com.silver.shelter.member.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -147,11 +148,15 @@ public class MemberController {
 	 }
 	 
 	
+	/** 비밀번호 찾기 버튼 클릭시 랜더링하는 메서드
+	 * @return
+	 */
 	@GetMapping("foundPw")
 	public String foundPw() {
 		
 		return "member/foundPw";
 	}
+	
 //	"http://loscalhost/member/signUp/411104RSORMD!@$/17"
 	@GetMapping("signUp/{path:[A-Za-z0-9!@$^]+}/{examId:[0-9]+}")
 	public String signUp(@PathVariable("path")String path,
@@ -161,8 +166,46 @@ public class MemberController {
 		return "member/signUp";
 	}
 	
+	/** 비밀번호 찾기 브라우저에서 아이디와 이메일을 입력받아 서버의 값과 동일한지 조회하는 메서드
+	 * @return
+	 */
+	@PostMapping("checkIdTel")
+	@ResponseBody
+	public String checkIdTel(@RequestBody Member member) {
+		String memberId = member.getMemberId();
+		String memberTel = member.getMemberTel();
+		
+		boolean isVaild = service.checkIdTel(memberId, memberTel);
+		
+		if(isVaild) {
+			return "success";
+		}else {
+			return "failure";
+		}
+			
+	}
 	
-	/** 탈퇴 컨트롤러
+	/** 아이디와 전화번호가 일치하면 비밀번호 변경을 진행하는 메서드
+	 * @param req
+	 * @return
+	 */
+	@PostMapping("updatePw")
+	@ResponseBody
+	public Map<String, Object> updatePw(@RequestBody Map<String, String> req){
+	    String memberId = req.get("memberId");
+	    String newPw = req.get("newPw");
+
+	    boolean success = service.updatePw(memberId, newPw);
+
+	    Map<String, Object> resp = new HashMap<>();
+	    resp.put("success", success);
+
+	    return resp;
+	}
+
+	
+	
+	/** 탈퇴를 위한 정보 컨트롤러 ( 사정상 resources/templates/myPage/secessionForm 을 이쪽으로 땡겨왔음)
 	 * @param map
 	 * @param loginMember
 	 * @param sessionStatus
@@ -172,7 +215,8 @@ public class MemberController {
 	@ResponseBody
 	public int secession(@RequestBody Map<String, String> map,
 						 @SessionAttribute("loginMember") Member loginMember,
-						 SessionStatus sessionStatus
+						 SessionStatus sessionStatus,
+						 RedirectAttributes ra
 						  ) {
 		
 		String memberId = loginMember.getMemberId();
@@ -180,8 +224,15 @@ public class MemberController {
 		int result = service.secession(map,loginMember);
 		
 		if (result > 0) {
+			
+			ra.addFlashAttribute("message", "탈퇴가 완료되었습니다.");
 			sessionStatus.setComplete();
+			
+		}else {
+			ra.addFlashAttribute("message", "비밀번호를 확인해주세요");
 		}
+		
 		return result;
+		
 	}
 }

@@ -44,10 +44,10 @@ public interface BoardMapper {
 	
 	/** 삭제되지 않은 검색한 게시글 조회
 	 * @param paramMap
-	 * @param cp
+	 * @param rowBounds
 	 * @return
 	 */
-	List<Board> boardSearchSelect(Map<String, Object> paramMap, int cp);
+	List<Board> boardSearchSelect(Map<String, Object> paramMap, RowBounds rowBounds);
 	
 	
 	
