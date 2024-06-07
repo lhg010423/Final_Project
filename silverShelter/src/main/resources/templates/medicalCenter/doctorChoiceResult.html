@@ -2,7 +2,7 @@
     <div id="res-dep-choice1">의료진 선택</div>
     <div id="doc-choice2">
         <div th:each="doctor : ${doctors}">
-            <div id="doc-choice1" class="doc-choice" th:data-doctor="${doctor}">
+            <div id="doc-choice1" class="doc-choice" th:data-doctor-name="${doctor.doctorName}" th:data-doctor-profile="${doctor.doctorProfile}">
                 <div class="doc-intro-left">
                     <div class="doc-choice-name" th:text="${doctor.doctorName}"></div>
                     <div class="doc-choice-speciality">진료 분야 : <span th:text="${doctor.doctorSpeciality}"></span></div>

@@ -1,5 +1,6 @@
 package com.silver.shelter.medicalCenter.model.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -11,6 +12,8 @@ import com.silver.shelter.medicalCenter.model.dto.Doctor;
 public interface DoctorMapper {
 
 	List<Doctor> findDoctorsByMajorName(String majorName);
+
+	List<Date> getDateByDoctorName(String resDoctorName);
 	
 
 }

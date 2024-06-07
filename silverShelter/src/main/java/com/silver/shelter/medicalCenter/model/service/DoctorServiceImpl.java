@@ -1,5 +1,6 @@
 package com.silver.shelter.medicalCenter.model.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,5 +25,10 @@ public class DoctorServiceImpl implements DoctorService{
 	@Override
 	public List<Doctor> getDoctorsByMajorName(String majorName) {
 			return mapper.findDoctorsByMajorName(majorName);
+	}
+
+	@Override
+	public List<Date> getDateByDoctorName(String resDoctorName) {
+		return mapper.getDateByDoctorName(resDoctorName);
 	}
 }

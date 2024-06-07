@@ -11,4 +11,11 @@
         JOIN DOCTOR_MAJOR dm ON d.MAJOR_CODE = dm.MAJOR_CODE
         WHERE dm.MAJOR_NAME = #{majorName}
     </select>
+    
+    <select id="getDateByDoctorName" resultType="Date">
+        SELECT da.DR_APPT_TIME
+        FROM DOCTOR_APPOINTMENT da
+        JOIN DOCTOR d ON da.DOCTOR_NO = d.DOCTOR_NO
+        WHERE d.DOCTOR_NAME = #{resDoctorName}
+    </select>
 </mapper>
