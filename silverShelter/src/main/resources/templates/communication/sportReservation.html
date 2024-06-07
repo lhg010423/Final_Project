@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 
 
-    <title>게스트룸 예약</title>
+    <title>스포츠센터 예약</title>
 </head>
 <body> 
   <main>
@@ -29,11 +29,26 @@
           <div class="guest-room-section">
 
             <div class="guest-room-header">
-              <h1>게스트룸</h1>   
+              <h1>스포츠센터</h1>   
             </div>
             
-            <div class="guest-room-img-container">
-              <img src="/images/communication/guestRoom.webp" alt="Guest Room">
+            <div class="sports-img-container">
+                <div class="image-wrapper" data-value="2">
+                    <img src="/images/communication/golf.png" alt="골프" class="selectable-image">
+                    <div class="overlay">골프</div>
+                </div>
+                <div class="image-wrapper" data-value="3">
+                    <img src="/images/communication/swimming.jpg" alt="수영" class="selectable-image">
+                    <div class="overlay">수영</div>
+                </div>
+                <div class="image-wrapper" data-value="4">
+                    <img src="/images/communication/sauna.jpg" alt="사우나" class="selectable-image">
+                    <div class="overlay">사우나</div>
+                </div>
+                <div class="image-wrapper" data-value="5">
+                    <img src="/images/communication/gateball.webp" alt="게이트볼" class="selectable-image">
+                    <div class="overlay">게이트볼</div>
+                </div>
             </div>
 
             <th:block th:if="${session.loginMember == null}">
@@ -212,6 +227,6 @@
   </main>
     <!--footer-->
     <th:block th:replace="~{/common/footer.html}"></th:block>
-    <script src="/js/communication/reservation.js"></script>
+    <script src="/js/communication/sportReservation.js"></script>
 </body>
 </html>
