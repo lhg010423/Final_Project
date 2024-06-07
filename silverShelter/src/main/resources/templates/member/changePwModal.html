@@ -1,0 +1,14 @@
+<form id="changePwForm" action="/member/updatePw" method="POST">
+	<div id="pwChangeModal" class="pwChangeModal" hidden>
+    <div class="modal-content">
+        <span onclick="closeModal()" class="close">&times;</span>
+        <div class="emptyDiv"></div>
+        <h2>비밀번호 변경</h2>
+		
+        	<input type="password" id="changePw" class="pwInput" placeholder="변경할 비밀번호를 입력하세요">
+        	<input type="password" id="changePwConfirm" class="pwInput" placeholder="비밀번호를 다시 입력하세요">
+        	<button id="changePwBtn">변경하기</button>
+		
+    </div>
+</div>
+</form>

@@ -44,5 +44,17 @@
 		MEMBER_DEL_FL = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="checkIdTel">
+		SELECT *
+		FROM "MEMBER"
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_TEL = #{memberTel}
+	</select>
  
+ 	<update id="updatePw">
+   		UPDATE "MEMBER" SET 
+    	MEMBER_PW = #{encPw}
+    	WHERE MEMBER_ID = #{memberId}
+</update>
 </mapper>
