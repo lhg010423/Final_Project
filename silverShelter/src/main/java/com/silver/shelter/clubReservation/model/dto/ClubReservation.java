@@ -15,7 +15,7 @@ import lombok.ToString;
 @Builder
 public class ClubReservation {
 
-	private int clubCode;
+	private int clubCode; // 1
 	private int clubResvNo;
 	private int memberNo;
 	private String clubResvTime;
