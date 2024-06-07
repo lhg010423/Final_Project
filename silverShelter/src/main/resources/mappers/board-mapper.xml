@@ -41,12 +41,12 @@
 		<choose>
 			
 			<!-- 제목으로 검색 -->
-			<when test='key == "t'>
+			<when test='key == "t"'>
 				AND BOARD_TITLE LIKE '%' || #{query} || '%'
 			</when>
 			
 			<!-- 작성자으로 검색 -->
-			<when test='key == "n'>
+			<when test='key == "w"'>
 				AND MEMBER_NAME LIKE '%' || #{query} || '%'
 			</when>
 			
@@ -62,17 +62,17 @@
 		FROM "BOARD"
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOARD_CODE = #{boardCode}
-		AND BOARD_DEL_FL = N
+		AND BOARD_DEL_FL = 'N'
 	
 		<choose>
 			
 			<!-- 제목으로 검색 -->
-			<when test='key == "t'>
+			<when test='key == "t"'>
 				AND BOARD_TITLE LIKE '%' || #{query} || '%'
 			</when>
 			
 			<!-- 작성자으로 검색 -->
-			<when test='key == "n'>
+			<when test='key == "w"'>
 				AND MEMBER_NAME LIKE '%' || #{query} || '%'
 			</when>
 		

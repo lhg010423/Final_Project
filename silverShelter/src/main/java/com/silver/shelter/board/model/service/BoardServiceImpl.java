@@ -12,9 +12,11 @@ import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.board.model.mapper.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class BoardServiceImpl implements BoardService{
 
 	private final BoardMapper mapper;
@@ -77,6 +79,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		// 검색한 게시글 수 조회
 		int boardCount = mapper.boardSearchCount(paramMap);
+		log.info("boardCount {}", boardCount);
 		
 		Pagination pagination = new Pagination(cp, boardCount);
 		
@@ -84,10 +87,12 @@ public class BoardServiceImpl implements BoardService{
 		int offset = (cp - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		
-		List<Board> boardList = mapper.boardSearchSelect(paramMap, cp);
+		log.info("paramMap {}", paramMap);
+		List<Board> boardList = mapper.boardSearchSelect(paramMap, rowBounds);
 		
 		Map<String, Object> map = new HashMap<>();
+		
+		//System.out.println("key값 : " + paramMap.get("key"));
 		
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
