@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let lastSelectedDepartment = ''; // 전역 변수로 선택된 진료과를 저장할 변수를 선언합니다.
     let lastSelectedDoctor = '';
     let lastSelectedDoctorImage = '';
+    let lastSelectedDoctorName = '';
 
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
@@ -106,27 +107,43 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("html값", html);
                 document.querySelector("#reservation-content3").innerHTML = html;
 
-                // doc-choice 이벤트 핸들러 등록
-                const docChoices = document.querySelectorAll('.doc-choice');
-                docChoices.forEach(docChoice => {
-                    docChoice.addEventListener('click', function() {
+                if(document.querySelectorAll('.doc-choice') != null){
+                    document.querySelectorAll('.doc-choice').forEach(function(element) {
+                        element.addEventListener('click', function() {
+                            // 모든 .doc-choice 요소에서 .resized 클래스를 제거
+                            document.querySelectorAll('.doc-choice').forEach(function(el) {
+                                el.classList.remove('resized');
+                            });
+                            // 클릭된 요소에만 .resized 클래스 추가
+                            this.classList.add('resized');
+                            lastSelectedDoctor = this.textContent;
+                            lastSelectedDoctorImage = this.querySelector('.doc-choice-profile').getAttribute('src');
+                            const toggleButtonImage2 = document.getElementById('toggleButtonImage2');
+                            const toggleButtonImageIntro2 = document.getElementById('toggleButtonImageIntro2');
+                            const cleanedText = lastSelectedDoctor.trim();
 
+                            // 줄바꿈을 기준으로 텍스트를 분할합니다.
+                            const lines = cleanedText.split('\n');
+                            
+                            // 첫 번째 줄의 텍스트를 추출합니다.
+                            const doctorName = lines[0].trim();
+                            
+                            console.log('dsfsd', doctorName);
 
-
-
-
-                        const doctorData = this.getAttribute('data-doctor');
-                        
-                        const d = document.querySelector('.doc-choice-name');
-                        const doo = d.getAttribute('text');
-                        console.log('d',doo);
-
-
-                        console.log(doctorData);
-                        lastSelectedDoctor = doctorData.doctorName;
-                        lastSelectedDoctorImage = doctorData.doctorProfile;
+                            toggleButtonImageIntro2.innerText = doctorName;
+                            lastSelectedDoctorName = doctorName;
+                            toggleButtonImage2.src = lastSelectedDoctorImage;
                     });
-                });
+                })}
+                if(document.querySelectorAll('.resized') != null){
+                    document.querySelectorAll('.resized').forEach(function(element) {
+                        element.addEventListener('click', function() {
+                            this.classList.remove('resized');
+                        });
+                    });
+                }
+
+
 
                 // doc-choice-next 클릭 이벤트 핸들러 등록
                 const docChoiceNextButton = document.getElementById('doc-choice-next');
@@ -136,16 +153,76 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.log("doc-choice-next 클릭 이벤트 시작");
                         console.log("lastSelected:", lastSelectedDoctor);
                         console.log("lastSelected:", lastSelectedDoctorImage);
+                        updateReservationView('4');
                     });
                 }
+                
             } catch (error) {
                 console.error("Error fetching doctor info:", error);
             }
         }
 
         if (target === '4') {
-            // '4' target 관련 추가 작업이 필요하다면 여기에 작성합니다.
-        }
+            try {
+                const response = await fetch(`/medicalCenter/reservation/date?departmentName=${lastSelectedDepartment}&resDoctorName=${lastSelectedDoctorName}`);
+                const html = await response.text();
+                console.log("html값", html);
+                document.querySelector("#reservation-content4").innerHTML = html;
+
+                if(document.querySelectorAll('.doc-choice') != null){
+                    document.querySelectorAll('.doc-choice').forEach(function(element) {
+                        element.addEventListener('click', function() {
+                            // 모든 .doc-choice 요소에서 .resized 클래스를 제거
+                            document.querySelectorAll('.doc-choice').forEach(function(el) {
+                                el.classList.remove('resized');
+                            });
+                            // 클릭된 요소에만 .resized 클래스 추가
+                            this.classList.add('resized');
+                            lastSelectedDoctor = this.textContent;
+                            lastSelectedDoctorImage = this.querySelector('.doc-choice-profile').getAttribute('src');
+                            const toggleButtonImage2 = document.getElementById('toggleButtonImage2');
+                            const toggleButtonImageIntro2 = document.getElementById('toggleButtonImageIntro2');
+                            const cleanedText = lastSelectedDoctor.trim();
+
+                            // 줄바꿈을 기준으로 텍스트를 분할합니다.
+                            const lines = cleanedText.split('\n');
+                            
+                            // 첫 번째 줄의 텍스트를 추출합니다.
+                            const doctorName = lines[0].trim();
+                            
+                            console.log('dsfsd', doctorName);
+
+                            toggleButtonImageIntro2.innerText = doctorName;
+                            toggleButtonImage2.src = lastSelectedDoctorImage;
+                    });
+                })}
+                if(document.querySelectorAll('.resized') != null){
+                    document.querySelectorAll('.resized').forEach(function(element) {
+                        element.addEventListener('click', function() {
+                            this.classList.remove('resized');
+                        });
+                    });
+                }
+
+
+
+                // doc-choice-next 클릭 이벤트 핸들러 등록
+                const docChoiceNextButton = document.getElementById('doc-choice-next');
+                if (docChoiceNextButton != null) {
+                    console.log("doc-choice-next 존재 확인");
+                    docChoiceNextButton.addEventListener('click', function () {
+                        console.log("doc-choice-next 클릭 이벤트 시작");
+                        console.log("lastSelected:", lastSelectedDoctor);
+                        console.log("lastSelected:", lastSelectedDoctorImage);
+                        updateReservationView('4');
+                    });
+                }
+                
+            } catch (error) {
+                console.error("Error fetching doctor info:", error);
+            }        }
+
+
     }
 
     // Mutation Observer 설정

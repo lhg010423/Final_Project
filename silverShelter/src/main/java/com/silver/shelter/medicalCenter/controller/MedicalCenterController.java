@@ -1,5 +1,6 @@
 package com.silver.shelter.medicalCenter.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,15 @@ public class MedicalCenterController {
 	    List<Doctor> doctors = doctorService.getDoctorsByMajorName(departmentName);
 	    model.addAttribute("doctors", doctors);
 	    return "medicalCenter/doctorChoiceResult";
+	}
+	
+	@GetMapping("reservation/date")
+	public String dateChoice(@RequestParam("resDoctorName") String resDoctorName,
+								Model model) {
+	    // 서비스 호출 및 로직 처리
+	    List<Date> date = (List<Date>) doctorService.getDateByDoctorName(resDoctorName);
+	    model.addAttribute("date", date);
+	    return "medicalCenter/dateResult";
 	}
 
 }
