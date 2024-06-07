@@ -1,5 +1,6 @@
 package com.silver.shelter.member.model.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -66,6 +67,7 @@ public class MemberServiceImpl implements MemberService{
 				
 	}
 
+	// 회원 탈퇴
 	@Override
 	public int secession(Map<String, String> map, Member loginMember) {
 		
@@ -84,6 +86,35 @@ public class MemberServiceImpl implements MemberService{
 			result = 1;
 		}
 		return result;
+	}
+
+	// 아이디, 연락처 조회하기
+	@Override
+	public boolean checkIdTel(String memberId, String memberTel) {
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("memberId", memberId);
+        param.put("memberTel", memberTel);
+		
+		Member member = mapper.checkIdTel(param);
+		
+		return member != null;
+	}
+
+	
+	// 비밀번호 업데이트 하기
+	@Override
+	public boolean updatePw(String memberId, String newPw) {
+		
+		String encPw = bcrypt.encode(newPw);
+		Map<String, String> param = new HashMap<>();
+		
+		param.put("memberId", memberId);
+		param.put("encPw", encPw);
+		
+		int result = mapper.updatePw(param);
+		
+		return result > 0;
 	}
 	
 }
