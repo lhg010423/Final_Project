@@ -23,7 +23,7 @@ public class BoardController {
 	private final BoardService service;
 
 	
-	/** 공지 게시판 게시글 조회하기
+	/** 게시판 게시글 조회하기
 	 * @return
 	 */
 	/**
@@ -51,6 +51,10 @@ public class BoardController {
 		} else {
 			
 			paramMap.put("boardCode", boardCode);
+			
+			System.out.println(paramMap);
+			
+			System.out.println(paramMap.get("key"));
 			
 			map = service.boardSearchSelect(paramMap, cp);
 			
