@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
 @Mapper
@@ -26,6 +27,8 @@ public interface MemberMapper {
 	 * @return
 	 */
 	int updatePw(Map<String, String> param);
+
+	Examination selectSignUp(Examination exam);
 
 	
 }

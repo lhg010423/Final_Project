@@ -6,7 +6,7 @@
 
 .signUp-Form{
 
-    height: 100vh;
+    height: 100%;
 }
 .agreement-head {
     padding-top: 20px; /* 약관동의 위 여백 설정 */
@@ -44,6 +44,9 @@
     line-height: 50px; /* 텍스트를 요소의 중앙에 위치시킵니다 */
 }
 
+.numColor {
+	color: white;
+}
 .step-container .step-item:nth-of-type(2),
 .step-container .step-item:nth-of-type(3),
 .step-container .step-item:nth-of-type(4) {
@@ -75,6 +78,8 @@ div i {
     color: #999;
 }
 
+
+
 /* ---------------------------------------------------------------------- */
 
 .agreement-head h1{
@@ -101,7 +106,11 @@ div i {
     display: flex;
 
     justify-content: space-between;
-    color: rgb(253, 111, 60);
+    
+}
+
+#notice{
+	color: rgb(253, 111, 60);
 }
 
 .star{

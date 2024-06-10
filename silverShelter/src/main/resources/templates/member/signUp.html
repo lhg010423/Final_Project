@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Golden Prestige 회원가입</title>
 
     <th:block th:replace="~{common/common}"></th:block>
 
-    <link rel="stylesheet" href="/css/signUp/signUpForm.css">
+    <link rel="stylesheet" th:href="@{/css/signUp/signUpForm.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/main/favicon.png}">
 </head>
 <body>
     <main>
@@ -20,7 +21,7 @@
             <div class="step-container">
 
                 <article class="step-item">
-                    <h1>1</h1>
+                    <h1 class="numColor">1</h1>
                 </article>
                 
                 <div class="i-div">
@@ -48,22 +49,20 @@
                 </article>
             </div>
 
-            
             <!-- ---------------------------정보입력란-------------------------------- -->
 
             <div id="formHeader">
                 <div class="notice">
-                    <div>* 은 필수 입력 항목입니다.</div>
-                    
+                    <div id="notice">* 은 필수 입력 항목입니다.</div>
                 </div>
                 <div class="line-div"></div>
             </div>
             <!-- 입력양식 -->
-            <form id="info-form" action="member/signUpForm" method="POST">
+            
+            <form id="info-form" action="/member/signUpForm" method="POST">
         
                 <!-- 아이디컨테이너 -->
                 <div class="id-container">
-
 
                     <label for="memberId" class="id-label">
                         <span class="star">*</span>&nbsp;
@@ -123,7 +122,7 @@
                     </label>
 
                     <div>
-                        <input type="text" placeholder="성함" id="memberName">
+                        <input type="text" placeholder="성함" id="memberName" th:value="${exam.examName}" name="name" readonly>
                     </div>
                 </div>    
 
@@ -137,7 +136,10 @@
                         <input type="text" 
                                placeholder="'-'를 포함하여 입력해주세요" 
                                autocomplete="off"
-                               id="memberTel">
+                               id="memberTel"
+                               name="phone"
+							   th:value="${exam.examPhone}"
+                               readonly>
                     </div>
                 </div>
                 
@@ -148,7 +150,7 @@
                     </label>    
                 
                     <div>
-                        <input type="text" placeholder="이메일" autocomplete="off" id="memberEmail">
+                        <input type="text" placeholder="이메일" autocomplete="off" id="memberEmail" name="email" th:value="${exam.examEmail}" readonly>
                     </div>
                 </div>
 
@@ -168,13 +170,11 @@
                     </div>
                 </div>
 
-
                 <!-- 주소 입력란 -->
                 <fieldset class="addr-fieldset">
                     <div class="add-div-1">
                         <span class="addr">주소</span> 
-                        <button type = "button" 
-                                id="searchAddress">검색</button>
+                        <button type="button" id="searchAddress">검색</button>
                     </div>
 
                     <br>
@@ -196,14 +196,11 @@
                         <input type="text" name="memberAddress" id="detailAddress" placeholder="상세주소">
                     </div>
                 </fieldset>
-                
 
                 <div class="prev-next-btn-container">
                     <a href="#" id="beforeBtn"><span>이전</span></a>
                     <button type="submit" id="submitBtn">다음</button>
                 </div>
-
-
 
             </form>
         </section>
@@ -214,6 +211,6 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/signUp/signUpForm.js"></script>
    
-   <script src="https://kit.fontawesome.com/f4ca9edfa4.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f4ca9edfa4.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.silver.shelter.admin.model.service.AdminService;
+import com.silver.shelter.examination.model.dto.Examination;
+
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.member.model.service.MemberService;
 
@@ -33,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final MemberService service;
+
 	
 	
 	/** 로그인 페이지로 이동
@@ -153,9 +157,25 @@ public class MemberController {
 		return "member/foundPw";
 	}
 	
-//	"http://loscalhost/member/signUp/411104RSORMD!@$/17"
+	//"http://loscalhost/member/signUp/411104RSORMD!@$/17"
 	@GetMapping("signUp/{path:[A-Za-z0-9!@$^]+}/{examId:[0-9]+}")
 	public String signUp(@PathVariable("path")String path,
+						 @PathVariable("examId")int inputExamId,
+						 Model model) {
+		
+		// examId 가지고 -> S > M -> DB
+		Examination exam = new Examination();
+		
+		exam.setExamId(inputExamId);
+		
+		log.info("examID는???"+exam.getExamId());
+		
+		exam = service.selectSignUp(exam);
+		// examId일치하는 행의 이름/이메일/전화번호
+		model.addAttribute("exam",exam);
+		log.info("잘 넘어오니?",exam.getExamName());
+		// request Scope에 넣기
+
 						 @PathVariable("examId")int examId ) {
 		
 		return "member/signUp";

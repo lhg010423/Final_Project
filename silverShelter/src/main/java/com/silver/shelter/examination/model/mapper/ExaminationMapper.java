@@ -11,9 +11,9 @@ import com.silver.shelter.examination.model.dto.Examination;
 public interface ExaminationMapper {
 
 
-	/* 중복 신청 확인 
+	/** 중복 신청 확인 
 	 * @param documentSubmisson
-	 * */
+	 */
 	int checkApplicantInfo(Examination applicantInfo);
 
 	
