@@ -169,40 +169,151 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("html값", html);
                 document.querySelector("#reservation-content4").innerHTML = html;
 
-                if(document.querySelectorAll('.doc-choice') != null){
-                    document.querySelectorAll('.doc-choice').forEach(function(element) {
-                        element.addEventListener('click', function() {
-                            // 모든 .doc-choice 요소에서 .resized 클래스를 제거
-                            document.querySelectorAll('.doc-choice').forEach(function(el) {
-                                el.classList.remove('resized');
+                // 캘린더 요소를 가져와서 변수에 저장
+                const calendar = document.getElementById('calendar');
+                const submitButton = document.getElementById('reserve-button');
+
+                // 전송할 데이터를 저장할 객체
+                const obj = {
+                    docResvTime: '',
+                    doctorName: lastSelectedDoctorName
+                };
+
+                // jSuites 캘린더를 초기화
+                jSuites.calendar(calendar, {
+                    format: 'DD/MM/YYYY',  // 날짜 형식을 '일/월/년'으로 설정
+                    onupdate: function(instance, value) {  // 날짜가 업데이트될 때 호출되는 콜백 함수
+                        
+                        // 클래스명이 'dateInfo'인 요소들을 가져옵니다.
+                        const dateInfoElements1 = document.querySelectorAll('.dateInfo');
+                        // 가져온 모든 요소를 순회하면서 값을 가져옵니다.
+                        dateInfoElements1.forEach(dateInfoElement => {
+                            // 각 요소의 텍스트 값을 가져옵니다.
+                            const dateInfo = dateInfoElement.textContent.trim();
+
+                            // 가져온 시간 옵션들을 저장할 배열을 선언합니다.
+                            const timeOptions = Array.from(document.querySelectorAll('.time-option'));
+
+                            // 시간 옵션들을 순회하면서 조건에 맞는지 확인합니다.
+                            timeOptions.forEach(timeOption => {
+                                    // 조건에 해당하는 시간 옵션을 화면에 다시 보이도록 설정합니다.
+                                    timeOption.style.display = '';
+
                             });
-                            // 클릭된 요소에만 .resized 클래스 추가
-                            this.classList.add('resized');
-                            lastSelectedDoctor = this.textContent;
-                            lastSelectedDoctorImage = this.querySelector('.doc-choice-profile').getAttribute('src');
-                            const toggleButtonImage2 = document.getElementById('toggleButtonImage2');
-                            const toggleButtonImageIntro2 = document.getElementById('toggleButtonImageIntro2');
-                            const cleanedText = lastSelectedDoctor.trim();
-
-                            // 줄바꿈을 기준으로 텍스트를 분할합니다.
-                            const lines = cleanedText.split('\n');
-                            
-                            // 첫 번째 줄의 텍스트를 추출합니다.
-                            const doctorName = lines[0].trim();
-                            
-                            console.log('dsfsd', doctorName);
-
-                            toggleButtonImageIntro2.innerText = doctorName;
-                            toggleButtonImage2.src = lastSelectedDoctorImage;
-                    });
-                })}
-                if(document.querySelectorAll('.resized') != null){
-                    document.querySelectorAll('.resized').forEach(function(element) {
-                        element.addEventListener('click', function() {
-                            this.classList.remove('resized');
                         });
+                        
+                        // value를 Date 객체로 변환
+                        const date = new Date(value);
+
+                        // 년도를 추출
+                        const year = date.getFullYear();
+
+                        // 월을 추출하고 두 자리 문자열로 변환 (1월은 '01', 12월은 '12')
+                        const month = String(date.getMonth() + 1).padStart(2, '0');  // getMonth()는 0부터 시작하므로 +1 필요
+
+                        // 일을 추출하고 두 자리 문자열로 변환 (1일은 '01', 31일은 '31')
+                        const day = String(date.getDate()).padStart(2, '0');
+
+                        // 'YYYY년MM월DD일' 형식으로 날짜를 조합
+                        const selectdate = `${year}년${month}월${day}일`;
+
+                        // 조합된 날짜를 콘솔에 출력
+                        console.log(selectdate); // 예시 출력: "2024년06월04일"
+
+                        // 날짜를 임시 저장
+                        window.selectedDate = selectdate;
+
+
+                        // 클래스가 "dateInfo"인 모든 <li> 요소를 가져옵니다.
+                        const dateInfoElements = document.querySelectorAll('.dateInfo');
+
+                        // 가져온 모든 요소를 순회하면서 값을 가져옵니다.
+                        dateInfoElements.forEach(dateInfoElement => {
+                            // 각 요소의 텍스트 값을 가져옵니다.
+                            const dateInfo = dateInfoElement.textContent.trim();
+
+                            // 가져온 시간 옵션들을 저장할 배열을 선언합니다.
+                            const timeOptions = Array.from(document.querySelectorAll('.time-option'));
+
+                            // 시간 옵션들을 순회하면서 조건에 맞는지 확인합니다.
+                            timeOptions.forEach(timeOption => {
+                                // 각 시간 옵션의 값을 가져옵니다.
+                                const timeValue = timeOption.querySelector('input[name="time"]').value;
+
+                                // dateInfo와 window.selectedDate + timeValue가 같은지 확인합니다.
+                                if (dateInfo === window.selectedDate + timeValue) {
+                                    // 조건에 해당하는 시간 옵션을 화면에서 숨깁니다.
+                                    timeOption.style.display = 'none';
+                                }
+                            });
+                        });
+
+                        
+                    }
+                });
+
+
+
+
+                // 시간 클릭 될때 값 얻어오기
+                var timeSelect = document.getElementsByName('time');
+                timeSelect.forEach(function(time) {
+                    time.addEventListener('click', function(e) {
+                        const selectedTime = e.target.value;
+                        console.log(selectedTime);
+
+                        // 날짜와 시간을 합쳐서 객체에 저장
+                        if (window.selectedDate) {
+                            obj.docResvTime = window.selectedDate + selectedTime;
+                        }
+                        console.log(obj.docResvTime);
                     });
+                });
+
+                // Fetch 요청을 보내는 함수 정의
+                function sendReservation() {
+                    if (obj.docResvTime) {
+                        fetch(`/medicalCenter/reservation/doctorReservation?resDoctorName=${lastSelectedDoctorName}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(obj) // 객체를 JSON 문자열로 변환하여 전송
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data == 1) {
+
+                                alert("예약 되었습니다.");
+
+                                location.href = "/";
+                            }else if(data == 3){
+
+                                alert("예약 있음 확인 바람");
+
+                            }else {
+                                alert("예약 실패");
+                                location.href = location.pathname;
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('예약 중 에러 발생:', error);
+                        });
+                    }
                 }
+
+                // 예약 버튼 클릭 이벤트 리스너
+                submitButton.addEventListener('click', function(e) {
+                    e.preventDefault();  // 기본 동작(폼 제출)을 막습니다.
+                    sendReservation();   // 예약 정보를 서버로 전송하는 함수를 호출합니다.
+                });
+
+
+
+
+
+
+
 
 
 
@@ -216,97 +327,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         console.log("lastSelected:", lastSelectedDoctorImage);
                         updateReservationView('4');
                         
-                        // 캘린더 요소를 가져와서 변수에 저장
-                        const calendar = document.getElementById('calendar-2');
-                        const submitButton = document.getElementById('reserve-button');
-                        const clubCode = document.getElementById('clubCode');
-
-                        // 전송할 데이터를 저장할 객체
-                        const obj = {
-                            clubResvTime: '',
-                            clubCode: clubCode.value
-                        };
-
-                        // jSuites 캘린더를 초기화
-                        jSuites.calendar(calendar, {
-                            format: 'DD/MM/YYYY',  // 날짜 형식을 '일/월/년'으로 설정
-                            onupdate: function(instance, value) {  // 날짜가 업데이트될 때 호출되는 콜백 함수
-                                // value를 Date 객체로 변환
-                                const date = new Date(value);
-
-                                // 년도를 추출
-                                const year = date.getFullYear();
-
-                                // 월을 추출하고 두 자리 문자열로 변환 (1월은 '01', 12월은 '12')
-                                const month = String(date.getMonth() + 1).padStart(2, '0');  // getMonth()는 0부터 시작하므로 +1 필요
-
-                                // 일을 추출하고 두 자리 문자열로 변환 (1일은 '01', 31일은 '31')
-                                const day = String(date.getDate()).padStart(2, '0');
-
-                                // 'YYYY년MM월DD일' 형식으로 날짜를 조합
-                                const selectdate = `${year}년${month}월${day}일`;
-
-                                // 조합된 날짜를 콘솔에 출력
-                                console.log(selectdate); // 예시 출력: "2024년06월04일"
-
-                                // 날짜를 임시 저장
-                                window.selectedDate = selectdate;
-                            }
-                        });
-
-                        // 시간 클릭 될때 값 얻어오기
-                        var timeSelect = document.getElementsByName('time');
-                        timeSelect.forEach(function(time) {
-                            time.addEventListener('click', function(e) {
-                                const selectedTime = e.target.value;
-                                console.log(selectedTime);
-                                console.log(clubCode.value); // clubCode 값 확인
-
-                                // 날짜와 시간을 합쳐서 객체에 저장
-                                if (window.selectedDate) {
-                                    obj.clubResvTime = window.selectedDate + selectedTime;
-                                }
-                                console.log(obj.clubResvTime);
-                            });
-                        });
-
-                        // Fetch 요청을 보내는 함수 정의
-                        function sendReservation() {
-                            if (obj.clubResvTime) {
-                                fetch('/communication/guestReservation', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify(obj) // 객체를 JSON 문자열로 변환하여 전송
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data == 1) {
-
-                                        alert("예약 되었습니다.");
-
-                                        location.href = "/";
-                                    }else if(data == 3){
-
-                                        alert("예약 있음 확인 바람");
-
-                                    }else {
-                                        alert("예약 실패");
-                                        location.href = location.pathname;
-                                    }
-                                })
-                                .catch((error) => {
-                                    console.error('예약 중 에러 발생:', error);
-                                });
-                            }
-                        }
-
-                        // 예약 버튼 클릭 이벤트 리스너
-                        submitButton.addEventListener('click', function(e) {
-                            e.preventDefault();  // 기본 동작(폼 제출)을 막습니다.
-                            sendReservation();   // 예약 정보를 서버로 전송하는 함수를 호출합니다.
-                        });
+                        
+                    
                     });
                 }
                 

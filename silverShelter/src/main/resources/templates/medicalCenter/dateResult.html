@@ -1,12 +1,22 @@
-    <div id="doc" class="doc" th:text="${date}">
-    </div>
-    
-    <form action="/communication/guestReservation" method="POST">
+    <li class="dateInfo" th:each="date : ${dates}" th:text="${date}"></li>
+    <script type="text/javascript">
+        window.onload = function() {
+            let datesStr = /*[[${dates}]]*/ '[]'; // 예: "[date1, date2, date3]"
+            let dates = JSON.parse(datesStr); // 문자열을 배열로 변환
+            console.log(dates);
+            dates.forEach(function(date) {
+                // 각 날짜에 대한 작업 수행
+                console.log("dkfsjdlfjskjkljskdlfkls");
+            });
+        }
+    </script>
+
+    <form action="/medicalCenter/reservation/doctorReservation" method="POST">
         <div class="selection-container">
           
           <div class="calendar-time-container">
             <!-- 캘린더 -->
-            <div id='calendar-2'></div>
+            <div id='calendar'></div>
 
             <div class="check-container">
 
@@ -79,8 +89,8 @@
                   <label for="time-20">20:00</label>
                 </div>
                 
-                <!-- 게스트룸 -->
-                <input type="hidden" value="1" id="clubCode">
+                <!-- 게스트룸
+                <input type="hidden" value="1" id="clubCode"> -->
               </div>
               
               <div class="reserve-container">
