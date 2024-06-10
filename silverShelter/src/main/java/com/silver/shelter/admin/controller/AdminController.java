@@ -261,10 +261,7 @@ public class AdminController {
 		
 		return 0;
 	}
-	
-	
-	
-	
+
 	
 	/** 예약
 	 * @return

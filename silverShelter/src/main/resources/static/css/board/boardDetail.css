@@ -1,0 +1,128 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+/* 게시판 전체 영역 */
+.boardMain {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+/* 게시판 상단 공간 */
+.boardTop {
+    height: 20%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.boardTop a {
+    margin: 20px;
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 상단 a태그를 제외한 나머지 메인 공간 */
+.boardBody {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 게시글 공간 */
+.boardDetail-area {
+    display: flex;
+    width: 800px;
+    min-height: 600px;
+    /* background-color: gray; */
+    border: 1px solid black;
+    flex-direction: column;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* 게시글 header부분*********************************************** */
+/* 이전으로 a태그 */
+.boardTitle > a {
+    color: black;
+    font-size: 13px;
+}
+
+.boardTitle-area {
+    flex: 0 0 auto; /* 고정 높이 */
+}
+
+
+/* 게시글 제목 */
+.boardTitle-area > span{
+    font-size: 25px;
+}
+
+/* 작성자, 작성일, 수정일, 조회수, 좋아요 공간 */
+.writer-area {
+    display: flex;
+    justify-content: space-between;
+    /* flex: 1 1 auto; 남은 공간 차지 */
+    margin-bottom: 15px;
+}
+
+
+
+/* 작성자 */
+#writer {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+    
+/* 작성일, 수정일 */
+.writer-left-area span:nth-of-type(2),
+.writer-left-area span:nth-of-type(3) {
+    color: gray;
+    font-size: 13px;
+}
+        
+
+/* 조회수, 좋아요 공간 지정 */
+.writer-right-area {
+    display: flex;
+    width: 200px;
+    justify-content: flex-end;
+}
+
+/* 조회수, 좋아요 마진 설정 */
+.writer-right-area span{
+    margin-right: 20px;
+}
+
+.boardDetail-area hr {
+    border-color: #ddd;
+}
+
+
+/* 게시글 내용 공간 */
+.boardContent-area {
+    flex: auto; /* 남은 공간 차지 */
+    margin-top: 15px;
+    /* overflow-y: auto; 내용이 넘칠 경우 수직 스크롤 표시 */
+    /* height: auto; 높이 자동 조절 */
+}
+
+/* 게시글 내용 */
+.boardContent {
+    /* padding: 30px; */
+}

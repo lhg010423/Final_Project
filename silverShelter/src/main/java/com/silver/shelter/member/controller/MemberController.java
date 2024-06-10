@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.examination.model.dto.Examination;
+
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.member.model.service.MemberService;
 
@@ -27,17 +28,15 @@ import com.silver.shelter.member.model.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
 @RequiredArgsConstructor
 @SessionAttributes({"loginMember"})
 @RequestMapping("member")
 public class MemberController {
 
 	private final MemberService service;
-	
+
 	
 	
 	/** 로그인 페이지로 이동
@@ -177,6 +176,8 @@ public class MemberController {
 		log.info("잘 넘어오니?",exam.getExamName());
 		// request Scope에 넣기
 
+						 @PathVariable("examId")int examId ) {
+		
 		return "member/signUp";
 	}
 	
@@ -216,8 +217,6 @@ public class MemberController {
 
 	    return resp;
 	}
-
-	
 	
 	/** 탈퇴를 위한 정보 컨트롤러 ( 사정상 resources/templates/myPage/secessionForm 을 이쪽으로 땡겨왔음)
 	 * @param map

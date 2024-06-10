@@ -3,6 +3,8 @@ package com.silver.shelter.board.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.silver.shelter.board.model.dto.Board;
+
 public interface BoardService {
 
 	
@@ -29,6 +31,16 @@ public interface BoardService {
 	 * @return
 	 */
 	Map<String, Object> boardSearchSelect(Map<String, Object> paramMap, int cp);
+
+
+
+
+
+	/** 게시글 상세보기
+	 * @param map
+	 * @return
+	 */
+	Map<String, Object> boardDetail(Map<String, Object> map);
 
 
 

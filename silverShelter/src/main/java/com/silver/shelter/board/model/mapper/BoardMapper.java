@@ -72,6 +72,13 @@ public interface BoardMapper {
 	int noticeSearchCount(Map<String, Object> paramMap);
 
 
+	/** 게시글 상세보기
+	 * @param map
+	 * @return
+	 */
+	Board boardDetail(Map<String, Object> map);
+
+
 
 
 	

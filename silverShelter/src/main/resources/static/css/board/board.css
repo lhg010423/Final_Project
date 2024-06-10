@@ -131,6 +131,7 @@ tbody td:nth-of-type(1) {
     padding-left: 20px;
 }
 
+
 td {
     max-width: 200px; /* 최대 너비 설정 */
     overflow: hidden; /* 넘치는 텍스트를 숨김 */

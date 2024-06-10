@@ -1,21 +1,38 @@
 package com.silver.shelter.medicalCenter.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
+import com.silver.shelter.communication.model.service.CommunicationService;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
+import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.service.DoctorService;
+import com.silver.shelter.member.model.dto.Member;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("medicalCenter")
+@SessionAttributes({"loginMember"})
+@RequiredArgsConstructor
 public class MedicalCenterController {
 	
     @Autowired
@@ -72,12 +89,80 @@ public class MedicalCenterController {
 	}
 	
 	@GetMapping("reservation/date")
-	public String dateChoice(@RequestParam("resDoctorName") String resDoctorName,
-								Model model) {
-	    // 서비스 호출 및 로직 처리
-	    List<Date> date = (List<Date>) doctorService.getDateByDoctorName(resDoctorName);
-	    model.addAttribute("date", date);
-	    return "medicalCenter/dateResult";
+    public String dateChoice(@RequestParam("resDoctorName") String resDoctorName, Model model) {
+        // 서비스 호출 및 로직 처리
+        List<Date> dates = doctorService.getDateByDoctorName(resDoctorName);
+
+        // 입력 및 출력 형식 지정
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy년MM월dd일HH:mm", Locale.KOREA);
+
+        // 날짜를 원하는 형식으로 변환
+        List<String> formattedDates = dates.stream()
+                .map(date -> outputFormat.format(date))
+                .collect(Collectors.toList());
+
+        // 모델에 변환된 날짜 추가
+        model.addAttribute("dates", formattedDates);
+
+        return "medicalCenter/dateResult";
+    }
+	
+
+	/** 게스트룸 예약 하기 
+	 * @param paramMap
+	 * @param loginMember
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("reservation/doctorReservation")
+	public int reservation(@RequestParam("resDoctorName") String resDoctorName,
+			@RequestBody Map<String, Object> paramMap,
+						   @SessionAttribute("loginMember")Member loginMember) {
+		
+		
+		// 로그인한 회원의 번호 가져오기
+	    loginMember.getMemberNo();
+	    
+	    // ClubReservation 객체 생성 및 데이터 설정
+	    DoctorAppointment reservation = new DoctorAppointment();
+	    
+	    // paramMap에서 clubResvTime 값을 String으로 가져와 설정
+	    reservation.setDrApptTime((String) paramMap.get("drApptTime"));
+	    
+	    // 회원 번호 설정
+	    reservation.setDoctorNo(loginMember.getMemberNo());
+	    
+	    // paramMap에서 clubCode 값을 String으로 가져온 후, 이를 Integer로 변환하여 설정
+	    String clubCodeStr = paramMap.get("clubCode").toString();
+	    reservation.setClubCode(Integer.parseInt(clubCodeStr));
+	    
+	    
+	    // 예약한 시간에 이미 예약이 있는지 확인 
+	    int count = doctorService.selectDoctorReservation(reservation);
+	    
+	    if(count > 0) {
+	    	
+	    	// 있다면 3 반환 
+	    	return 3;
+	    	
+	    } else {
+	    	
+		    // 서비스 메서드를 호출하여 예약 처리
+		    int result = doctorService.doctorReservation(reservation);
+		    
+			
+			if(result > 0) {
+					
+				return result; 
+			
+			} else {
+			
+				return result;
+			}
+			
+	    }
 	}
+	
 
 }
