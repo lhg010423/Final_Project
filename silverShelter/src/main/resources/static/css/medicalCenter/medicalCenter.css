@@ -845,7 +845,7 @@ li {
 }
 
 /* 달력 부분  */
-#calendar-2 {
+#calendar {
     width: 100%; /* 원하는 너비 */
     max-width: 600px; /* 최대 너비 */
     height: auto; /* 높이를 자동으로 조절 */
