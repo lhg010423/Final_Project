@@ -36,7 +36,7 @@
 	
 		SELECT MEMBE_PW
 		FROM "MEMBER"
-		WHERE MEMBER_NO = #{memberNo}
+		WHER"C:/Users/user1/Desktop/secession.html"E MEMBER_NO = #{memberNo}
 	</select>
 	
 	<update id="secession">
