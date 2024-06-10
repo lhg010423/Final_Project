@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|${boardList.boardTitle} - 게시글 상세보기|">게시글 상세보기</title>
+
+    <!-- main css -->
+	<link rel="stylesheet" href="/css/common/main.css">
+	
+	<!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+
+    <link rel="stylesheet" href="/css/board/boardDetail.css">
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/headerNav}"></th:block>
+
+        <!-- <img src="/images/main/main.png" class="main"> -->
+        <th:block th:replace="~{common/mainNav}"></th:block>
+    
+        <!-- header를 제외한 나머지 공간 -->
+        <section class="boardMain">
+
+            <!-- a태그있는 상단 공간 -->
+            <div class="boardTop">
+                <th:block th:each="boardType : ${application.boardTypeList}">
+                    <a th:text="${boardType.boardName}"
+                        th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}">게시판 이름</a>
+                </th:block>
+
+                <th:block th:unless="${application.boardTypeList}">
+
+                    <h1>값 없음</h1>
+                </th:block>
+            </div>
+
+
+            <!-- 상단 a태그 공간을 제외한 나머지 공간 전부 -->
+            <div class="boardBody">
+
+                <!-- 게시글 공간 -->
+                <div class="boardDetail-area">
+
+                    <!-- 게시글 제목 공간 -->
+                    <div class="boardTitle-area">
+
+                        <a th:text="이전으로"
+                        th:href="@{/board/{boardCode} (boardCode=${boardList.boardCode}, cp=${session.cp}, key=${session.key}, query=${session.query})}"></a>
+                        <br>
+
+                        <span th:text="${boardList.boardTitle}"></span>
+
+                    </div>
+
+                    <!-- 작성자 정보 공간 -->
+                    <div class="writer-area">
+
+                        <div class="writer-left-area">
+                            <span id="writer" th:text="${boardList.memberName}">작성자</span><br>
+                            <span th:text="|작성일 ${boardList.boardWriteDate}|">작성일</span><br>
+                            <span th:if="${boardList.boardUpdateDate}" th:text="|수정일 ${boardList.boardUpdateDate}|">수정일</span>
+                        </div>
+
+                        <div class="writer-right-area">
+                            <span th:text="|조회수 ${boardList.readCount}|">조회수</span>
+                            <span th:text="|좋아요 ${boardList.likeCount}|">좋아요</span>
+
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <hr>    
+
+                    <div class="boardContent-area">
+
+                        <article class="boardContent"
+                            th:text="${boardList.boardContent}">
+
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </section>
+    
+    
+    </main>
+</body>
+</html>

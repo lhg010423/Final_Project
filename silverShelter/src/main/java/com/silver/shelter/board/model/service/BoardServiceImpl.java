@@ -99,6 +99,40 @@ public class BoardServiceImpl implements BoardService{
 		
 		return map;
 	}
+
+
+
+
+	/** 게시글 상세보기
+	 *
+	 */
+	@Override
+	public Map<String, Object> boardDetail(Map<String, Object> map) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		Board boardDetail = mapper.boardDetail(map);
+		
+		// 수정 및 삭제 권한 확인
+	    boolean canModify = false;
+	    boolean canDelete = false;
+		
+	    // 로그인한 회원 == 게시글 작성자 || 관리자계정
+	    if(map.get("memberNo") != null) {
+	    	
+	    	if((int)map.get("memberNo") == boardDetail.getMemberNo() || (int)map.get("memberNo") == 1 ) {
+	    		canModify = true;
+	    		canDelete = true;
+	    	}
+	    }
+	    
+	    result.put("boardList", boardDetail);
+	    result.put("canModify", canModify);
+	    result.put("canDelete", canDelete);
+	    
+	    
+		return result;
+	}
 	
 	
 	
