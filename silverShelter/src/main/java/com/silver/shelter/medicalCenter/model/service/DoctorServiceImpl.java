@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
+import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.mapper.DoctorMapper;
 import com.silver.shelter.member.model.mapper.MemberMapper;
 import com.silver.shelter.member.model.service.MemberServiceImpl;
@@ -33,13 +34,14 @@ public class DoctorServiceImpl implements DoctorService{
 		return mapper.getDateByDoctorName(resDoctorName);
 	}
 
+
 	@Override
-	public int selectDoctorReservation(ClubReservation reservation) {
-		return mapper.selectDoctorReservation;
+	public int getNoByDoctorName(String string) {
+		return mapper.getNoByDoctorName(string);
 	}
 
 	@Override
-	public int doctorReservation(ClubReservation reservation) {
-		return 0;
+	public int doctorReservation(DoctorAppointment reservation) {
+		return mapper.doctorReservation(reservation);
 	}
 }

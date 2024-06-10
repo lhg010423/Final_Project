@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Fetch 요청을 보내는 함수 정의
                 function sendReservation() {
                     if (obj.docResvTime) {
-                        fetch(`/medicalCenter/reservation/doctorReservation?resDoctorName=${lastSelectedDoctorName}`, {
+                        fetch(`/medicalCenter/reservation/doctorReservation?resDoctorName=${lastSelectedDoctorName}&drApptTime=${obj.docResvTime}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

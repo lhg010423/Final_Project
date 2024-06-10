@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
+import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 
 public interface DoctorService {
 
@@ -12,8 +13,8 @@ public interface DoctorService {
 
 	List<Date> getDateByDoctorName(String resDoctorName);
 
-	int selectDoctorReservation(ClubReservation reservation);
+	int getNoByDoctorName(String string);
 
-	int doctorReservation(ClubReservation reservation);
+	int doctorReservation(DoctorAppointment reservation);
 
 }

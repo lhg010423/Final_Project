@@ -117,7 +117,8 @@ public class MedicalCenterController {
 	@ResponseBody
 	@PostMapping("reservation/doctorReservation")
 	public int reservation(@RequestParam("resDoctorName") String resDoctorName,
-			@RequestBody Map<String, Object> paramMap,
+							@RequestParam("drApptTime") String drApptTime,
+							@RequestBody Map<String, Object> paramMap,
 						   @SessionAttribute("loginMember")Member loginMember) {
 		
 		
@@ -128,28 +129,15 @@ public class MedicalCenterController {
 	    DoctorAppointment reservation = new DoctorAppointment();
 	    
 	    // paramMap에서 clubResvTime 값을 String으로 가져와 설정
-	    reservation.setDrApptTime((String) paramMap.get("drApptTime"));
+	    reservation.setDrApptTime(drApptTime);
 	    
 	    // 회원 번호 설정
-	    reservation.setDoctorNo(loginMember.getMemberNo());
+	    reservation.setMemberNo(loginMember.getMemberNo());
 	    
-	    // paramMap에서 clubCode 값을 String으로 가져온 후, 이를 Integer로 변환하여 설정
-	    String clubCodeStr = paramMap.get("clubCode").toString();
-	    reservation.setClubCode(Integer.parseInt(clubCodeStr));
+	    int docNo = doctorService.getNoByDoctorName(resDoctorName);
+	    reservation.setDoctorNo(docNo);
 	    
-	    
-	    // 예약한 시간에 이미 예약이 있는지 확인 
-	    int count = doctorService.selectDoctorReservation(reservation);
-	    
-	    if(count > 0) {
-	    	
-	    	// 있다면 3 반환 
-	    	return 3;
-	    	
-	    } else {
-	    	
-		    // 서비스 메서드를 호출하여 예약 처리
-		    int result = doctorService.doctorReservation(reservation);
+	    int result = doctorService.doctorReservation(reservation);
 		    
 			
 			if(result > 0) {
@@ -165,4 +153,4 @@ public class MedicalCenterController {
 	}
 	
 
-}
+
