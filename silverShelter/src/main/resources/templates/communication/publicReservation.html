@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -35,27 +43,24 @@
               
 
               <div class="image-wrapper">
-                <img src="/images/communication/golf.png" alt="골프" class="selectable-image">
-                <div class="overlay">골프</div>
-                <input type="hidden" class="selected-sport" name="selectedSport" value="2">
+                <img src="/images/communication/pottery.webp" alt="도예" class="selectable-image">
+                <div class="overlay">도예</div>
+                <input type="hidden" class="selected-sport" name="selectedSport" value="7">
               </div>
             
               <div class="image-wrapper">
-                  <img src="/images/communication/swimming.jpg" alt="수영" class="selectable-image">
-                  <div class="overlay">수영</div>
-                  <input type="hidden" class="selected-sport" name="selectedSport" value="3">
+                  <img src="/images/communication/moving.webp" alt="영화" class="selectable-image">
+                  <div class="overlay">영화</div>
+                  <input type="hidden" class="selected-sport" name="selectedSport" value="6">
               </div>
               
               <div class="image-wrapper">
-                  <img src="/images/communication/sauna.jpg" alt="사우나" class="selectable-image">
-                  <div class="overlay">사우나</div>
-                  <input type="hidden" class="selected-sport" name="selectedSport" value="4">
+                  <img src="/images/communication/crossStitch.webp" alt="십자수" class="selectable-image">
+                  <div class="overlay">십자수</div>
+                  <input type="hidden" class="selected-sport" name="selectedSport" value="8">
               </div>
               
               <div class="image-wrapper">
-                  <img src="/images/communication/gateball.webp" alt="게이트볼" class="selectable-image">
-                  <div class="overlay">게이트볼</div>
-                  <input type="hidden" class="selected-sport" name="selectedSport" value="5">
               </div>
 
             </div>
@@ -190,5 +195,8 @@
   <!--footer-->
   <th:block th:replace="~{/common/footer.html}"></th:block>
   <script src="/js/communication/communicationReservation.js"></script>
+</body>
+</html>
+
 </body>
 </html>
