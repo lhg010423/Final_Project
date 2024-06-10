@@ -25,4 +25,5 @@ public class signUpFormController {
 		return service.checkId(memberId);
 	}
 	
+	
 }

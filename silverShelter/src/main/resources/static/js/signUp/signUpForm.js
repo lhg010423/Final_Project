@@ -249,3 +249,67 @@ guardianTel.addEventListener("input", e => {
         guardianTelMessage.classList.remove("error");
         checkObj.guardianTel = true;
 });
+
+
+/* 버튼 클릭 시 전체 유효성 검사 여부 확인하기*/
+/*
+const checkObj ={
+    "memberId"          :   false,
+    "memberPw"          :   false,
+    "memberPwConfirm"   :   false,
+    "guardianTel"       :   false
+    
+}
+*/
+
+const signUpForm = document.querySelector("#info-form");
+
+signUpForm.addEventListner("submit", e =>{
+	
+	for(let key in checkObj){
+		
+		if( !checkObj[key]){
+			
+			let str;
+			
+			switch(key){
+				
+				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
+				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
+				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
+				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
+			}
+			
+			
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

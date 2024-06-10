@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.member.model.mapper.MemberMapper;
 
@@ -116,5 +117,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result > 0;
 	}
-	
+
+	@Override
+	public Examination selectSignUp(Examination exam) {
+		return mapper.selectSignUp(exam);
+	}
 }

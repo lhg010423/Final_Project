@@ -56,5 +56,12 @@
    		UPDATE "MEMBER" SET 
     	MEMBER_PW = #{encPw}
     	WHERE MEMBER_ID = #{memberId}
-</update>
+	</update>
+	
+	<select id="selectSignUp">
+		SELECT * 
+		FROM "EXAMINATION"
+		WHERE EXAM_ID = #{examId}
+				
+	</select>
 </mapper>

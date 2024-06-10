@@ -19,6 +19,7 @@ public class Examination {
 	
 	// 심사 고유번호
 	private int examId; 
+	
 	// Step 2 fields
 	// 방 이름 			
     private String examRoomType;

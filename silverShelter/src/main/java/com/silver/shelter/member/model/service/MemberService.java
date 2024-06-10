@@ -2,6 +2,7 @@ package com.silver.shelter.member.model.service;
 
 import java.util.Map;
 
+import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
 public interface MemberService {
@@ -29,5 +30,8 @@ public interface MemberService {
 	 * @return
 	 */
 	boolean updatePw(String memberId, String newPw);
+
+	Examination selectSignUp(Examination exam);
+	
 
 }

@@ -80,6 +80,7 @@ public interface AdminMapper {
 	 * @param examId
 	 * @return
 	 */
+	
 	Examination examinationDetailSelect(int examId);
 
 
@@ -88,6 +89,9 @@ public interface AdminMapper {
 	 * @return
 	 */
 	int updateAdminDocument(int examId);
+
+
+	
 
 
 
