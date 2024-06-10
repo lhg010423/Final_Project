@@ -8,9 +8,9 @@ import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 public interface CommunicationMapper {
 	
 	// 게스트룸 예약하기 
-	int guestRoomReservation(ClubReservation reservation);
+	int reservation(ClubReservation reservation);
 
 	// 예약 겹치는지 확인
-	int selectGuestRoomReservation(ClubReservation reservation);
+	int selectReservation(ClubReservation reservation);
 
 }

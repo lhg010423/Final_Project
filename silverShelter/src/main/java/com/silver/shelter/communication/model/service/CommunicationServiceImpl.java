@@ -17,14 +17,14 @@ public class CommunicationServiceImpl implements CommunicationService{
 	 * 게스트룸 예약 하기 
 	 */
 	@Override
-	public int guestRoomReservation(ClubReservation reservation) {
+	public int reservation(ClubReservation reservation) {
 
-		return mapper.guestRoomReservation(reservation);
+		return mapper.reservation(reservation);
 	}
 	
 	@Override
-	public int selectGuestRoomReservation(ClubReservation reservation) {
+	public int selectReservation(ClubReservation reservation) {
 
-		return mapper.selectGuestRoomReservation(reservation);
+		return mapper.selectReservation(reservation);
 	}
 }
