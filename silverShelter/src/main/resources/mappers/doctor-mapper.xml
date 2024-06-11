@@ -18,4 +18,22 @@
         JOIN DOCTOR d ON da.DOCTOR_NO = d.DOCTOR_NO
         WHERE d.DOCTOR_NAME = #{resDoctorName}
     </select>
+    
+    <select id="getNoByDoctorName">
+        SELECT d.DOCTOR_NO
+        FROM DOCTOR d
+        WHERE d.DOCTOR_NAME = #{string}
+    </select>
+    
+    	<!-- 일정 추가 -->
+	<insert id="doctorReservation">
+		INSERT INTO DOCTOR_APPOINTMENT
+		VALUES(SEQ_DR_APPT_NO.NEXTVAL, #{memberNo}, #{doctorNo}, TO_DATE(#{drApptTime}, 'YYYY"년"MM"월"DD"일"HH24:MI'), 'N')
+	</insert>
+	
+	<select id="getDrRoomByDoctorNo">
+		SELECT CLINICROOM_NAME
+        FROM CLINICROOM
+        WHERE DOCTOR_NUMBER = #{docNo}
+	</select>
 </mapper>

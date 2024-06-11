@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let lastSelectedDoctor = '';
     let lastSelectedDoctorImage = '';
     let lastSelectedDoctorName = '';
+    let lastSelectedDay = '';
+    let drRoom = '';
+    let lastSelectedDep = '';
 
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
@@ -11,25 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("initializeReservationButtons: reservationPage 존재 확인");
             isReservationPageInitialized = true;
 
-            // 모든 버튼 요소와 콘텐츠 요소를 가져오기
-            const reservationButtons = document.querySelectorAll(".reservation-toggleButton");
-            const reservationContents = document.querySelectorAll(".reservation-content");
-            console.log("모든 버튼과 콘텐츠 요소를 가져오기 성공");
             updateReservationView('2');
-
-            // 각 버튼에 클릭 이벤트 핸들러 등록
-            reservationButtons.forEach(button => {
-                button.addEventListener("click", function () {
-                    try {
-                        console.log("버튼 이벤트 핸들러 시작");
-                        const target = this.getAttribute("data-target");
-                        updateReservationView(target);
-                        console.log("버튼 이벤트 핸들러 성공: " + target);
-                    } catch (error) {
-                        console.error("버튼 이벤트 핸들러 오류:", error);
-                    }
-                });
-            });
 
             // resImg 클릭 이벤트 핸들러 등록
             const resImgs = document.querySelectorAll('.resImg');
@@ -127,12 +112,13 @@ document.addEventListener("DOMContentLoaded", function() {
                             
                             // 첫 번째 줄의 텍스트를 추출합니다.
                             const doctorName = lines[0].trim();
-                            
+                            lastSelectedDep = lines.slice(1).join('\n').trim();
                             console.log('dsfsd', doctorName);
 
                             toggleButtonImageIntro2.innerText = doctorName;
                             lastSelectedDoctorName = doctorName;
                             toggleButtonImage2.src = lastSelectedDoctorImage;
+                            
                     });
                 })}
                 if(document.querySelectorAll('.resized') != null){
@@ -173,6 +159,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 const calendar = document.getElementById('calendar');
                 const submitButton = document.getElementById('reserve-button');
 
+                // 오늘 날짜를 YYYY-MM-DD 형식으로 구하기
+                const today = new Date();
+                const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
                 // 전송할 데이터를 저장할 객체
                 const obj = {
                     docResvTime: '',
@@ -182,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // jSuites 캘린더를 초기화
                 jSuites.calendar(calendar, {
                     format: 'DD/MM/YYYY',  // 날짜 형식을 '일/월/년'으로 설정
+                    validRange: [todayString, null],  // 오늘 날짜 이후로만 선택 가능하게 설정
                     onupdate: function(instance, value) {  // 날짜가 업데이트될 때 호출되는 콜백 함수
                         
                         // 클래스명이 'dateInfo'인 요소들을 가져옵니다.
@@ -253,8 +244,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
 
-
-
                 // 시간 클릭 될때 값 얻어오기
                 var timeSelect = document.getElementsByName('time');
                 timeSelect.forEach(function(time) {
@@ -267,13 +256,14 @@ document.addEventListener("DOMContentLoaded", function() {
                             obj.docResvTime = window.selectedDate + selectedTime;
                         }
                         console.log(obj.docResvTime);
+                        lastSelectedDay = obj.docResvTime;
                     });
                 });
 
                 // Fetch 요청을 보내는 함수 정의
                 function sendReservation() {
                     if (obj.docResvTime) {
-                        fetch(`/medicalCenter/reservation/doctorReservation?resDoctorName=${lastSelectedDoctorName}`, {
+                        fetch(`/medicalCenter/reservation/doctorReservation?resDoctorName=${lastSelectedDoctorName}&drApptTime=${obj.docResvTime}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -282,18 +272,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            if (data == 1) {
-
-                                alert("예약 되었습니다.");
-
-                                location.href = "/";
-                            }else if(data == 3){
-
-                                alert("예약 있음 확인 바람");
-
-                            }else {
-                                alert("예약 실패");
-                                location.href = location.pathname;
+                            if (data.result > 0) {
+                                alert(data.message);  // 성공 메시지 알림
+                                updateReservationView('5');
+                                drRoom = data.drRoom;
+                            } else {
+                                alert(data.message);  // 실패 메시지 알림
+                                window.location.href = data.redirectUrl;  // 실패 시 URL로 이동
                             }
                         })
                         .catch((error) => {
@@ -307,35 +292,34 @@ document.addEventListener("DOMContentLoaded", function() {
                     e.preventDefault();  // 기본 동작(폼 제출)을 막습니다.
                     sendReservation();   // 예약 정보를 서버로 전송하는 함수를 호출합니다.
                 });
-
-
-
-
-
-
-
-
-
-
-                // doc-choice-next 클릭 이벤트 핸들러 등록
-                const docChoiceNextButton = document.getElementById('doc-choice-next');
-                if (docChoiceNextButton != null) {
-                    console.log("doc-choice-next 존재 확인");
-                    docChoiceNextButton.addEventListener('click', function () {
-                        console.log("doc-choice-next 클릭 이벤트 시작");
-                        console.log("lastSelected:", lastSelectedDoctor);
-                        console.log("lastSelected:", lastSelectedDoctorImage);
-                        updateReservationView('4');
-                        
-                        
-                    
-                    });
-                }
                 
             } catch (error) {
                 console.error("Error fetching doctor info:", error);
             }        }
 
+            if (target === '5'){
+                try {
+                    const response = await fetch(`/medicalCenter/reservationSuccess`);
+                    const html = await response.text();
+                    console.log("html값", html);
+                    document.querySelector("#reservationForm").innerHTML = html;
+                    
+                    const btnimg = document.querySelector("#btnimg");
+                    const day = document.querySelector("#doctor-day");
+                    const name = document.querySelector("#doctor-name");
+                    const dep = document.querySelector("#doctor-dep");
+                    const room = document.querySelector("#doctor-room");
+                    
+                    btnimg.src = lastSelectedDoctorImage;
+                    name.innerText = lastSelectedDepartment + " " + lastSelectedDoctorName;
+                    dep.innerText = lastSelectedDep;
+                    day.innerText = "날짜 : " + lastSelectedDay;
+                    room.innerText = "장소 : " + drRoom;
+                    
+                } catch (error) {
+                    console.error("Error fetching doctor info:", error);
+                }
+            }
 
     }
 
@@ -412,15 +396,26 @@ if (tabSelected.length > 0) {
 
 function showTab(tabId) {
     var tabs = document.getElementsByClassName('tab');
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove('selected-tab');
+    var selectedTab = document.querySelector('.selected-tab');
+
+    // 현재 선택된 탭을 다시 클릭한 경우 함수 종료
+    if (selectedTab && selectedTab.id === tabId) {
+        console.log(`Tab ${tabId} is already selected. No action taken.`);
+        return;
     }
 
-    var selectedTab = document.getElementById(tabId);
+    // 기존 선택된 탭의 'selected-tab' 클래스 제거
     if (selectedTab) {
-        selectedTab.classList.add('selected-tab');
+        selectedTab.classList.remove('selected-tab');
+    }
+
+    // 새로운 탭 선택
+    var newSelectedTab = document.getElementById(tabId);
+    if (newSelectedTab) {
+        newSelectedTab.classList.add('selected-tab');
     }
 }
+
 
 async function loadTabContent(htmlFile, sectionId = null) {
     try {
@@ -434,6 +429,14 @@ async function loadTabContent(htmlFile, sectionId = null) {
                 console.info("이게됨?");
                 if(sectionId == 'section1') {
                     showSection(sectionId, "sectionBtn1");
+                }
+                if(sectionId === 'section2-2'){
+                    const section22 = document.querySelector('.section2-2');
+                    console.log("first");
+                    if(section22){
+                        console.log("twice");
+                        section22.style.display = 'block';
+                    }
                 }
                 // 이후에 추가적으로 필요한 작업 수행
                 // 예: showFloor, showDep 등의 함수 호출
