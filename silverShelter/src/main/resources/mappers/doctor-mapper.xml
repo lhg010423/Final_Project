@@ -30,4 +30,10 @@
 		INSERT INTO DOCTOR_APPOINTMENT
 		VALUES(SEQ_DR_APPT_NO.NEXTVAL, #{memberNo}, #{doctorNo}, TO_DATE(#{drApptTime}, 'YYYY"년"MM"월"DD"일"HH24:MI'), 'N')
 	</insert>
+	
+	<select id="getDrRoomByDoctorNo">
+		SELECT CLINICROOM_NAME
+        FROM CLINICROOM
+        WHERE DOCTOR_NUMBER = #{docNo}
+	</select>
 </mapper>

@@ -17,4 +17,6 @@ public interface DoctorService {
 
 	int doctorReservation(DoctorAppointment reservation);
 
+	String getDrRoomByDoctorNo(int docNo);
+
 }

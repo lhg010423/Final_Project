@@ -44,4 +44,9 @@ public class DoctorServiceImpl implements DoctorService{
 	public int doctorReservation(DoctorAppointment reservation) {
 		return mapper.doctorReservation(reservation);
 	}
+
+	@Override
+	public String getDrRoomByDoctorNo(int docNo) {
+		return mapper.getDrRoomByDoctorNo(docNo);
+	}
 }

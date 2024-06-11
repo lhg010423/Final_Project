@@ -19,6 +19,8 @@ public interface DoctorMapper {
 	int getNoByDoctorName(String string);
 
 	int doctorReservation(DoctorAppointment reservation);
+
+	String getDrRoomByDoctorNo(int docNo);
 	
 
 }

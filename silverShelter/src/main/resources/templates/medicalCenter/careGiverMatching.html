@@ -1,3 +1,86 @@
-<div>
-    caregiver
-</div>
+    <h1>요양사 매칭 사전 설문 조사</h1>
+    <form id="surveyForm">
+        <p>선호하는 요양사 성별:</p>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">남자</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">여자</label><br>
+
+        <p>선호하는 요양사 나이대:</p>
+        <input type="radio" id="young" name="age" value="young">
+        <label for="young">20-40</label><br>
+        <input type="radio" id="middle" name="age" value="middle">
+        <label for="middle">40-50</label><br>
+        <input type="radio" id="old" name="age" value="old">
+        <label for="old">50+</label><br>
+
+        <p>선호하는 요양사 경력:</p>
+        <input type="radio" id="novice" name="experience" value="novice">
+        <label for="novice">3년 미만</label><br>
+        <input type="radio" id="intermediate" name="experience" value="intermediate">
+        <label for="intermediate">3-7년</label><br>
+        <input type="radio" id="experienced" name="experience" value="experienced">
+        <label for="experienced">8년 이상</label><br>
+
+        <p>선호하는 요양사 근무시간:</p>
+        <input type="radio" id="morning" name="workTime" value="morning">
+        <label for="morning">오전 (09:00 - 13:00)</label><br>
+        <input type="radio" id="afternoon" name="workTime" value="afternoon">
+        <label for="afternoon">오후 (13:00 - 18:00)</label><br>
+        <input type="radio" id="evening" name="workTime" value="evening">
+        <label for="evening">저녁 (18:00 - 22:00)</label><br>        
+
+        <p>요양사에게 원하는 주요 역할:</p>
+        <input type="radio" id="companionship" name="role" value="companionship">
+        <label for="companionship">정서적 지원(대화, 동반 등)</label><br>
+        <input type="radio" id="personalCare" name="role" value="personalCare">
+        <label for="personalCare">의료적 지원(투약, 간호 등)</label><br>
+        <input type="radio" id="housekeeping" name="role" value="housekeeping">
+        <label for="housekeeping">일상생활 지원(세탁, 청소 등)</label><br>
+
+        <button type="submit">제출하기</button>
+    </form>
+
+    <script>
+        document.getElementById("surveyForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+            var age = document.querySelector('input[name="age"]:checked').value;
+            var experience = document.querySelector('input[name="experience"]:checked').value;
+            var workTime = document.querySelector('input[name="workTime"]:checked').value;
+            var role = document.querySelector('input[name="role"]:checked').value;
+
+            var formData = {
+                gender: gender,
+                age: age,
+                experience: experience,
+                workTime: workTime,
+                role: role
+            };
+
+            // 서버로 요청을 보내는 부분
+            fetch('/medicalCenter/careGivers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('서버 응답:', data);
+                // 서버 응답에 따른 작업 수행
+            })
+            .catch(error => {
+                console.error('오류 발생:', error);
+            });
+        });
+
+    </script>
+
