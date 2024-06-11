@@ -1,5 +1,7 @@
 package com.silver.shelter.board.controller;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,13 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.service.BoardService;
 import com.silver.shelter.member.model.dto.Member;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -80,6 +89,8 @@ public class BoardController {
 	 * @param paramMap : 검색했을 때 목록으로 버튼 클릭시 key, query값으로
 	 * 					 전페이지로 돌아가기 위해 씀
 	 * @param loginMember : 로그인한 회원확인용
+	 * @param req : 요청에 담김 쿠키 얻어오기
+	 * @param resp : 새로운 쿠키 만들어서 응답하기
 	 * @param model : 데이터 전달용
 	 * @return
 	 */
@@ -91,6 +102,8 @@ public class BoardController {
 			@RequestParam Map<String, Object> paramMap,
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
 			HttpSession session,
+			HttpServletRequest req,
+			HttpServletResponse resp,
 			Model model
 			) {
 		
@@ -98,31 +111,166 @@ public class BoardController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardCode", boardCode);
 		map.put("boardNo", boardNo);
-		if(loginMember != null) {
-			map.put("memberNo", loginMember.getMemberNo());			
+//		if(loginMember != null) {
+//			map.put("memberNo", loginMember.getMemberNo());			
+//		}
+		
+		
+		Board board = service.boardDetailSelect(map);
+		
+		
+		String path = null;
+		
+		if(board == null) {
+			path = "redirect:/board/" + boardCode;
+			
+		} else {
+			
+			// 로그인 안함 || 로그인한 회원 != 게시글 작성자
+			if(loginMember == null ||
+					loginMember.getMemberNo() != board.getMemberNo()) {
+				
+				
+				Cookie[] cookies = req.getCookies();
+				
+				Cookie c = null;
+				
+				for(Cookie temp : cookies) {
+					
+					if(temp.getName().equals("readBoardNo")) {
+						c = temp;
+						break;
+					}
+				}
+				
+				
+				int result = 0;
+				
+				
+				// readBoardNo 에 쿠키가 없을 때
+				if(c == null) {
+					
+					c = new Cookie("readBoardNo", "[" + boardNo + "]");
+					result = service.readCountUpdate(boardNo);
+					
+				} else {
+					
+					if(c.getValue().indexOf("[" + boardNo + "]") == -1) {
+						
+						c.setValue(c.getValue() + "[" + boardNo + "]");
+						result = service.readCountUpdate(boardNo);
+					}
+				}
+				
+				
+				// 조회수 증가 성공
+				if(result > 0) {
+					board.setReadCount(result);
+					
+					// 쿠키 적용 경로 설정
+					c.setPath("/");
+					
+					// 수명 지정
+					
+					// 현제 시간 얻어오기
+					LocalDateTime now = LocalDateTime.now();
+					
+					// 다음날 지정
+					LocalDateTime nextDayMidnight = now.plusDays(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
+					
+					// 다음날 자정까지 남은 시간 계산 - now, nextDayMidnight 사이를 초단위로 계산
+					long secondsUntilNextDay = Duration.between(now, nextDayMidnight).getSeconds();
+					
+					// 쿠키 수명 설정
+					c.setMaxAge((int)secondsUntilNextDay);
+					
+					resp.addCookie(c); // 클라이언트로 전달
+				}
+				
+			}
+			
+			
+			path = "board/boardDetail";
 		}
 		
 		
-		Map<String, Object> boardDetail = service.boardDetail(map);
-		
-		
 		// 검색 쿼리 및 페이지 번호 저장(목록으로 버튼 클릭 시 사용할 것)
-		session.setAttribute("key", paramMap.get("key"));
-		session.setAttribute("query", paramMap.get("query"));
-		session.setAttribute("cp", cp);
+		session.setAttribute("key", paramMap.getOrDefault("key", ""));
+		session.setAttribute("query", paramMap.getOrDefault("query", ""));
+//		session.setAttribute("cp", cp);
+		
+		// 수정, 삭제 권한
+		boolean author = false;
+		
+		// 로그인 함
+		if(loginMember != null ) {
+			
+			// 로그인한 회원 == 게시글 작성자 ||
+			// 		로그인한 회원 == 관리자 계정
+			if(loginMember.getMemberNo() == board.getMemberNo() || 
+					loginMember.getMemberRole() == 1) {
+
+				author = true;
+			}
+		}
+		
+		model.addAttribute("board",board);
+		model.addAttribute("author", author);
+		model.addAttribute("cp", cp);
 		
 		
-		model.addAttribute("boardList", boardDetail.get("boardList"));
-		model.addAttribute("canModify", boardDetail.get("canModify"));
-		model.addAttribute("canDelete", boardDetail.get("canDelete"));
+		return path;
+	}
+	
+	
+	/** 게시글 수정 페이지로 이동
+	 * @param boardCode
+	 * @param boardNo
+	 * @param cp
+	 * @param key
+	 * @param query
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardUpdate")
+	public String boardUpdate(
+			@PathVariable("boardCode") int boardCode,
+			@PathVariable("boardNo") int boardNo,
+//			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+//		    @RequestParam(value="key", required = false, defaultValue = "") String key,
+//		    @RequestParam(value="query", required = false, defaultValue = "") String query,
+		    Model model
+			
+			) {
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardCode", boardCode);
+		map.put("boardNo", boardNo);
 		
-		return "board/boardDetail";
+		// 게시글 정보 불러오기
+		Board board = service.boardDetailSelect(map);
+		
+		model.addAttribute("board",board);
+//		model.addAttribute("cp", cp);
+//		model.addAttribute("key", key);
+//		model.addAttribute("query", query);
+		
+		log.info("board {}" + board);
+		
+		return "/board/boardUpdate";
 	}
 	
 	
 	
-	
+	/** 게시글 수정하기
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@PutMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardUpdate")
+	public int boardUpdate(@RequestBody Map<String, Object> map) {
+		return service.boardUpdate(map);
+	}
 	
 	
 	
