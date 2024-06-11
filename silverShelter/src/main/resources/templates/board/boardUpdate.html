@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="|${board.boardTitle} - 게시글 상세보기|">게시글 상세보기</title>
+    <title th:text="|${board.boardTitle} - 게시글 수정하기|">게시글 수정하기</title>
 
     <!-- main css -->
 	<link rel="stylesheet" href="/css/common/main.css">
@@ -11,7 +11,7 @@
 	<!-- mainNav css -->
     <th:block th:replace="~{common/common}"></th:block>
 
-    <link rel="stylesheet" href="/css/board/boardDetail.css">
+    <link rel="stylesheet" href="/css/board/boardUpdate.css">
 
 </head>
 <body>
@@ -47,11 +47,9 @@
                     <!-- 게시글 제목 공간 -->
                     <div class="boardTitle-area">
 
-                        <a th:text="이전으로"
-                        th:href="@{/board/{boardCode} (boardCode=${board.boardCode}, cp=${cp}, key=${session.key}, query=${session.query})}"></a>
-                        <br>
+                        
 
-                        <span th:text="${board.boardTitle}"></span>
+                        <input id="boardTitle" th:value="${board.boardTitle}"></input>
 
                     </div>
 
@@ -77,26 +75,22 @@
 
                     <div class="boardContent-area">
 
-                        <article class="boardContent"
+                        <textarea id="boardContent"
                             th:text="${board.boardContent}">
 
-
-                        </article>
+                        </textarea>
 
                     </div>
                     
                 </div>
 
 
-                <th:block th:if="${author}">
-                    <a id="updateBtn"
-                    th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${board.boardCode}, boardNo=${boardNo})}"
-                    >수정하기</a>
-                    <button id="deleteBtn">삭제하기</button>
-                </th:block>
-                <!-- th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${boardList.boardCode}, boardNo=${boardNo}, cp=${cp}${session.key != null and session.key != '' ? ', key=' + session.key : ''}${session.query != null and session.query != '' ? ', query=' + session.query : ''})}" -->
-                    
+                
+                <button id="updateBtn">수정하기</button>
+                <button id="cancelBtn">취소하기</button>
+                
 
+                
 
             </div>
 
@@ -116,9 +110,8 @@
 
         const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
 
-        const cp = /*[[${board.cp}]]*/ "현제페이지";
     </script>
 
-    <script src="/js/board/boardDetail.js"></script>
+    <script src="/js/board/boardUpdate.js"></script>
 </body>
 </html>
