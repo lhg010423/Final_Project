@@ -7,6 +7,7 @@ GRANT CONNECT, RESOURCE TO silver_shelter;
 
 ALTER USER silver_shelter DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 
+COMMIT;
 --------------------------------------------------------------------------------------------
 -- 회원 삭제
 DELETE FROM "MEMBER"

@@ -12,8 +12,8 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/main/favicon.png}">
 </head>
 <body>
+	
     <main>
-        <div style="height: 100px;"></div>
         <section class="signUp-Form" id="step1">
             <div class="agreement-head">
                 <h1>회원 정보 입력</h1>
@@ -36,7 +36,8 @@
             <form id="infoForm" action="/member/signUpForm" method="POST">
                 
                 <input id="examId" name="examId" th:value="${exam.examId}" hidden>
-                <!-- 아이디컨테이너 -->
+                
+				<!-- 아이디컨테이너 -->
                 <div class="id-container">
 
                     <label for="memberId" class="id-label">
@@ -177,42 +178,27 @@
                     </div>
                 </fieldset>
 
-                <div class="prev-next-btn-container">
-                    <a href="#" id="beforeBtn"><span>이전</span></a>
-                    <button type="button" id="nextBtn1">다음</button>
-                </div>
-
+				<div class="line-div"></div>
+				
+				<div class="submit-container">
+	                <h4>요양사 배정 여부</h4>
+	            
+					<div class="infoCareGiver">
+						<br>
+						<span>* '예'를 선택하시면 선호하는 요양사의 정보를 입력할 수 있는 페이지로 이동됩니다. </span><br>
+						<span>* '아니오'를 선택하시면 회원가입이 완료됩니다 </span>
+					</div>
+					
+            	    <div class="buttonDiv">
+                	    <a href="#" id="careGiverBtn">예</a>
+                    	<button type="submit" id="nextBtn1">아니오</button>
+                	</div>
+					<div style="height: 10%;"></div>
+				</div>
             </form>
         </section>
 
-        <section class="signUp-Form hidden" id="step2">
-            <div class="agreement-head">
-                <h1>요양사 선택</h1>
-            </div>
-            <div id="selectArea">
-                <h1>요양사 선택 사항</h1>
-                <br>
-                <h6 style="font-size: 14px;">(* 필수 사항은 아닙니다)</h6>
-            </div>
-            <br>
-            <div id="selectBtns">
-                <button id="careGiverYes">예</button>
-                <button id="careGiverNo">아니오</button>
-            </div>
-        </section>
-
-        <section class="signUp-Form hidden" id="step3">
-            <div class="agreement-head">
-                <h1>요양사 정보 입력</h1>
-            </div>
-            <form id="careGiverForm">
-                <input type="text" id="careGiverName" placeholder="요양사 이름">
-                <input type="text" id="careGiverTel" placeholder="요양사 전화번호">
-                <div class="prev-next-btn-container">
-                    <button type="button" id="submitBtn">제출</button>
-                </div>
-            </form>
-        </section>
+       
     </main>
 
     <th:block th:replace="~{common/footer}"></th:block>
