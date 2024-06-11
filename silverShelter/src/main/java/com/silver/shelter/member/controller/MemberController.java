@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.member.model.service.MemberService;
@@ -175,7 +174,7 @@ public class MemberController {
 		log.info("잘 넘어오니?",exam.getExamName());
 		// request Scope에 넣기
 
-						
+
 		
 		return "member/signUp";
 	}
