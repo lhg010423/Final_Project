@@ -46,4 +46,34 @@ public interface BoardService {
 
 
 
+	/** 조회수 증가
+	 * @param boardNo
+	 * @return
+	 */
+	int readCountUpdate(int boardNo);
+
+
+
+
+
+	/** 게시글 상세조회
+	 * @param map
+	 * @return
+	 */
+	Board boardDetailSelect(Map<String, Object> map);
+
+
+
+
+
+	/** 게시글 수정하기
+	 * @param map
+	 * @return
+	 */
+	int boardUpdate(Map<String, Object> map);
+
+
+
+
+
 }
