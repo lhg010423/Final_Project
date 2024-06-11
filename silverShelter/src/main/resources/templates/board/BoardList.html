@@ -75,13 +75,13 @@
 
                                         <!-- 검색 안했을 때 -->
                                         <a th:unless="${param.key}"
-                                        th:href="@{/board/{boardCode}/{boardNo} (boardCode=${board.boardCode}, boardNo=${board.boardNo}, ${pagination.currentPage})}"
+                                        th:href="@{/board/{boardCode}/{boardNo} (boardCode=${board.boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage})}"
                                         th:text="${board.boardTitle}"
                                         >제목</a>
 
                                         <!-- 검색 했을 때 -->
                                         <a th:if="${param.key}"
-                                        th:href="@{/board/{boardCode}/{boardNo} (boardCode=${board.boardCode}, boardNo=${board.boardNo}, key=${param.key}, query=${param.query}, ${pagination.currentPage})}"
+                                        th:href="@{/board/{boardCode}/{boardNo} (boardCode=${board.boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}"
                                         th:text="${board.boardTitle}"
                                         >제목</a>
 

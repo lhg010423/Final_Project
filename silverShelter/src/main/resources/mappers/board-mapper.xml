@@ -81,21 +81,40 @@
 	
 	
 	<!-- 게시글 상세보기 -->
-	<select id="boardDetail">
-		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, MEMBER_NAME, BOARD_WRITE_DATE,
-			BOARD_UPDATE_DATE, READ_COUNT, LIKE_COUNT, BOARD_CODE, MEMBER_NO
-		FROM "BOARD"
-		JOIN "MEMBER" USING(MEMBER_NO)
+	<select id="boardDetailSelect">
+		SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, m.MEMBER_NAME, b.BOARD_WRITE_DATE,
+			b.BOARD_UPDATE_DATE, b.READ_COUNT, b.LIKE_COUNT, b.BOARD_CODE, b.MEMBER_NO
+		FROM "BOARD" b
+		JOIN "MEMBER" m ON b.MEMBER_NO = m.MEMBER_NO
 		WHERE BOARD_CODE = #{boardCode}
 		AND BOARD_NO = #{boardNo}
 	</select>
 	
 	
+	<update id="boardUpdate">
+		UPDATE "BOARD" SET
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 	
 	
 	
 	
+	<!-- 조회수 1 증가 -->
+	<update id="readCountUpdate">
+		UPDATE "BOARD" SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 	
+	
+	<!-- 조회수 조회 -->	
+	<select id="readCountSelect">
+		SELECT READ_COUNT
+		FROM "BOARD"
+		WHERE BOARD_NO = #{boardNo}
+	</select>
 	
 	
 	
