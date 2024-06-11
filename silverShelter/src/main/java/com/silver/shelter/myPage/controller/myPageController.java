@@ -21,8 +21,9 @@ public class myPageController {
 	
 
 	/*
-	 * @GetMapping("myPage") public String myPageMapping( HttpSession session, Model
-	 * model) {
+	 * @GetMapping("myPage") 
+	 * public String myPageMapping( HttpSession session, 
+	 * 								Model model) {
 	 * 
 	 * Member loginMember = (Member)session.getAttribute("loginMember");
 	 * 

@@ -41,15 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* 캐러샐2 */
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
 
     const carouselInner = document.querySelector('.carousel-inner2');
     const totalSlides = document.querySelectorAll('.carousel-items').length;
-    const slideWidth = 50; // 두 개의 이미지가 보이므로 각 슬라이드의 너비는 50%
+    const slideWidth = 50; // 두 개의 이미지가 각 슬라이드의 너비는 50%
     let currentIndex = 0;
     let offset = 0;
     let speed = 0.009; // 이동 속도 조절 (값을 조절하여 속도를 변경)
-
+    
+	
+    
     window.prevSlide = function() {
         currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 2;
         updateCarousel();
@@ -74,12 +76,76 @@ document.addEventListener('DOMContentLoaded', function() {
         carouselInner.style.transform = `translateX(${offset}%)`;
         requestAnimationFrame(autoSlide);
     }
-    
+        
 	// 자동 슬라이드
     autoSlide();
-}); /* 캐러샐2 end */
-    
- 
+}); */
+/* 캐러샐2 end */
+document.addEventListener('DOMContentLoaded', function() {
+    const carouselInner = document.querySelector('.carousel-inner2');
+    const carouselItems = document.querySelectorAll('.carousel-items');
+    const totalSlides = carouselItems.length;
+    const slideWidth = 100 / totalSlides; // 각 슬라이드의 너비는 전체 너비의 비율로 설정
+    let offset = 0;
+    const speed = 0.008; // 이동 속도 조절
+    let isAnimating = false;
+
+    function animate() {
+        if (isAnimating) return;
+        isAnimating = true;
+        offset -= speed;
+        if (Math.abs(offset) >= 100) {
+            offset = 0; // 마지막 슬라이드 다음에는 첫 슬라이드로 돌아감
+        }
+        carouselInner.style.transform = `translateX(${offset}%)`;
+        requestAnimationFrame(() => {
+            isAnimating = false;
+            animate();
+        });
+    }
+
+    function prevSlide() {
+        if (isAnimating) return;
+        isAnimating = true;
+        offset += slideWidth;
+        if (offset > 0) {
+            offset = -slideWidth * (totalSlides - 1);
+        }
+        carouselInner.style.transform = `translateX(${offset}%)`;
+        requestAnimationFrame(() => {
+            isAnimating = false;
+        });
+    }
+
+    function nextSlide() {
+        if (isAnimating) return;
+        isAnimating = true;
+        offset -= slideWidth;
+        if (Math.abs(offset) >= 100) {
+            offset = 0;
+        }
+        carouselInner.style.transform = `translateX(${offset}%)`;
+        requestAnimationFrame(() => {
+            isAnimating = false;
+        });
+    }
+
+    const prevButton = document.querySelector('.carousel-control-prev2');
+    const nextButton = document.querySelector('.carousel-control-next2');
+
+    prevButton.addEventListener('click', function() {
+        prevSlide();
+    });
+
+    nextButton.addEventListener('click', function() {
+        nextSlide();
+    });
+
+    animate(); // 애니메이션 시작
+});
+
+
+
 /* --------------------- 날씨 API -------------------------- */ 
 
 function getCurrentDate(){
