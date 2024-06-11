@@ -47,3 +47,38 @@ if(cancelBtn != null) {
     })
 
 }
+
+// 게시글 삭제하기
+if(deleteBtn != null) {
+
+    deleteBtn.addEventListener("click", () => {
+
+        const answer = confirm("게시글을 삭제하시겠습니까?");
+
+        if(!answer) {
+            alert("삭제 취소");
+            return;
+        } else {
+            
+            fetch(`/board/${boardCode}/${boardNo}/boardDelete`, {
+                method : "DELETE",
+                headers : {"Content-Type" : "application/json"},
+                body : boardNo
+            })
+            .then(resp => resp.text())
+            .then(result => {
+                if(result == 0 ) {
+                    console.log("삭제 중 오류가 발생했습니다.");
+                }
+            })
+            alert("게시글이 삭제되었습니다.");
+
+
+        }
+
+        location.href = `/board/${boardCode}`;
+
+    })
+
+
+}
