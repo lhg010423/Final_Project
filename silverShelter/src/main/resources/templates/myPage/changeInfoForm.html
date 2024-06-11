@@ -147,20 +147,20 @@
                     <br>
 
                     <div>
-                        <input type="text" name="memberAddress" id="postcode" placeholder="우편번호" autocomplete="off">
+                        <input type="text" name="memberAddress" id="postcode" th:value="${postcode}" placeholder="우편번호" autocomplete="off">
                     </div>
 
                     <br>
 
                     <div>
-                        <input type="text" name="memberAddress" id="roadAddress" placeholder="도로명 / 지번 주소" autocomplete="off">
+                        <input type="text" name="memberAddress" id="roadAddress" th:value="${roadAddress}" placeholder="도로명 / 지번 주소" autocomplete="off">
                     </div>
                     
                     <br>
 
                     <div>
                         <span id="guide" style="color:#999;display:none"></span>
-                        <input type="text" name="memberAddress" id="detailAddress" placeholder="상세주소" autocomplete="off">
+                        <input type="text" name="memberAddress" id="detailAddress" th:value="${detailAddress}" placeholder="상세주소" autocomplete="off">
                     </div>
                 </fieldset>
                 

@@ -307,12 +307,13 @@ th:first-child, td:first-child {
     border: 2px solid #DDDDDD; /* 테두리 추가 */
     text-align: center;
     width: 150px;
-    height: 100px;
-    display: inline-block; /* 가로로 정렬하기 위해 인라인 블록 요소로 설정 */
+    height: 120px;
+    display: flex; /* 가로로 정렬하기 위해 인라인 블록 요소로 설정 */
     /* margin-left: 20px; */
     flex-direction: column; /* 내용을 세로로 정렬하기 위해 */
-    justify-content: center; /* 세로 방향 가운데 정렬 */
-    align-items: center; /* 가로 방향 가운데 정렬 */
+    justify-content: space-evenly; /* 세로 방향 가운데 정렬 */
+    
+    
     border-radius: 5px;
 }
 

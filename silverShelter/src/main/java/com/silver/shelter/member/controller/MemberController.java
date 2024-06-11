@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.examination.model.dto.Examination;
 
 import com.silver.shelter.member.model.dto.Member;
@@ -28,11 +27,13 @@ import com.silver.shelter.member.model.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
 @SessionAttributes({"loginMember"})
 @RequestMapping("member")
+@Slf4j
 public class MemberController {
 
 	private final MemberService service;
@@ -176,7 +177,7 @@ public class MemberController {
 		log.info("잘 넘어오니?",exam.getExamName());
 		// request Scope에 넣기
 
-						 @PathVariable("examId")int examId ) {
+						 
 		
 		return "member/signUp";
 	}

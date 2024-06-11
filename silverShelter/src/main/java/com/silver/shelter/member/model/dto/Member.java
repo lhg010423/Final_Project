@@ -28,7 +28,7 @@ public class Member {
 	private int roomNo;            // 방 번호
 	private String examStatus;     // 심사 승인 여부
 	private String examDate;       // 심사 신청일
-//	private int examNo;
+	private int examId;
 //	private String caregiversName;
 	
 	

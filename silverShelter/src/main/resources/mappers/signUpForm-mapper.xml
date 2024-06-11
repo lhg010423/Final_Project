@@ -10,6 +10,23 @@
 		AND MEMBER_ID = #{memberId}
 	</select>
 	
-
+	<insert id="signUpForm">
+      INSERT INTO "MEMBER"
+      VALUES(SEQ_MEMBER_NO.NEXTVAL,
+             #{memberId},
+             #{memberPw},
+             #{memberName},
+             #{memberEmail},
+             #{memberAddress},
+             #{memberTel},
+             #{guardianTel},         
+             DEFAULT,
+             DEFAULT,
+             DEFAULT,<!-- 관리자 1/ 일반 2 -->
+             NULL,
+             NULL,
+             #{examId}
+      )      
+   </insert>
 	
 </mapper>

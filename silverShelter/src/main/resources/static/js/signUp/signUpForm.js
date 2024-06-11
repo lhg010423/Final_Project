@@ -42,10 +42,12 @@ const checkObj ={
     "memberPw"          :   false,
     "memberPwConfirm"   :   false,
     "guardianTel"       :   false
+    // 만약 examId 를 쓸거면 examId.value
     
 }
 
 const memberId = document.querySelector("#memberId");
+const examId = document.querySelector("#examId");
 const idMessage = document.querySelector("#idMessage");
 
 // 아이디가 입력될 '때'마다 유효성검사
@@ -90,7 +92,7 @@ memberId.addEventListener("input", e => {
     }
 
     // 유효한경우(ajax)
-    fetch("member/checkId?memberId=" + inputId)
+    fetch("/member/checkId?memberId=" + inputId)
     .then(resp=> resp.text() )
     .then( count=> {
 
@@ -105,6 +107,7 @@ memberId.addEventListener("input", e => {
         } 
 
         // 중복이 아닌경우
+        console.log(examId.value);
         idMessage.innerText = "* 사용 가능한 아이디 입니다.";
         idMessage.classList.add('confirm');
         idMessage.classList.remove('error');
@@ -262,10 +265,10 @@ const checkObj ={
 }
 */
 
-const signUpForm = document.querySelector("#info-form");
+const signUpForm = document.querySelector("#infoForm");
 
-signUpForm.addEventListner("submit", e =>{
-	
+signUpForm.addEventListener("submit", () => {
+
 	for(let key in checkObj){
 		
 		if( !checkObj[key]){
@@ -275,41 +278,132 @@ signUpForm.addEventListner("submit", e =>{
 			switch(key){
 				
 				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
-				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
-				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
-				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
+				case "memberPw" : str = "아이디가 유효하지 않습니다"; break;
+				case "memberPwConfirm" : str = "아이디가 유효하지 않습니다"; break;
+				case "guardianTel" : str = "아이디가 유효하지 않습니다"; break;
 			}
 			
+			alert(str);
 			
+			document.getElementById(key).focus();
 			
-		}
-		
+			e.preventDefault();
+			
+			return;
+		}	
 		
 	}
 	
 	
-	
-	
-	
-})
+});
 
 
 
+/* ---------------------------- */
+// FormData 객체 생성 및 데이터 저장
+const formData = {
+    memberId: '',
+    memberPw: '',
+    memberPwConfirm: '',
+    memberName: '',
+    memberEmail: '',
+    memberTel: '',
+    guardianTel: '',
+    address: {
+        postcode: '',
+        roadAddress: '',
+        detailAddress: ''
+    },
+    careGiverSelected: false,
+    careGiverInfo: null
+};
 
+document.addEventListener('DOMContentLoaded', function() {
+    const step1Form = document.getElementById('step1');
+    const step2Section = document.getElementById('step2');
+    const step3Form = document.getElementById('step3');
+    const careGiverYes = document.getElementById('careGiverYes');
+    const careGiverNo = document.getElementById('careGiverNo');
+    const nextBtn1 = document.getElementById('nextBtn1');
+    const submitBtn = document.getElementById('submitBtn');
 
+    // Step 1: Next button
+    nextBtn1.addEventListener('click', function(e) {
+        e.preventDefault();
 
+        // 회원 정보 객체에 저장
+        formData.memberId = document.getElementById('memberId').value;
+        formData.memberPw = document.getElementById('memberPw').value;
+        formData.memberPwConfirm = document.getElementById('memberPwConfirm').value;
+        formData.memberName = document.getElementById('memberName').value;
+        formData.memberEmail = document.getElementById('memberEmail').value;
+        formData.memberTel = document.getElementById('memberTel').value;
+        formData.guardianTel = document.getElementById('guardianTel').value;
+        formData.address.postcode = document.getElementById('postcode').value;
+        formData.address.roadAddress = document.getElementById('roadAddress').value;
+        formData.address.detailAddress = document.getElementById('detailAddress').value;
 
+        step1Form.classList.add('hidden');
+        step2Section.classList.remove('hidden');
+    });
 
+    // Step 2: Caregiver Yes button
+    careGiverYes.addEventListener('click', function(e) {
+        e.preventDefault();
+        formData.careGiverSelected = true;
+        step2Section.classList.add('hidden');
+        step3Form.classList.remove('hidden');
+    });
 
+    // Step 2: Caregiver No button
+    careGiverNo.addEventListener('click', function(e) {
+        e.preventDefault();
+        formData.careGiverSelected = false;
+        submitFormData();
+    });
 
+    // Step 3: Submit button
+    submitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
 
+        // 요양사 정보 객체에 저장
+        formData.careGiverInfo = {
+            careGiverName: document.getElementById('careGiverName').value,
+            careGiverTel: document.getElementById('careGiverTel').value
+        };
 
+        submitFormData();
+    });
 
+    function submitFormData() {
+        // FormData 객체를 사용하여 데이터를 서버로 전송
+        const submitData = new FormData();
+        for (const key in formData) {
+            if (typeof formData[key] === 'object' && formData[key] !== null) {
+                for (const subKey in formData[key]) {
+                    submitData.append(`${key}.${subKey}`, formData[key][subKey]);
+                }
+            } else {
+                submitData.append(key, formData[key]);
+            }
+        }
 
-
-
-
-
-
-
-
+        fetch('/member/signUpForm', {
+            method: 'POST',
+            body: submitData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('회원가입이 완료되었습니다.');
+                window.location.href = '/';
+            } else {
+                alert('회원가입에 실패했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('회원가입 중 오류가 발생했습니다.');
+        });
+    }
+});
