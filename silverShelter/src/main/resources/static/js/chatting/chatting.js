@@ -19,6 +19,10 @@ const chattingContent = document.querySelector(".chatting-content");
 // 채팅방 선택 전 메세지
 const prevMessage = document.querySelector(".prev-message");
 
+// 
+const recordButton = document.querySelector("#recordButton");
+
+
 let selectChattingNo; // 선택한 채팅방 번호
 let selectTargetNo; // 현재 채팅 대상
 let selectTargetName; // 대상의 이름 
@@ -317,6 +321,7 @@ if(loginMemberNo != ""){
 }
 
 // 채팅 입력
+
 const send = document.getElementById("send");
 
 const sendMessage = () => {
@@ -338,7 +343,9 @@ const sendMessage = () => {
 		chattingSock.send(JSON.stringify(obj));
 
 		inputChatting.value = "";
+		
 	}
+	
 }
 
 // 엔터 == 제출

@@ -57,18 +57,18 @@ public class ChattingServiceImpl implements ChattingService{
 		return mapper.updateReadFlag(paramMap);
 	}
 
-	// 채팅 메시지 조회
-	@Override
-	public List<Message> selectMessageList(Map<String, Integer> paramMap) {
-		
+    // 채팅 메세지 조회
+    @Override
+    public List<Message> selectMessageList( Map<String, Integer> paramMap) {
+        
         List<Message> messageList = mapper.selectMessageList(  paramMap.get("chattingNo") );
         
         if(!messageList.isEmpty()) { // 메시지 목록이 있다면
-        	
             int result = mapper.updateReadFlag(paramMap);
         }
         return messageList;
-	}
+    }
+    
 	// 채팅 입력
 	@Override
 	public int insertMessage(Message msg) {

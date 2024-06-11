@@ -43,12 +43,12 @@ public interface ChattingMapper {
 	 */
 	int updateReadFlag(Map<String, Integer> paramMap);
 
-	/** 메시지 조회
-	 * @param integer
-	 * @return
-	 */
-	List<Message> selectMessageList(Integer integer);
-	
+    /** 메시지 조회
+     * @param object
+     * @return
+     */
+    public List<Message> selectMessageList(Object object);
+ 
     
     /** 채팅 입력
      * @param msg
