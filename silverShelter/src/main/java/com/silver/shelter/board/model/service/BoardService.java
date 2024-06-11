@@ -76,4 +76,14 @@ public interface BoardService {
 
 
 
+	/** 게시글 삭제하기
+	 * @param boardNo
+	 * @return
+	 */
+	int boardDelete(int boardNo);
+
+
+
+
+
 }

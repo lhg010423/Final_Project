@@ -117,6 +117,16 @@
 	</select>
 	
 	
+	<!-- 게시글 삭제하기 -->
+	<update id="boardDelete">
+		UPDATE "BOARD" SET
+		BOARD_DEL_FL = 'Y'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
+	
+	
 	
 	<!-- 공지게시판 삭제되지 않은 게시글 전체 수 조회  검색X -->
 	<!-- <select id="noticeAllCount">

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -274,6 +275,15 @@ public class BoardController {
 	
 	
 	
+	/** 게시글 삭제하기
+	 * @param boardNo
+	 * @return
+	 */
+	@ResponseBody
+	@DeleteMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardDelete")
+	public int boardDelete(@RequestBody int boardNo) {
+		return service.boardDelete(boardNo);
+	}
 	
 	
 	
