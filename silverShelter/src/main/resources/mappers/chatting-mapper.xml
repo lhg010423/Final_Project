@@ -73,7 +73,7 @@
 	</update>
 	
 	
-		<!-- 채팅방 메세지 조회 -->
+	<!-- 채팅방 메세지 조회 -->
 	<select id="selectMessageList">
 		SELECT MESSAGE_NO, MESSAGE_CONTENT, READ_FL, SENDER_NO, CHATTING_NO,
 		TO_CHAR(SEND_TIME, 'YYYY.MM.DD HH24:MI') SEND_TIME 
