@@ -24,5 +24,7 @@ public class Board {
 	private int boardCode;
 	private int memberNo;
 	private String memberName;     // 작성자
+	private int memberRole;        //
+	private int cp; // 현제페이지
 	
 }
