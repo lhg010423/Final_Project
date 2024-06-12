@@ -531,3 +531,68 @@ function showDep(sectionId, floorId) {
         console.error("No floor found with ID:", sectionId);
     }
 }
+if(document.getElementById("surveyForm")) {
+document.getElementById("surveyForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    console.log("dkfjslkefjlks");
+    var gender = document.querySelector('input[name="gender"]:checked').value;
+    var age = document.querySelector('input[name="age"]:checked').value;
+    var experience = document.querySelector('input[name="experience"]:checked').value;
+    var workTime = document.querySelector('input[name="workTime"]:checked').value;
+    var role = document.querySelector('input[name="role"]:checked').value;
+
+    var formData = {
+        gender: gender,
+        age: age,
+        experience: experience,
+        workTime: workTime,
+        role: role
+    };
+
+    // 서버로 요청을 보내는 부분
+    fetch('/medicalCenter/careGivers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('서버 응답:', data);
+        // 서버 응답에 따른 작업 수행
+        var jsObject = JSON.parse(data);
+        function renderCaregiversList(data) {
+            var table = "<table border='1'><tr><th>Name</th><th>Age</th><th>Gender</th><th>Experience</th><th>Work Time</th><th>Role</th></tr>";
+    
+            // 각 요양사 데이터를 테이블에 추가
+            data.forEach(function(caregiver) {
+                table += "<tr>";
+                table += "<td>" + caregiver.name + "</td>";
+                table += "<td>" + caregiver.age + "</td>";
+                table += "<td>" + caregiver.gender + "</td>";
+                table += "<td>" + caregiver.experience + "</td>";
+                table += "<td>" + caregiver.workTime + "</td>";
+                table += "<td>" + caregiver.role + "</td>";
+                table += "</tr>";
+            });
+    
+            table += "</table>";
+    
+            // HTML에 테이블 추가
+            document.getElementById("caregiversList").innerHTML = table;
+        }
+    
+        // 서버에서 받은 요양사 데이터를 화면에 표시
+        renderCaregiversList(jsObject);
+    })
+    
+    .catch(error => {
+        console.error('오류 발생:', error);
+    });
+});}

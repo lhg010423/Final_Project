@@ -29,6 +29,7 @@ import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.service.DoctorService;
 import com.silver.shelter.member.model.dto.Member;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -159,17 +160,21 @@ public class MedicalCenterController {
 		return "medicalCenter/reservationSuccess";
 	}
 	
-
+	@PostMapping("careGiversResult")
+	public String careGiversResult() {
+		return "medicalCenter/careGiversResult";
+	}
+	
 
 	    @Autowired
 	    private CareGiverService careGiverService;
 	
-	    @PostMapping("/medicalCenter/careGivers")
-	    public ResponseEntity<String> getCareGiverRecommendation(@RequestBody CareGiver careGiver) {
-	        // 클라이언트로부터 받은 설문조사 데이터를 활용하여 요양사 추천 로직을 수행
-	        String recommendation = careGiverService.getRecommendation(careGiver);
-	        return ResponseEntity.ok(recommendation);
-	    }
+//	    @PostMapping("/medicalCenter/careGivers")
+//	    public ResponseEntity<String> getCareGiverRecommendation(@RequestBody CareGiver careGiver) {
+//	        // 클라이언트로부터 받은 설문조사 데이터를 활용하여 요양사 추천 로직을 수행
+//	        String recommendation = careGiverService.getRecommendation(careGiver);
+//	        return ResponseEntity.ok(recommendation);
+//	    }
 }
 	
 
