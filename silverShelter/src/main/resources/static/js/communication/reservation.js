@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendar = document.getElementById('calendar-2');
     const submitButton = document.getElementById('reserve-button');
     const clubCode = document.getElementById('clubCode');
+    const timeList = document.getElementsByName('time');
 
     // 전송할 데이터를 저장할 객체
     const obj = {
@@ -39,12 +40,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 날짜를 임시 저장
             window.selectedDate = selectdate;
+
+            // 현재 날짜와 시간과 비교하여 시간 옵션을 비활성화
+            const currentTime = new Date();
+            timeList.forEach(function(time) {
+                const selectedTime = time.value;
+                const selectedDateTime = new Date(`${year}-${month}-${day}T${selectedTime}`);
+
+                if (selectedDateTime < currentTime) {
+                    time.disabled = true;
+                    // 수정해야함 
+                    time.classList.add('name');
+                } else {
+                    time.disabled = false;
+                    time.style.backgroundColor = '';
+                }
+            });
         }
     });
 
     // 시간 클릭 될때 값 얻어오기
-    var timeSelect = document.getElementsByName('time');
-    timeSelect.forEach(function(time) {
+    timeList.forEach(function(time) {
         time.addEventListener('click', function(e) {
             const selectedTime = e.target.value;
             console.log(selectedTime);
@@ -52,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 날짜와 시간을 합쳐서 객체에 저장
             if (window.selectedDate) {
-                obj.clubResvTime = window.selectedDate + selectedTime;
+                obj.clubResvTime = window.selectedDate + ' ' + selectedTime;
             }
             console.log(obj.clubResvTime);
         });
@@ -71,15 +87,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data == 1) {
-
                     alert("예약 되었습니다.");
-
                     location.href = "/";
-                }else if(data == 3){
-
+                } else if (data == 3) {
                     alert("예약 있음 확인 바람");
-
-                }else {
+                } else {
                     alert("예약 실패");
                     location.href = location.pathname;
                 }
