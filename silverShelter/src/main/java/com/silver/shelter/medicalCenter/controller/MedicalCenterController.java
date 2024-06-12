@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.silver.shelter.careGiver.model.CareGiver;
-import com.silver.shelter.careGiver.service.CareGiverService;
+
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.communication.model.service.CommunicationService;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
@@ -166,8 +166,7 @@ public class MedicalCenterController {
 	}
 	
 
-	    @Autowired
-	    private CareGiverService careGiverService;
+	    
 	
 //	    @PostMapping("/medicalCenter/careGivers")
 //	    public ResponseEntity<String> getCareGiverRecommendation(@RequestBody CareGiver careGiver) {
