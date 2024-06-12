@@ -32,8 +32,10 @@
 
 #logo {
 
-	width : 7vw;
-	height: 8vh;     
+	width : 45%;
+	height: 45%;
+	margin-left: 3vw;
+	     
 }
 
 .login-join {
