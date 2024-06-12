@@ -76,11 +76,18 @@ public interface BoardService {
 
 
 
+
+	/** 메인페이지 하단 게시글 조회
+	 * @return
+	 */
+	Map<String, Object> mainBoardSelect();
+
 	/** 게시글 삭제하기
 	 * @param boardNo
 	 * @return
 	 */
 	int boardDelete(int boardNo);
+
 
 
 

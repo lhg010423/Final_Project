@@ -56,11 +56,6 @@ main {
 }
 
 /* 게시글 header부분*********************************************** */
-/* 이전으로 a태그 */
-.boardTitle > a {
-    color: black;
-    font-size: 13px;
-}
 
 .boardTitle-area {
     flex: 0 0 auto; /* 고정 높이 */
@@ -69,7 +64,9 @@ main {
 
 /* 게시글 제목 */
 .boardTitle-area > span{
+    display: block; /* 블록 요소로 변경 */
     font-size: 25px;
+    width: 100%;
 }
 
 /* 작성자, 작성일, 수정일, 조회수, 좋아요 공간 */

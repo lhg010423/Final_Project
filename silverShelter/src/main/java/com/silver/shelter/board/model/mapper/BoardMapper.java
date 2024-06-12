@@ -107,11 +107,25 @@ public interface BoardMapper {
 	int boardUpdate(Map<String, Object> map);
 
 
+
+	
+
+
+	/** 최신 공지게시글 1개 조회
+	 * @return
+	 */
+	Board mainBoardSelect(int boardCode);
+
+
+
+
+
 	/** 게시글 삭제하기
 	 * @param boardNo
 	 * @return
 	 */
 	int boardDelete(int boardNo);
+
 
 
 

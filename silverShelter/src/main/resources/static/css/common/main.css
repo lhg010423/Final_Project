@@ -625,6 +625,8 @@
  	grid-template-columns: repeat(3, minmax(auto, 1fr));
   	gap: 3rem;
   	list-style: none;
+
+    justify-content: space-around;
   	
 }
 
@@ -639,15 +641,41 @@
     width: 22vw;
 }
 
+/* 공지게시판 a태그 */
 .section-6-2-1{
-	
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    padding: 60px 40px;
+    display: block; /*각 요소를 수직으로 쌓기 위해 block 요소로 설정*/
+    flex: auto;
+    width: 100%;
     height: 100%;
-    padding: 8rem 4rem 5.4rem 4rem;
+    text-decoration: none;
+    box-sizing: border-box;
+
 }
+
+.section-6-2 li span {
+    display: block; /* 각 요소를 수직으로 쌓기 위해 block 요소로 설정 */
+}
+
+/* 공지게시판 글씨 */
+.section-6-2-1 span:nth-of-type(1) {
+    /* justify-content: flex-end; */
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 골지게시판 날짜 */
+.section-6-2-1 span:nth-of-type(3) {
+    /* align-self: flex-end; */
+    /* justify-content: flex-end; */
+    margin-top: auto;
+}
+
+
 
 .section-6-2-2{
 	
