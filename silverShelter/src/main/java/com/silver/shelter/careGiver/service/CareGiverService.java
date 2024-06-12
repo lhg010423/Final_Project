@@ -15,7 +15,6 @@ import com.silver.shelter.careGiver.model.CaregiverCluster;
 
 @Service
 public class CareGiverService {
-
 	public String getRecommendation(String gender, int age, int experience, String workingHours, String roles) throws JSONException {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:5000/predict";
@@ -29,7 +28,6 @@ public class CareGiverService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
     private List<CaregiverCluster> clusters;
 
 
