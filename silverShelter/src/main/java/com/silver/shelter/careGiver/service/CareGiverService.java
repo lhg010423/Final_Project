@@ -5,10 +5,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import java.util.List;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import com.silver.shelter.careGiver.model.CareGiver;
+import com.silver.shelter.careGiver.model.CaregiverCluster;
 
 @Service
 public class CareGiverService {
@@ -25,16 +25,14 @@ public class CareGiverService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+    private List<CaregiverCluster> clusters;
 
-        HttpEntity<String> entity = new HttpEntity<>(requestJson.toString(), headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-
-        return response.getBody();
+    public CareGiverService(List<CaregiverCluster> clusters) {
+        this.clusters = clusters;
     }
 
-	public String getRecommendation(CareGiver careGiver) {
-		// 요양사 추천 로직 구현
-        // AI 모델 호출 및 결과 처리 등
-        return "Best Caregiver recommendation based on the survey data";
-	}
+    public List<CareGiver> recommendCaregivers(CareGiver userData) {
+        // 사용자 정보를 기반으로 요양사 추천
+        return null;
+    }
 }
