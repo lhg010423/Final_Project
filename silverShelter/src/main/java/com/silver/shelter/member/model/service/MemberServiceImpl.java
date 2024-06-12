@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService{
 		int memberNo = loginMember.getMemberNo();
 		
 		String encPw = mapper.findPw(memberNo);
-		String pwInput = map.get("pwInput");
+		String pwInput = map.get("memberPw2");
 		
 		boolean flag = bcrypt.matches(pwInput, encPw);
 		

@@ -1,11 +1,14 @@
 package com.silver.shelter.careGiver.service;
+
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.careGiver.model.CaregiverCluster;
@@ -26,6 +29,7 @@ public class CareGiverService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
     private List<CaregiverCluster> clusters;
+
 
     public CareGiverService(List<CaregiverCluster> clusters) {
         this.clusters = clusters;
