@@ -76,4 +76,13 @@ public interface BoardService {
 
 
 
+	/** 메인페이지 하단 게시글 조회
+	 * @return
+	 */
+	Map<String, Object> mainBoardSelect();
+
+
+
+
+
 }

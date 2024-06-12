@@ -172,9 +172,34 @@ public class BoardServiceImpl implements BoardService{
 	public int boardUpdate(Map<String, Object> map) {
 		return mapper.boardUpdate(map);
 	}
+
+
+
+
+	/** 메인페이지 하단 게시글 조회
+	 *
+	 */
+	@Override
+	public Map<String, Object> mainBoardSelect() {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		
+		
+		map.put("notice", getMainBoard(1));
+		map.put("free", getMainBoard(2));
+		map.put("inquiry", getMainBoard(3));
+		
+		
+		
+		return map;
+	}
 	
 	
-	
+	private Board getMainBoard(int boardCode) {
+		return mapper.mainBoardSelect(boardCode);
+	}
 	
 	
 	
