@@ -1,5 +1,5 @@
     <h1>요양사 매칭 사전 설문 조사</h1>
-    <form id="surveyForm">
+    <form id="surveyForm" action="/medicalCenter/careGiversResult" method="POST">
         <p>선호하는 요양사 성별:</p>
         <input type="radio" id="male" name="gender" value="male">
         <label for="male">남자</label><br>
@@ -40,47 +40,4 @@
 
         <button type="submit">제출하기</button>
     </form>
-
-    <script>
-        document.getElementById("surveyForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            var gender = document.querySelector('input[name="gender"]:checked').value;
-            var age = document.querySelector('input[name="age"]:checked').value;
-            var experience = document.querySelector('input[name="experience"]:checked').value;
-            var workTime = document.querySelector('input[name="workTime"]:checked').value;
-            var role = document.querySelector('input[name="role"]:checked').value;
-
-            var formData = {
-                gender: gender,
-                age: age,
-                experience: experience,
-                workTime: workTime,
-                role: role
-            };
-
-            // 서버로 요청을 보내는 부분
-            fetch('/medicalCenter/careGivers', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('서버 응답:', data);
-                // 서버 응답에 따른 작업 수행
-            })
-            .catch(error => {
-                console.error('오류 발생:', error);
-            });
-        });
-
-    </script>
 

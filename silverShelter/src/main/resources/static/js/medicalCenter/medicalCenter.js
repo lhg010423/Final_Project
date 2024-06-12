@@ -362,6 +362,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (document.getElementById("reservationPage")) {
         initializeReservationButtons();
     }
+
+    
 });
 
 document.getElementById('infoTab').addEventListener('click', function () {
@@ -376,7 +378,7 @@ document.getElementById('doctorTab').addEventListener('click', function () {
 
 document.getElementById('careGiverTab').addEventListener('click', function () {
     showTab('careGiverTab');
-    loadTabContent('careGiverMatching', 'section3-1');
+    loadTabContent('careGiverMatching', 'section3-1', initializeSurveyForm);
 });
 
 document.getElementById('checkTab').addEventListener('click', function () {
@@ -417,7 +419,7 @@ function showTab(tabId) {
 }
 
 
-async function loadTabContent(htmlFile, sectionId = null) {
+async function loadTabContent(htmlFile, sectionId = null, callback = null) {
     try {
         const response = await fetch(htmlFile);
         const html = await response.text();
@@ -440,6 +442,9 @@ async function loadTabContent(htmlFile, sectionId = null) {
                 }
                 // 이후에 추가적으로 필요한 작업 수행
                 // 예: showFloor, showDep 등의 함수 호출
+                if (callback) {
+                    callback();
+                }
             } else {
                 console.info("응안돼");
             }
@@ -530,4 +535,62 @@ function showDep(sectionId, floorId) {
     } else {
         console.error("No floor found with ID:", sectionId);
     }
+}
+
+function initializeSurveyForm() {
+    const form = document.getElementById("surveyForm");
+    if (form) {
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            console.log("Form submitted");
+
+            const formData = {
+                gender: document.querySelector('input[name="gender"]:checked').value,
+                age: document.querySelector('input[name="age"]:checked').value,
+                experience: document.querySelector('input[name="experience"]:checked').value,
+                workTime: document.querySelector('input[name="workTime"]:checked').value,
+                role: document.querySelector('input[name="role"]:checked').value
+            };
+            console.log(formData);
+
+            fetch('http://localhost:5000/medicalCenter/careGivers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Server response:', data);
+                renderCaregiversList(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    }
+}
+
+function renderCaregiversList(data) {
+    let table = "<table border='1'><tr><th>Name</th><th>Age</th><th>Gender</th><th>Experience</th><th>Work Time</th><th>Role</th></tr>";
+
+    data.forEach(caregiver => {
+        table += "<tr>";
+        table += "<td>" + caregiver.name + "</td>";
+        table += "<td>" + caregiver.age + "</td>";
+        table += "<td>" + caregiver.gender + "</td>";
+        table += "<td>" + caregiver.experience + "</td>";
+        table += "<td>" + caregiver.workTime + "</td>";
+        table += "<td>" + caregiver.role + "</td>";
+        table += "</tr>";
+    });
+
+    table += "</table>";
+    document.getElementById("caregiversList").innerHTML = table;
 }
