@@ -7,13 +7,55 @@ import java.nio.charset.Charset;
 import java.util.stream.*;
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.silver.shelter.careGiver.model.CareGiver;
+
 public class KMeansClustering {
     private static final int caregiversAgeIndex = 2; // caregiversAge 열은 3번째 열에 해당하는 인덱스입니다.
     
     // 클러스터링 수행
     public int[] performClustering(String filePath, int numClusters) throws IOException {
-        // CSV 파일에서 데이터 읽기
-        List<String[]> data = readCSV(filePath);
+        
+    	 String csvFile = filePath;
+         String line;
+         String cvsSplitBy = ",";
+         List<CareGiver> caregivers = new ArrayList<>();
+
+         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+             // 첫 줄은 헤더이므로 읽기만 하고 처리하지 않음
+             br.readLine();
+
+             while ((line = br.readLine()) != null) {
+                 // 쉼표로 분리하여 배열로 저장
+                 String[] data = line.split(cvsSplitBy);
+
+                 // caregiver 객체 생성 후 리스트에 추가
+                 caregivers.add(new CareGiver(
+                         Integer.parseInt(data[0]),
+                         data[1],
+                         data[2],
+                         data[3],
+                         data[4],
+                         data[5],
+                         data[6],
+                         data[7]
+                 ));
+             }
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+
+         // 데이터 확인
+         for (CareGiver caregiver : caregivers) {
+             System.out.println(caregiver);
+         }
+    	
+    	
+    	DataProcessor dp = new DataProcessor();
+    	
+    	dp.processCSVData(filePath, "C:\\goldenPrestige\\csv\\processed_caregivers.csv");
+    	
+    	// CSV 파일에서 데이터 읽기
+        List<String[]> data = readCSV("C:\\goldenPrestige\\csv\\processed_caregivers.csv");
         
         // 필요한 특징 열 선택
         List<String[]> selectedData = selectFeatures(data);
@@ -49,7 +91,7 @@ public class KMeansClustering {
     public List<String[]> selectFeatures(List<String[]> data) {
         List<String[]> selectedData = new ArrayList<>();
         for (String[] row : data) {
-            String[] selectedRow = {row[0], row[1], row[3], row[4], row[5]}; // caregiversAge 열 제외
+            String[] selectedRow = {row[2], row[3], row[5], row[6], row[7]}; // caregiversAge 열 제외
             selectedData.add(selectedRow);
         }
         return selectedData;
@@ -100,6 +142,7 @@ public class KMeansClustering {
             this.numClusters = numClusters;
         }
 
+
         public void fit(double[][] data) {
             // 데이터 포인트의 개수
             int numDataPoints = data.length;
@@ -109,6 +152,9 @@ public class KMeansClustering {
 
             // 최대 반복 횟수
             int maxIterations = 100;
+            
+            // 클러스터 할당 배열 초기화
+            clusterAssignments = new int[numDataPoints];
             
             // 반복적으로 클러스터링 수행
             for (int iteration = 0; iteration < maxIterations; iteration++) {
@@ -127,6 +173,7 @@ public class KMeansClustering {
                 }
             }
         }
+
 
         // 중심 초기화를 위한 메소드
         private double[][] initializeCentroids(double[][] data) {
