@@ -80,6 +80,9 @@
     padding-top: 23px;
 }
 
+#idMessage{
+	color: coral;
+}
 /* 비밀번호 입력 컨테이너 */
 
 .pw-container{
@@ -145,7 +148,7 @@
 /* 이름 입력 컨테이너 */
 .memberName-container{
     display: flex;
-
+    align-items:center;
     width: 50vw;
 
     margin-bottom: 5vh;
@@ -170,6 +173,10 @@
     border-radius: 6px;
 
   
+}
+
+#nameMessage{
+	color: coral;
 }
 
 /* 전화번호 입력 컨테이너 */

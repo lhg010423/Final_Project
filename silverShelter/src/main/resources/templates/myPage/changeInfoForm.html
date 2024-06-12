@@ -6,7 +6,7 @@
                 <div class="line-div"></div>
             </div>
             <!-- 입력양식 -->
-            <form id="info-form" action="#" method="POST">
+            <form id="info-form" action="/mypage/changeInfo" method="POST">
         
                 <!-- 아이디컨테이너 -->
                 <div class="id-container">
@@ -82,7 +82,9 @@
 							   type="text" 
 							   placeholder="성함" 
 							   id="memberName"
-							   readonly />
+							   readonly /><br>
+					   	<span style="font-size: 12px; letter-spacing: -1px;"
+                         	  class="signUp-message" id="nameMessage" >* 이름은 변경할 수 없습니다</span>	   
                     </div>
                 </div>    
 
