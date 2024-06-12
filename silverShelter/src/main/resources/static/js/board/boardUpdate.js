@@ -1,5 +1,5 @@
 const updateBtn = document.getElementById("updateBtn");
-const deleteBtn = document.getElementById("cancelBtn");
+const cancelBtn = document.getElementById("cancelBtn");
 const boardTitle = document.getElementById("boardTitle");
 const boardContent = document.getElementById("boardContent");
 
@@ -47,6 +47,9 @@ if(cancelBtn != null) {
     })
 
 }
+
+
+const deleteBtn = document.getElementById("deleteBtn");
 
 // 게시글 삭제하기
 if(deleteBtn != null) {
