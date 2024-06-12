@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.silver.shelter.board.model.dto.Board;
+import com.silver.shelter.board.model.dto.Comment;
 
 @Mapper
 public interface BoardMapper {
@@ -125,6 +126,12 @@ public interface BoardMapper {
 	 * @return
 	 */
 	int boardDelete(int boardNo);
+
+
+	/** 댓글 전체 조회
+	 * @return
+	 */
+	List<Comment> commentAllSelect(int boardNo);
 
 
 
