@@ -10,10 +10,8 @@ import org.apache.commons.lang3.ArrayUtils;
 public class KMeansClustering {
     private static final int caregiversAgeIndex = 2; // caregiversAge 열은 3번째 열에 해당하는 인덱스입니다.
     
-    public static void main(String[] args) throws IOException {
-        // 데이터 파일 경로
-        String filePath = "C:\\goldenPrestige\\csv\\caregiver_data1.csv";
-        
+    // 클러스터링 수행
+    public int[] performClustering(String filePath, int numClusters) throws IOException {
         // CSV 파일에서 데이터 읽기
         List<String[]> data = readCSV(filePath);
         
@@ -27,19 +25,15 @@ public class KMeansClustering {
         double[][] scaledFeatures = standardizeData(labelEncodings, selectedData);
         
         // K-평균 클러스터링을 적용
-        int numClusters = 40;
         KMeans kmeans = new KMeans(numClusters);
         kmeans.fit(scaledFeatures);
         
-        // 클러스터링 결과 출력
-        int[] clusterAssignments = kmeans.getClusterAssignments();
-        for (int i = 0; i < clusterAssignments.length; i++) {
-            System.out.println("Data point " + i + " belongs to cluster " + clusterAssignments[i]);
-        }
+        // 클러스터링 결과 반환
+        return kmeans.getClusterAssignments();
     }
     
     // CSV 파일에서 데이터 읽기
-    public static List<String[]> readCSV(String filePath) throws IOException {
+    public List<String[]> readCSV(String filePath) throws IOException {
         CSVParser parser = CSVParser.parse(new File(filePath), Charset.defaultCharset(), CSVFormat.DEFAULT);
         List<CSVRecord> records = parser.getRecords();
         List<String[]> data = new ArrayList<>();
@@ -52,7 +46,7 @@ public class KMeansClustering {
     }
     
     // 필요한 특징 열 선택
-    public static List<String[]> selectFeatures(List<String[]> data) {
+    public List<String[]> selectFeatures(List<String[]> data) {
         List<String[]> selectedData = new ArrayList<>();
         for (String[] row : data) {
             String[] selectedRow = {row[0], row[1], row[3], row[4], row[5]}; // caregiversAge 열 제외
@@ -62,7 +56,7 @@ public class KMeansClustering {
     }
     
     // 범주형 데이터를 레이블 인코딩으로 변환
-    public static Map<String, Integer[]> encodeLabels(List<String[]> data) {
+    public Map<String, Integer[]> encodeLabels(List<String[]> data) {
         Map<String, Integer[]> labelEncodings = new HashMap<>();
         for (int i = 0; i < data.get(0).length; i++) {
             final int index = i; // final로 선언된 변수
@@ -77,7 +71,7 @@ public class KMeansClustering {
     }
     
     // 데이터를 표준화
-    public static double[][] standardizeData(Map<String, Integer[]> labelEncodings, List<String[]> data) {
+    public double[][] standardizeData(Map<String, Integer[]> labelEncodings, List<String[]> data) {
         int numRows = data.size();
         int numCols = data.get(0).length;
         double[][] standardizedData = new double[numRows][numCols];
@@ -96,6 +90,8 @@ public class KMeansClustering {
 
         return standardizedData;
     }
+
+    // KMeans 클래스는 그대로 유지합니다
     public static class KMeans {
         private int numClusters;
         private int[] clusterAssignments;
@@ -132,7 +128,7 @@ public class KMeansClustering {
             }
         }
 
-     // 중심 초기화를 위한 메소드
+        // 중심 초기화를 위한 메소드
         private double[][] initializeCentroids(double[][] data) {
             int numDataPoints = data.length;
             int numFeatures = data[0].length;
@@ -210,6 +206,5 @@ public class KMeansClustering {
         public int[] getClusterAssignments() {
             return clusterAssignments;
         }
-        }
-
+    }
 }
