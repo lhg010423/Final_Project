@@ -15,9 +15,12 @@ import lombok.ToString;
 @ToString
 @Builder
 public class CareGiver {
-    private String gender;
-    private String age;
-    private String experience;
-    private String workTime;
-    private String role;
+	private String caregiversNo;
+	private String caregiversName;
+    private String caregiversAge;
+    private String caregiversGender;
+    private String caregiversTel;
+    private String caregiversExperience;
+    private String caregiversWorkHours;
+    private String caregiversRole;
 }
