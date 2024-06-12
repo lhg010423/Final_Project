@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.silver.shelter.board.model.dto.Board;
+import com.silver.shelter.board.model.dto.Comment;
 
 public interface BoardService {
 
@@ -87,6 +88,16 @@ public interface BoardService {
 	 * @return
 	 */
 	int boardDelete(int boardNo);
+
+
+
+
+
+	/** 댓글 조회
+	 * @param boardNo 
+	 * @return
+	 */
+	List<Comment> commentSelect(int boardNo);
 
 
 

@@ -85,3 +85,32 @@ if(deleteBtn != null) {
 
 
 }
+
+
+// 댓글 ----------------------------------------------------------------
+
+function loadComments(boardNo) {
+
+    fetch(`/board/commentSelect?boardNo=${boardNo}`)
+    .then(resp => resp.json())
+    .then(result => {
+
+        const commentsContainer = document.getElementById("comment-container");
+        commentsContainer.innerHTML = "";
+        result.forEach(comment => {
+
+            const commentElement = document.createElement("div");
+            commentElement.innerHTML = `
+                <div>작성자 : ${comment.memberName}</div>
+                <div>${comment.commentContent}</div>
+                <div>작성일 : ${comment.commentWriteDate}</div>
+            `;
+
+        })
+
+
+    })
+
+
+
+}
