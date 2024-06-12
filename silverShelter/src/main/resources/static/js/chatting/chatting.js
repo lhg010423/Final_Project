@@ -19,10 +19,6 @@ const chattingContent = document.querySelector(".chatting-content");
 // 채팅방 선택 전 메세지
 const prevMessage = document.querySelector(".prev-message");
 
-// 
-const recordButton = document.querySelector("#recordButton");
-
-
 let selectChattingNo; // 선택한 채팅방 번호
 let selectTargetNo; // 현재 채팅 대상
 let selectTargetName; // 대상의 이름 
@@ -289,7 +285,8 @@ function selectChattingFn() {
 				
 			}else{ // 상대가 작성한 메세지인 경우
 				li.classList.add("target-chat");
-
+				
+				const div = document.createElement("div");
 				// 상대 이름
 				const b = document.createElement("b");
 				b.innerText = selectTargetName; // 전역변수
@@ -297,7 +294,7 @@ function selectChattingFn() {
 				const br = document.createElement("br");
 
 				div.append(b, br, p, span);
-				li.append(img,div);
+				li.append(div);
 
 			}
 
@@ -402,7 +399,7 @@ chattingSock.onmessage = function(e) {
 			const br = document.createElement("br");
 	
 			div.append(b, br, p, span);
-			li.append(img,div);
+			li.append(div);
 	
 		}
 	
@@ -423,4 +420,127 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 	// 보내기 버튼에 이벤트 추가
 	send.addEventListener("click", sendMessage);
+});
+
+
+/* ------------------------------------------------------------------------- */
+
+
+// 오디오버튼 클릭시 모달창 js 
+var modal = document.getElementById("recordModal");
+var recordBtn = document.getElementById("recordButton");
+var span = document.getElementsByClassName("close")[0];
+
+let mediaRecorder;
+// 목소리가 저장될 빈 배열
+let audioChunks = [];
+
+let isRecording = false;
+
+const audioPlayback = document.getElementById('audioPlayback');
+// 전송 버튼 
+const sendBtn = document.getElementById('sendBtn');
+// 결과를 담을 요소
+const resultText = document.getElementById('result'); 
+// 녹음 시작 / 종료 버튼 
+const recordToggleBtn = document.getElementById('recordToggleBtn');
+
+// 녹음 버튼 클릭 시 모달 열기
+recordBtn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// 닫기 버튼 클릭 시 모달 닫기
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// 모달 외부 클릭 시 모달 닫기
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+recordToggleBtn.addEventListener("click", async () => {
+    if(!isRecording){
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = event => {
+            audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            audioChunks = [];
+            const audioUrl = URL.createObjectURL(audioBlob);
+            audioPlayback.src = audioUrl; // 녹음된 오디오를 재생할 수 있도록 설정
+            uploadAudioFile(audioBlob);
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        recordToggleBtn.textContent = "Stop Recording";
+
+    } else {
+        // 녹음 정지
+        mediaRecorder.stop();
+        isRecording = false;
+        recordToggleBtn.textContent = "Start Recording";
+    }
+});
+
+// 서버로 오디오 파일을 업로드하는 함수
+function uploadAudioFile(audioBlob) {
+    const formData = new FormData(); // FormData 대문자로 수정
+    formData.append('upload', audioBlob, 'recording.wav');
+
+    fetch('/sttChatting/stt', {
+        method: 'POST',
+        body: formData
+    })
+    .then(resp => resp.json())
+    .then(result => {
+        console.log('Success: ', result);
+
+        let resultString = result.text;
+        let index = 0;
+
+        let interval = setInterval(function() {
+            resultText.value = resultString.substring(0, index); // substring 소문자로 수정
+            index++;
+
+            if (index > resultString.length) {
+                clearInterval(interval);
+            }
+        }, 100);
+    })
+    .catch(error => {
+        console.error('에러 발생 ', error);
+    });
+}
+
+sendBtn.addEventListener('click', () => {
+    fetch("/sttChatting/sendMessage", {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "messageContent": resultText.value, 
+							   "chattingNo": selectChattingNo,
+							   "senderNo":loginMemberNo })
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data > 0) {
+            
+			selectChattingFn()
+            resultText.value = "";
+        } else {
+            alert("전송 실패");
+        }
+    })
+    .catch(error => {
+        console.error("에러 발생 ", error);
+    });
+	selectChattingFn()
 });

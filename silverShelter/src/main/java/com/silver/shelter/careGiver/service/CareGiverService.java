@@ -1,4 +1,5 @@
 package com.silver.shelter.careGiver.service;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +12,7 @@ import com.silver.shelter.careGiver.model.CareGiver;
 
 @Service
 public class CareGiverService {
-	public String getRecommendation(String gender, int age, int experience, String workingHours, String roles) {
+	public String getRecommendation(String gender, int age, int experience, String workingHours, String roles) throws JSONException {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:5000/predict";
 
