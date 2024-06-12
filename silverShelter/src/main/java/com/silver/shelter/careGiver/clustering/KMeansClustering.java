@@ -12,7 +12,7 @@ public class KMeansClustering {
     
     public static void main(String[] args) throws IOException {
         // 데이터 파일 경로
-        String filePath = "C:\\workspace\\Final_Project\\silverShelter\\src\\main\\resources\\caregiver_data1.csv";
+        String filePath = "C:\\goldenPrestige\\csv\\caregiver_data1.csv";
         
         // CSV 파일에서 데이터 읽기
         List<String[]> data = readCSV(filePath);
