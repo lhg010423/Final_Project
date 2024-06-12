@@ -39,11 +39,11 @@ public interface ChattingService {
 	 */
 	int updateReadFlag(Map<String, Integer> paramMap);
 
-	/** 메시지 조회
-	 * @param paramMap
-	 * @return
-	 */
-	List<Message> selectMessageList(Map<String, Integer> paramMap);
+    /** 메세지 조회
+     * @param paramMap
+     * @return
+     */
+    List<Message> selectMessageList( Map<String, Integer> paramMap );
 
 	/** 채팅 입력
      * @param msg

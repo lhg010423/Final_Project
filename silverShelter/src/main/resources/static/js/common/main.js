@@ -267,3 +267,44 @@ async function fetchData(){
 }
 
 fetchData();
+
+/* 글자 등장 관련 */
+
+document.addEventListener('DOMContentLoaded', function() {
+		    const observerOptions = {
+		        root: null,
+		        rootMargin: '0px',
+		        threshold: 0.1
+		    };
+		
+		    const observerCallback = (entries, observer) => {
+		        entries.forEach(entry => {
+		            if (entry.isIntersecting) {
+		                const letters = entry.target.querySelectorAll('span.fade-in');
+		                letters.forEach((letter) => {
+		                    const delay = Math.random() * 2000; // Random delay between 0 and 2000ms
+		                    setTimeout(() => {
+		                        letter.classList.add('visible');
+		                    }, delay);
+		                });
+		
+		                // Add slide-in effect for div elements
+		                if (entry.target.classList.contains('slide-in')) {
+		                    entry.target.classList.add('slide-visible');
+		                }
+		
+		                observer.unobserve(entry.target);
+		            }
+		        });
+		    };
+		
+		    const observer = new IntersectionObserver(observerCallback, observerOptions);
+		
+		    document.querySelectorAll('.fade-in-container').forEach(container => {
+		        observer.observe(container);
+		    });
+		
+		    document.querySelectorAll('.slide-in').forEach(element => {
+		        observer.observe(element);
+		    });
+		});

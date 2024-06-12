@@ -55,6 +55,13 @@ public class ChattingController {
 		return service.selectTarget(map);
 	}
     
+    // 채팅방 목록 조회 - 비동기
+    @GetMapping("roomList")
+    @ResponseBody
+    public List<ChattingRoom> selectRoomList(@SessionAttribute("loginMember") Member loginMember) {
+    	return service.selectRoomList(loginMember.getMemberNo());
+    }
+    
     // 채팅방 입장(없으면 생성)
     @GetMapping("enter")
     @ResponseBody

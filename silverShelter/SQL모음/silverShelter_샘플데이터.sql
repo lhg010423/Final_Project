@@ -7,6 +7,7 @@ GRANT CONNECT, RESOURCE TO silver_shelter;
 
 ALTER USER silver_shelter DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 
+COMMIT;
 --------------------------------------------------------------------------------------------
 -- 회원 삭제
 DELETE FROM "MEMBER"
@@ -17,9 +18,6 @@ COMMIT;
 
 -- MEMBER 테이블의 MEMBER_ID에 UNIQUE 추가하기 ---     아직 적용안함
 ALTER TABLE MEMBER ADD CONSTRAINT uc_member_id UNIQUE (MEMBER_ID);
-
-
-
 
 -- 번호, ID, PW, 이름, 이메일,
 -- 주소, 전화번호, 보호자전화번호, 가입일, 탈퇴여부,

@@ -176,6 +176,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
+
 	/** 메인페이지 하단 게시글 조회
 	 *
 	 */
@@ -185,21 +186,27 @@ public class BoardServiceImpl implements BoardService{
 		Map<String, Object> map = new HashMap<>();
 		
 		
-		
-		
 		map.put("notice", getMainBoard(1));
 		map.put("free", getMainBoard(2));
 		map.put("inquiry", getMainBoard(3));
 		
-		
-		
 		return map;
-	}
-	
-	
-	private Board getMainBoard(int boardCode) {
+  }
+    
+  private Board getMainBoard(int boardCode) {
 		return mapper.mainBoardSelect(boardCode);
 	}
+  
+	/** 게시글 삭제하기
+	 *
+	 */
+	@Override
+	public int boardDelete(int boardNo) {
+		return mapper.boardDelete(boardNo);
+	}
+	
+	
+	
 	
 	
 	
