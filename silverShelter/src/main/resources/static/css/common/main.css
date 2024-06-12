@@ -60,8 +60,18 @@
 }
 
 .content-1 {
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 500;
     width: 30vw;
+}
+
+.content-1-1 {
+    font-size: 18px;
+    font-weight: 500;
+    width: 30vw;
+}
+.content-1-1 div{
+	text-align: center;
 }
 
 .information {
@@ -319,7 +329,7 @@
 
     text-align: center;
 
-    font-size: 16px;
+    font-size: 18px;
 }
 
 
@@ -372,11 +382,15 @@
 	text-align: center;
 	width: 45vw;
 	font-size: 36px;
+	
+	font-family: cora, sans-serif;
+	font-style: normal;
+	font-weight: 800;
 }
 
 .section-4-2{
 	
-	font-size:20px;
+	font-size:18px;
 }
 
 .section-4-3-Btn{
@@ -393,6 +407,8 @@
 	justify-content: space-between;
 	
 	margin-top: 1vh; 
+	
+	
 }
 
 .section-4-3-1{
@@ -402,6 +418,7 @@
 	justify-content: space-around;
 	text-align: center;
 	width: 20vw;
+	font-size: 18px;
 }
 
 .section-4-3-1-1{
@@ -468,7 +485,7 @@
 
 .section-5-2{
 	
-	font-size:20px;
+	font-size:18px;
 	
 	
 }
@@ -710,7 +727,26 @@
 
 
 
+/* 글자 등장 관련 */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
 
+.visible {
+    opacity: 1;
+}
+
+.slide-in {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 1s ease-in, transform 1s ease-in;
+}
+
+.slide-visible {
+    opacity: 1;
+    
+}
 
 
 

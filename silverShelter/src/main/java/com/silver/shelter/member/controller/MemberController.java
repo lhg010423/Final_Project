@@ -27,6 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @SessionAttributes({"loginMember"})
@@ -82,6 +83,8 @@ public class MemberController {
 			
 			return "redirect:/member/login";
 		}
+		
+		model.addAttribute("loginMember",loginMember);
 		
 		if(loginMember != null) {
 			//log.debug("adsfasdfasdfasdf");
@@ -223,12 +226,12 @@ public class MemberController {
 	 */
 	@PostMapping("secession")
 	@ResponseBody
-	public int secession(@RequestBody Map<String, String> map,
+	public int secession(@RequestParam Map<String, String> map,
 						 @SessionAttribute("loginMember") Member loginMember,
 						 SessionStatus sessionStatus,
 						 RedirectAttributes ra
 						  ) {
-		
+		log.info("로그인 정보: {}", loginMember);
 		String memberId = loginMember.getMemberId();
 		
 		int result = service.secession(map,loginMember);
