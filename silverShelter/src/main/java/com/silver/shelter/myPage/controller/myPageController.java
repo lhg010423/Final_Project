@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class myPageController {
 
 	public final myPageService service;
-	
 
 	/*
 	 * @GetMapping("myPage") 
@@ -39,6 +38,5 @@ public class myPageController {
 		
 		return "myPage/myPage";
 	}
-	
-	
+
 }

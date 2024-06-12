@@ -28,6 +28,7 @@
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOARD_CODE = #{boardCode}
 		AND BOARD_DEL_FL = 'N'
+		ORDER BY BOARD_NO DESC
 	</select>
 	
 	<!-- 삭제되지 않고 검색한 게시글 수 조회 -->
@@ -77,6 +78,7 @@
 			</when>
 		
 		</choose>
+		ORDER BY BOARD_NO DESC
 	</select>
 	
 	
@@ -125,6 +127,14 @@
 	</update>
 	
 	
+	<!-- 댓글 전체 조회 -->
+	<select id="commentAllSelect">
+		SELECT *
+		FROM "COMMENT"
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	
 	
 	
 	
@@ -139,6 +149,9 @@
 	    ORDER BY BOARD_WRITE_DATE DESC
 	</select>
 
+	
+	
+	
 	
 	
 	

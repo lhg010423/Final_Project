@@ -303,3 +303,7 @@ main {
 .image-wrapper.selected .overlay {
     opacity: 1;
 }
+
+.name{
+    background-color: #fcfcfc;
+}

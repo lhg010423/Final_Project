@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,10 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.silver.shelter.careGiver.model.CareGiver;
-
-
-
-
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.communication.model.service.CommunicationService;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;

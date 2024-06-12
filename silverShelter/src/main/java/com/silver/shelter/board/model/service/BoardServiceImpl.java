@@ -1,5 +1,6 @@
 package com.silver.shelter.board.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.silver.shelter.board.model.dto.Board;
+import com.silver.shelter.board.model.dto.Comment;
 import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.board.model.mapper.BoardMapper;
 
@@ -203,6 +205,41 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int boardDelete(int boardNo) {
 		return mapper.boardDelete(boardNo);
+	}
+
+
+
+
+	/** 댓글 조회
+	 *
+	 */
+	@Override
+	public List<Comment> commentSelect(int boardNo) {
+		
+		// 댓글 전체 조회
+		List<Comment> comments = mapper.commentAllSelect(boardNo);
+		
+		// 결과값 전달용 List
+		List<Comment> commentList = new ArrayList<>();
+		
+		
+		for(Comment comment : comments) {
+			
+			// 대댓글인 경우 부모 댓글의 boardNo를 확인하여 부모 댓글에 추가
+			if(comment.getParentCommentNo() > 0) {
+		
+//				Comment parentComment = mapper.parentCommentSelect(comment.getParentCommentNo());
+			} else {
+				
+			}
+			
+			
+			
+		}
+		
+		
+		
+		return null;
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.silver.shelter.board.controller;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.silver.shelter.board.model.dto.Board;
+import com.silver.shelter.board.model.dto.Comment;
 import com.silver.shelter.board.model.service.BoardService;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -285,6 +287,13 @@ public class BoardController {
 		return service.boardDelete(boardNo);
 	}
 	
+	
+	@GetMapping("commentSelect")
+	public List<Comment> commentSelect(
+			@RequestParam int boardNo
+			) {
+		return service.commentSelect(boardNo);
+	}
 	
 	
 	

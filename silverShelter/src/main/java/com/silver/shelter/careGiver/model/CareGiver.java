@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class CareGiver {
-	private String caregiversNo;
+	private int caregiversNo;
 	private String caregiversName;
     private String caregiversAge;
     private String caregiversGender;
