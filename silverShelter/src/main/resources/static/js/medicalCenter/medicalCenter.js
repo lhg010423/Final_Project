@@ -553,7 +553,7 @@ function initializeSurveyForm() {
             };
             console.log(formData);
 
-            fetch('http://localhost:5000/medicalCenter/careGivers', {
+            fetch('/medicalCenter/careGivers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -569,6 +569,7 @@ function initializeSurveyForm() {
             .then(data => {
                 console.log('Server response:', data);
                 renderCaregiversList(data);
+                hideSurveyForm(); // 설문조사 폼 숨기기
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -578,19 +579,33 @@ function initializeSurveyForm() {
 }
 
 function renderCaregiversList(data) {
-    let table = "<table border='1'><tr><th>Name</th><th>Age</th><th>Gender</th><th>Experience</th><th>Work Time</th><th>Role</th></tr>";
+    let table = "<table border='1'><tr><th>No</th><th>Name</th><th>Age</th><th>Gender</th><th>Tel</th><th>Experience</th><th>Work Hours</th><th>Role</th></tr>";
 
     data.forEach(caregiver => {
         table += "<tr>";
-        table += "<td>" + caregiver.name + "</td>";
-        table += "<td>" + caregiver.age + "</td>";
-        table += "<td>" + caregiver.gender + "</td>";
-        table += "<td>" + caregiver.experience + "</td>";
-        table += "<td>" + caregiver.workTime + "</td>";
-        table += "<td>" + caregiver.role + "</td>";
+        table += "<td>" + caregiver.caregiversNo + "</td>";
+        table += "<td>" + caregiver.caregiversName + "</td>";
+        table += "<td>" + caregiver.caregiversAge + "</td>";
+        table += "<td>" + caregiver.caregiversGender + "</td>";
+        table += "<td>" + caregiver.caregiversTel + "</td>";
+        table += "<td>" + caregiver.caregiversExperience + "</td>";
+        table += "<td>" + caregiver.caregiversWorkHours + "</td>";
+        table += "<td>" + caregiver.caregiversRole + "</td>";
         table += "</tr>";
     });
 
     table += "</table>";
     document.getElementById("caregiversList").innerHTML = table;
+}
+
+function hideSurveyForm() {
+    const surveyForm = document.getElementById("surveyForm");
+    const surveyFormTit = document.getElementById("surveyFormTit");
+    const resultTit = document.getElementById("resultTit");
+
+    if (surveyForm) {
+        surveyForm.style.display = "none"; // 설문조사 폼 숨기기
+        surveyFormTit.display = "none";
+        resultTit.display = "block";
+    }
 }
