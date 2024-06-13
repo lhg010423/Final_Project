@@ -234,12 +234,12 @@ public class MemberController {
 							 RedirectAttributes ra) {
 		
 		
-		boolean result = service.updateInfo(inputMember, memberAddress);
+		int result = service.updateInfo(inputMember, memberAddress);
 		
 		String path;
         String message;
 
-        if (result) { // 성공
+        if (result > 0) { // 성공
         	
         	log.info("asdfasdf");
         	
@@ -265,13 +265,12 @@ public class MemberController {
 	 * @return
 	 */
 	@PostMapping("secession")
-	@ResponseBody
-	public int secession(@RequestParam Map<String, String> map,
-						 @SessionAttribute("loginMember") Member loginMember,
-						 SessionStatus sessionStatus,
-						 RedirectAttributes ra
-						  ) {
-		log.info("로그인 정보: {}", loginMember);
+	public String secession(@RequestParam Map<String, String> map,
+                				@SessionAttribute("loginMember") Member loginMember,
+                				SessionStatus sessionStatus,
+                				RedirectAttributes ra) {
+		log.info("로그인 정보를 주겠어 ?: {}", loginMember);
+		
 		String memberId = loginMember.getMemberId();
 		
 		int result = service.secession(map,loginMember);
@@ -281,11 +280,14 @@ public class MemberController {
 			ra.addFlashAttribute("message", "탈퇴가 완료되었습니다.");
 			sessionStatus.setComplete();
 			
+			return "redirect:/"; // 메인 페이지로 리디렉션
+			
 		}else {
 			ra.addFlashAttribute("message", "비밀번호를 확인해주세요");
+			return "redirect:/member/secession"; // 탈퇴 페이지로 다시 리디렉션
 		}
 		
-		return result;
+		
 		
 	}
 }

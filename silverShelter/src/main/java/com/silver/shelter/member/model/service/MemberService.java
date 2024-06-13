@@ -51,7 +51,7 @@ public interface MemberService {
 	 * @param memberAddress
 	 * @return
 	 */
-	boolean updateInfo(Member inputMember, String[] memberAddress);
+	int updateInfo(Member inputMember, String[] memberAddress);
 	
 
 }
