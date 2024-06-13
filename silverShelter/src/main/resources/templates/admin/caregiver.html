@@ -57,10 +57,10 @@
                                 <th:block th:unless="${#lists.isEmpty(caregiversList)}">
 
                                     <tr th:each="caregivers : ${caregiversList}">
-                                        <td th:text="${caregiver.caregiversName}"></td>
-                                        <td th:text="${caregiver.caregiversExperience}"></td>
-                                        <td th:text="${caregiver.caregiversWorkHours}"></td>
-                                        <td th:text="${caregiver.caregiversRole}"></td>
+                                        <td th:text="${caregivers.caregiversName}"></td>
+                                        <td th:text="${caregivers.caregiversExperience}"></td>
+                                        <td th:text="${caregivers.caregiversWorkHours}"></td>
+                                        <td th:text="${caregivers.caregiversRole}"></td>
                                     </tr>
 
                                 </th:block>
@@ -150,7 +150,7 @@
 
 
                         <!-- 검색창 공간 -->
-                        <form th:action="@{/admin/caregiverSearch}" method="get" class="boardSearch">
+                        <form th:action="@{/admin/caregiver}" method="get" class="boardSearch">
 
                             <!-- 이름 검색 -->
                             <select name="key" id="searchKey">
@@ -162,15 +162,56 @@
                             <div class="form-group">
                                 <label>경력 선택:</label>
                                 <div>
-                                    <input type="checkbox" id="career1" name="career[]" value="3년 미만">
+                                    <input type="checkbox" id="career1" name="caregiversExperience" value="novice">
                                     <label for="career1">3년 미만</label>
-
                                 </div>
 
+                                <div>
+                                    <input type="checkbox" id="career2" name="caregiversExperience" value="intermediate">
+                                    <label for="career2">3-7년</label>
+                                </div>
 
-
+                                <div>
+                                    <input type="checkbox" id="career3" name="caregiversExperience" value="experienced">
+                                    <label for="career3">8년 이상</label>
+                                </div>
                             </div>
 
+                            <!-- 근무 시간 선택 -->
+                            <div class="form-group">
+                                <label>근무 시간 선택:</label>
+                                <div>
+                                    <input type="checkbox" id="time1" name="caregiversWorkHours" value="morning">
+                                    <label for="time1">아침</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="time2" name="caregiversWorkHours" value="afternoon">
+                                    <label for="time2">오전</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="time3" name="caregiversWorkHours" value="evening">
+                                    <label for="time3">오후</label>
+                                </div>
+                            </div>
+
+                            <!-- 담당 업무 선택 -->
+                            <div class="form-group">
+                                <label>담당 업무 선택:</label>
+                                <div>
+                                    <input type="checkbox" id="task1" name="caregiversRole" value="companionship">
+                                    <label for="task1">정서적 지원</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="task2" name="caregiversRole" value="personalCare">
+                                    <label for="task2">의료적 지원</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="task3" name="caregiversRole" value="housekeeping">
+                                    <label for="task3">일상생활 지원</label>
+                                </div>
+                            </div>
+
+                            <button type="submit">검색하기</button>
                         </form>
 
                         
