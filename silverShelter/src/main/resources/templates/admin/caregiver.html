@@ -20,13 +20,165 @@
         <!-- nav를 제외한 오른쪽 메인 페이지 -->
         <section class="adminMain">
 
+            <!-- 페이지 상단 메인 글씨 -->
             <div class="adminHeader">
                 <span>관리자 페이지 - 요양사 관리</span>
             </div>
 
             <div class="adminBody">
 
-                <div class="adminLeft"></div>
+                <!-- 요양사 게시판 출력 -->
+                <div class="adminLeft">
+
+                    <div class="table-area">
+
+                        <table class="list-table">
+
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>경력</th>
+                                    <th>근무시간</th>
+                                    <th>담당업무</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                <!-- 요양사가 없을 때 -->
+                                <th:block th:if="${#lists.isEmpty(caregiversList)}">
+                                    <tr>
+                                        <th colspan="6">요양사가 존재하지 않습니다.</th>
+                                    </tr>
+                                </th:block> 
+
+                                <!-- 회원이 있을 때 -->
+                                <th:block th:unless="${#lists.isEmpty(caregiversList)}">
+
+                                    <tr th:each="caregivers : ${caregiversList}">
+                                        <td th:text="${caregiver.caregiversName}"></td>
+                                        <td th:text="${caregiver.caregiversExperience}"></td>
+                                        <td th:text="${caregiver.caregiversWorkHours}"></td>
+                                        <td th:text="${caregiver.caregiversRole}"></td>
+                                    </tr>
+
+                                </th:block>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <!-- pagination, 검색창 공간 -->
+                    <div class="bottom-area">
+
+                        <!-- pagination 공간 -->
+                        <div class="pagination-area">
+
+                            <!-- 일반 목록 조회(검색X) -->
+                            <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
+                                
+                                <!-- 첫페이지 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=1)}">&lt;&lt;</a></li>
+
+                                <!-- 이전 목록 마지막 번호로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=*{prevPage})}">&lt;</a></li>
+
+                                <!-- 특정 페이지로 이동 -->
+                                <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+
+                                    <!-- 현재 보고있는 페이지 -->
+                                    <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+
+                                    <!-- 보고있지 않은 페이지 -->
+                                    <li th:unless="${i} == *{currentPage}"><a th:href="@{/admin/caregiver(cp=${i})}" th:text="${i}"></a></li>
+
+                                </th:block>
+
+                                <!-- 다음 목록 시작 번호로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=*{nextPage})}">&gt;</a></li>
+
+                                <!-- 끝 페이지로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=*{maxPage})}">&gt;&gt;</a></li>
+
+
+                            </ul>
+
+                            <!-- 검색할 경우 -->
+                            <ul class="pagination" th:if="${param.key}" th:object="${pagination}" th:unless="${#lists.isEmpty(memberList)}">
+
+                                <!-- 첫 페이지로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+
+                                <!-- 이전 목록 마지막 번호로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=${pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+
+                                <!-- 특정페이지로 이동 -->
+                                <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
+
+                                    <!-- 현재 보고 있는 페이지 -->
+                                    <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+
+                                    <!-- 보고있지 않은 페이지 -->
+                                    <li th:unless="${i} == *{currentPage}">
+                                        <a th:href="@{/admin/caregiver(cp=${i}, key=${param.key}, query=${param.query})}" th:text="${i}"></a>
+                                    </li>
+
+                                </th:block>
+
+                                <!-- 일치하는 페이지가 없을 경우 -->
+                                <th:block th:unless="*{startPage lt endPage}">
+                                    <li>
+                                        <a class="current">1</a>
+                                    </li>
+                                </th:block>
+
+                                <!-- 다음 목록 시작 번호로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=*{nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
+
+                                <!-- 끝 페이지로 이동 -->
+                                <li><a th:href="@{/admin/caregiver(cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+
+                            </ul>
+
+
+
+
+                        </div>
+
+
+                        <!-- 검색창 공간 -->
+                        <form th:action="@{/admin/caregiverSearch}" method="get" class="boardSearch">
+
+                            <!-- 이름 검색 -->
+                            <select name="key" id="searchKey">
+                                <option value="name">이름</option>
+                            </select>
+                            <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요">
+
+                            <!-- 경력 선택 -->
+                            <div class="form-group">
+                                <label>경력 선택:</label>
+                                <div>
+                                    <input type="checkbox" id="career1" name="career[]" value="3년 미만">
+                                    <label for="career1">3년 미만</label>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </form>
+
+                        
+
+                    </div>
+                    
+
+                </div>
                 
                 <div class="adminRight"></div>
             </div>

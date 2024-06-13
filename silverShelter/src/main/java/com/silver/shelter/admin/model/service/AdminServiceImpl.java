@@ -183,6 +183,7 @@ public class AdminServiceImpl implements AdminService{
 
       return mapper.updateAdminDocument(examId);
    }
+   
    @Override
    public String signUpAdminDocument(String HtmlName,int examId) {
       // 서류 통과 클라이언트 조회 
@@ -266,5 +267,42 @@ public class AdminServiceImpl implements AdminService{
       log.info("url주소 어떻게 되는지 알려주세요"+url);
       return url;
    }
+
+
+   
+   
+	/** 요양사 전체 조회
+	 *
+	 */
+	@Override
+	public Map<String, Object> caregiverAllSelect(int cp) {
+		
+		// 전체 요양사 수 조회
+		int caregiverCount = mapper.caregiverAllCount();
+		
+		Pagination pagination = new Pagination(cp, caregiverCount);
+		
+		// 한페이지에 보여줄 게시글 수 (10개)
+		int limit = pagination.getLimit();
+		
+		// 현재 페이지에서 시작할 게시글 번호
+		// 인덱스로 이용할거니 -1을 하고 현재페이지가 3이면
+		// 20 => 21번 게시글 부터 보여줌
+		int offset = (cp -1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+	      
+	    // 요양사 관리 페이지에서 Examination테이블의 값들을 축력함
+	    List<Member> caregiverList = mapper.caregiverAllSelect(rowBounds);
+	      
+	    Map<String, Object> map = new HashMap<>();
+	    
+	    map.put("pagination", pagination);
+	    map.put("caregiverList", caregiverList);
+		
+		
+		
+		return null;
+	}
    
 }

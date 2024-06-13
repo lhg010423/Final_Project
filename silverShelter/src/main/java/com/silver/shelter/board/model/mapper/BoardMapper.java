@@ -131,9 +131,10 @@ public interface BoardMapper {
 	/** 댓글 전체 조회
 	 * @return
 	 */
-	List<Comment> commentAllSelect(int boardNo);
+	List<Comment> commentAllSelect(long boardNo);
 
 
+	
 
 
 

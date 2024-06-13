@@ -64,6 +64,15 @@ public interface AdminService {
 	
 	
 	
+	/** 요양사 전체 조회
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> caregiverAllSelect(int cp);
+
+	
+	
+	
 	
 	
 
