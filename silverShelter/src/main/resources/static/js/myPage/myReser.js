@@ -23,17 +23,53 @@ document.addEventListener('DOMContentLoaded', function() {
         // 예약된 날짜와 일치하는 요소에 클래스 추가 및 클릭 이벤트 추가
         days.forEach(function(day) {
             const dayNumber = parseInt(day.innerText, 10);
-            if (!isNaN(dayNumber) && reservedDates.includes(dayNumber)) {
-                const span = document.createElement('span');
-                span.classList.add('resevColor');
-                day.appendChild(span);
+            if (!isNaN(dayNumber)) {
+                const selectedDate = new Date(instance.getValue());
+                const currentMonth = selectedDate.getMonth();
+                const currentYear = selectedDate.getFullYear();
 
-                // 클릭 이벤트 추가
-                day.addEventListener('click', function() {
-                    fetchReservationsForDate(dayNumber);
-                });
+
+                // 현재 날짜 객체 생성
+                const dayDate = new Date(currentYear, currentMonth, dayNumber);
+
+                // 예약된 날짜와 일치하는 요소에 클래스 추가
+                if (reservedDates.some(date => date.getTime() === dayDate.getTime())) {
+                    const span = document.createElement('span');
+                    span.classList.add('resevColor');
+                    day.appendChild(span);
+
+                    // 예약된 날짜 라벨 추가
+                    const label = document.createElement('label');
+                    label.id = `label${dayNumber}`;
+                    label.innerText = 'Y';
+                    label.hidden = true;
+                    day.appendChild(label);
+
+                    // 클릭 이벤트 추가
+                    day.addEventListener('click', function() {
+                        fetchReservationsForDate(dayNumber);
+                    });
+                } else {
+                    // 예약이 없는 날짜에도 클릭 이벤트 추가
+                    day.addEventListener('click', function() {
+                        displayNoReservationsMessage(dayNumber);
+                    });
+                }
             }
         });
+    }
+
+    // 예약이 없는 날짜를 클릭했을 때 메시지를 표시하는 함수
+    function displayNoReservationsMessage(day) {
+        const label = document.querySelector(`#label${day}`);
+        const reservationList = document.getElementById('reservationList');
+        reservationList.innerHTML = ''; // 기존 내용을 초기화
+
+        // 라벨이 없거나 비어 있는 경우 메시지 표시
+        if (!label || label.innerText === '') {
+            reservationList.innerHTML = '<p class="reservation-none">예약 일정이 없습니다.</p>';
+        }
+
     }
 
     // 서버에서 예약된 날짜를 가져오는 함수
@@ -44,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 데이터가 객체 배열로 반환되면, 각 객체의 clubResvTime 속성만 추출
                 const reservedDates = data.map(item => {
                     const date = new Date(item.clubResvTime);
-                    return date.getDate();
+                    date.setHours(0, 0, 0, 0); // 시간을 0으로 설정하여 날짜만 비교
+                    return date;
                 });
 
                 // 데이터 확인을 위한 로그 출력
@@ -55,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => console.error('Error fetching reserved dates:', error));
     }
+
 
     // 특정 날짜의 예약 목록을 가져오는 함수
     function fetchReservationsForDate(day) {
@@ -77,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 reservationList.innerHTML = ''; // 기존 내용을 초기화
                 
                 if (data.length === 0) {
-                    // 데이터가 없을 경우 메시지 표시
-                    reservationList.innerHTML = '<p>예약 일정이 없습니다.</p>';
+                    
                 } else {
                     // 데이터가 있을 경우 예약 목록 표시
                     data.forEach(reservation => {
@@ -86,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         div.classList.add('reservation');
                         div.innerHTML = `
                             <div class="divTest"></div>
-                            <p>Club Name: ${reservation.clubName}</p>
-                            <p>Reservation Time: ${reservation.clubResvTime}</p>
+                            <p class="reservation-clubName">${reservation.clubName}</p>
+                            <p class="reservation-clubResvTime">${reservation.clubResvTime}</p>
                         `;
                         reservationList.appendChild(div);
                     });
