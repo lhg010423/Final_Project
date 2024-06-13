@@ -1,4 +1,32 @@
-    <h1>요양사 매칭 사전 설문 조사</h1>
+<th:block th:if="${session.loginMember == null}">
+    <div id="doctorMatchingPage">
+        <h1 id="doctorMatchingTitle">Golden Prestage 의료센터에 오신 것을 환영합니다</h1>
+        <div id="doctorMatchingLoginForm">
+            <div id="doctorMatchingLogin">
+                <article class="login-form">
+
+                    <form action="/member/login" method="GET" id="loginArea">
+                        
+                        <!-- 아이디, 비번 입력 -->
+                        <img id="doctorMatchingMainLogo" src="/images/main/Logo4.png">
+                            <h1>서비스를 이용하시려면 로그인이 필요합니다.</h1>
+                            
+                            <div class="text">Golden Prestige Corperation</div>
+                            <button id="docLoginBtn">로그인 페이지로 이동</button>
+                            
+                    </form>
+                </article>
+            </div>
+            <div id="doctorMatchingIntro">
+                <img id="signupemoji" src="/images/medicalCenter/signupemoji.png">
+                <h3 id="signupIntro1">회원가입 후, 다음 서비스를 이용하실 수 있습니다.</h3>
+                <h4 id="signupIntro2">입주신청<br><br>인터넷 예약 및 확인<br><br>자유, 문의게시판 글 작성<br><br>여가문화 서비스 신청</h4>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block th:if="${session.loginMember != null}">
+<h1 id="surveyFormTit">요양사 매칭 사전 설문 조사</h1>
     <form id="surveyForm" action="/medicalCenter/careGiversResult" method="POST">
         <p>선호하는 요양사 성별:</p>
         <input type="radio" id="male" name="gender" value="male">
@@ -7,11 +35,11 @@
         <label for="female">여자</label><br>
 
         <p>선호하는 요양사 나이대:</p>
-        <input type="radio" id="young" name="age" value="young">
+        <input type="radio" id="young" name="age" value="20-40">
         <label for="young">20-40</label><br>
-        <input type="radio" id="middle" name="age" value="middle">
+        <input type="radio" id="middle" name="age" value="40-50">
         <label for="middle">40-50</label><br>
-        <input type="radio" id="old" name="age" value="old">
+        <input type="radio" id="old" name="age" value="50+">
         <label for="old">50+</label><br>
 
         <p>선호하는 요양사 경력:</p>
@@ -40,4 +68,8 @@
 
         <button type="submit">제출하기</button>
     </form>
-
+    <h1 id="resultTit" style="display: none;">요양사 매칭 결과</h1>
+    <div id="caregiversList">
+        <!-- 이곳에 서버에서 받은 요양사 데이터가 추가될 것입니다. -->
+    </div>
+</th:block>
