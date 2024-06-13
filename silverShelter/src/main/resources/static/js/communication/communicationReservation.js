@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const calendar = document.getElementById('calendar-2');
     const submitButton = document.getElementById('reserve-button');
     const clubCode = document.getElementById('clubCode');
+    const timeList = document.getElementsByName('time');
 
     // 전송할 데이터를 저장할 객체
     const obj = {
@@ -10,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function() {
         clubResvTime: '',
         clubCode: clubCode.value
     };
+
+    // 이전에 선택된 시간 값을 저장할 변수
+    let previousSelectedTime = null;
 
     // 오늘 날짜를 YYYY-MM-DD 형식으로 구하기
     const today = new Date();
@@ -30,20 +34,57 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // 날짜를 임시 저장
             window.selectedDate = selectdate;
+
+            // 현재 날짜와 시간과 비교하여 시간 옵션을 비활성화
+            const currentTime = new Date();
+            timeList.forEach(function(time) {
+                const selectedTime = time.value;
+                const selectedDateTime = new Date(`${year}-${month}-${day}T${selectedTime}`);
+
+                const label = document.querySelector(`label[for='${time.id}']`);
+
+                if (selectedDateTime < currentTime) {
+                    time.disabled = true;
+                    if (label) {
+                        label.classList.add("timeout");
+                    }
+                } else {
+                    time.disabled = false;
+                    if (label) {
+                        label.classList.remove("timeout");
+                    }
+                }
+            });
         }
     });
 
     // 시간 클릭 될때 값 얻어오기
-    var timeSelect = document.getElementsByName('time');
-    timeSelect.forEach(function(time) {
+    timeList.forEach(function(time) {
         time.addEventListener('click', function(e) {
             const selectedTime = e.target.value;
             console.log(selectedTime);
             console.log(clubCode.value); // clubCode 값 확인
 
-            // 날짜와 시간을 합쳐서 객체에 저장
-            if (window.selectedDate) {
-                obj.clubResvTime = window.selectedDate + selectedTime;
+            const label = document.querySelector(`label[for='${time.id}']`);
+
+            // 같은 시간 두 번 클릭 시 값 지우기
+            if (previousSelectedTime === selectedTime) {
+                obj.clubResvTime = '';
+                previousSelectedTime = null;
+                console.log("시간 선택 취소됨");
+                e.target.checked = false;
+                if (label) {
+                    label.classList.remove("selected");  // 선택 해제 시 클래스 제거
+                }
+            } else {
+                // 날짜와 시간을 합쳐서 객체에 저장
+                if (window.selectedDate) {
+                    obj.clubResvTime = window.selectedDate + ' ' + selectedTime;
+                }
+                previousSelectedTime = selectedTime;
+                if (label) {
+                    label.classList.add("selected");  // 선택 시 클래스 추가
+                }
             }
             console.log(obj.clubResvTime);
         });
@@ -56,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
             wrapper.classList.add("selected");
             const selectedValue = wrapper.querySelector(".selected-sport").value;
             obj.clubSport = selectedValue;
-            console.log("선택된 스포츠 타입:", obj.clubSport); // 선택된 스포츠 값 확인
         });
     });
 

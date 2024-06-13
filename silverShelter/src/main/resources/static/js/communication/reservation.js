@@ -23,25 +23,21 @@ document.addEventListener('DOMContentLoaded', function() {
         format: 'DD/MM/YYYY',  // 날짜 형식을 '일/월/년'으로 설정
         validRange: [todayString, null],  // 오늘 날짜 이후로만 선택 가능하게 설정
         onupdate: function(instance, value) {  // 날짜가 업데이트될 때 호출되는 콜백 함수
+           
             // value를 Date 객체로 변환
             const date = new Date(value);
-
             // 년도를 추출
             const year = date.getFullYear();
             // 월을 추출하고 두 자리 문자열로 변환 (1월은 '01', 12월은 '12')
             const month = String(date.getMonth() + 1).padStart(2, '0');  // getMonth()는 0부터 시작하므로 +1 필요
             // 일을 추출하고 두 자리 문자열로 변환 (1일은 '01', 31일은 '31')
             const day = String(date.getDate()).padStart(2, '0');
-
             // 'YYYY년MM월DD일' 형식으로 날짜를 조합
             const selectdate = `${year}년${month}월${day}일`;
-
             // 조합된 날짜를 콘솔에 출력
             console.log(selectdate); // 예시 출력: "2024년06월04일"
-
             // 날짜를 임시 저장
             window.selectedDate = selectdate;
-
             // 현재 날짜와 시간과 비교하여 시간 옵션을 비활성화
             const currentTime = new Date();
             timeList.forEach(function(time) {
