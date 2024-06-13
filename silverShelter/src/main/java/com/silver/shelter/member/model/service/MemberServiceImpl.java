@@ -24,6 +24,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	private final BCryptPasswordEncoder bcrypt;
 	
+	
 	/** 로그인 서비스
 	 *
 	 */
@@ -157,14 +158,10 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 정보 수정 메서드
 	@Override
-	public boolean updateInfo(Member inputMember, String[] memberAddress) {
+	public int updateInfo(Member inputMember, String[] memberAddress) {
 		
 		
-		log.debug("aaaa={}", inputMember.getMemberId());
-		log.debug("aaaa={}", inputMember.getMemberPw());
-		log.debug("aaaa={}", inputMember.getMemberTel());
-		log.debug("aaaa={}", inputMember.getMemberEmail());
-		log.debug("aaaa={}", inputMember.getMemberTel());
+		log.info("aaaa={}", inputMember.getMemberId());
 		
 		if (inputMember.getMemberPw() != null && !inputMember.getMemberPw().isEmpty() ) {
 			String encPw = bcrypt.encode(inputMember.getMemberPw());
@@ -182,8 +179,8 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 		
-		int result = mapper.updateInfo(inputMember);
 		
-		return result > 0;
+		
+		return mapper.updateInfo(inputMember);
 	}
 }
