@@ -285,7 +285,36 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("caregiver")
-	public String caregiver() {
+	public String caregiver(
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model,
+			@RequestParam Map<String, Object> paramMap
+			
+			) {
+		
+		// 결과 저장용 Map
+		Map<String, Object> map = new HashMap<>();
+		
+		// 검색 안했을 때
+		if(paramMap.get("key") == null) {
+			map = service.caregiverAllSelect(cp);
+			
+			
+		// 검색 했을 때
+		} else {
+//			map = service.caregiverSearchSelect(paramMap, cp);
+		
+		}
+		
+		model.addAttribute("pagination", map.get("pagination"));
+		model.addAttribute("caregiverList", map.get("caregiverList"));
+		
+		// 그냥 확인용 코드
+		System.out.println(map.get("memberList"));
+		System.out.println(map.get("pagination"));
+		
+		
+		
 		return "admin/caregiver";
 	}
 	

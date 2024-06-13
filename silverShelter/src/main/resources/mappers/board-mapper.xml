@@ -129,8 +129,9 @@
 	
 	<!-- 댓글 전체 조회 -->
 	<select id="commentAllSelect">
-		SELECT *
-		FROM "COMMENT"
+		SELECT c.*, m.MEMBER_NAME
+		FROM "COMMENT" c
+		JOIN "MEMBER" m ON c.MEMBER_NO = m.MEMBER_NO
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 	

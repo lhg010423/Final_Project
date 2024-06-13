@@ -165,5 +165,41 @@
 			WHERE EXAM_ID = #{examId}
 	
 	</update>
+	
+	
+	
+	
+	
+	
+	<!-- 요양사 수 전체 조회 -->
+	<select id="caregiverAllCount">
+		SELECT COUNT(*)
+		FROM "CAREGIVERS"
+	</select>
+	
+	
+	<!-- 요양사 데이터 전체 조회 -->
+	<select id="caregiverAllSelect">
+		SELECT *
+		FROM "CAREGIVERS"
+		
+		<choose>
+			
+			<when test='key == "n"'>
+				WHERE CAREGIVERS_NAME LIKE '%' || #{query} || '%'
+			</when>
+
+			<when test='key == "'>
+			</when>
+			
+		</choose>
+	</select>
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

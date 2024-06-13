@@ -128,3 +128,19 @@ main {
     border: none;
     /* padding: 30px; */
 }
+
+
+/* 댓글 ***************************************** */
+.comment {
+    margin-bottom: 10px; /* 댓글 간의 간격 설정 */
+    padding: 10px; /* 댓글의 패딩 설정 */
+}
+
+.child-comments {
+    margin-top: 10px; /* 대댓글과 부모 댓글 사이의 간격 설정 */
+}
+
+
+
+
+
