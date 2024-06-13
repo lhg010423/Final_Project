@@ -89,14 +89,4 @@ public class SpeachToTextService {
 		return response.toString();	// 변환된 문자열 반환
 	}
 
-
-
-	public int insertMessage(Message message) {
-		
-		return mapper.insertMessage(message);
-	}
-	
-	
-	
-
 }

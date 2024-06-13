@@ -13,8 +13,11 @@ public class PointcutBundle {
 	// ==@Before("PointcutBundle.controllerPointCut()")
 	
 	@Pointcut("execution(* com.silver.shelter..*Controller*.*(..))")
-	public void controllerPointCut() {}
+	public void controllerPointCut() {
+	}
+	
 	
 	@Pointcut("execution(* com.silver.shelter..*ServiceImpl*.*(..))")
 	public void serviceImplPointCut() {}
+	
 }

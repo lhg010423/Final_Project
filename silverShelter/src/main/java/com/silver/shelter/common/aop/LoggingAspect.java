@@ -17,6 +17,7 @@ import com.silver.shelter.member.model.dto.Member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+
 @EnableAspectJAutoProxy
 @Component
 @Aspect
@@ -72,8 +73,6 @@ public class LoggingAspect {
 		log.error("[롤백 원인] : {} ",ex.getMessage());
 		
 	}
-	
-	
 	// -------------------------------------------------------------------------------
 	
 	// ProceedingJoinPoint
@@ -162,5 +161,7 @@ public class LoggingAspect {
 		}
 		return ip;
 	}
+	
+	
 
 }

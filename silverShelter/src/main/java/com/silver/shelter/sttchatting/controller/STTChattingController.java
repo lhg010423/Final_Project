@@ -74,26 +74,4 @@ public class STTChattingController {
 		return resp;
 	}
 
-	@ResponseBody
-	@PostMapping("sendMessage")
-	public int sendMessage(@RequestBody Map<String, Object>parmaMap)  {
-		
-		Message message = new Message();
-		
-		message.setChattingNo(Integer.parseInt(parmaMap.get("chattingNo").toString()));
-        message.setSenderNo(Integer.parseInt(parmaMap.get("senderNo").toString()));
-        message.setMessageContent((String) parmaMap.get("messageContent"));
-		
-		log.info("어떻게 넘어 오는 중이니? "+message);
-		int result = speachToTextService.insertMessage(message);
-		
-		if(result > 0) {
-			return 1;
-		
-		} else {
-			
-			return 0;
-		}
-
-	}
 }

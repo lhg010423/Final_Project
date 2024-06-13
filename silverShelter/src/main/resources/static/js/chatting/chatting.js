@@ -245,7 +245,6 @@ function roomListAddEvent(){
 		});
 	}
 }
-
 // 비동기로 메세지 목록을 조회하는 함수
 function selectChattingFn() {
 
@@ -424,46 +423,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 /* ------------------------------------------------------------------------- */
-
-
-// 오디오버튼 클릭시 모달창 js 
-var modal = document.getElementById("recordModal");
-var recordBtn = document.getElementById("recordButton");
-var span = document.getElementsByClassName("close")[0];
-
 let mediaRecorder;
 // 목소리가 저장될 빈 배열
 let audioChunks = [];
 
 let isRecording = false;
+const recordButton = document.querySelector('#recordButton');
 
-const audioPlayback = document.getElementById('audioPlayback');
-// 전송 버튼 
-const sendBtn = document.getElementById('sendBtn');
-// 결과를 담을 요소
-const resultText = document.getElementById('result'); 
-// 녹음 시작 / 종료 버튼 
-const recordToggleBtn = document.getElementById('recordToggleBtn');
-
-// 녹음 버튼 클릭 시 모달 열기
-recordBtn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// 닫기 버튼 클릭 시 모달 닫기
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// 모달 외부 클릭 시 모달 닫기
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-recordToggleBtn.addEventListener("click", async () => {
-    if(!isRecording){
+recordButton.addEventListener("click", async () => {
+    if (!isRecording) {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
 
@@ -481,66 +449,52 @@ recordToggleBtn.addEventListener("click", async () => {
 
         mediaRecorder.start();
         isRecording = true;
-        recordToggleBtn.textContent = "Stop Recording";
-
+        recordButton.textContent = "정지";
+        recordButton.className = "fa-solid fa-record-vinyl"; // 클래스명 변경
     } else {
         // 녹음 정지
         mediaRecorder.stop();
         isRecording = false;
-        recordToggleBtn.textContent = "Start Recording";
+        recordButton.textContent = "시작";
+        recordButton.className = "fa-solid fa-microphone"; // 클래스명 변경
     }
 });
 
 // 서버로 오디오 파일을 업로드하는 함수
 function uploadAudioFile(audioBlob) {
-    const formData = new FormData(); // FormData 대문자로 수정
+    // FormData 객체를 생성합니다. FormData는 폼 데이터를 쉽게 다룰 수 있게 해줍니다.
+    const formData = new FormData(); 
+
+    // 오디오 Blob 객체를 'upload'라는 이름으로 FormData에 추가합니다.
     formData.append('upload', audioBlob, 'recording.wav');
 
+    // fetch API를 사용하여 '/sttChatting/stt' 경로로 POST 요청을 보냅니다.
     fetch('/sttChatting/stt', {
-        method: 'POST',
-        body: formData
+        method: 'POST', // HTTP 메서드를 POST로 설정합니다.
+        body: formData   // 요청의 본문에 FormData 객체를 포함시킵니다.
     })
-    .then(resp => resp.json())
+    .then(resp => resp.json())  // 서버로부터의 응답을 JSON 형태로 변환합니다.
     .then(result => {
-        console.log('Success: ', result);
+        console.log('Success: ', result);  // 변환된 JSON 데이터를 콘솔에 출력합니다.
 
-        let resultString = result.text;
+        let resultString = result.text;  // 서버에서 반환한 텍스트 결과를 저장합니다.
         let index = 0;
 
+        // inputChatting 요소를 가져옵니다.
+        const inputChatting = document.getElementById('inputChatting');
+
+        // 100 밀리초마다 한 글자씩 텍스트를 입력하는 애니메이션을 구현합니다.
         let interval = setInterval(function() {
-            resultText.value = resultString.substring(0, index); // substring 소문자로 수정
+            inputChatting.value = resultString.substring(0, index); // 텍스트의 부분 문자열을 설정합니다.
             index++;
 
+            // 텍스트의 모든 글자가 입력되면 인터벌을 중지합니다.
             if (index > resultString.length) {
                 clearInterval(interval);
             }
-        }, 100);
+        }, 100);  // 100 밀리초 간격으로 실행됩니다.
     })
     .catch(error => {
-        console.error('에러 발생 ', error);
+        console.error('에러 발생 ', error);  // 오류가 발생하면 콘솔에 에러 메시지를 출력합니다.
     });
 }
-
-sendBtn.addEventListener('click', () => {
-    fetch("/sttChatting/sendMessage", {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "messageContent": resultText.value, 
-							   "chattingNo": selectChattingNo,
-							   "senderNo":loginMemberNo })
-    })
-    .then(res => res.text())
-    .then(data => {
-        if (data > 0) {
-            
-			selectChattingFn()
-            resultText.value = "";
-        } else {
-            alert("전송 실패");
-        }
-    })
-    .catch(error => {
-        console.error("에러 발생 ", error);
-    });
-	selectChattingFn()
-});

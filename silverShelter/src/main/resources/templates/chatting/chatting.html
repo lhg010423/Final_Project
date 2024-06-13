@@ -18,7 +18,7 @@
 		<!-- <th:block th:replace="~{common/headerNav}"></th:block> -->
 
 		<button id="addTarget">추가</button>
-
+		
 		<div id="addTargetPopupLayer" class="popup-layer-close">  
 			<span id="closeBtn">&times</span>
 
@@ -62,19 +62,10 @@
 				<div class="input-area">
 					<textarea id="inputChatting" rows="3"></textarea>
 
+
+                    <audio id="audioPlayback" controls hidden></audio>
 					<button class="fa-solid fa-microphone" id="recordButton"></button>
 					<button id="send">보내기</button>
-				</div>
-				<!-- 녹음 버튼 클릭 시 모달  -->
-				<div id="recordModal" class="modal">
-					<div class="modal-content">
-						<span class="close">&times;</span>
-
-						<button id="recordToggleBtn">Start Recording</button>
-						<audio id="audioPlayback" controls></audio>
-						<input type="text" id="result" readonly></input>
-						<button id="sendBtn">전송</button>
-					</div>
 				</div>
 
 			</div>

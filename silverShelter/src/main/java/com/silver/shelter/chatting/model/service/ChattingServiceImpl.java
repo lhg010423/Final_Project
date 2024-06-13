@@ -33,7 +33,6 @@ public class ChattingServiceImpl implements ChattingService{
 		return mapper.selectTarget(map);
 	}
 
-
 	@Override
 	public int checkChattingNo(Map<String, Integer> map) {
 		

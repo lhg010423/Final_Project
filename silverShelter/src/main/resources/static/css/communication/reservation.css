@@ -304,6 +304,8 @@ main {
     opacity: 1;
 }
 
-.name{
-    background-color: #fcfcfc;
+.timeout{
+    background-color: #eeee;
+    text-decoration: line-through;
+
 }
