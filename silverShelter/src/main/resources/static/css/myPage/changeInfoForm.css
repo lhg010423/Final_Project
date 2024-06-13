@@ -33,7 +33,7 @@
     margin-bottom: 5vh;
 }
 
-#info-form{
+#infoForm{
 
     display: flex;
 
@@ -59,9 +59,7 @@
     align-items: center;
 
     width: 10vw;
-   
-   
-    
+
 }
 
 
@@ -151,7 +149,7 @@
     align-items:center;
     width: 50vw;
 
-    margin-bottom: 5vh;
+    margin-bottom: 4vh;
 }
 
 .memberName-label{

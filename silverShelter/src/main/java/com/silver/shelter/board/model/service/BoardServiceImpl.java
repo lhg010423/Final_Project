@@ -222,24 +222,47 @@ public class BoardServiceImpl implements BoardService{
 		// 결과값 전달용 List
 		List<Comment> commentList = new ArrayList<>();
 		
+		// 모든 댓글을 빠르게 찾을 수 있도록 저장할 map
+		Map<Long, Comment> commentMap = new HashMap<>();
+		// Map<commentNo, comment>
 		
+		
+		// 모든 댓글을 가져오면서 댓글 번호로 map에 저장
 		for(Comment comment : comments) {
-			
-			// 대댓글인 경우 부모 댓글의 boardNo를 확인하여 부모 댓글에 추가
-			if(comment.getParentCommentNo() > 0) {
-		
-//				Comment parentComment = mapper.parentCommentSelect(comment.getParentCommentNo());
-			} else {
-				
-			}
-			
-			
+			commentMap.put( comment.getCommentNo(), comment);
 			
 		}
 		
 		
+		// 다시 모든 댓글을 순회하면서 부모-자식 관계 설정하기
+		for(Comment comment : comments) {
+			
+			// 대댓글인 경우 부모 댓글의 boardNo를 확인하여 부모 댓글에 추가
+			if(comment.getParentCommentNo() > 0) {
+			
 		
-		return null;
+				// 부모 댓글을 map에서 찾아서 가져오기
+				Comment parentComment = commentMap.get(comment.getParentCommentNo());
+				
+				// 부모 댓글이 있을 때
+				if(parentComment != null) {
+					
+					// 부모 댓글에 현재 댓글을 자식 댓글로 추가하기
+					parentComment.addChildComment(comment);
+					
+				}
+				
+			} else {
+				// 최상위 댓글은 리스트에 추가
+				commentList.add(comment);
+				
+			}
+		}
+		
+		System.out.println("commentList 확인용 : " + commentList);
+		log.info("commentList {}", commentList);
+		
+		return commentList;
 	}
 	
 	

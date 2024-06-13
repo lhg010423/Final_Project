@@ -64,4 +64,14 @@
 		WHERE EXAM_ID = #{examId}
 				
 	</select>
+	
+	<update id="updateInfo">
+		UPDATE "MEMBER" SET 
+			MEMBER_PW = #{memberPw},
+			MEMBER_TEL = #{memberTel},
+			MEMBER_EMAIL = #{memberEmail},
+			GUARDIAN_TEL = #{guardianTel},
+			MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_ID =#{memberId}	
+	</update>
 </mapper>

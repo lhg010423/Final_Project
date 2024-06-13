@@ -96,4 +96,11 @@ public class myPageController {
 		
 		return service.getReservationsForDate(reservation);
 	}
+	@GetMapping("myInfo")
+	public String myPageMapping() {
+		
+		return "myPage/myInfo";
+	}
+
+	
 }

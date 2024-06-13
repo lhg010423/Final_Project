@@ -288,9 +288,10 @@ public class BoardController {
 	}
 	
 	
+	@ResponseBody
 	@GetMapping("commentSelect")
 	public List<Comment> commentSelect(
-			@RequestParam int boardNo
+			@RequestParam("boardNo") int boardNo
 			) {
 		return service.commentSelect(boardNo);
 	}

@@ -91,6 +91,19 @@ public interface AdminMapper {
 	int updateAdminDocument(int examId);
 
 
+	/** 요양사 전체 수 조회
+	 * @return
+	 */
+	int caregiverAllCount();
+
+
+	/** 요양사 데이터 전체 조회
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Member> caregiverAllSelect(RowBounds rowBounds);
+
+
 	
 
 

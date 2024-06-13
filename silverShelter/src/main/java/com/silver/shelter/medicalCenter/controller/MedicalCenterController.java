@@ -1,5 +1,6 @@
 package com.silver.shelter.medicalCenter.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,7 +9,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.silver.shelter.careGiver.model.CareGiver;
-import com.silver.shelter.clubReservation.model.dto.ClubReservation;
-import com.silver.shelter.communication.model.service.CommunicationService;
+import com.silver.shelter.careGiver.model.SurveyForm;
+import com.silver.shelter.careGiver.service.CareGiverClustering;
+import com.silver.shelter.careGiver.service.KMeansClusteringService;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
 import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.service.DoctorService;
 import com.silver.shelter.member.model.dto.Member;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -164,17 +164,48 @@ public class MedicalCenterController {
 	}
 	
 
+    private final KMeansClusteringService clusteringService;
+    private final CareGiverClustering cgc = new CareGiverClustering();
+    private static final String CSV_FILE_PATH = "C:\\goldenPrestige\\csv\\caregiver_data1.csv";
+    // 클라이언트에서 전달된 데이터를 기반으로 클러스터링 수행하고 결과를 반환
+    @PostMapping("careGivers")
+    @ResponseBody
+    public List<CareGiver> clusterCaregivers(@RequestBody SurveyForm formData) throws IOException{
+        // 클라이언트에서 전달된 데이터를 기반으로 클러스터링 수행
 
+        List<CareGiver> caregivers1 = clusteringService.preprocessData(CSV_FILE_PATH);
+        
+        
+        // 클러스터링 실행
+        int numClusters = 25;
+        List<List<CareGiver>> clusters = cgc.clusterCareGivers(caregivers1, numClusters);
+
+        // 결과 출력
+        for (int i = 0; i < clusters.size(); i++) {
+            System.out.println("Cluster " + (i + 1) + ":");
+            for (CareGiver caregiver : clusters.get(i)) {
+                System.out.println(caregiver);
+            }
+            System.out.println();
+        }
+        
+        // 클러스터 중심값 얻기
+        List<CareGiver> clusterCentroids = cgc.getClusterCentroids();
+        // 클러스터 중심값 활용 예시
+        for (int i = 0; i < clusterCentroids.size(); i++) {
+            CareGiver centroid = clusterCentroids.get(i);
+            System.out.println("Cluster " + i + " centroid: " + centroid);
+        }
+        
+        int num = clusteringService.getMatchingCareGivers(clusterCentroids, formData);
+        List<CareGiver> result = clusters.get(num);
+        
+        // 클러스터링 결과를 클라이언트로 반환
+        return result;
+    }
 	    
 
 
-	
-//	    @PostMapping("/medicalCenter/careGivers")
-//	    public ResponseEntity<String> getCareGiverRecommendation(@RequestBody CareGiver careGiver) {
-//	        // 클라이언트로부터 받은 설문조사 데이터를 활용하여 요양사 추천 로직을 수행
-//	        String recommendation = careGiverService.getRecommendation(careGiver);
-//	        return ResponseEntity.ok(recommendation);
-//	    }
 }
 	
 
