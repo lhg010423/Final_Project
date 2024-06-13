@@ -30,5 +30,23 @@ public interface MemberMapper {
 
 	Examination selectSignUp(Examination exam);
 
+	/** 회원정보 수정 메서드
+	 * @param inputMember
+	 * @return
+	 */
+	int updateInfo(Member inputMember);
+	
+	/** 아이디 중복검사 mapper
+	 * @param memberId
+	 * @return count
+	 */
+	int checkId(String memberId);
+
+	/** 회원가입 sql 
+	 * @param inputMember
+	 * @return result
+	 */
+	int signUpForm(Member inputMember);
+
 	
 }

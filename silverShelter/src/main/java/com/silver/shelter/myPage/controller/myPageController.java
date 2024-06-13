@@ -33,10 +33,11 @@ public class myPageController {
 	 * model.addAttribute("loginMember",loginMember); return "myPage/myPage"; }
 	 */
 	
-	@GetMapping("myPage")
+	@GetMapping("myInfo")
 	public String myPageMapping() {
 		
-		return "myPage/myPage";
+		return "myPage/myInfo";
 	}
 
+	
 }

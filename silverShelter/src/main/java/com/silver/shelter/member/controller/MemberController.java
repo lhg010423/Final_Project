@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
+
 import com.silver.shelter.member.model.service.MemberService;
 
 import jakarta.servlet.http.Cookie;
@@ -35,7 +36,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	private final MemberService service;
-
 	
 	
 	/** 로그인 페이지로 이동
@@ -127,7 +127,13 @@ public class MemberController {
 	}
 	
 	
-   @PostMapping("idResult") 
+   /** 아이디 찾기 결과
+     * @param member
+     * @param model
+     * @param ra
+     * @return
+     */
+@PostMapping("idResult") 
    public String foundId(@ModelAttribute Member member,
 		   				 Model model,
 		   				 RedirectAttributes ra) {
@@ -181,7 +187,7 @@ public class MemberController {
 		return "member/signUp";
 	}
 	
-	/** 비밀번호 찾기 브라우저에서 아이디와 이메일을 입력받아 서버의 값과 동일한지 조회하는 메서드
+	/** 비밀번호 찾기 - 아이디와 이메일을 입력받아 서버의 값과 동일한지 조회하는 메서드
 	 * @return
 	 */
 	@PostMapping("checkIdTel")
@@ -217,6 +223,40 @@ public class MemberController {
 
 	    return resp;
 	}
+	
+	
+	/** 내 정보 - 정보변경 처리 메서드
+	 * @return
+	 */
+	@PostMapping("changeInfo")
+	public String updateInfo(@ModelAttribute Member inputMember,
+							 @RequestParam("memberAddress") String[] memberAddress,
+							 RedirectAttributes ra) {
+		
+		
+		boolean result = service.updateInfo(inputMember, memberAddress);
+		
+		String path;
+        String message;
+
+        if (result) { // 성공
+        	
+        	log.info("asdfasdf");
+        	
+            message = inputMember.getMemberName() + " 님의 정보가 성공적으로 수정되었습니다!";
+            path = "/";  // 수정 후 리디렉트할 경로
+        } else { // 실패
+        	
+        	log.info("asdfasdf2222222");
+            message = "정보 수정에 실패하였습니다.";
+            path = "/myPage/myInfo";  // 수정 실패 시 다시 수정 페이지로 리디렉트
+        }
+
+        ra.addFlashAttribute("message", message);
+        return "redirect:" + path;
+	}
+	
+	
 	
 	/** 탈퇴를 위한 정보 컨트롤러 ( 사정상 resources/templates/myPage/secessionForm 을 이쪽으로 땡겨왔음)
 	 * @param map
