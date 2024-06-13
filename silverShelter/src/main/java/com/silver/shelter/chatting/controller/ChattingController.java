@@ -30,7 +30,6 @@ public class ChattingController {
 
 	private final ChattingService service;
 	
-	
 	@GetMapping("list")
 	public String chatting(@SessionAttribute("loginMember")Member loginMember,
 						   Model model) {

@@ -4,12 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.getElementById('reserve-button');
     const clubCode = document.getElementById('clubCode');
     const timeList = document.getElementsByName('time');
-
+    
     // 전송할 데이터를 저장할 객체
     const obj = {
         clubResvTime: '',
         clubCode: clubCode.value
     };
+
+    // 이전에 선택된 시간 값을 저장할 변수
+    let previousSelectedTime = null;
 
     // 오늘 날짜를 YYYY-MM-DD 형식으로 구하기
     const today = new Date();
@@ -25,10 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 년도를 추출
             const year = date.getFullYear();
-
             // 월을 추출하고 두 자리 문자열로 변환 (1월은 '01', 12월은 '12')
             const month = String(date.getMonth() + 1).padStart(2, '0');  // getMonth()는 0부터 시작하므로 +1 필요
-
             // 일을 추출하고 두 자리 문자열로 변환 (1일은 '01', 31일은 '31')
             const day = String(date.getDate()).padStart(2, '0');
 
@@ -47,13 +48,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedTime = time.value;
                 const selectedDateTime = new Date(`${year}-${month}-${day}T${selectedTime}`);
 
+                const label = document.querySelector(`label[for='${time.id}']`);
+
                 if (selectedDateTime < currentTime) {
                     time.disabled = true;
-                    // 수정해야함 
-                    time.classList.add('name');
+                    if (label) {
+                        label.classList.add("timeout");
+                    }
                 } else {
                     time.disabled = false;
-                    time.style.backgroundColor = '';
+                    if (label) {
+                        label.classList.remove("timeout");
+                    }
                 }
             });
         }
@@ -66,9 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(selectedTime);
             console.log(clubCode.value); // clubCode 값 확인
 
-            // 날짜와 시간을 합쳐서 객체에 저장
-            if (window.selectedDate) {
-                obj.clubResvTime = window.selectedDate + ' ' + selectedTime;
+            const label = document.querySelector(`label[for='${time.id}']`);
+
+            // 같은 시간 두 번 클릭 시 값 지우기
+            if (previousSelectedTime === selectedTime) {
+                obj.clubResvTime = '';
+                previousSelectedTime = null;
+                console.log("시간 선택 취소됨");
+                e.target.checked=false;
+
+
+            } else {
+                // 날짜와 시간을 합쳐서 객체에 저장
+                if (window.selectedDate) {
+                    obj.clubResvTime = window.selectedDate + ' ' + selectedTime;
+                }
+                previousSelectedTime = selectedTime;
             }
             console.log(obj.clubResvTime);
         });

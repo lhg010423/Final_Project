@@ -18,7 +18,6 @@ public interface ChattingMapper {
 	 */
 	List<ChattingRoom> selectRoomList(int memberNo);
 	
-
 	/** 채팅 상대 검색
 	 * @param map
 	 * @return
@@ -49,7 +48,6 @@ public interface ChattingMapper {
      */
     public List<Message> selectMessageList(Object object);
  
-    
     /** 채팅 입력
      * @param msg
      * @return
