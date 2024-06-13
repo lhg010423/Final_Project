@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -94,14 +95,24 @@ public interface AdminMapper {
 	/** 요양사 전체 수 조회
 	 * @return
 	 */
-	int caregiverAllCount();
+	int caregiversAllCount();
 
 
-	/** 요양사 데이터 전체 조회
+	/** 요양사 전체 조회
 	 * @param rowBounds
 	 * @return
 	 */
-	List<Member> caregiverAllSelect(RowBounds rowBounds);
+	List<CareGiver> caregiversAllSelect(RowBounds rowBounds);
+
+
+	/** 요양사 검색한 결과 수 조회
+	 * @param paramMap
+	 * @return
+	 */
+	int caregiversSearchCount(Map<String, Object> paramMap);
+
+
+	List<CareGiver> caregiversSearchSelect(Map<String, Object> paramMap, RowBounds rowBounds);
 
 
 	

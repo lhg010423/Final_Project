@@ -293,26 +293,25 @@ public class AdminController {
 			) {
 		
 		// 결과 저장용 Map
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = null;
 		
 		// 검색 안했을 때
 		if(paramMap.get("key") == null) {
-			map = service.caregiverAllSelect(cp);
+			map = service.caregiversAllSelect(cp);
 			
 			
 		// 검색 했을 때
 		} else {
-//			map = service.caregiverSearchSelect(paramMap, cp);
+			map = service.caregiversSearchSelect(paramMap, cp);
 		
 		}
 		
 		model.addAttribute("pagination", map.get("pagination"));
-		model.addAttribute("caregiverList", map.get("caregiverList"));
+		model.addAttribute("caregiversList", map.get("caregiversList"));
 		
 		// 그냥 확인용 코드
-		System.out.println(map.get("memberList"));
+		System.out.println(map.get("caregiversList"));
 		System.out.println(map.get("pagination"));
-		
 		
 		
 		return "admin/caregiver";

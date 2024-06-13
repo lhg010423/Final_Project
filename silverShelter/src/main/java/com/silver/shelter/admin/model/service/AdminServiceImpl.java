@@ -14,6 +14,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.silver.shelter.admin.model.mapper.AdminMapper;
 import com.silver.shelter.board.model.dto.Pagination;
+import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -275,12 +276,12 @@ public class AdminServiceImpl implements AdminService{
 	 *
 	 */
 	@Override
-	public Map<String, Object> caregiverAllSelect(int cp) {
+	public Map<String, Object> caregiversAllSelect(int cp) {
 		
 		// 전체 요양사 수 조회
-		int caregiverCount = mapper.caregiverAllCount();
+		int caregiversCount = mapper.caregiversAllCount();
 		
-		Pagination pagination = new Pagination(cp, caregiverCount);
+		Pagination pagination = new Pagination(cp, caregiversCount);
 		
 		// 한페이지에 보여줄 게시글 수 (10개)
 		int limit = pagination.getLimit();
@@ -293,16 +294,46 @@ public class AdminServiceImpl implements AdminService{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 	      
 	    // 요양사 관리 페이지에서 Examination테이블의 값들을 축력함
-	    List<Member> caregiverList = mapper.caregiverAllSelect(rowBounds);
+	    List<CareGiver> caregiversList = mapper.caregiversAllSelect(rowBounds);
 	      
 	    Map<String, Object> map = new HashMap<>();
 	    
 	    map.put("pagination", pagination);
-	    map.put("caregiverList", caregiverList);
+	    map.put("caregiversList", caregiversList);
 		
 		
 		
-		return null;
+		return map;
+	}
+
+
+	/** 요양사 검색한 결과 조회
+	 *
+	 */
+	@Override
+	public Map<String, Object> caregiversSearchSelect(Map<String, Object> paramMap, int cp) {
+		
+		// 탈퇴하지 않았고 검색조건에 맞는 회원 수 조회하기
+	    int caregiversCount = mapper.caregiversSearchCount(paramMap);
+	      
+	    log.info("caregiversCount {}" + caregiversCount);
+	      
+	      
+	    Pagination pagination = new Pagination(cp, caregiversCount);
+	      
+	    int limit = pagination.getLimit();
+	    int offset = (cp -1) * limit;
+	    RowBounds rowBounds = new RowBounds(offset, limit);
+	      
+	      
+	    List<CareGiver> caregiversList = mapper.caregiversSearchSelect(paramMap, rowBounds);
+	      
+	    Map<String, Object> map = new HashMap<>();
+	      
+	    map.put("pagination", pagination);
+	    map.put("caregiversList", caregiversList);
+	      
+		return map;
 	}
    
 }

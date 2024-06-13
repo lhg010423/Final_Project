@@ -68,7 +68,14 @@ public interface AdminService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> caregiverAllSelect(int cp);
+	Map<String, Object> caregiversAllSelect(int cp);
+
+	/** 요양사 검색한 결과 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> caregiversSearchSelect(Map<String, Object> paramMap, int cp);
 
 	
 	
