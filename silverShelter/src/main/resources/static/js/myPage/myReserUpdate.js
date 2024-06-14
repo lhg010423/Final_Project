@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     console.log("몇월며칠이에요? ",clubResvTime);
                     // 데이터가 있을 경우 예약 목록 표시
+                    const selectList = ["게스트룸", "골프", "수영", "사우나", "게이트볼", "영화", "도예", "십자수"];
+                    const selectTimeList = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"];
+                    
                     data.forEach(reservation => {
                         const div = document.createElement('div');
                         div.classList.add('reservation');
@@ -127,8 +130,20 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div class="reservation-fontList">
                                     <p class="reservation-clubName">${reservation.clubName}</p>
                                     <p class="reservation-clubResvTime">${reservation.clubResvTime}</p>
+                                    <select>
+                                        ${selectList.map(option => `<option value="${option}" id="selectCommunication">${option}</option>`).join('')}
+                                    </select>
+                                    <input type="date" id="updateDate">
+                                    <select>
+                                        ${selectTimeList.map(option => `<option value="${option}" id="selectTime">${option}</option>`).join('')}
+                                    </select>
+                                    
                                 </div>
                             </div>
+
+                            <div >
+                                <button>삭제</button>
+                            <div/>
                             `;
                         reservationList.appendChild(div);
                     });
@@ -148,7 +163,6 @@ const updateBtn = document.querySelector("#reservationUpdate");
 updateBtn.addEventListener("click",() => {
     // http://localhost/myPage/myInfo/update
 
-    location.href = location.href +"/update";
 
 });
 
