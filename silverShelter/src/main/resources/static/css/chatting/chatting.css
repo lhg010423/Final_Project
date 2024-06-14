@@ -19,15 +19,17 @@
 #chatRoomTitle {
 	width: 250px;
 }
-
+.horizen{
+	color: white;
+}
 /* 추가 버튼 */
 #addTarget{
-    margin: 30px 0 0 70px;
-    width: 100px;
-    height: 30px;
+    padding: 0;
+    width: 100%;
+    height: 45px;
     background-color: #455BA7;
     border: none;
-    border-radius: 10px;
+    
     font-weight: bold;
     color: white;
     cursor: pointer;
@@ -39,15 +41,14 @@
     position: fixed;
     margin: auto;
     top: 0;
-    bottom: 0;
-    left: 0;
+    bottom: -55px;
+    left: -180px;
     right: 0;
-    z-index: 1200;
+    z-index: 900;
     background-color: #f5f5f5;
-    border: 5px inset #455ba8;
-    width: 450px;
+    border: 1px solid grey;
+    width: 350px;
     height: 600px;
-
 }
 
 .popup-layer-close{ display: none;  }
@@ -83,7 +84,7 @@
 #resultArea{list-style: none;}
 
 .result-row{
-	width: 100%;
+	width: 97.5%;
 	height: 50px;
 	padding: 5px;
 	cursor: pointer;
@@ -115,9 +116,13 @@
 /*  채팅 목록 */
 .chatting-list{
 	width: 30%;
+	
 	border : 1px solid black;
+	border-radius: 12px 0 0 12px;
+	
 	list-style: none;
 	overflow: auto;
+	padding: 0;
 }
 
 .chatting-item{
@@ -126,6 +131,8 @@
 	padding: 5px 0;
 	border-bottom: 1px solid black;
 	cursor: pointer;
+	
+	background-color: rgb(122, 131, 211);
 }
 
 .chatting-item * {
@@ -133,18 +140,26 @@
 }
 
 .chatting-item > div{ height: 100%; text-align: center;}
-.item-header{ width : 25%; }
+.item-header{ 
+	width : 25%; 
+}
+
 .item-body{ 
 	width : 75%; 
 	padding : 2px 0;
 }
+
 .item-body> p{ 
 	display: flex;
 	justify-content: space-between;
 }
 
+
+.chatting-item:hover{
+	background-color: rgb(244, 244, 244);
+}
 .chatting-item.select{
-	background-color: #ddd;
+	background-color: rgb(244, 244, 244);
 }
 
 
@@ -216,9 +231,10 @@
 }
 
 .display-chatting {
-	width: 100%;
+	width: 97%;
 	height: 570px;
 	border: 1px solid black;
+	border-left: none;
 	overflow: auto;
 	list-style: none;
 	padding: 10px 10px;
@@ -250,20 +266,45 @@
 
 
 .input-area {
+	display: flex;
 	height: 80px;
 	width: 100%;
-	display: flex;
 }
 
 #inputChatting {
 	padding: 3px;
 	font-size: 1.3em;
-	width: 80%;
+	flex-grow: 1;
+	height: 64%;
 	resize: none;
+	width: 90%;
+	border-radius: 0;
+	border-top:none;
+	border-left: none;
+	border-right: 1px solid #ccc; /* 버튼과의 구분선 추가 */
+	outline: none;
+}
+
+
+#audioPlayback{
+	width: 0%;
+}
+#recordButton{
+	width: 10%;
+	height: 72%;
+	border-radius: 0;
+	
+	
 }
 
 #send {
-	width: 20%;
+	width: 10%;
+	height: 72%;
+	border-radius: 0;
+	
+	
+	
+	
 }
 
 .my-chat {

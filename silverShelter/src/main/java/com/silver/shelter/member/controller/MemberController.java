@@ -107,7 +107,15 @@ public class MemberController {
 		}
 		
 		
-		return "redirect:/";
+		 if (loginMember.getMemberRole() == '1') {
+			 
+		        return "redirect:/admin/adminMain";
+		        
+	    } else {
+	    	
+		        return "redirect:/";
+	    }
+		
 	}
 	
 	
