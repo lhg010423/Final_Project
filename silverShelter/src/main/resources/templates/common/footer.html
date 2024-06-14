@@ -7,35 +7,29 @@ footer {
 	background-color: #3C3C3B;
 	display: flex;
 
-	justify-content: space-around;
+	justify-content: center;
 	align-items: flex-start;
-	flex-direction: column;
-}
-
-.line{
 	
-	width:90%;
-	border: 1px solid white;
-
+	
 }
 
-footer > p {
+
+
+footer p {
 
 	color: #FAFAFA;
-	font-weight: bold;
-
-	margin: 16px 0;
+	
+	
+	margin: 14px 0;
 }
 
-footer > article > * {
 
-	font-size: 16px;
-}
   
 footer a {
 
     color: #FAFAFA;
-	text-decoration: none;
+	
+	font-weight: 100;
 }
 
 footer span {
@@ -44,29 +38,67 @@ footer span {
 	padding: 0 10px;
 }
 
-.logo{
+.logo-footer{
 
-    width: 5%;
-	height: 32%;
+    width: 50%;
+	height: 85%;
+}
+
+.footer-section-1{
+	width: 20vw;
+	color: white;
+	font-size: 14px;
+}
+
+.emptyDiv{
+	height: 4vh;
+}
+
+.logo-div{
+	display: flex;
+}
+.footer-section-2{
+	display: flex;
+	flex-direction: column;
+	
+	height: 100%;
+	justify-content: space-evenly;
+}
+
+.footer-section-2 article{
+	color: white;
+	font-size: 14px;
 }
 
 </style>
 
 <footer>
 	
-	<div class="line"> </div>
-    <img src="/images/main/Logo4.png" class="logo">
-    <p>Copyright &copy; nobody Copyright but, we have.</p>
-  
-    <article>
-        <a href="#">프로젝트 소개</a>    
-            <span>|</span>
-        <a href="#">이용약관</a>    
-            <span>|</span>
-    	<a href="#">개인정보처리방침</a>    
-    	    <span>|</span>
-		<a href="#">고객센터</a>    
-	</article>
+	
+	<secton class="footer-section-1">
+		<div class="emptyDiv"></div>
+		<div class="logo-div">
+			<img src="/images/main/Logo4.png" class="logo-footer">
+		</div>
+		<p>ⓒGolden Prestige Inc. All Rights Reserved.</p>
+	</secton>
+	
+	<section class="footer-section-2">
+		<article>
+			대표이사 : 이 형 구<br>			<br>
+			소재지 : 서울 중구 남대문로 1 그레이츠청계 3층 E반<br>
+			사업자 번호 :  050-24-0224-997
+		</article>
+		
+	    <article>
+	        
+	        <a href="#">이용약관</a>    
+	            <span> </span>
+	    	<a href="#">개인정보처리방침</a>    
+	    	    <span> </span>
+			<a href="#">고객센터</a>    
+		</article>
+	</section>
 </footer>
 
 <script th:inline="javascript">

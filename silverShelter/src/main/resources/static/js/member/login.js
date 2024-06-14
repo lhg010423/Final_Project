@@ -25,36 +25,24 @@ loginArea.addEventListener("submit", e => {
 	
 });
 
-// 로그인 아이디 저장 ( 안됨 )
+// 쿠키 가져오기 함수
 const getCookie = (key) => {
-	
-	const cookies = document.cookie;
-	
-	const cookieList = cookies.split(";").map( el => el.split ("=") );
-	
-	const obj = {};
-	
-	for(let i = 0; i < cookieList.length; i++ ){
-		const k = cookieList[i][0];
-		const v = cookieList[i][0];
-		obj[k] = v;
-		
-	}
-	
-	
-	return obj[key];
-	
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+        const [k, v] = cookie.split("=");
+        if (k === key) return decodeURIComponent(v); // 쿠키 값을 디코딩. 못알아듣지만 써봄
+    }
+    return null;
 }
 
-const loginId = document.querySelector("#loginAaer input [name ='memberId']");
-
-if (loginId != null){
-	
-	const saveId = getCookie("saveId");
-	
-	if(saveId != undefined){
-		loginId.value = saveId;
-		
-		document.querySelector("input[name='saveId']").checked =true;
-	}
+// 저장된 쿠기가 있다면 멤버 아이디 저장할거심
+const autoFillMemberId = () => {
+    const saveId = getCookie("saveId");
+    if (saveId) {
+        memberId.value = saveId;
+        document.querySelector("input[name='saveId']").checked = true;
+    }
 }
+
+
+document.addEventListener("DOMContentLoaded", autoFillMemberId);

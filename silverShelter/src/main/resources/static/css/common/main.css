@@ -14,7 +14,7 @@
 	
    	max-width: 100%;
     margin: 0;
- }
+}
 
 
 
@@ -27,8 +27,8 @@
     object-fit: cover;
 }*/
 
-#bg-video {
-  /* 화면 전체를 채우도록 설정 */
+#bgvideo {
+  
   position:fixed;
   right: 0;
   bottom: 0;
@@ -105,8 +105,9 @@
 
 .carousel-inner {
     display: flex;
-    transition: transform 0.5s ease;
-
+    
+    transition: transform 0.5s ease-in-out;
+	
 
 
 }
@@ -500,6 +501,8 @@
 	justify-content: space-between;
 }
 
+
+
 .section-5-4{
 	
 	display: flex;
@@ -641,7 +644,7 @@
 	position: relative;
     min-height: 25rem;
     border-top: 1px solid rgb(249, 249, 249);
-    background: rgb(251, 251, 251);
+    background: rgb(255, 255, 240);
     
     width: 22vw;
 }

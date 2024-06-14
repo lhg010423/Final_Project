@@ -157,7 +157,7 @@ function getCurrentDate(){
     return `${year}${month}${day}`;
 }
 
-console.log(getCurrentDate());
+//console.log(getCurrentDate());
 
 
 async function getServiceKey() {
@@ -170,7 +170,7 @@ async function getServiceKey() {
         
 
     } catch(err){
-        console.log("getServiceKey의 에러" + err)
+        //console.log("getServiceKey의 에러" + err)
     }
 }
 
@@ -190,7 +190,7 @@ async function fetchData(){
 
     const servicekey = await getServiceKey(); // 비동기 요청 1번째의 응답이 올대까지 기다림 
 
-    console.log("serviceKey : ", servicekey);
+    //console.log("serviceKey : ", servicekey);
 
     const url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
 
@@ -209,7 +209,7 @@ async function fetchData(){
 
     });
 
-    console.log(`${url}?${queryParams}`);
+    //console.log(`${url}?${queryParams}`);
 
     // fetch 요청 
 
@@ -218,7 +218,7 @@ async function fetchData(){
         const response = await fetch(`${url}?${queryParams}`);
         const result = await response.json();
 
-        console.log(result);
+        //console.log(result);
 
 
         const obj = result.response.body.items.item.reduce((acc, data) => {
@@ -262,7 +262,7 @@ async function fetchData(){
 
     } catch(err){
 
-        console.log(err);
+        //console.log(err);
     }
 }
 
