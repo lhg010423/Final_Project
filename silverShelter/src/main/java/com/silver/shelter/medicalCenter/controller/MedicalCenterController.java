@@ -166,14 +166,13 @@ public class MedicalCenterController {
 
     private final KMeansClusteringService clusteringService;
     private final CareGiverClustering cgc = new CareGiverClustering();
-    private static final String CSV_FILE_PATH = "C:\\goldenPrestige\\csv\\caregiver_data1.csv";
     // 클라이언트에서 전달된 데이터를 기반으로 클러스터링 수행하고 결과를 반환
     @PostMapping("careGivers")
     @ResponseBody
     public List<CareGiver> clusterCaregivers(@RequestBody SurveyForm formData) throws IOException{
         // 클라이언트에서 전달된 데이터를 기반으로 클러스터링 수행
 
-        List<CareGiver> caregivers1 = clusteringService.preprocessData(CSV_FILE_PATH);
+        List<CareGiver> caregivers1 = clusteringService.getAllCareGiversFromDatabase();
         
         
         // 클러스터링 실행

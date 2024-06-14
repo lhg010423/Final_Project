@@ -29,7 +29,7 @@ def generate_insert_queries(caregivers_data):
     return insert_queries
 
 # CSV 파일 경로 설정 (수정 필요)
-file_path = 'silverShelter\\src\\main\\resources\\caregiver_data1.csv'
+file_path = 'silverShelter\\src\\main\\python\\caregiver_data1.csv'
 
 # CSV 파일 읽기
 caregivers_data = read_caregivers_csv(file_path)
