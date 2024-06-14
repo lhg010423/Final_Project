@@ -903,3 +903,184 @@ li {
 .form-group {
     margin-bottom: 15px;
 }
+
+/* 예약확인 */
+
+.reservation-section{
+    display: flex;
+    flex-direction: row;
+}
+
+#calendar1 {
+    width: 700px ;
+    height: 700px ;
+}
+
+.jsuites-calendar {
+    font-size: 25px ;
+    height: 100% ; 
+}
+
+.jsuites-calendar .jcalendar {
+    width: 100% ;
+    height: 100% ;
+    display: flex;
+    flex-direction: column;
+}
+.jcalendar-set-day{
+    height: 80px;
+    font-size: 18px; /* 글꼴 크기 */
+}
+.jsuites-calendar .jcalendar-header,
+.jsuites-calendar .jcalendar-footer {
+    flex: 0 0 auto;
+}
+
+.jsuites-calendar .jcalendar-body {
+    width: 100% ;
+    height: 100% ;
+    flex: 1 1 auto; 
+}
+
+/* 예약이 있다면 색이 변경됨 */
+.jcalendar-set-day .resevColor {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1A2050;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.jcalendar-weekday {
+    width: 120px;
+}
+
+.divTest{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+}
+
+/* ------------------------------------------ */
+
+/* 예약 목록 들 */
+.reservation-section{
+    display: flex;
+    flex-direction: column;
+}
+.border-container{
+    border: 1px solid #EEEE;
+    border-radius: 3px;
+}
+.reservationList{
+    display: flex;
+}
+
+.reservation-list{
+    padding-left: 10px;
+}
+
+/* 요양사매칭 */
+.caregiver-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.caregiver-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.caregiver-table th,
+.caregiver-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+.caregiver-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.caregiver-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.caregiver-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.caregiver-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 설문조사 */
+
+#surveyForm {
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+#serveyFormTit {
+    color: #009879;
+    text-align: center;
+}
+
+#surveyForm p {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#surveyForm input[type="radio"] {
+    margin-right: 10px;
+}
+
+#surveyForm label {
+    cursor: pointer;
+}
+
+#surveyForm button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#surveyForm button[type="submit"]:hover {
+    background-color: #007a65;
+}
+
+.caregiver-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.caregiver-table th, .caregiver-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.caregiver-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}

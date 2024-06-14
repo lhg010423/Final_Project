@@ -9,6 +9,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +25,21 @@ import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.careGiver.model.SurveyForm;
 import com.silver.shelter.careGiver.service.CareGiverClustering;
 import com.silver.shelter.careGiver.service.KMeansClusteringService;
+import com.silver.shelter.careGiver.service.caregiverService;
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
 import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.service.DoctorService;
 import com.silver.shelter.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("medicalCenter")
 @SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
+@Slf4j
 public class MedicalCenterController {
 	
     @Autowired
@@ -107,6 +113,13 @@ public class MedicalCenterController {
 
         return "medicalCenter/dateResult";
     }
+	
+	@GetMapping("reservation/result")
+	public String getdrnamebydrno(@RequestParam("doctorNo") String doctorNo, Model model) {
+		// 서비스 호출 및 로직 처리
+		String doctorName = doctorService.getdrnamebydrno(doctorNo);
+		return doctorName;
+	}
 	
 
 
@@ -203,7 +216,51 @@ public class MedicalCenterController {
         return result;
     }
 	    
+    @Autowired
+    private com.silver.shelter.careGiver.service.caregiverService caregiverService;
 
+    @PostMapping("/selectCaregiver")
+    @ResponseBody
+    public ResponseEntity<?> selectCaregiver(@RequestParam("caregiverId") int caregiverId) {
+        try {
+            // 요양사 정보 조회
+            Map<String, Object> caregiverInfo = caregiverService.getCaregiverInfoById(caregiverId);
+
+            if (caregiverInfo == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 ID의 요양사 정보를 찾을 수 없습니다.");
+            }
+
+            // 요청에 대한 응답 데이터
+            return ResponseEntity.ok().body(caregiverInfo);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+        }
+    }
+
+    
+	@ResponseBody
+	@GetMapping("getReservedDates")
+	public List<DoctorAppointment> getReservedDates(@SessionAttribute("loginMember")Member loginMember) {
+		
+		
+		return doctorService.getReservedDates(loginMember.getMemberNo());
+	}
+	
+	@ResponseBody
+	@PostMapping("getReservationsForDate")
+	public List<DoctorAppointment> getReservationsForDate(@SessionAttribute("loginMember")Member loginMember,
+														@RequestBody String clubResvTime) {
+		
+		log.info("현재 클릭된 시간은? == {} ", clubResvTime);
+		
+		DoctorAppointment reservation = DoctorAppointment.builder()
+				.drApptTime(clubResvTime)
+				.memberNo(loginMember.getMemberNo())
+				.build();
+		
+		
+		return doctorService.getReservationsForDate(reservation);
+	}
 
 }
 	

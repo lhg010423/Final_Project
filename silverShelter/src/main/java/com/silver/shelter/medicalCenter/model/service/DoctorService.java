@@ -19,4 +19,10 @@ public interface DoctorService {
 
 	String getDrRoomByDoctorNo(int docNo);
 
+	List<DoctorAppointment> getReservationsForDate(DoctorAppointment reservation);
+
+	List<DoctorAppointment> getReservedDates(int memberNo);
+
+	String getdrnamebydrno(String doctorNo);
+
 }

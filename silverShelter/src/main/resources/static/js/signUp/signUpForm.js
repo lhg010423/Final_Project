@@ -265,9 +265,19 @@ const checkObj ={
 }
 */
 
-const signUpForm = document.querySelector("#infoForm");
 
-signUpForm.addEventListener("submit", () => {
+/* ---------------------------- */
+
+document.getElementById('yesBtn').addEventListener('click', function() {
+    isItOkay();
+});
+
+document.getElementById('noBtn').addEventListener('click', function() {
+    isItOkay();
+});
+
+
+function isItOkay() {
 
 	for(let key in checkObj){
 		
@@ -295,9 +305,4 @@ signUpForm.addEventListener("submit", () => {
 	}
 	
 	
-});
-
-
-
-/* ---------------------------- */
-
+};

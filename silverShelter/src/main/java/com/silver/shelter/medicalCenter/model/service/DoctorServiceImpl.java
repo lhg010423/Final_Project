@@ -45,4 +45,19 @@ public class DoctorServiceImpl implements DoctorService{
 	public String getDrRoomByDoctorNo(int docNo) {
 		return mapper.getDrRoomByDoctorNo(docNo);
 	}
+
+	@Override
+	public List<DoctorAppointment> getReservationsForDate(DoctorAppointment reservation) {
+		return mapper.getReservationsForDate(reservation);
+	}
+
+	@Override
+	public List<DoctorAppointment> getReservedDates(int memberNo) {
+		return mapper.getReservedDates(memberNo);
+	}
+
+	@Override
+	public String getdrnamebydrno(String doctorNo) {
+		return mapper.getdrnamebydrno(doctorNo);
+	}
 }
