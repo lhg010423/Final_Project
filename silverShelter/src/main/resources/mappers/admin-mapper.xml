@@ -78,7 +78,7 @@
 			MEMBER_EMAIL, MEMBER_ADDRESS, MEMBER_TEL,
 			GUARDIAN_TEL, CAREGIVERS_NAME
 		FROM "MEMBER"
-		JOIN "CAREGIVERS" USING(CAREGIVERS_NO)
+		LEFT JOIN "CAREGIVERS" USING(CAREGIVERS_NO)
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 
@@ -182,82 +182,63 @@
 	<select id="caregiversAllSelect">
 		SELECT *
 		FROM "CAREGIVERS"
-		
+	</select>
+	
+	
+	<select id="caregiversSearchCount">
+		SELECT COUNT(*)
+		FROM CAREGIVERS
+		WHERE
 		<choose>
-			
-			<when test='key == "n"'>
-				WHERE CAREGIVERS_NAME LIKE '%' || #{query} || '%'
+			<when test='key == "name"'>
+				CAREGIVERS_NAME LIKE '%' || #{query} || '%'
 			</when>
-
-			<!-- <when test='key == "'>
-			</when> -->
 			
+			<when test='key == "experience"'>
+				CAREGIVERS_EXPERIENCE = #{query}
+			</when>
+			
+			<when test='key == "workHours"'>
+				CAREGIVERS_WORK_HOURS = #{query}
+			</when>
+			
+			<when test='key == "jobDuties"'>
+				CAREGIVERS_ROLE = #{query}
+			</when>
 		</choose>
 	</select>
 	
 	
-	<select id="caregiversSearchCount" resultType="int">
-	    SELECT COUNT(*)
-	    FROM CAREGIVERS
-	    WHERE 1=1
-	    <!-- 이름 검색 -->
-	    <if test="name != null and name != ''">
-	        AND CAREGIVERS_NAME LIKE '%' || #{name} || '%'
-	    </if>
-	    <!-- 경력 검색 -->
-	    <if test="caregiversExperience != null and caregiversExperience.length() > 0">
-	        AND CAREGIVERS_EXPERIENCE IN
-	        <foreach item="career" index="index" collection="caregiversExperience" open="(" separator="," close=")">
-	            #{career}
-	        </foreach>
-	    </if>
-	    <!-- 근무 시간 검색 -->
-	    <if test="caregiversWorkHours != null and caregiversWorkHours.length() > 0">
-	        AND CAREGIVERS_WORK_HOURS IN
-	        <foreach item="workHour" index="index" collection="caregiversWorkHours" open="(" separator="," close=")">
-	            #{workHour}
-	        </foreach>
-	    </if>
-	    <!-- 담당 업무 검색 -->
-	    <if test="caregiversRole != null and caregiversRole.length() > 0">
-	        AND CAREGIVERS_ROLE IN
-	        <foreach item="role" index="index" collection="caregiversRole" open="(" separator="," close=")">
-	            #{role}
-	        </foreach>
-	    </if>
+	<select id="caregiversSearchSelect">
+		SELECT *
+		FROM CAREGIVERS
+		WHERE
+		<choose>
+			<when test='key == "name"'>
+				CAREGIVERS_NAME LIKE '%' || #{query} || '%'
+			</when>
+			
+			<when test='key == "experience"'>
+				CAREGIVERS_EXPERIENCE = #{query}
+			</when>
+			
+			<when test='key == "workHours"'>
+				CAREGIVERS_WORK_HOURS = #{query}
+			</when>
+			
+			<when test='key == "jobDuties"'>
+				CAREGIVERS_ROLE = #{query}
+			</when>
+		</choose>
 	</select>
 	
-	<select id="caregiversSearchSelect" resultType="CareGiver">
-	    SELECT *
-	    FROM CAREGIVERS
-	    WHERE 1=1
-	    <!-- 이름 검색 -->
-	    <if test="name != null and name != ''">
-	        AND CAREGIVERS_NAME LIKE '%' || #{name} || '%'
-	    </if>
-	    <!-- 경력 검색 -->
-	    <if test="caregiversExperience != null and caregiversExperience.length() > 0">
-	        AND CAREGIVERS_EXPERIENCE IN
-	        <foreach item="career" index="index" collection="caregiversExperience" open="(" separator="," close=")">
-	            #{career}
-	        </foreach>
-	    </if>
-	    <!-- 근무 시간 검색 -->
-	    <if test="caregiversWorkHours != null and caregiversWorkHours.length() > 0">
-	        AND CAREGIVERS_WORK_HOURS IN
-	        <foreach item="workHour" index="index" collection="caregiversWorkHours" open="(" separator="," close=")">
-	            #{workHour}
-	        </foreach>
-	    </if>
-	    <!-- 담당 업무 검색 -->
-	    <if test="caregiversRole != null and caregiversRole.length() > 0">
-	        AND CAREGIVERS_ROLE IN
-	        <foreach item="role" index="index" collection="caregiversRole" open="(" separator="," close=")">
-	            #{role}
-	        </foreach>
-	    </if>
+	
+	<!-- 요양사 상세조회 -->
+	<select id="caregiversDetailSelect">
+		SELECT *
+		FROM CAREGIVERS
+		WHERE CAREGIVERS_NO = #{caregiversNo}
 	</select>
-
 
 	
 	

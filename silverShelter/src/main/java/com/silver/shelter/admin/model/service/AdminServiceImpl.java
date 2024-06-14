@@ -328,12 +328,21 @@ public class AdminServiceImpl implements AdminService{
 	      
 	    List<CareGiver> caregiversList = mapper.caregiversSearchSelect(paramMap, rowBounds);
 	      
+	    System.out.println("caregiversList@@@@@@@@@@@@@@@@" + caregiversList);
+	    
+	    
 	    Map<String, Object> map = new HashMap<>();
 	      
 	    map.put("pagination", pagination);
 	    map.put("caregiversList", caregiversList);
 	      
 		return map;
+	}
+
+
+	@Override
+	public CareGiver caregiversDetailSelect(int caregiversNo) {
+		return mapper.caregiversDetailSelect(caregiversNo);
 	}
    
 }
