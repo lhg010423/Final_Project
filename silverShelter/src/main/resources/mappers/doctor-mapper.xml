@@ -36,4 +36,44 @@
         FROM CLINICROOM
         WHERE DOCTOR_NUMBER = #{docNo}
 	</select>
+	
+	<select id="selectReserv">
+		SELECT 
+		    DR_APPT_NO, 
+		    MEMBER_NO, 
+		    DOCTOR_NO, 
+		    DR_APPT_TIME, 
+		    DR_APPT_STATUS 
+		FROM 
+		    DOCTOR_APPOINTMENT
+		WHERE MEMBER_NO= #{memberNo}
+		AND TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') = #{clubResvTime}
+		ORDER BY DR_APPT_TIME
+	</select>
+	
+		<!-- 예약된 날짜 달력에 표시 -->			  
+	<select id="getReservedDates">
+		SELECT TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') drApptTime  
+		FROM DOCTOR_APPOINTMENT
+		WHERE MEMBER_NO= #{memberNo}
+	</select> 
+	
+	<!-- 예약된 예약리스트 가져오기 -->
+	<select id="getReservationsForDate">
+		SELECT DR_APPT_NO, 
+		    MEMBER_NO, 
+		    DOCTOR_NO,  
+		    DR_APPT_STATUS,  DR_APPT_TIME,
+		TO_CHAR(DR_APPT_TIME, 'HH24:MI') drApptTime
+		FROM DOCTOR_APPOINTMENT
+		WHERE MEMBER_NO= #{memberNo}
+		AND TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') = #{drApptTime}
+		ORDER BY DR_APPT_TIME
+	</select>
+	
+	<select id="getdrnamebydrno">
+		SELECT d.DOCTOR_NAME
+        FROM DOCTOR d
+        WHERE d.DOCTOR_NO = #{doctorNo}
+	</select>
 </mapper>
