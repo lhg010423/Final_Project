@@ -87,9 +87,22 @@ main {
     /* box-shadow:#3C3C3B; */
 }
 
+/* 게시글 종류 이동하는 공간 */
+.adminLeft-header {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    /* justify-content: center; */
+}
+
+/* 게시글 종류 이동 a태그 */
+.adminLeft-header a {
+    color: black;
+    text-decoration: none;
+} 
 
 /* 게시판 공간 띄우기 */
-.table-area {
+.board-area {
 
     box-sizing: border-box;
     padding: 50px;

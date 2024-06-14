@@ -115,6 +115,13 @@ public interface AdminMapper {
 	List<CareGiver> caregiversSearchSelect(Map<String, Object> paramMap, RowBounds rowBounds);
 
 
+	/** 요양사 상세조회
+	 * @param caregiversNo
+	 * @return
+	 */
+	CareGiver caregiversDetailSelect(int caregiversNo);
+
+
 	
 
 

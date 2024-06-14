@@ -8,16 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.silver.shelter.admin.model.service.AdminService;
+import com.silver.shelter.board.model.service.BoardService;
+import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 
 	private final AdminService service;
+	private final BoardService bs;
 	
 	
 	/** 한눈에 보기
@@ -199,6 +205,8 @@ public class AdminController {
 		
 		// 회원 상세정보 조회
 		Examination examInfo = service.examinationDetailSelect(paramMap.get("examId"));
+		
+		System.out.println(examInfo);
 
 		if (examInfo == null) {
 	        // 회원 정보가 없는 경우
@@ -275,16 +283,81 @@ public class AdminController {
 	/** 게시판 관리
 	 * @return
 	 */
-	@GetMapping("boardList")
-	public String boardList() {
+	@GetMapping("{boardCode:[0-9]+}")
+	public String boardList(
+			@PathVariable("boardCode") int boardCode,
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model,
+			@RequestParam Map<String, Object> paramMap
+			) {
+		
+		// 공지 게시글 조회한 결과 저장용 Map
+		Map<String, Object> map = null;
+		
+		// 검색 안했을 때
+		if(paramMap.get("key") == null) {
+			map = bs.boardAllSelect(boardCode, cp);
+			
+		// 검색 했을 때
+		} else {
+			
+			paramMap.put("boardCode", boardCode);
+			
+			System.out.println(paramMap);
+			
+			System.out.println(paramMap.get("key"));
+			
+			map = bs.boardSearchSelect(paramMap, cp);
+			
+		}
+		
+		model.addAttribute("pagination", map.get("pagination"));
+		model.addAttribute("boardList", map.get("boardList"));
+		
+		
 		return "admin/boardList";
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
+	public Map<String, Object> boardList(
+			@PathVariable("boardCode") int boardCode,
+			@PathVariable("boardNo") int boardNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			HttpSession session,
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Model model
+			
+			) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		return map;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/** 요양사 관리
 	 * @return
 	 */
-	@GetMapping("caregiver")
+	@GetMapping("caregivers")
 	public String caregiver(
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			Model model,
@@ -314,9 +387,30 @@ public class AdminController {
 		System.out.println(map.get("pagination"));
 		
 		
-		return "admin/caregiver";
+		return "admin/caregivers";
 	}
 	
+	@ResponseBody
+	@PostMapping("caregivers")
+	public Map<String, Object> caregivers(@RequestBody int caregiversNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		CareGiver caregiversInfo = service.caregiversDetailSelect(caregiversNo);
+		
+		
+		map.put("caregiversNo", caregiversInfo.getCaregiversNo());
+		map.put("caregiversName", caregiversInfo.getCaregiversName());
+		map.put("caregiversAge", caregiversInfo.getCaregiversAge());
+		map.put("caregiversGender", caregiversInfo.getCaregiversGender());
+		map.put("caregiversTel", caregiversInfo.getCaregiversTel());
+		map.put("caregiversExperience", caregiversInfo.getCaregiversExperience());
+		map.put("caregiversWorkHours", caregiversInfo.getCaregiversWorkHours());
+		map.put("caregiversRole", caregiversInfo.getCaregiversRole());
+		
+		
+		return map;
+	}
 	
 	
 }

@@ -18,7 +18,7 @@ document.getElementById("memberId").addEventListener("click", e => {
             e.preventDefault();
         } else {
 
-            // console.log(result);
+            console.log(result);
 
 
 
