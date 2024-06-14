@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.member.model.dto.Member;
@@ -94,5 +95,33 @@ public class myPageController {
 		return "myPage/myInfo";
 	}
 
+	@GetMapping("myInfo/update")
+	public String updateReserv(@SessionAttribute("loginMember")Member loginMember,
+								Model model,
+								RedirectAttributes ra) {
+		
+		
+		List<ClubReservation> reservationList = service.selectReserv(loginMember.getMemberNo());
+		
+		String path = null; 
+		String message = null;
+		
+		if(reservationList.isEmpty()) {
+			
+			message = "예약한 날짜가 없습니다.";
+			path = "redirect:/myPage/myInfo";
+			
+			ra.addFlashAttribute("message",message);
+			
+		} else {
+			
+			path = "myPage/updateReserv";
+			
+			model.addAttribute("reservationList",reservationList);
+			
+		}
+		return path;
+	}
+	
 	
 }

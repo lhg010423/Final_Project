@@ -17,7 +17,7 @@ public class ClubReservation {
 
 	private int clubCode; // 클럽 코드 
 	private int clubResvNo; // 
-	private int memberNo;  
+	private int memberNo; 
 	private String clubResvTime;  
 	private String clubLocation;
 	private String clubName;

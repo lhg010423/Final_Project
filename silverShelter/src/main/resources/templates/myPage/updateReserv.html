@@ -6,42 +6,38 @@
 
     <script src="https://jsuites.net/v5/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
-    <link rel="stylesheet" href="/css/myPage/myReserv.css">
+    <link rel="stylesheet" href="/css/myPage/myReservUpdate.css">
     <title>예약 확인</title>
 </head>
 <body>
     <div class="reservation-container">
 
         <div class="reservation-header">
-            <h1>◾ 예약 확인</h1>
+            <h1>◾ 예약 수정</h1>
         </div>
 
         <section class="reservation-section">
             <!-- 캘린더 영역 -->
             <div class="border-container calendar-container">
+                <div id="calendar"></div>
+            </div>
 
-                <div id="calendar">
-                    <span id="clubResvColor"></span>
+
+            <form action="">
+                <!-- 예약 목록을 표시할 영역 -->
+                <div id="reservationList" class="reservation-list">
                 </div>
 
-            </div>
-
-            <!-- 예약 목록을 표시할 영역 -->
-            <div id="reservationList" class="reservation-list">
-
-            </div>
-
-
+                <!-- 예약 수정 및 삭제 버튼 -->
+                <div class="reservation-actions">
+                    <button class="reservation-update" id="reservationUpdate">수정 하기</button>
+                </div>
+            </form>
         </section>
-        
-        <!-- 예약 수정 및 삭제 버튼 -->
-        <div class="reservation-actions">
-            <button class="reservation-update" id="reservationUpdate">수정</button>
-        </div>
 
-        
+
     </div>
 
-    <script src="/js/myPage/myReser.js"></script>
+    <script src="/js/myPage/myReserUpdate.js"></script>
 </body>
 </html>
