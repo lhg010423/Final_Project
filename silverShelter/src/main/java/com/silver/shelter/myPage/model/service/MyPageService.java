@@ -13,4 +13,6 @@ public interface MyPageService {
 
 	List<ClubReservation> getReservationsForDate(ClubReservation reservation);
 
+	int myReserUpdate(ClubReservation clubresv);
+
 }

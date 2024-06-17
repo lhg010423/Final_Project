@@ -37,4 +37,12 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		return mapper.getReservationsForDate(reservation);
 	}
+	
+	@Override
+	public int myReserUpdate(ClubReservation clubresv) {
+
+		
+		
+		return mapper.myReserUpdate(clubresv);
+	}
 }

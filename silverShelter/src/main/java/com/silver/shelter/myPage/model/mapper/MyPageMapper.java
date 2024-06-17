@@ -16,4 +16,6 @@ public interface MyPageMapper {
 
 	List<ClubReservation> getReservationsForDate(ClubReservation reservation);
 
+	int myReserUpdate(ClubReservation clubresv);
+
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -94,14 +96,23 @@ public class myPageController {
 		
 		return "myPage/myInfo";
 	}
-
-	@GetMapping("myInfo/update")
+	
+	
+	@GetMapping("myInfo/update/{date:[0-9]+}")
 	public String updateReserv(@SessionAttribute("loginMember")Member loginMember,
 								Model model,
+								@PathVariable("date") String date,
 								RedirectAttributes ra) {
 		
+		 String formattedDate = String.join("-", date.substring(0, 4), date.substring(4, 6), date.substring(6, 8));
 		
-		List<ClubReservation> reservationList = service.selectReserv(loginMember.getMemberNo());
+		 ClubReservation reservation = ClubReservation.builder()
+					.clubResvTime(formattedDate)
+					.memberNo(loginMember.getMemberNo())
+					.build();
+		 
+		 log.info("여기에 뭐가 들어오는지 보여줘 == {}",formattedDate);
+		List<ClubReservation> reservationList = service.getReservationsForDate(reservation);
 		
 		String path = null; 
 		String message = null;
@@ -120,8 +131,51 @@ public class myPageController {
 			model.addAttribute("reservationList",reservationList);
 			
 		}
+		
 		return path;
 	}
 	
+	@PostMapping("myInfo/myReserUpdate/{date:[0-9]+}")
+	public String myReserUpdate(@SessionAttribute("loginMember")Member loginMember,
+			@PathVariable("date") String date,
+			@RequestParam("clubResvTime") String clubResvTime,
+			@RequestParam("clubCode") int clubCode,
+			RedirectAttributes ra) {
+		
+		 String formattedDate = String.join("-", date.substring(0, 4), date.substring(4, 6), date.substring(6, 8));
+		
+		 formattedDate += " "+clubResvTime;
+		 
+		 
+		 ClubReservation clubresv = ClubReservation.builder()
+				 					.clubResvTime(formattedDate+=clubResvTime)
+				 					.memberNo(loginMember.getMemberNo())
+				 					.clubCode(clubCode)
+				 					.build();
+				 					
+		int result = service.myReserUpdate(clubresv);
+		
+		log.info("뭐가 찍히려나 == {}",clubresv);
+		
+		String path = null;
+		String message = null;
+		
+		
+		if(result > 0) {
+			
+			message = "예약이 변경 되었습니다.";
+			path = "redirect:/myPage/myInfo";
+		
+		} else {
+			
+			message = "예약이 변경 실패...";
+			path = "myPage/updateReserv";
+			
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		return path;
+	}
 	
 }

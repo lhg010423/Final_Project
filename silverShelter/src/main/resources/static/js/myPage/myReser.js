@@ -7,8 +7,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // 전역 변수 선언 
+    window.selectedDateValue = null; // 전역 변수로 선언
+    window.reservedDates = []; // 예약된 날짜들을 저장하는 배열
+
     // 예약된 날짜를 강조하는 함수
     function highlightReservedDates(reservedDates) {
+        // 예약된 날짜들을 전역 변수에 저장
+        window.reservedDates = reservedDates;
+
         // 모든 jcalendar-set-day 요소를 선택
         const days = document.querySelectorAll('.jcalendar-set-day');
 
@@ -19,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 day.removeChild(span);
             }
         });
-
         // 예약된 날짜와 일치하는 요소에 클래스 추가 및 클릭 이벤트 추가
         days.forEach(function(day) {
             const dayNumber = parseInt(day.innerText, 10);
@@ -27,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedDate = new Date(instance.getValue());
                 const currentMonth = selectedDate.getMonth();
                 const currentYear = selectedDate.getFullYear();
-
 
                 // 현재 날짜 객체 생성
                 const dayDate = new Date(currentYear, currentMonth, dayNumber);
@@ -48,11 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 클릭 이벤트 추가
                     day.addEventListener('click', function() {
                         fetchReservationsForDate(dayNumber);
+                        window.selectedDateValue = `${currentYear}${currentMonth + 1 < 10 ? '0' + (currentMonth + 1) : currentMonth + 1}${dayNumber < 10 ? '0' + dayNumber : dayNumber}`;
                     });
                 } else {
                     // 예약이 없는 날짜에도 클릭 이벤트 추가
                     day.addEventListener('click', function() {
                         displayNoReservationsMessage(dayNumber);
+                        window.selectedDateValue = `${currentYear}${currentMonth + 1 < 10 ? '0' + (currentMonth + 1) : currentMonth + 1}${dayNumber < 10 ? '0' + dayNumber : dayNumber}`;
                     });
                 }
             }
@@ -93,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching reserved dates:', error));
     }
 
-
     // 특정 날짜의 예약 목록을 가져오는 함수
     function fetchReservationsForDate(day) {
         const selectedDate = new Date(instance.getValue());
@@ -101,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const month = selectedDate.getMonth() + 1; // months are 0-indexed
         const clubResvTime = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
         
-
         fetch('/myPage/getReservationsForDate', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -116,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.length === 0) {
                     
                 } else {
-                    console.log("몇월며칠이에요? ",clubResvTime);
+
                     // 데이터가 있을 경우 예약 목록 표시
                     data.forEach(reservation => {
                         const div = document.createElement('div');
@@ -141,14 +146,21 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchReservedDates();
 });
 
-
-// 예약 수정 및 삭제 버튼 클릭 시 
+// 예약 수정 버튼 클릭 시 
 const updateBtn = document.querySelector("#reservationUpdate");
 
-updateBtn.addEventListener("click",() => {
-    // http://localhost/myPage/myInfo/update
+updateBtn.addEventListener("click", () => {
+    // window.selectedDateValue에서 연도, 월, 일을 추출하여 Date 객체 생성
+    const selectedDate = new Date(window.selectedDateValue.slice(0, 4), window.selectedDateValue.slice(4, 6) - 1, window.selectedDateValue.slice(6, 8));
+    const isReserved = window.reservedDates.some(date => date.getTime() === selectedDate.getTime());
 
-    location.href = location.href +"/update";
-
+    if (window.selectedDateValue) {
+        if (isReserved) {
+            location.href = `/myPage/myInfo/update/${window.selectedDateValue}`;
+        } else {
+            alert('예약이 없는 날짜입니다. 수정할 수 없습니다.');
+        }
+    } else {
+        alert('날짜를 선택해 주세요.');
+    }
 });
-
