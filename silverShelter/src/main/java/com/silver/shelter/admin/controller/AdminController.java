@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.silver.shelter.admin.model.service.AdminService;
+import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.service.BoardService;
 import com.silver.shelter.careGiver.model.CareGiver;
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
+import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.member.model.dto.Member;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -271,13 +270,30 @@ public class AdminController {
 	}
 
 	
-	/** 예약
+	
+	
+	
+	
+	/** 예약페이지 이동
 	 * @return
 	 */
 	@GetMapping("reservation")
-	public String reservation() {
+	public String reservation(@RequestParam Map<String, Object> paramMap) {
+		
+		ClubReservation clubList = service.clubAllSelect(paramMap);
+//		DoctorAppointment docList = service.docAllSelect(paramMap);
+		
+		
+		
 		return "admin/reservation";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/** 게시판 관리
@@ -319,22 +335,55 @@ public class AdminController {
 	}
 	
 	
+	
+	
+	
+	/** 게시글 상세 조회
+	 * @param boardCode
+	 * @param boardNo
+	 * @param loginMember
+	 * @param session
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @return
+	 */
 	@ResponseBody
-	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
+	@PostMapping("{boardCode:[0-9]+}")
 	public Map<String, Object> boardList(
 			@PathVariable("boardCode") int boardCode,
-			@PathVariable("boardNo") int boardNo,
-			@SessionAttribute("loginMember") Member loginMember,
-			HttpSession session,
-			HttpServletRequest req,
-			HttpServletResponse resp,
-			Model model
+			@RequestBody Map<String, Object> paramMap
+//			@SessionAttribute("loginMember") Member loginMember,
+//			HttpSession session,
+//			HttpServletRequest req,
+//			HttpServletResponse resp
+//			Model model
 			
 			) {
 		
+		System.out.println("컨트롤러 진입 확인");  // 디버깅 출력
+		
 		Map<String, Object> map = new HashMap<>();
+		paramMap.put("boardCode", boardCode);
+		
+//		int boardNo = (int) paramMap.get("boardNo");
+		
+		Board board = bs.boardDetailSelect(paramMap);
+		
+		
+		System.out.println("board 확인용"+board);
+		
+		map.put("boardTitle", board.getBoardTitle());
+		map.put("boardContent", board.getBoardContent());
+		map.put("memberName", board.getMemberName());
+		map.put("boardWriteDate", board.getBoardWriteDate());
+		map.put("readCount", board.getReadCount());
+		map.put("boardNo", board.getBoardNo());
+		map.put("boardCode", boardCode);
+		
 		
 		return map;
+		
 	}
 	
 	
