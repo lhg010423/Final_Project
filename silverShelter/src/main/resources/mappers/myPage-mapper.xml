@@ -29,4 +29,11 @@
 		ORDER BY CLUB_RESV_TIME
 	</select>
 	
+	
+	<update id="myReserUpdate">
+		UPDATE CLUB_RESERVATION
+		SET CLUB_RESV_TIME = TO_DATE('2024-06-14 10:00', 'YYYY-MM-DD HH24:MI')
+		WHERE CLUB_CODE = #{clubCode}
+		AND MEMBER_NO = #{memberNo}
+	</update>
 </mapper>

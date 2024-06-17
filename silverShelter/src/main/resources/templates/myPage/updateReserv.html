@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://jsuites.net/v5/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
     <link rel="stylesheet" href="/css/myPage/myReservUpdate.css">
     <title>예약 확인</title>
@@ -19,19 +18,55 @@
         <section class="reservation-section">
             <!-- 캘린더 영역 -->
             <div class="border-container calendar-container">
-                <div id="calendar"></div>
+
+                <div id="calendar">
+                </div>
+
             </div>
 
-
-            <form action="">
+            <form th:action="@{/myPage/myInfo/myReserUpdate/{date}(date=${date})}" method="POST" >
                 <!-- 예약 목록을 표시할 영역 -->
                 <div id="reservationList" class="reservation-list">
+
+                    <th:block th:each="resv : ${reservationList}">
+                        <div class="reservation-item" th:object="${resv}">
+                            <div class="stapper-div"></div>
+                            <div class="reservation-fontList">
+                                <p class="reservation-clubName" th:text="*{clubName}"></p>
+                                <input type="hidden" name="clubCode" id="clubCode" th:value="*{clubCode}">
+
+                                <p class="reservation-clubResvTime" th:text="*{clubResvTime}"></p>
+                                <input type="hidden" name="clubResvTime" id="clubResvTime" th:value="*{clubResvTime}">
+
+                                <select id="reservationTime">
+                                    <option value="09:00" id="optionTime">09:00</option>
+                                    <option value="10:00" id="optionTime">10:00</option>
+                                    <option value="11:00" id="optionTime">11:00</option>
+                                    <option value="12:00" id="optionTime">12:00</option>
+                                    <option value="13:00" id="optionTime">13:00</option>
+                                    <option value="14:00" id="optionTime">14:00</option>
+                                    <option value="15:00" id="optionTime">15:00</option>
+                                    <option value="16:00" id="optionTime">16:00</option>
+                                    <option value="17:00" id="optionTime">17:00</option>
+                                    <option value="18:00" id="optionTime">18:00</option>
+                                    <option value="19:00" id="optionTime">19:00</option>
+                                    <option value="20:00" id="optionTime">20:00</option>
+                                </select>
+
+                           
+                           
+                                            <!-- 예약 수정 및 삭제 버튼 -->
+                            <div class="reservation-actions">
+                                <button class="reservation-update" id="reservationUpdate">수정 하기</button>
+                                <button class="reservation-update" id="reservationDelete">삭제하기</button>
+                            </div>
+                        </div>
+
+                        </div>
+                    </th:block>
                 </div>
 
-                <!-- 예약 수정 및 삭제 버튼 -->
-                <div class="reservation-actions">
-                    <button class="reservation-update" id="reservationUpdate">수정 하기</button>
-                </div>
+
             </form>
         </section>
 
