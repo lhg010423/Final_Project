@@ -130,9 +130,14 @@ function selectRoomList(){
 		// 채팅방 목록 출력 영역 선택
 		const chattingList = document.querySelector(".chatting-list");
 
+		//240617 채팅리스트 버튼사라지는거 해결 1
+		const addTargetButton = document.getElementById("addTarget");
 		// 채팅방 목록 지우기
 		chattingList.innerHTML = "";
-
+		
+		//240617 채팅리스트 버튼사라지는거 해결 1
+		chattingList.appendChild(addTargetButton);
+		
 		// 조회한 채팅방 목록을 화면에 추가
 		for(let room of roomList){
 			const li = document.createElement("li");
@@ -449,13 +454,12 @@ recordButton.addEventListener("click", async () => {
 
         mediaRecorder.start();
         isRecording = true;
-        recordButton.textContent = "정지";
         recordButton.className = "fa-solid fa-record-vinyl"; // 클래스명 변경
     } else {
         // 녹음 정지
         mediaRecorder.stop();
         isRecording = false;
-        recordButton.textContent = "시작";
+        // 여기에 추가하면
         recordButton.className = "fa-solid fa-microphone"; // 클래스명 변경
     }
 });

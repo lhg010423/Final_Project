@@ -32,8 +32,8 @@
 
 #logo {
 
-	width : 45%;
-	height: 45%;
+	width : 38%;
+	height: 42%;
 	margin-left: 3vw;
 	     
 }
@@ -129,22 +129,22 @@
 	text-decoration: none;
 	
 	
-	border:1px solid #000000;
-	border-radius: 12px;
+	border:8px solid #000000;
+	border-radius: 3px;
 	padding: 8px 16px;
 	
 	display: none;
 	position: absolute;
 	
 	
-	background-color: #fefefe;
-	 
+	background-color: rgb(22, 22, 22);
+	
 	 
 	box-shadow: 0 4px 8px rbga(0, 0, 0, 0.2);
 	
 	z-index: 1;
 	
-	top: 85px;
+	top: 8vh;
 	left : 1;
 	
 	
@@ -153,10 +153,12 @@
 
 
 
+
+
 .modalLine{
-	width: 80%;
+	width: 95%;
 	
-	border: 1px solid #000000;
+	border: 1px solid #fff;
 	margin: 8px 0;
 }
 
@@ -164,6 +166,7 @@
 #logoutBtn{
 	
 	text-decoration: none;
+	color: #fefefe; 
 }
 
 .hidden-bar {

@@ -5,6 +5,18 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "NotoSans-Bold";
+    font-weight: 700;
+    src: local(☺), url("../fonts/NotoSans-Bold.woff2") format("woff2"), url("../fonts/NotoSans-Bold.woff") format("woff");
+    /* IE 9+, 모던 브라우저 */
+}
+@font-face {
+    font-family: "Cora-Regular";
+    font-weight: 300;
+    src: local(☺), url("../fonts/Cora-Regular.woff2") format("woff2"), url("../fonts/Cora-Regular.woff") format("woff");
+    /* IE 9+, 모던 브라우저 */
+}
 * {
 	
 	/*border:1px solid rgb(255, 206, 206);*/
@@ -27,15 +39,49 @@
     object-fit: cover;
 }*/
 
+#blur-title{
+	width: 100%;
+	margin:0;
+}
+
+#blur-title h1{
+	
+	display: flex;
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 42px;
+    width: 100vw;
+    height: 125.4%;
+    
+    
+    backdrop-filter: blur(5px);
+ 	background-color: rgb(60, 60, 59, 0.3); /* 반투명한 배경 색상 추가 */
+   
+   
+    
+    top: 0vw;
+}
+
+.a .fade-in{
+	
+	font-family: "Cora-Regular";
+	color: #fff;
+}
 #bgvideo {
   
   position:fixed;
   right: 0;
   bottom: 0;
+  width: 100%;
   min-width: 100vw;
   min-height: 100vh;
   z-index: -9999;
 }
+
+
 
 .section-1 {
 
