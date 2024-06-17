@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		            if (entry.isIntersecting) {
 		                const letters = entry.target.querySelectorAll('span.fade-in');
 		                letters.forEach((letter) => {
-		                    const delay = Math.random() * 2000; // Random delay between 0 and 2000ms
+		                    const delay = Math.random() * 2000; 
 		                    setTimeout(() => {
 		                        letter.classList.add('visible');
 		                    }, delay);

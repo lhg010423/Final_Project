@@ -12,7 +12,7 @@
 }
 
 .facility-links {
-    margin-top: 20px;
+    margin-top: 10vh;
     text-align: center;
 }
 
@@ -23,6 +23,8 @@
     display: inline-block;
     margin: 0 10px 10px 10px;
     color: inherit;
+    
+    font-weight: bold;
 
 }
 
@@ -33,15 +35,27 @@
     font-weight: 900;
     
 }
-
+.line-div{
+	
+	width: 44vw;
+	text-align: center;
+	height: 1px;
+	
+	margin-top: 5vh;
+	margin-left:28vw;
+	
+	background-color: lightgrey;
+}
 /* 클래식/프리미엄/vip 버튼 정리 */
 .room-grade {
+	
     display: flex;
     justify-content: center;
     margin: 20px 0;
 }
 
 .room-grade button {
+	
     background-color: transparent;
     border: none;
     padding: 10px 20px;
@@ -77,7 +91,7 @@
 
 #main-img {
     width: 1920px;
-    height: 500px;
+    height: 800px;
 }
 
 #classic-img {
@@ -339,6 +353,13 @@ th:first-child, td:first-child {
     display: flex; /* 수평 가운데 정렬을 위해 */
     justify-content: center; /* 수평 가운데 정렬을 위해 */
     align-items: center; /* 세로 가운데 정렬을 위해 */
+}
+
+.apply-button-container a:hover{
+
+	background-color: #fff;
+	color: #1A2050;
+	border:1px solid #1A2050;
 }
 
 .i-div {

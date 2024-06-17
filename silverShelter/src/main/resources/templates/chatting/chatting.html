@@ -9,6 +9,9 @@
 
     <th:block th:replace="~{common/common}"></th:block>
     <link rel="stylesheet" href="/css/chatting/chatting.css">
+	
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
 </head>
 
 <body>
@@ -20,7 +23,7 @@
 		<div style="height: 150px;"></div>
 		
 		<div id="addTargetPopupLayer" class="popup-layer-close">  
-			<div style="border-bottom:1px solid grey; height : 18px;">
+			<div style="border-bottom:1px solid black; height : 28px;">
 				<span id="closeBtn">&times</span>
 			</div>
 			<div class="target-input-area">
@@ -30,11 +33,12 @@
 
 			<ul id="resultArea"></ul>
 		</div>
-	
+		
 		<div class="chatting-area">
+			
 			<ul class="chatting-list">
-			<button id="addTarget">상대 추가</button>
-			<hr class="horizen">
+				<button id="addTarget">+ 상대 추가</button>
+			
 				<th:block th:each="room : ${roomList}">
 
 					<li class="chatting-item" th:chat-no="${room.chattingNo}" th:target-no="${room.targetNo}">
@@ -70,7 +74,7 @@
 					
                 	<audio id="audioPlayback" controls hidden></audio>
 					<button class="fa-solid fa-microphone" id="recordButton"></button>
-					<button id="send">보내기</button>
+					<button id="send">전송</button>
 					
 				</div>
 
