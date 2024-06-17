@@ -3,6 +3,7 @@ package com.silver.shelter.admin.model.service;
 import java.util.Map;
 
 import com.silver.shelter.careGiver.model.CareGiver;
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -83,6 +84,12 @@ public interface AdminService {
 	 * @return
 	 */
 	CareGiver caregiversDetailSelect(int caregiversNo);
+
+	/** 여가 일정 전체 조회
+	 * @param paramMap
+	 * @return
+	 */
+	ClubReservation clubAllSelect(Map<String, Object> paramMap);
 
 	
 	

@@ -242,5 +242,15 @@
 
 	
 	
+	<!-- 여가 일정 전체 조회 -->
+	<select id="clubAllSelect">
+		SELECT CLUB_NAME
+		FROM 
+		
+	</select>
+	
+	
+	
+	
 
 </mapper>

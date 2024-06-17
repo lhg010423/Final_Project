@@ -201,14 +201,14 @@ tbody td {
 
 
 /* 하단 검색창 공간 */
-.boardSearch {
+#boardSearch {
     display: flex;
     justify-content: space-evenly;
     padding: 40px;
 }
 
 /* select, 검색창, 검색하기버튼 세로크기 및 색상 지정 */
-.boardSearch * {
+#boardSearch * {
     height: 40px;
     padding: 8px;
     border-radius: 5px;
@@ -217,6 +217,7 @@ tbody td {
     box-sizing: border-box;
     background-color: white;
     outline: none;
+    /* justify-content: center; */
 }
 
 
@@ -245,60 +246,83 @@ tbody td {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch; /* 세로공간 모두 채움 */
+    padding: 30px;
+    overflow: auto; /* 스크롤 생기게 하는거 */
 }
 
-.adminRight h2 {
-    padding: 20px;
-    text-align: center;
+
+
+
+
+.boardTitle-area {
+    flex: 0 0 auto; /* 고정 높이 */
 }
 
-#memberForm {
-    /* width: calc(100% - 40px);
-    height: calc(90% - 40px); */
+
+/* 게시글 제목 */
+.boardTitle-area > span{
+    display: block; /* 블록 요소로 변경 */
+    font-size: 25px;
     width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
 }
 
-/* label, span태그 공간 지정 */
-#memberForm > div{
-    height: 40px;
+/* 작성자, 작성일, 수정일, 조회수, 좋아요 공간 */
+.writer-area {
     display: flex;
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-    /* justify-content: center; */
-}
-
-/*  */
-#memberForm label {
-    width: 25%;
-    /* justify-content: flex-end; */
-    text-align: left;
-    padding-right: 10px;
+    justify-content: space-between;
+    /* flex: 1 1 auto; 남은 공간 차지 */
+    margin-bottom: 15px;
 }
 
 
-#memberForm span {
-    width: 40%;
-    height: 40px;
-    /* align-items: stretch; */
-    padding: 8px;
-    border-radius: 5px;
+
+/* 작성자 */
+#writer {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+    
+/* 작성일, 수정일 */
+.writer-left-area span:nth-of-type(2),
+.writer-left-area span:nth-of-type(3) {
+    color: gray;
+    font-size: 13px;
+}
+        
+
+/* 조회수, 좋아요 공간 지정 */
+.writer-right-area {
+    display: flex;
+    width: 200px;
+    justify-content: flex-end;
+}
+
+/* 조회수, 좋아요 마진 설정 */
+.writer-right-area span{
+    margin-right: 20px;
+}
+
+.boardDetail-area hr {
     border: 1px solid #ddd;
-    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
-    box-sizing: border-box;
 }
 
-.updateBtn {
-    height: 40px;
-    padding: 8px;
+
+/* 게시글 내용 공간 */
+.boardContent-area {
+    flex: auto; /* 남은 공간 차지 */
+    margin-top: 15px;
+    min-height: 300px;
+    /* overflow-y: auto; 내용이 넘칠 경우 수직 스크롤 표시 */
+    /* height: auto; 높이 자동 조절 */
+}
+
+/* 게시글 내용 */
+.boardContent {
+    white-space: pre-wrap;
     border-radius: 5px;
-    border: none;
-    /* box-shadow: 0 3px 3px rgba(0,0,0,0.2); */
-    box-sizing: border-box;
-    background-color: #1A2050;
+    /* border: 1px solid #ddd; */
     outline: none;
-    color: white;
+    border: none;
+    /* padding: 30px; */
 }

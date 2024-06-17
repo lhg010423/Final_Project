@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.silver.shelter.careGiver.model.CareGiver;
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -120,6 +121,13 @@ public interface AdminMapper {
 	 * @return
 	 */
 	CareGiver caregiversDetailSelect(int caregiversNo);
+
+
+	/** 여가 일정 전체 조회
+	 * @param paramMap
+	 * @return
+	 */
+	ClubReservation clubAllSelect(Map<String, Object> paramMap);
 
 
 	

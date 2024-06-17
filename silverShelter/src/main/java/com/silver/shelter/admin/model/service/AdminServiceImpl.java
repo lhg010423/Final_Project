@@ -15,6 +15,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.silver.shelter.admin.model.mapper.AdminMapper;
 import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.careGiver.model.CareGiver;
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -343,6 +344,15 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public CareGiver caregiversDetailSelect(int caregiversNo) {
 		return mapper.caregiversDetailSelect(caregiversNo);
+	}
+
+
+	/** 여가 일정 전체 조회
+	 *
+	 */
+	@Override
+	public ClubReservation clubAllSelect(Map<String, Object> paramMap) {
+		return mapper.clubAllSelect(paramMap);
 	}
    
 }

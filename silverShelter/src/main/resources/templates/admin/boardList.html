@@ -76,12 +76,18 @@
                                     <!-- 게시글이 있을 때 -->
                                     <th:block th:unless="${#lists.isEmpty(boardList)}">
                                         <tr th:each="board : ${boardList}" th:object="${board}" class="tbody-tr">
-                                            <td th:classappend="${board.boardCode == 1} ? 'boardTitle' : ''"
+                                            <!-- <td th:classappend="${board.boardCode == 1} ? 'board-Title' : ''"
                                                 th:data-board-code="${board.boardCode}"
                                                 th:data-board-no="${board.boardNo}"
                                                 class="board-cell"
-                                                th:text="${board.boardTitle}">
-        
+                                                th:text="${board.boardTitle}"> -->
+
+                                            <td>
+                                                <button class="boardTitleBtn"
+                                                    th:data-board-no="${board.boardNo}" 
+                                                    th:data-board-code="${board.boardCode}"
+                                                    th:text="${board.boardTitle}">
+                                                </button>
                                             </td>
                                             <!-- style부분에 boarCode == 1이면(공지게시판이면) 게시판에 출력이 안된다 -->
                                             <td th:text="${board.memberName}" th:style="${board.boardCode == 1 ? 'display:none' : ''}">작성자</td>
@@ -144,7 +150,7 @@
         
                                     <!-- 보고있지 않은 페이지 -->
                                     <li th:unless="${i} == *{currentPage}">
-                                        <a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=${i}, key=${param.key}, query=${param.query})}"
+                                        <a th:href="@{/admin/{boardCode}(boardCode=${boardCode}, cp=${i}, key=${param.key}, query=${param.query})}"
                                         th:text="${i}"></a>
                                     </li>
         
@@ -165,23 +171,23 @@
         
                             </ul>
         
+                            
                         </div>
-        
-        
+                            
                         <!-- 검색창 공간 -->
                         <form th:action="@{/admin/{boardCode}(boardCode=${boardCode})}" method="GET" id="boardSearch">
-        
+                            
                             <select name="key" id="searchKey">
                                 <option value="t">제목</option>
                                 <option value="w">작성자</option>
                             </select>
-        
+                            
                             <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
-        
-                            <button>검색</button>
-        
+                            
+                            <button>검색하기</button>
+                            
                         </form>
-        
+                            
         
         
                     </div>
@@ -189,49 +195,67 @@
 
                 </div>
                 
+
+
+
+
                 <div class="adminRight">
 
                     <!-- 게시글 공간 -->
-                <div class="boardDetail-area">
+                    <form action="/admin/{boardCode} (boardCode=${board.boardCode})" method="POST" id="boardForm">
 
-                    <!-- 게시글 제목 공간 -->
-                    <div class="boardTitle-area">
+                        <!-- 게시글 제목 공간 -->
+                        <div class="boardTitle-area">
+                            <span id="titleSpan" name="name"></span>
 
-                        <span th:text="${board.boardTitle}"></span>
-
-                    </div>
-
-                    <!-- 작성자 정보 공간 -->
-                    <div class="writer-area">
-
-                        <div class="writer-left-area">
-                            <span id="writer" th:text="${board.memberName}">작성자</span><br>
-                            <span th:text="|작성일 ${board.boardWriteDate}|">작성일</span><br>
-                            <span th:if="${board.boardUpdateDate}" th:text="|수정일 ${board.boardUpdateDate}|">수정일</span>
                         </div>
 
-                        <div class="writer-right-area">
-                            <span>조회수</span>
-                            <span>좋아요</span>
+                        <!-- 작성자 정보 공간 -->
+                        <div class="writer-area">
+
+                            <!-- 작성자, 작성일 공간 -->
+                            <div class="writer-left-area">
+                                <span id="writerSpan"></span><br>
+                                <span id="writeDateSpan"></span><br>
+                                <!-- <span th:if="${board.boardUpdateDate}" th:text="|수정일 ${board.boardUpdateDate}|">수정일</span> -->
+                            </div>
+
+                            <!-- 좋아요 공간 -->
+                            <div class="writer-right-area">
+                                <span id="readCountSpan"></span>
+                                <!-- <span>좋아요</span> -->
+
+                            </div>
+                            
+                            
+                        </div>
+                        
+                        <hr>    
+
+                        <!-- 게시글 내용 공간 -->
+                        <div class="boardContent-area">
+
+                            <!-- 게시글 내용 -->
+                            <article class="boardContent"
+                                id="contentSpan">
+                            </article>
+
+                        </div>
+
+                        <!-- 댓글 공간 -->
+                        <div class="comment-area">
+
+                            <div id="comments-container">
+
+                            </div>                
+
+                            <textarea id="comment-input" placeholder="댓글을 입력해주세요"></textarea>
+                            <button onclick="submitComment()">댓글 작성</button>
+
 
                         </div>
                         
-                        
-                    </div>
-                    
-                    <hr>    
-
-                    <div class="boardContent-area">
-
-                        <article class="boardContent"
-                            th:text="${board.boardContent}">
-
-
-                        </article>
-
-                    </div>
-                    
-                </div>
+                    </form>
                 
                 </div>
             </div>
@@ -241,41 +265,7 @@
         
     </main>
 
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".board-cell").forEach(function (cell) {
-                cell.addEventListener("click", function () {
-                    const boardCode = cell.getAttribute("data-board-code");
-                    const boardNo = cell.getAttribute("data-board-no");
-
-                    fetch(`/admin/${boardCode}/${boardNo}`)
-                    .then(resp => resp.json())
-                    .then(result => {
-                        document.querySelector(".adminRight").innerHTML = data;
-
-                        // 오른쪽 상세보기 기존 요소들 전부 삭제
-                        const adminRight = document.querySelector(".adminRight");
-                        adminRight.innerHTML = "";
-                        
-                        // 게시글 공간 생성
-                        const boardDetailArea = document.createElement("div");
-                        boardDetailArea.classList.add("boardDetail-area");
-
-                        
-
-
-
-
-
-                    })
-                    .catch(error => console.error("Error:", error));
-
-                })
-            })
-        })
-
-    </script>
+    <script src="/js/admin/boardList.js"></script>
 
 
 </body>

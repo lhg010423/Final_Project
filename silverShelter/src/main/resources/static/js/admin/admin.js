@@ -33,19 +33,8 @@ document.getElementById("memberId").addEventListener("click", e => {
 
             const gdtelInput = document.getElementById("gdtelInput");
             gdtelInput.innerText = result.guardianTel;
-
-            const postCode = document.getElementById("postCode");
-            postCode.innerText = result.postCode;
-
-            const address = document.getElementById("address");
-            address.innerText = result.address;
-
-            const detailAddress = document.getElementById("detailAddress");
-            detailAddress.innerText = result.detailAddress;
-
-            const caregiversName = document.getElementById("caregiversName");
-            caregiversName.innerText = result.caregiversName;
-
+            
+            
             const roomNo = document.getElementById("roomNo");
             roomNo.innerText = result.roomNo;
 
