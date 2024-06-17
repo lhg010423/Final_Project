@@ -114,13 +114,17 @@ public class MedicalCenterController {
         return "medicalCenter/dateResult";
     }
 	
-	@GetMapping("reservation/result")
-	public String getdrnamebydrno(@RequestParam("doctorNo") String doctorNo, Model model) {
-		// 서비스 호출 및 로직 처리
-		String doctorName = doctorService.getdrnamebydrno(doctorNo);
-		return doctorName;
+	@ResponseBody
+	@PostMapping("reservation/result")
+	public ResponseEntity<String> getDrNameByDrNoPost(@RequestBody Map<String, String> requestBody) {
+	    String doctorNo = requestBody.get("doctorNo");
+
+	    // 서비스 호출 및 로직 처리
+	    String doctorName = doctorService.getdrnamebydrno(doctorNo); // 의사 이름을 서비스에서 가져옴
+
+	    return ResponseEntity.ok().body(doctorName); // 의사 이름을 클라이언트로 반환
 	}
-	
+
 
 
 	/**
@@ -238,13 +242,13 @@ public class MedicalCenterController {
     }
 
     
-	@ResponseBody
-	@GetMapping("getReservedDates")
-	public List<DoctorAppointment> getReservedDates(@SessionAttribute("loginMember")Member loginMember) {
-		
-		
-		return doctorService.getReservedDates(loginMember.getMemberNo());
-	}
+    @ResponseBody
+    @PostMapping("getReservedDates")
+    public ResponseEntity<List<DoctorAppointment>> getReservedDatesPost(@SessionAttribute("loginMember") Member loginMember) {
+        List<DoctorAppointment> reservedDates = doctorService.getReservedDates(loginMember.getMemberNo());
+        return ResponseEntity.ok().body(reservedDates);
+    }
+
 	
 	@ResponseBody
 	@PostMapping("getReservationsForDate")
