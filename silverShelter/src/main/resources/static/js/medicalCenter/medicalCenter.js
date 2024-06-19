@@ -436,9 +436,6 @@ async function loadTabContent(htmlFile, sectionId = null, callback = null) {
         }
 
         const html = await response.text();
-        console.log('Fetched HTML content:', html);
-
-        const html = await response.text();
         const tabContentContainer = document.getElementById('tabContentContainer');
         if (!tabContentContainer) {
             console.error('tabContentContainer element not found.');
