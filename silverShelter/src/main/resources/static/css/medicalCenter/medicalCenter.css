@@ -747,7 +747,7 @@ li {
 /* dateResult */
 .selection-container{
     display: flex;
-    margin: 50px;
+    margin: 30px;
     flex-direction: column;
 }
 
@@ -765,27 +765,76 @@ li {
     font-weight: bold;
 }
 
-.calendar-time-container {
-    display: flex; /* Flexbox 사용 */
-    justify-content: space-between; /* 요소 간의 공간을 균등하게 분배 */
-    width: 100%; /* 전체 너비 사용 */
-    max-width: 1000px; /* 최대 너비 설정 */
-    align-items: center;
+.calendar-time-container{
+    display: flex;
 }
 
-.calendar-container {
-    flex: 1; /* 요소가 가로 공간을 나누어 가질 수 있도록 */
+/* jsuites 캘린더 스타일 */
+.jsuites-calendar {
+    font-size: 25px;
+    height: 600px;
+    width: 600px;
+}
+
+.jcalendar-table {
+    height: 600px;
+    width: 600px;
+}
+
+.jsuites-calendar .jcalendar {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 캘린더 날짜 스타일 */
+.jcalendar-set-day {
+    height: 100px;
+    width: 100px;
+    font-size: 18px; /* 글꼴 크기 */
+    box-sizing: border-box; /* 추가: 패딩, 보더 포함 */
+}
+
+.jsuites-calendar .jcalendar-header,
+.jsuites-calendar .jcalendar-footer {
+    flex: 0 0 auto;
+}
+
+.jsuites-calendar .jcalendar-body {
+    width: auto;
+    height: auto;
+    flex: auto; 
+}
+
+/* 요일 스타일 */
+.jcalendar-weekday {
+    width: 120px;
+}
+
+#reservation-content4 {
+    padding: 40px;
 }
 
 .check-container {
     flex: 1; /* 요소가 가로 공간을 나누어 가질 수 있도록 */
-    margin-left: 40px; /* 두 섹션 간의 간격 설정 */
-    width: 400px;
+    margin-left: 30px; /* 두 섹션 간의 간격 설정 */
+    width: 100px;
     height: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.jcalendar-container{
+    width: 100%;
+    height: 100%;
+}
+
+#reservation-content4 {
+    display: flex;
 }
 
 .time-selection {
@@ -847,16 +896,22 @@ li {
 }
 
 /* 달력 부분  */
-#calendar {
-    width: 400px; /* 원하는 너비 */
-    height: auto; /* 높이를 자동으로 조절 */
-}
 
+
+.jcalendar-set-day {
+    height: 100px;
+    width: 100px;
+    font-size: 18px; /* 글꼴 크기 */
+    box-sizing: border-box; /* 추가: 패딩, 보더 포함 */
+}
 
 .dateInfo {
     display: none;
 }
 
+#calendar {
+   width: 100%; 
+}
 /* 진료예약완료 */
 
 #reservation {
@@ -904,15 +959,13 @@ li {
     margin-bottom: 15px;
 }
 
-/* 예약확인 */
-
 
 /* 요양사매칭 */
 .caregiver-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 18px;
+    font-size: 23px;
     text-align: left;
 }
 
@@ -948,65 +1001,98 @@ li {
 /* 설문조사 */
 
 #surveyForm {
-    max-width: 600px;
     background-color: #fff;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    padding-left: 300px;
+    padding-right: 300px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-#serveyFormTit {
-    color: #009879;
+#surveyFormTit {
     text-align: center;
+}
+
+#surveyFormTit1 {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 30px;
+    color: #4b4b4b;
 }
 
 #surveyForm p {
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 50px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 #surveyForm input[type="radio"] {
-    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 #surveyForm label {
     cursor: pointer;
+    font-size: 23px;
+    margin: 30px;
 }
 
 #surveyForm button[type="submit"] {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin-top: 20px;
+    padding: 20px;
+    margin-top: 50px;
     background-color: #009879;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 25px;
 }
 
 #surveyForm button[type="submit"]:hover {
     background-color: #007a65;
 }
 
+#loginServey {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .caregiver-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .caregiver-table th, .caregiver-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 20px;
     text-align: center;
 }
 
 .caregiver-table th {
     background-color: #f2f2f2;
     font-weight: bold;
+}
+
+.select-button {
+    display: block;
+    width: 100px;
+    padding: 10px;
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }

@@ -58,7 +58,11 @@ document.addEventListener("DOMContentLoaded", function() {
             reservationContents.forEach(content => {
                 try {
                     console.log("콘텐츠 순회 시작");
-                    content.style.display = content.id === `reservation-content${target}` ? "block" : "none";
+                    if(target == '4'){
+                        content.style.display = content.id === `reservation-content${target}` ? "flex" : "none";
+                    }else {
+                        content.style.display = content.id === `reservation-content${target}` ? "block" : "none";
+                    }
                     console.log("콘텐츠 순회 성공: " + content.id);
                 } catch (error) {
                     console.error("콘텐츠 순회 오류:", error);
@@ -432,6 +436,9 @@ async function loadTabContent(htmlFile, sectionId = null, callback = null) {
         }
 
         const html = await response.text();
+        console.log('Fetched HTML content:', html);
+
+        const html = await response.text();
         const tabContentContainer = document.getElementById('tabContentContainer');
         if (!tabContentContainer) {
             console.error('tabContentContainer element not found.');
@@ -458,7 +465,6 @@ function handleSectionDisplay(sectionId) {
             showSection(sectionId, "sectionBtn1");
             break;
         case 'section2-2':
-            displaySection2_2();
             break;
         case 'section4-1':
             initializeCalendar(); // 기존의 initializeCalendar 함수 호출
@@ -618,7 +624,6 @@ function initializeCalendar() {
             // 예약 목록을 표시할 HTML 생성
             const reservationList = document.getElementById('reservationList');
             reservationList.innerHTML = ''; // 기존 내용을 초기화
-
             if (data.length === 0) {
                 // 데이터가 없을 경우 예약 없음 메시지를 표시
                 displayNoReservationsMessage(day);
@@ -791,6 +796,7 @@ function initializeSurveyForm() {
 
 function renderCaregiversList(data) {
     let table = `
+    <h1 id="surveyFormTit1">요양사 매칭 결과</h1>
     <table class="caregiver-table">
         <thead>
             <tr>
@@ -879,6 +885,7 @@ function renderCaregiverInfo(caregiverInfo) {
     }
 
     let table = `
+        <h1 id="surveyFormTit1">요양사 매칭이 성공적으로 완료되었습니다</h1>
         <table class="caregiver-table">
             <thead>
                 <tr>
@@ -950,13 +957,24 @@ function translateRole(role) {
 
 function hideSurveyForm() {
     const surveyForm = document.getElementById("surveyForm");
-    const surveyFormTit = document.getElementById("surveyFormTit");
-    const resultTit = document.getElementById("resultTit");
+    const surveyFormTit = document.getElementsByClassName("surveyFormTit");
 
     if (surveyForm) {
         surveyForm.style.display = "none"; // 설문조사 폼 숨기기
-        surveyFormTit.display = "none";
-        resultTit.display = "block";
+        for (var i = 0; i < surveyFormTit.length; i++) {
+            surveyFormTit[i].style.display = 'none';
+        }
     }
 }
 
+// 캘린더를 클릭해도 크기가 바뀌지 않도록 유지
+document.querySelectorAll('.jcalendar-set-day').forEach(day => {
+    day.addEventListener('click', (event) => {
+        const calendarContainer = document.querySelector('.calendar-container');
+        const calendarRect = calendarContainer.getBoundingClientRect();
+        
+        // 클릭 후에도 크기를 유지
+        calendarContainer.style.width = `${calendarRect.width}px`;
+        calendarContainer.style.height = `${calendarRect.height}px`;
+    });
+});
