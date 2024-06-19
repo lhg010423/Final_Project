@@ -1,28 +1,336 @@
+<style>
+    /* 전체 예약 섹션을 세로로 정렬하기 위해 flex 속성 사용 */
+.reservation-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-header {
+    margin-bottom: 10px;
+}
+
+/* 캘린더와 예약 목록을 가로로 정렬하기 위해 flex 속성 사용 */
+.reservation-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* 캘린더 컨테이너의 크기 설정 */
+.calendar-container {
+    width: 700px;
+    height: 700px;
+}
+
+/* jsuites 캘린더 스타일 */
+.jsuites-calendar {
+    font-size: 25px;
+    height: 100%;
+}
+
+.jsuites-calendar .jcalendar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 캘린더 날짜 스타일 */
+.jcalendar-set-day {
+    height: 80px;
+    font-size: 18px; /* 글꼴 크기 */
+}
+
+.jsuites-calendar .jcalendar-header,
+.jsuites-calendar .jcalendar-footer {
+    flex: 0 0 auto;
+}
+
+.jsuites-calendar .jcalendar-body {
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto; 
+}
+
+/* 예약이 있다면 색이 변경됨 */
+.jcalendar-set-day .resevColor {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1A2050;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 요일 스타일 */
+.jcalendar-weekday {
+    width: 120px;
+}
+
+.stapper-div {
+    width: 50px;  /* 너비 */
+    height: 50px;  /* 높이 */
+    border-radius: 50%;  /* 동그랗게 만들기 */
+    background-color: black;  /* 배경색 */
+}
+
+/* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
+.reservation-item {
+    display: flex;
+    align-items: center;  /* 수직 중앙 정렬 */
+    padding-bottom: 30px;  /* 항목 간의 간격 */
+    /* margin-bottom: 30px; */
+}
+
+/* 텍스트 스타일 */
+.reservation-font {
+    margin-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
+}
+
+.reservation-font p {
+    margin: 0;  /* 문단 간의 기본 간격 제거 */
+}
+
+.reservation-fontList{
+    margin-left: 5px;
+}
+
+/* 예약 목록 스타일 */
+.border-container {
+    border: 1px solid #EEEEEE;
+    border-radius: 3px;
+    margin-right: 20px;
+}
+
+.reservation-list {
+    padding-left: 10px;
+    flex: 1;
+}
+
+/* 예약 수정 및 삭제 버튼 스타일 */
+.reservation-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 예약 수정 버튼 스타일 */
+.reservation-update {
+    font-size: 16px;  /* 폰트 크기 */
+    font-weight: bolder;
+    padding: 10px 50px;  /* 안쪽 여백 (패딩) */
+    border: none;
+    margin: 5px;  /* 버튼 간의 간격 */
+    border-radius: 5px;  /* 모서리 둥글게 */
+    background-color: #f0f0f0;  /* 배경색 */
+}
+
+
+/* 버튼에 마우스를 올렸을 때 스타일 */
+.reservation-update:hover,
+.reservation-delete:hover {
+    font-weight: bolder;
+    background-color: #1A2050;  /* 호버 시 배경색 */
+    color: #FFFF;
+}
+
+.reservation-clubName{
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+
+.reservation-clubResvTime{
+    font-size: 16px;
+}
+</style>
+
+<div class="reservation-container">
+
+    <div class="reservation-header">
+        <h1>◾ 예약 확인</h1>
+    </div>
 
     <section class="reservation-section">
+        <!-- 캘린더 영역 -->
+        <div class="border-container calendar-container">
 
-        <div class="reservation-header">
-            <h1>◾ 예약 확인</h1>
-        </div>
-        
-        <div class="border-container">
-
-            <div class="calendar-container">
-                <!-- 캘린더 -->
-                <div id="calendar1">
-                    <span id="clubResvColor"></span>
-                </div>
+            <div id="calendar1">
+                <span id="clubResvColor"></span>
             </div>
 
         </div>
 
         <!-- 예약 목록을 표시할 영역 -->
         <div id="reservationList" class="reservation-list">
+
         </div>
 
-        <div class="reservation-actions">
-            <button class="reservation-edit">수정</button>
-            <button class="reservation-delete">삭제</button>
-        </div>
 
     </section>
+    
+    <!-- 예약 수정 및 삭제 버튼 -->
+    <div class="reservation-actions">
+        <button class="reservation-update" id="reservationUpdate">수정</button>
+    </div>
+
+    
+</div>
+<script type="text/javascript">
+
+    // jSuites 캘린더 인스턴스 생성
+    let instance = jSuites.calendar(document.getElementById('calendar1'), {
+        format: 'DD/MM/YYYY HH:MM',
+        onupdate: function() {
+            fetchReservedDates();
+        }
+    });
+
+    // 예약된 날짜를 강조하는 함수
+    function highlightReservedDates(reservedDates) {
+        // 모든 jcalendar-set-day 요소를 선택
+        const days = document.querySelectorAll('.jcalendar-set-day');
+
+        // 모든 날짜 요소에서 클래스 제거 및 span 제거 (초기화 단계)
+        days.forEach(function(day) {
+            const span = day.querySelector('.resevColor');
+            if (span) {
+                day.removeChild(span);
+            }
+        });
+
+        // 예약된 날짜와 일치하는 요소에 클래스 추가 및 클릭 이벤트 추가
+        days.forEach(function(day) {
+            const dayNumber = parseInt(day.innerText, 10);
+            if (!isNaN(dayNumber)) {
+                const selectedDate = new Date(instance.getValue());
+                const currentMonth = selectedDate.getMonth();
+                const currentYear = selectedDate.getFullYear();
+
+
+                // 현재 날짜 객체 생성
+                const dayDate = new Date(currentYear, currentMonth, dayNumber);
+
+                // 예약된 날짜와 일치하는 요소에 클래스 추가
+                if (reservedDates.some(date => date.getTime() === dayDate.getTime())) {
+                    const span = document.createElement('span');
+                    span.classList.add('resevColor');
+                    day.appendChild(span);
+
+                    // 예약된 날짜 라벨 추가
+                    const label = document.createElement('label');
+                    label.id = `label${dayNumber}`;
+                    label.innerText = 'Y';
+                    label.hidden = true;
+                    day.appendChild(label);
+
+                    // 클릭 이벤트 추가
+                    day.addEventListener('click', function() {
+                        fetchReservationsForDate(dayNumber);
+                    });
+                } else {
+                    // 예약이 없는 날짜에도 클릭 이벤트 추가
+                    day.addEventListener('click', function() {
+                        displayNoReservationsMessage(dayNumber);
+                    });
+                }
+            }
+        });
+    }
+
+    // 예약이 없는 날짜를 클릭했을 때 메시지를 표시하는 함수
+    function displayNoReservationsMessage(day) {
+        const label = document.querySelector(`#label${day}`);
+        const reservationList = document.getElementById('reservationList');
+        reservationList.innerHTML = ''; // 기존 내용을 초기화
+
+        // 라벨이 없거나 비어 있는 경우 메시지 표시
+        if (!label || label.innerText === '') {
+            reservationList.innerHTML = '<p class="reservation-none">예약 일정이 없습니다.</p>';
+        }
+
+    }
+
+    // 서버에서 예약된 날짜를 가져오는 함수
+    function fetchReservedDates() {
+        fetch('/myPage/getReservedDates')
+            .then(response => response.json())
+            .then(data => {
+                // 데이터가 객체 배열로 반환되면, 각 객체의 clubResvTime 속성만 추출
+                const reservedDates = data.map(item => {
+                    const date = new Date(item.clubResvTime);
+                    date.setHours(0, 0, 0, 0); // 시간을 0으로 설정하여 날짜만 비교
+                    return date;
+                });
+
+                // 데이터 확인을 위한 로그 출력
+                console.log('Fetched data:', data);
+                console.log('Reserved dates:', reservedDates);
+
+                highlightReservedDates(reservedDates);
+            })
+            .catch(error => console.error('Error fetching reserved dates:', error));
+    }
+
+
+    // 특정 날짜의 예약 목록을 가져오는 함수
+    function fetchReservationsForDate(day) {
+        const selectedDate = new Date(instance.getValue());
+        const year = selectedDate.getFullYear();
+        const month = selectedDate.getMonth() + 1; // months are 0-indexed
+        const clubResvTime = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+        
+
+        fetch('/myPage/getReservationsForDate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: clubResvTime
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 예약 목록을 표시할 HTML 생성
+                const reservationList = document.getElementById('reservationList');
+                reservationList.innerHTML = ''; // 기존 내용을 초기화
+                
+                if (data.length === 0) {
+                    
+                } else {
+                    console.log("몇월며칠이에요? ",clubResvTime);
+                    // 데이터가 있을 경우 예약 목록 표시
+                    data.forEach(reservation => {
+                        const div = document.createElement('div');
+                        div.classList.add('reservation');
+                        div.innerHTML = `
+                            <div class="reservation-item">
+                                <div class="stapper-div"></div>
+                                <div class="reservation-fontList">
+                                    <p class="reservation-clubName">${reservation.clubName}</p>
+                                    <p class="reservation-clubResvTime">${reservation.clubResvTime}</p>
+                                </div>
+                            </div>
+                            `;
+                        reservationList.appendChild(div);
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching reservations for date:', error));
+    }
+
+    // 예약된 날짜를 초기화하고 예약된 날짜를 강조하는 함수 호출
+    fetchReservedDates();
+
+
+
+// 예약 수정 및 삭제 버튼 클릭 시 
+const updateBtn = document.querySelector("#reservationUpdate");
+
+updateBtn.addEventListener("click",() => {
+    // http://localhost/myPage/myInfo/update
+
+    location.href = location.href +"/update";
+
+});
+</script>

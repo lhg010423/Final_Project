@@ -421,12 +421,21 @@ function showTab(tabId) {
     }
 }
 
-
 async function loadTabContent(htmlFile, sectionId = null, callback = null) {
+    console.log(`loadTabContent called with htmlFile: ${htmlFile}, sectionId: ${sectionId}, callback: ${callback}`);
+
     try {
+        // HTML 파일 가져오기
         const response = await fetch(htmlFile);
         const html = await response.text();
+        console.log('Fetched HTML content:', html);
+
+        // 탭 컨텐츠를 담을 컨테이너 찾기
         const tabContentContainer = document.getElementById('tabContentContainer');
+<<<<<<< HEAD
+        if (!tabContentContainer) {
+            throw new Error('tabContentContainer가 존재하지 않습니다.');
+=======
         if (tabContentContainer) {
             tabContentContainer.innerHTML = html;
             if (sectionId != null) {
@@ -615,11 +624,54 @@ async function loadTabContent(htmlFile, sectionId = null, callback = null) {
             }
         } else {
             console.error('tabContentContainer 요소를 찾을 수 없습니다.');
+>>>>>>> e85320ec77ad4e7f275be952e9b2d00281c04c50
         }
+
+        // HTML 파일을 컨테이너에 설정
+        tabContentContainer.innerHTML = html;
+        console.log('HTML content set in tabContentContainer.');
+
+        // 섹션 ID에 따라 특정 섹션을 보여주는 로직 호출
+        if (sectionId != null) {
+            console.log(`Section ID provided: ${sectionId}`);
+            if (sectionId === 'section1') {
+                console.log('Showing section1');
+                showSection(sectionId, "sectionBtn1");
+            } else if (sectionId === 'section2-2') {
+                console.log('Showing section2-2');
+                const section22 = document.querySelector('.section2-2');
+                if (section22) {
+                    section22.style.display = 'block';
+                }
+            } else if (sectionId === 'section4-1') {
+
+            }
+        }
+
+        // 콜백 함수 호출
+        if (typeof callback === 'function') {
+            console.log('Executing callback function.');
+            callback();
+        }
+
     } catch (error) {
-        console.error('Error fetching HTML file:', error);
+        console.error('loadTabContent 함수에서 오류 발생:', error);
     }
 }
+
+
+
+
+
+// 예약 수정 및 삭제 버튼 클릭 시 
+const updateBtn = document.querySelector("#reservationUpdate");
+if(updateBtn){
+updateBtn.addEventListener("click",() => {
+    // http://localhost/myPage/myInfo/update
+
+    location.href = location.href +"/update";
+
+});}
 
 function showSection(sectionId, sectionBtnId) {
     console.log("Trying to show section with ID:", sectionId);
