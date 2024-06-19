@@ -14,6 +14,7 @@
         FROM CLUB_RESERVATION
         WHERE MEMBER_NO = #{memberNo}
         AND CLUB_RESV_TIME = TO_DATE(#{clubResvTime}, 'YYYY"년"MM"월"DD"일"HH24:MI')
+        AND RESERVATION_DEL_FL='N'
     </select>
     
 </mapper>
