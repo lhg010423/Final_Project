@@ -248,19 +248,28 @@ public class MedicalCenterController {
 	
 	@ResponseBody
 	@PostMapping("getReservationsForDate")
-	public List<DoctorAppointment> getReservationsForDate(@SessionAttribute("loginMember")Member loginMember,
-														@RequestBody String clubResvTime) {
-		
-		log.info("현재 클릭된 시간은? == {} ", clubResvTime);
-		
-		DoctorAppointment reservation = DoctorAppointment.builder()
-				.drApptTime(clubResvTime)
-				.memberNo(loginMember.getMemberNo())
-				.build();
-		
-		
-		return doctorService.getReservationsForDate(reservation);
+	public List<DoctorAppointment> getReservationsForDate(
+	    @SessionAttribute("loginMember") Member loginMember,
+	    @RequestBody String clubResvTime) {
+	    
+	    log.info("현재 클릭된 시간은? == {} ", clubResvTime);
+	    
+	    // Create a DoctorAppointment object with the received clubResvTime and memberNo from session
+	    DoctorAppointment reservation = DoctorAppointment.builder()
+	            .drApptTime(clubResvTime)
+	            .memberNo(loginMember.getMemberNo())
+	            .build();
+	    
+	    // Call a service method to retrieve reservations for the specified date/time
+	    List<DoctorAppointment> reservations = doctorService.getReservationsForDate(reservation);
+	    for (DoctorAppointment appointment : reservations) {
+	        log.info("Appointment details: doctorNo={}, drApptTime={}", appointment.getDoctorNo(), appointment.getDrApptTime());
+	    }
+
+	    // Return the list of reservations as JSON response
+	    return reservations;
 	}
+
 
 }
 	
