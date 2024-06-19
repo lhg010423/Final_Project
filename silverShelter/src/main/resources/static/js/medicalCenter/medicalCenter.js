@@ -429,13 +429,19 @@ window.selectedDateValue = null; // 전역 변수로 선언
 window.reservedDates = []; // 예약된 날짜들을 저장하는 배열
 
 async function loadTabContent(htmlFile, sectionId = null, callback = null) {
+    console.log(`loadTabContent called with htmlFile: ${htmlFile}, sectionId: ${sectionId}, callback: ${callback}`);
+
     try {
+        // HTML 파일 가져오기
         const response = await fetch(htmlFile);
         if (!response.ok) {
             throw new Error(`Failed to fetch ${htmlFile}`);
         }
 
         const html = await response.text();
+        console.log('Fetched HTML content:', html);
+
+        // 탭 컨텐츠를 담을 컨테이너 찾기
         const tabContentContainer = document.getElementById('tabContentContainer');
         if (!tabContentContainer) {
             console.error('tabContentContainer element not found.');
@@ -669,6 +675,10 @@ updateBtn.addEventListener("click", () => {
     }
 });
 }
+
+
+
+
 
 function showSection(sectionId, sectionBtnId) {
     console.log("Trying to show section with ID:", sectionId);

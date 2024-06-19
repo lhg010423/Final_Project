@@ -1,5 +1,7 @@
 package com.silver.shelter.board.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,7 @@ public class Board {
 	private int memberRole;        //
 	private int cp; // 현제페이지
 	
+	
+	// 특정 게시글의 댓글 목록
+	private List<Comment> commentList;
 }

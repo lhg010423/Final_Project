@@ -28,8 +28,6 @@ import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.careGiver.model.SurveyForm;
 import com.silver.shelter.careGiver.service.CareGiverClustering;
 import com.silver.shelter.careGiver.service.KMeansClusteringService;
-import com.silver.shelter.careGiver.service.caregiverService;
-import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
 import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.service.DoctorService;
@@ -266,18 +264,26 @@ public class MedicalCenterController {
 	
 	@ResponseBody
 	@PostMapping("getReservationsForDate")
-	public List<DoctorAppointment> getReservationsForDate(@SessionAttribute("loginMember")Member loginMember,
-														@RequestBody String clubResvTime) {
-		
-		log.info("현재 클릭된 시간은? == {} ", clubResvTime);
-		
-		DoctorAppointment reservation = DoctorAppointment.builder()
-				.drApptTime(clubResvTime)
-				.memberNo(loginMember.getMemberNo())
-				.build();
-		
-		
-		return doctorService.getReservationsForDate(reservation);
+	public List<DoctorAppointment> getReservationsForDate(
+	    @SessionAttribute("loginMember") Member loginMember,
+	    @RequestBody String clubResvTime) {
+	    
+	    log.info("현재 클릭된 시간은? == {} ", clubResvTime);
+	    
+	    // Create a DoctorAppointment object with the received clubResvTime and memberNo from session
+	    DoctorAppointment reservation = DoctorAppointment.builder()
+	            .drApptTime(clubResvTime)
+	            .memberNo(loginMember.getMemberNo())
+	            .build();
+	    
+	    // Call a service method to retrieve reservations for the specified date/time
+	    List<DoctorAppointment> reservations = doctorService.getReservationsForDate(reservation);
+	    for (DoctorAppointment appointment : reservations) {
+	        log.info("Appointment details: doctorNo={}, drApptTime={}", appointment.getDoctorNo(), appointment.getDrApptTime());
+	    }
+
+	    // Return the list of reservations as JSON response
+	    return reservations;
 	}
 
 	@GetMapping("reservationCheck/update/{date:[0-9]+}")
@@ -339,11 +345,11 @@ public class MedicalCenterController {
 		log.info("뭐가 찍히려나 == {}",clubresv);
 		
 		String path = null;
-		String message = null;
+
 		
 
-			message = "예약이 변경 실패...";
-			path = "myPage/updateReserv";
+
+
 
 		
 		return path;
