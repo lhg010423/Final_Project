@@ -13,6 +13,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.silver.shelter.admin.model.mapper.AdminMapper;
+import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
@@ -353,6 +354,15 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ClubReservation clubAllSelect(Map<String, Object> paramMap) {
 		return mapper.clubAllSelect(paramMap);
+	}
+
+
+	/** 게시글 상세조회
+	 *
+	 */
+	@Override
+	public Board boardDetailSelect(Object boardNo) {
+		return mapper.boardDetailSelect(boardNo);
 	}
    
 }

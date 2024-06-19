@@ -11,6 +11,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 /* 공간 확인용 */
@@ -77,7 +78,8 @@ main {
 /* 좌우 div 크기 지정 */
 .adminLeft, .adminRight {
     width: 50%;
-    height: auto;
+    height: 500px;
+    overflow-y: auto; /* 세로 스크롤바 추가 */
     margin: 30px;
     background-color: white;
     border-radius: 5px;
@@ -288,4 +290,8 @@ tbody td {
     background-color: #1A2050;
     outline: none;
     color: white;
+}
+
+#commentArea {
+    height: 100%;
 }

@@ -1,6 +1,7 @@
 package com.silver.shelter.admin.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.board.model.dto.Board;
+import com.silver.shelter.board.model.dto.Comment;
 import com.silver.shelter.board.model.service.BoardService;
+import com.silver.shelter.board.model.service.CommentService;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
-import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,7 @@ public class AdminController {
 
 	private final AdminService service;
 	private final BoardService bs;
+	private final CommentService cs;
 	
 	
 	/** 한눈에 보기
@@ -329,7 +332,9 @@ public class AdminController {
 		
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("boardList", map.get("boardList"));
-		
+		log.info("pagination {}" + map.get("pagination"));
+		log.info("boardList {}" + map.get("boardList"));
+		System.out.println("boardList @@@@@@@@@" + map.get("boardList"));
 		
 		return "admin/boardList";
 	}
@@ -349,10 +354,10 @@ public class AdminController {
 	 * @return
 	 */
 	@ResponseBody
-	@PostMapping("{boardCode:[0-9]+}")
+	@PostMapping("boardList")
 	public Map<String, Object> boardList(
-			@PathVariable("boardCode") int boardCode,
-			@RequestBody Map<String, Object> paramMap
+//			@PathVariable("boardCode") int boardCode,
+			@RequestBody int boardNo
 //			@SessionAttribute("loginMember") Member loginMember,
 //			HttpSession session,
 //			HttpServletRequest req,
@@ -364,12 +369,15 @@ public class AdminController {
 		System.out.println("컨트롤러 진입 확인");  // 디버깅 출력
 		
 		Map<String, Object> map = new HashMap<>();
-		paramMap.put("boardCode", boardCode);
+		
+		Map<String, Object> paramMap = new HashMap<>();
+//		paramMap.put("boardCode", boardCode);
+		paramMap.put("boardNo", boardNo);
 		
 //		int boardNo = (int) paramMap.get("boardNo");
 		
-		Board board = bs.boardDetailSelect(paramMap);
-		
+		Board board = service.boardDetailSelect(boardNo);
+//		List<Comment> commentList = cs.select(boardNo);
 		
 		System.out.println("board 확인용"+board);
 		
@@ -379,8 +387,8 @@ public class AdminController {
 		map.put("boardWriteDate", board.getBoardWriteDate());
 		map.put("readCount", board.getReadCount());
 		map.put("boardNo", board.getBoardNo());
-		map.put("boardCode", boardCode);
-//		map.put("", board)
+		map.put("boardCode", board.getBoardCode());
+//		map.put("commentList", commentList);
 		
 		
 		return map;

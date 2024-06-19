@@ -2,6 +2,7 @@ package com.silver.shelter.admin.model.service;
 
 import java.util.Map;
 
+import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
@@ -90,6 +91,12 @@ public interface AdminService {
 	 * @return
 	 */
 	ClubReservation clubAllSelect(Map<String, Object> paramMap);
+
+	/** 게시글 상세 조회
+	 * @param boardNos
+	 * @return
+	 */
+	Board boardDetailSelect(Object boardNo);
 
 	
 	
