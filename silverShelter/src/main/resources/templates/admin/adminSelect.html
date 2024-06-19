@@ -61,7 +61,7 @@
                                     <tr th:each="member : ${memberList}" th:object="${member}" id="memberBtn">
                                         
                                         <td>
-                                            <button id="memberId"
+                                            <button class="memberId"
                                             th:name="*{memberNo}" th:text="*{memberName}"></button>
                                         </td>
 

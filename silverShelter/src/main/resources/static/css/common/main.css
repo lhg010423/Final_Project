@@ -11,12 +11,7 @@
     src: local(☺), url("../fonts/NotoSans-Bold.woff2") format("woff2"), url("../fonts/NotoSans-Bold.woff") format("woff");
     /* IE 9+, 모던 브라우저 */
 }
-@font-face {
-    font-family: "Cora-Regular";
-    font-weight: 300;
-    src: local(☺), url("../fonts/Cora-Regular.woff2") format("woff2"), url("../fonts/Cora-Regular.woff") format("woff");
-    /* IE 9+, 모던 브라우저 */
-}
+
 * {
 	
 	/*border:1px solid rgb(255, 206, 206);*/

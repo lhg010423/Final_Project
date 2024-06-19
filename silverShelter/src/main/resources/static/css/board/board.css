@@ -191,3 +191,33 @@ tr {
 }
 
 
+/* 검색창 공간 *************************************************************** */
+
+#boardSearch {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px;
+}
+
+#boardSearch * {
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    background-color: white;
+    outline: none;
+    margin: 0 10px;
+}
+
+
+/* 검색창 왼쪽 select태그 */
+#searchKey {
+    width: 100px;
+}
+
+/* 검색창 크기 지정 */
+#searchQuery {
+    width: 200px;
+}
