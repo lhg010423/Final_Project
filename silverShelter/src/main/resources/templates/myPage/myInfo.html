@@ -8,6 +8,7 @@
 	
 	<link rel="stylesheet" href="/css/myPage/changeInfoForm.css">
 	<link rel="stylesheet" href="/css/myPage/secessionForm.css">
+	<link rel="stylesheet" href="/css/myPage/roomCaregiverForm.css">
     <!-- mainNav css -->
     <th:block th:replace="~{common/common}"></th:block>
     <link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
@@ -27,9 +28,10 @@
                 
 				<img src="/images/myPage/diary2.png"><br><br><br>
                 
-				<h2>안녕하세요.</h2><br>
+				<h3>안녕하세요.</h3><br>
                 <span>
                     <span th:text="${session.loginMember.memberName}" class="memberN"></span>&nbsp;<span>님!</span>
+					<!--<br>-->
                 </span>
             </div>
         </section>
@@ -37,18 +39,25 @@
 
     <section class="section-3-banner-forMyPage">
         <ul class="myPageNavi">
-            <li class="li-1">
-                <a href="#" id="changeInfo" data-form="changeInfoForm">정보 변경</a>
+			<li class="li-1">
+                <a href="#" id="roomCareGiver" data-form="roomCareGiverForm">객실 / 요양사</a>
             </li>
             <li class="li-2">
-                <a href="#" id="myReserv" data-form="myReservForm">예약 확인</a>
+                <a href="#" id="changeInfo" data-form="changeInfoForm">정보 변경</a>
             </li>
             <li class="li-3">
+                <a href="#" id="myReserv" data-form="myReservForm">예약 확인</a>
+            </li>
+            <li class="li-4">
                 <a href="#" id="secession" data-form="secessionForm">회원 탈퇴</a>
             </li>
+			
+			
         </ul>
+		
+		
     </section>
-
+	
     <!-- Form containers -->
 	<section class="container-2">
 	    <div id="changeInfoForm" class="form-container" style="display: none;">
@@ -62,6 +71,12 @@
 	    <div id="secessionForm" class="form-container" style="display: none;">
 	        <th:block th:replace="~{myPage/secessionForm}"></th:block>
 	    </div>
+		
+		<div id="roomCareGiverForm" class="form-container" style="display: none;">
+			<th:block th:replace="~{myPage/roomCareGiverForm}"></th:block>
+			<!--<span>객실 정보 : </span><span th:text="${session.loginMember.examRoomType}" />
+			<br><span>요양사 정보 : </span> <span th:text="${session.loginMember.caregiversNo}" />-->
+		</div>
 	</section>
     
 	<div style="height: 15vh;"></div>
