@@ -206,7 +206,7 @@
 
                         <!-- 게시글 제목 공간 -->
                         <div class="boardTitle-area">
-                            <span id="titleSpan" name="name"></span>
+                            <span id="titleSpan" name="name">게시글 제목</span>
 
                         </div>
 
@@ -215,15 +215,13 @@
 
                             <!-- 작성자, 작성일 공간 -->
                             <div class="writer-left-area">
-                                <span id="writerSpan"></span><br>
-                                <span id="writeDateSpan"></span><br>
-                                <!-- <span th:if="${board.boardUpdateDate}" th:text="|수정일 ${board.boardUpdateDate}|">수정일</span> -->
+                                <span id="writerSpan">작성자</span><br>
+                                <span id="writeDateSpan">작성일</span><br>
                             </div>
 
                             <!-- 좋아요 공간 -->
                             <div class="writer-right-area">
-                                <span id="readCountSpan"></span>
-                                <!-- <span>좋아요</span> -->
+                                <span id="readCountSpan">조회수</span>
 
                             </div>
                             
@@ -237,23 +235,67 @@
 
                             <!-- 게시글 내용 -->
                             <article class="boardContent"
-                                id="contentSpan">
+                                id="contentSpan">게시글 내용
                             </article>
 
                         </div>
 
+                        <hr>
+                        <span>댓글</span>
+
                         <!-- 댓글 공간 -->
-                        <div class="comment-area">
+                        <div id="commentArea">
 
-                            <div id="comments-container">
-
-                            </div>                
-
-                            <textarea id="comment-input" placeholder="댓글을 입력해주세요"></textarea>
-                            <button onclick="submitComment()">댓글 작성</button>
-
-
-                        </div>
+                            <!-- 댓글 모록 -->
+                            <div class="comment-list-area">
+        
+                                <ul id="commentList">
+        
+                                    <li class="comment-row"
+                                        th:each="comment : ${board.commentList}"
+                                        th:classappend="${comment.parentCommentNo} != 0 ? child-comment"
+                                        th:object="${comment}">
+        
+                                        <th:block th:if="*{commentDelFl} == 'Y'">
+                                            삭제된 댓글 입니다
+                                        </th:block>
+        
+                                        <th:block th:if="*{commentDelFl} == 'N'">
+                                            <p class="comment-writer">
+                                                
+                            
+                                                <span th:text="*{memberName}">작성자</span>
+                                                <span class="comment-date" th:text="*{commentWriteDate}">작성일</span>
+                                            </p>
+                            
+                                            <p class="comment-content" th:text="*{commentContent}">댓글 내용</p>
+                            
+                                            <!-- 버튼 영역 -->
+                                            <div class="comment-btn-area">
+                                                <button th:onclick="|showInsertComment(*{commentNo}, this)|">답글</button>
+                            
+                                                <th:block th:if="${session.loginMember != null and session.loginMember.memberNo == comment.memberNo}">
+                                                    <button th:onclick="|showUpdateComment(*{commentNo}, this)|">수정</button>
+                                                    <button th:onclick="|deleteComment(*{commentNo})|">삭제</button>
+                                                </th:block>
+                                                <!-- 로그인 회원과 댓글 작성자가 같은 경우 -->
+                            
+                                            </div>
+                                        </th:block>
+                                    </li>
+                                </ul>
+                            </div>
+        
+                            <!-- 댓글 작성 공간 -->
+                            <div class="comment-write-area">
+        
+                                <textarea id="commentContent"></textarea>
+                                <button id="addComment">
+                                    댓글<br>
+                                    등록
+                                </button>
+                            </div>
+                        </div> <!-- 댓글 공간 끝 -->
                         
                     </form>
                 
@@ -265,7 +307,19 @@
         
     </main>
 
+    <script th:inline="javascript">
+
+        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
+
+        const boardCode = /*[[${board.boardCode}]]*/ "게시판 코드";
+
+        const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
+
+        const cp = /*[[${board.cp}]]*/ "현제페이지";
+    </script>
+
     <script src="/js/admin/boardList.js"></script>
+    <script src="/js/board/comment.js"></script>
 
 
 </body>

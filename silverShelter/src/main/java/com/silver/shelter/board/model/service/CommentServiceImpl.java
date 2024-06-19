@@ -23,6 +23,24 @@ public class CommentServiceImpl implements CommentService{
 	public List<Comment> select(int boardNo) {
 		return mapper.select(boardNo);
 	}
+
+	// 댓글 작성
+	@Override
+	public int insert(Comment comment) {
+		return mapper.insert(comment);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int delete(int commentNo) {
+		return mapper.delete(commentNo);
+	}
+
+	// 댓글 수정
+	@Override
+	public int update(Comment comment) {
+		return mapper.update(comment);
+	}
 	
 	
 	

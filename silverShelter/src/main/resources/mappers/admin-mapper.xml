@@ -2,7 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.silver.shelter.admin.model.mapper.AdminMapper">
 
-
+	<resultMap type="Board" id="board_rm">
+	
+		<id property="boardNo" column="BOARD_NO"/>
+		
+		<collection 
+			property="commentList"
+			select="commentListSelect"
+			column="BOARD_NO"
+			javaType="java.util.ArrayList"
+			ofType="Comment"
+		/>
+			
+	</resultMap>
 	
 
 	<!-- <typeAlias alias="member" type="silverShelter.member.model.dto.Member"/> -->
@@ -180,7 +192,31 @@
 	
 	<!-- 요양사 데이터 전체 조회 -->
 	<select id="caregiversAllSelect">
-		SELECT *
+		SELECT CAREGIVERS_NO, CAREGIVERS_NAME, CAREGIVERS_AGE, CAREGIVERS_TEL,
+		
+			CASE
+				WHEN CAREGIVERS_GENDER = 'male' THEN '남자'
+				WHEN CAREGIVERS_GENDER = 'female' THEN '여자'
+			END as CAREGIVERS_GENDER,
+			
+			CASE
+				WHEN CAREGIVERS_EXPERIENCE = 'novice' THEN '3년 미만'
+				WHEN CAREGIVERS_EXPERIENCE = 'intermediate' THEN '3-7년'
+				WHEN CAREGIVERS_EXPERIENCE = 'experienced' THEN '8년 이상'
+			END as CAREGIVERS_EXPERIENCE,
+			
+			CASE
+				WHEN CAREGIVERS_WORK_HOURS = 'morning' THEN '09:00 - 13:00'
+				WHEN CAREGIVERS_WORK_HOURS = 'afternoon' THEN '13:00 - 18:00'
+				WHEN CAREGIVERS_WORK_HOURS = 'evening' THEN '18:00 - 22:00'
+			END as CAREGIVERS_WORK_HOURS,
+			
+			CASE
+				WHEN CAREGIVERS_ROLE = 'companionship' THEN '정서적 지원'
+				WHEN CAREGIVERS_ROLE = 'personalCare' THEN '의료적 지원'
+				WHEN CAREGIVERS_ROLE = 'housekeeping' THEN '일상생활 지원'
+			END as CAREGIVERS_ROLE
+			
 		FROM "CAREGIVERS"
 	</select>
 	
@@ -210,7 +246,30 @@
 	
 	
 	<select id="caregiversSearchSelect">
-		SELECT *
+		SELECT CAREGIVERS_NO, CAREGIVERS_NAME, CAREGIVERS_AGE, CAREGIVERS_TEL,
+		
+			CASE
+				WHEN CAREGIVERS_GENDER = 'male' THEN '남자'
+				WHEN CAREGIVERS_GENDER = 'female' THEN '여자'
+			END as CAREGIVERS_GENDER,
+			
+			CASE
+				WHEN CAREGIVERS_EXPERIENCE = 'novice' THEN '3년 미만'
+				WHEN CAREGIVERS_EXPERIENCE = 'intermediate' THEN '3-7년'
+				WHEN CAREGIVERS_EXPERIENCE = 'experienced' THEN '8년 이상'
+			END as CAREGIVERS_EXPERIENCE,
+			
+			CASE
+				WHEN CAREGIVERS_WORK_HOURS = 'morning' THEN '09:00 - 13:00'
+				WHEN CAREGIVERS_WORK_HOURS = 'afternoon' THEN '13:00 - 18:00'
+				WHEN CAREGIVERS_WORK_HOURS = 'evening' THEN '18:00 - 22:00'
+			END as CAREGIVERS_WORK_HOURS,
+			
+			CASE
+				WHEN CAREGIVERS_ROLE = 'companionship' THEN '정서적 지원'
+				WHEN CAREGIVERS_ROLE = 'personalCare' THEN '의료적 지원'
+				WHEN CAREGIVERS_ROLE = 'housekeeping' THEN '일상생활 지원'
+			END as CAREGIVERS_ROLE
 		FROM CAREGIVERS
 		WHERE
 		<choose>
@@ -235,7 +294,30 @@
 	
 	<!-- 요양사 상세조회 -->
 	<select id="caregiversDetailSelect">
-		SELECT *
+		SELECT CAREGIVERS_NO, CAREGIVERS_NAME, CAREGIVERS_AGE, CAREGIVERS_TEL,
+		
+			CASE
+				WHEN CAREGIVERS_GENDER = 'male' THEN '남자'
+				WHEN CAREGIVERS_GENDER = 'female' THEN '여자'
+			END as CAREGIVERS_GENDER,
+			
+			CASE
+				WHEN CAREGIVERS_EXPERIENCE = 'novice' THEN '3년 미만'
+				WHEN CAREGIVERS_EXPERIENCE = 'intermediate' THEN '3-7년'
+				WHEN CAREGIVERS_EXPERIENCE = 'experienced' THEN '8년 이상'
+			END as CAREGIVERS_EXPERIENCE,
+			
+			CASE
+				WHEN CAREGIVERS_WORK_HOURS = 'morning' THEN '09:00 - 13:00'
+				WHEN CAREGIVERS_WORK_HOURS = 'afternoon' THEN '13:00 - 18:00'
+				WHEN CAREGIVERS_WORK_HOURS = 'evening' THEN '18:00 - 22:00'
+			END as CAREGIVERS_WORK_HOURS,
+			
+			CASE
+				WHEN CAREGIVERS_ROLE = 'companionship' THEN '정서적 지원'
+				WHEN CAREGIVERS_ROLE = 'personalCare' THEN '의료적 지원'
+				WHEN CAREGIVERS_ROLE = 'housekeeping' THEN '일상생활 지원'
+			END as CAREGIVERS_ROLE
 		FROM CAREGIVERS
 		WHERE CAREGIVERS_NO = #{caregiversNo}
 	</select>
