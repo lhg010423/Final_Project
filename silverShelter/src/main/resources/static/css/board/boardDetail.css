@@ -131,6 +131,35 @@ main {
 
 
 /* 댓글 ***************************************** */
+
+/* 댓글 공간 */
+.commentWrite-area {
+    display: flex;
+    min-height: 100px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.commentWrite-area > textarea {
+    flex-basis: 75%;
+    margin-right: 10px;
+    resize: none;
+}
+
+.commentWrite-area > button {
+    flex-basis: 7%;
+    height: 85px;
+    font-weight: bold;
+    border: 0;
+    background-color: #1A2050;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
 .comment {
     margin-bottom: 10px; /* 댓글 간의 간격 설정 */
     padding: 10px; /* 댓글의 패딩 설정 */
