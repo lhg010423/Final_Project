@@ -60,7 +60,7 @@
 		ORDER BY MEMBER_NO DESC
 	</select>
 
-	
+	<!-- 검색한 회원 조회 -->
 	<select id="memberSearchSelect">
 		SELECT MEMBER_NAME, MEMBER_ID, MEMBER_NO, EXAM_STATUS
 		FROM "MEMBER"
@@ -85,6 +85,7 @@
 	</select>
 	
 	
+	<!-- 회원 상세 조회 -->
 	<select id="adminDetailSelect" resultType="Member">
 		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_ID, MEMBER_PW,
 			MEMBER_EMAIL, MEMBER_ADDRESS, MEMBER_TEL,
@@ -154,8 +155,6 @@
 			<when test='key == "e"'>
 				AND EXAM_EMAIL LIKE '%' || #{query} || '%'
 			</when>
-			
-			
 			
 		</choose>
 		ORDER BY EXAM_ID
@@ -332,7 +331,32 @@
 	</select>
 	
 	
+	<!-- 게시글 상세조회 -->
+	<select id="boardDetailSelect" resultMap="board_rm">
+		SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, m.MEMBER_NAME, b.BOARD_WRITE_DATE,
+			b.BOARD_UPDATE_DATE, b.READ_COUNT, b.LIKE_COUNT, b.BOARD_CODE, b.MEMBER_NO
+		FROM "BOARD" b
+		JOIN "MEMBER" m ON b.MEMBER_NO = m.MEMBER_NO
+		WHERE BOARD_NO = #{boardNo}
+	</select>
 	
+	
+	<select id="commentListSelect" resultType="Comment">
+   		SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+			    BOARD_NO, MEMBER_NO, MEMBER_NAME, PARENT_COMMENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE BOARD_NO = #{boardNo}) C
+		WHERE COMMENT_DEL_FL = 'N'
+		OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+						WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+						AND COMMENT_DEL_FL = 'N')
+		START WITH PARENT_COMMENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO
+   	</select>
 	
 
 </mapper>

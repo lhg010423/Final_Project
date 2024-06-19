@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
@@ -128,6 +129,13 @@ public interface AdminMapper {
 	 * @return
 	 */
 	ClubReservation clubAllSelect(Map<String, Object> paramMap);
+
+
+	/** 게시글 상세조회
+	 * @param boardNo
+	 * @return
+	 */
+	Board boardDetailSelect(Object boardNo);
 
 
 	
