@@ -138,24 +138,23 @@ public class myPageController {
 	@PostMapping("myInfo/myReserUpdate/{date:[0-9]+}")
 	public String myReserUpdate(@SessionAttribute("loginMember")Member loginMember,
 			@PathVariable("date") String date,
-			@RequestParam("clubResvTime") String clubResvTime,
+			@RequestParam("reservationTime") String reservationTime,
 			@RequestParam("clubCode") int clubCode,
 			RedirectAttributes ra) {
 		
 		 String formattedDate = String.join("-", date.substring(0, 4), date.substring(4, 6), date.substring(6, 8));
 		
-		 formattedDate += " "+clubResvTime;
+		 String resetTime = formattedDate += " "+reservationTime;
 		 
-		 
+		 log.info("새로들어온 시간은?  == {}",resetTime);
 		 ClubReservation clubresv = ClubReservation.builder()
-				 					.clubResvTime(formattedDate+=clubResvTime)
+				 					.clubResvTime(resetTime)
 				 					.memberNo(loginMember.getMemberNo())
 				 					.clubCode(clubCode)
 				 					.build();
 				 					
 		int result = service.myReserUpdate(clubresv);
-		
-		log.info("뭐가 찍히려나 == {}",clubresv);
+		log.info("뭐가 찍히려나 == {}",clubresv.getClubResvTime());
 		
 		String path = null;
 		String message = null;
