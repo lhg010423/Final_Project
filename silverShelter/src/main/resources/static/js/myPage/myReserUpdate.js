@@ -45,6 +45,7 @@ document.querySelectorAll('.reservation-delete').forEach(button => {
 
         if(confirm('일정을 삭제하시겠습니까?')){
 
+            console.log(obj);
         }
     })
 })
