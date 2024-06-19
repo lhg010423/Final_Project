@@ -1,6 +1,8 @@
 package com.silver.shelter.myPage.controller;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,44 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 public class myPageController {
 
 	public final MyPageService service;
-
-	/*
-	 * @GetMapping("myPage") 
-	 * public String myPageMapping( HttpSession session, 
-	 * 								Model model) {
-	 * 
-	 * Member loginMember = (Member)session.getAttribute("loginMember");
-	 * 
-	 * if(loginMember == null) {
-	 * 
-	 * return "redirect:/login"; }
-	 * 
-	 * model.addAttribute("loginMember",loginMember); return "myPage/myPage"; }
-	 */
-	
-//	@GetMapping("myPage")
-//	public String myPageMapping(@SessionAttribute("loginMember")Member loginMember,
-//			Model model) {
-//
-//		List<ClubReservation> reservList = service.selectReserv(loginMember.getMemberNo());
-//		
-//		
-//		String message = null;
-//		
-//		
-//		if(reservList.isEmpty()) {
-//			
-//			message = "예약된 날짜가 없습니다.";
-//			
-//		}
-//		
-//		model.addAttribute("reservList",reservList);
-//		
-//		return "myPage/myPage";
-//		
-//	}
-
-
 
 	@ResponseBody
 	@GetMapping("getReservedDates")
@@ -127,14 +91,25 @@ public class myPageController {
 		} else {
 			
 			path = "myPage/updateReserv";
-			
 			model.addAttribute("reservationList",reservationList);
-			
+			log.info("예약 리스트들은 ? == {} ",reservationList);
+			model.addAttribute("timeSlots", Arrays.asList("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"));
+			model.addAttribute("clubNames", Arrays.asList("게스트룸", "골프", "수영", "사우나", "게이트볼", "영화", "도예", "십자수"));
+			model.addAttribute("formattedDate",formattedDate); 
 		}
+		
 		
 		return path;
 	}
 	
+	/** 예약 수정 
+	 * @param loginMember
+	 * @param date
+	 * @param reservationTime
+	 * @param clubCode
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("myInfo/myReserUpdate/{date:[0-9]+}")
 	public String myReserUpdate(@SessionAttribute("loginMember")Member loginMember,
 			@PathVariable("date") String date,
@@ -175,6 +150,29 @@ public class myPageController {
 		ra.addFlashAttribute("message",message);
 		
 		return path;
+	}
+	
+	/** 예약 삭제 
+	 * @param paramMap
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("deleteReservation")
+	public int deleteReservation(@RequestBody Map<String, Object>paramMap,
+								 @SessionAttribute("loginMember")Member loginMember) {
+		
+		log.info("처음 들어오는 값은? == {}",paramMap.get("clubCode"));
+		log.info("처음 들어오는 값은? == {}",paramMap.get("clubResvNo"));
+		
+		ClubReservation clubReserv = ClubReservation.builder()
+									.clubCode(Integer.parseInt((String)paramMap.get("clubCode")))
+									.clubResvNo(Integer.parseInt((String)paramMap.get("clubResvNo")))
+									.memberNo(loginMember.getMemberNo())
+									.build();
+		
+		log.info("값이 뭐게 == {}",clubReserv);
+		
+		return service.deleteReservation(clubReserv);
 	}
 	
 }

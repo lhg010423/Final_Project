@@ -18,4 +18,10 @@ public interface MyPageMapper {
 
 	int myReserUpdate(ClubReservation clubresv);
 
+	/** 삭제 하기 
+	 * @param clubReserv
+	 * @return
+	 */
+	int deleteReservation(ClubReservation clubReserv);
+
 }
