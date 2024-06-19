@@ -420,258 +420,252 @@ function showTab(tabId) {
         newSelectedTab.classList.add('selected-tab');
     }
 }
+// 전역 변수 선언 
+window.selectedDateValue = null; // 전역 변수로 선언
+window.reservedDates = []; // 예약된 날짜들을 저장하는 배열
 
 async function loadTabContent(htmlFile, sectionId = null, callback = null) {
-    console.log(`loadTabContent called with htmlFile: ${htmlFile}, sectionId: ${sectionId}, callback: ${callback}`);
-
     try {
-        // HTML 파일 가져오기
         const response = await fetch(htmlFile);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${htmlFile}`);
+        }
+
         const html = await response.text();
-        console.log('Fetched HTML content:', html);
-
-        // 탭 컨텐츠를 담을 컨테이너 찾기
         const tabContentContainer = document.getElementById('tabContentContainer');
-<<<<<<< HEAD
         if (!tabContentContainer) {
-            throw new Error('tabContentContainer가 존재하지 않습니다.');
-=======
-        if (tabContentContainer) {
-            tabContentContainer.innerHTML = html;
-            if (sectionId != null) {
-                // 섹션을 보여주는 로직을 이곳에서 호출
-                console.info("이게됨?");
-                if(sectionId == 'section1') {
-                    showSection(sectionId, "sectionBtn1");
-                }
-                if(sectionId === 'section2-2'){
-                    const section22 = document.querySelector('.section2-2');
-                    console.log("first");
-                    if(section22){
-                        console.log("twice");
-                        section22.style.display = 'block';
-                    }
-                }
-                if(sectionId === 'section4-1'){
-
-                    if (document.getElementById('calendar1')) {
-                        console.log('Initializing jSuites calendar');
-                        instance = jSuites.calendar(document.getElementById('calendar1'), {
-                            format: 'DD/MM/YYYY HH:MM',
-                            onupdate: function () {
-                                console.log('Calendar updated');
-                                fetchReservedDates();
-                            }
-                        });
-                    } else {console.log('캘린더 없음');}
-
-                    function highlightReservedDates(reservedDates) {
-                        console.log('Highlighting reserved dates', reservedDates);
-                        const days = document.querySelectorAll('.jcalendar-set-day');
-                    
-                        days.forEach(function (day) {
-                            const span = day.querySelector('.resevColor');
-                            if (span) {
-                                console.log('Removing span from day', day.innerText);
-                                day.removeChild(span);
-                            }
-                        });
-                    
-                        days.forEach(function (day) {
-                            const dayNumber = parseInt(day.innerText, 10);
-                            if (!isNaN(dayNumber)) {
-                                const selectedDate = new Date(instance.getValue());
-                                const currentMonth = selectedDate.getMonth();
-                                const currentYear = selectedDate.getFullYear();
-                                const dayDate = new Date(currentYear, currentMonth, dayNumber);
-                                console.log('Processing day', dayDate);
-                    
-                                if (reservedDates.some(date => date.getTime() === dayDate.getTime())) {
-                                    const span = document.createElement('span');
-                                    span.classList.add('resevColor');
-                                    day.appendChild(span);
-                    
-                                    const label = document.createElement('label');
-                                    label.id = `label${dayNumber}`;
-                                    label.innerText = 'Y';
-                                    label.hidden = true;
-                                    day.appendChild(label);
-                    
-                                    day.clickListener = function () {
-                                        console.log('Fetching reservations for reserved day', dayNumber);
-                                        fetchReservationsForDate(dayNumber);
-                                    };
-                                    day.addEventListener('click', day.clickListener);
-                                } else {
-                                    day.clickListener = function () {
-                                        console.log('Displaying no reservations message for day', dayNumber);
-                                        displayNoReservationsMessage(dayNumber);
-                                    };
-                                }
-                            }
-                        });
-                    }
-                    
-                    async function fetchReservedDates() {
-                        console.log('Fetching reserved dates');
-                        try {
-                            const response = await fetch('/medicalCenter/getReservedDates', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({}) // 별도의 데이터가 필요 없다면 빈 객체를 전송
-                            });
-                            if (!response.ok) {
-                                throw new Error('Failed to fetch reserved dates');
-                            }
-                            const data = await response.json();
-                            
-                            // Assuming data is an array of DoctorAppointment objects
-                            const reservedDates = data.map(item => {
-                                const date = new Date(item.drApptTime);
-                                date.setHours(0, 0, 0, 0);
-                                return date;
-                            });
-                    
-                            console.log('Reserved dates data processed', reservedDates);
-                            highlightReservedDates(reservedDates);
-                        } catch (error) {
-                            console.error('Error fetching reserved dates:', error);
-                        }
-                    }
-                    
-                    
-                    
-                    
-
-                    
-
-                    function displayNoReservationsMessage(day) {
-                        console.log('Displaying no reservations message for day', day);
-                        const label = document.querySelector(`#label${day}`);
-                        const reservationList = document.getElementById('reservationList');
-                        reservationList.innerHTML = '';
-
-                        if (!label || label.innerText === '') {
-                            reservationList.innerHTML = '<p class="reservation-none">예약 일정이 없습니다.</p>';
-                        }
-                    }
-
-                    function fetchReservationsForDate(day) {
-                        const selectedDate = new Date(instance.getValue());
-                        const year = selectedDate.getFullYear();
-                        const month = selectedDate.getMonth() + 1;
-                        const clubResvTime = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
-
-                        console.log('Fetching reservations for date', clubResvTime);
-                        fetch('/medicalCenter/getReservationsForDate', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ clubResvTime: clubResvTime }) // Ensure clubResvTime is properly sent in the request body
-                        })
-                            .then(response => {
-                                console.log('Received response for reservations', response);
-                                return response.json(); // Parse JSON from the response
-                            })
-                            .then(data => {
-                                const reservationList = document.getElementById('reservationList');
-                                reservationList.innerHTML = '';
-                                
-                                console.log('Reservations data for date processed', data);
-                                
-                                if (data.length === 0) {
-                                    reservationList.innerHTML = '<p class="reservation-none">예약 일정이 없습니다.</p>';
-                                } else {
-                                    data.forEach(reservation => {
-                                        // Fetch doctor name asynchronously
-                                        fetch('/medicalCenter/reservation/result', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            },
-                                            body: JSON.stringify({ doctorNo: reservation.doctorNo })
-                                        })
-                                        .then(response => response.text()) // Fetch doctor name as text
-                                        .then(reservationDoctorName => {
-                                            const div = document.createElement('div');
-                                            div.classList.add('reservation');
-                                
-                                            div.innerHTML = `
-                                                <p class="reservation-clubName">${reservationDoctorName}</p>
-                                                <p class="reservation-clubResvTime">${reservation.drApptTime}</p>
-                                            `;
-                                            reservationList.appendChild(div);
-                                        })
-                                        .catch(error => console.error('Error fetching doctor name:', error));
-                                    });
-                                }
-                                
-                            })
-                            .catch(error => console.error('Error fetching reservations for date:', error));
-
-                    }
-
-
-                }
-                // 이후에 추가적으로 필요한 작업 수행
-                // 예: showFloor, showDep 등의 함수 호출
-                if (callback) {
-                    callback();
-                }
-            } else {
-                console.info("응안돼");
-            }
-        } else {
-            console.error('tabContentContainer 요소를 찾을 수 없습니다.');
->>>>>>> e85320ec77ad4e7f275be952e9b2d00281c04c50
+            console.error('tabContentContainer element not found.');
+            return;
         }
 
-        // HTML 파일을 컨테이너에 설정
         tabContentContainer.innerHTML = html;
-        console.log('HTML content set in tabContentContainer.');
 
-        // 섹션 ID에 따라 특정 섹션을 보여주는 로직 호출
-        if (sectionId != null) {
-            console.log(`Section ID provided: ${sectionId}`);
-            if (sectionId === 'section1') {
-                console.log('Showing section1');
-                showSection(sectionId, "sectionBtn1");
-            } else if (sectionId === 'section2-2') {
-                console.log('Showing section2-2');
-                const section22 = document.querySelector('.section2-2');
-                if (section22) {
-                    section22.style.display = 'block';
-                }
-            } else if (sectionId === 'section4-1') {
-
-            }
+        if (sectionId) {
+            handleSectionDisplay(sectionId);
         }
 
-        // 콜백 함수 호출
-        if (typeof callback === 'function') {
-            console.log('Executing callback function.');
+        if (callback) {
             callback();
         }
-
     } catch (error) {
-        console.error('loadTabContent 함수에서 오류 발생:', error);
+        console.error('Error fetching HTML file:', error);
+    }
+}
+
+function handleSectionDisplay(sectionId) {
+    switch (sectionId) {
+        case 'section1':
+            showSection(sectionId, "sectionBtn1");
+            break;
+        case 'section2-2':
+            displaySection2_2();
+            break;
+        case 'section4-1':
+            initializeCalendar(); // 기존의 initializeCalendar 함수 호출
+            break;
+        default:
+            console.info(`Section ${sectionId} not handled.`);
+    }
+}
+
+function initializeCalendar() {
+    const calendarElement = document.getElementById('calendar1'); // calendar1로 수정
+    if (!calendarElement) {
+        console.log('Calendar element not found.');
+        return;
+    }
+
+    const instance = jSuites.calendar(calendarElement, {
+        format: 'DD/MM/YYYY HH:MM',
+        onupdate: fetchReservedDates
+    });
+
+    fetchReservedDates();
+
+    async function fetchReservedDates() {
+        try {
+            const response = await fetch('/medicalCenter/getReservedDates', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch reserved dates');
+            }
+
+            const data = await response.json();
+            const reservedDates = data.map(item => {
+                const date = new Date(item.drApptTime);
+                date.setHours(0, 0, 0, 0);
+                return date;
+            });
+
+            highlightReservedDates(reservedDates);
+        } catch (error) {
+            console.error('Error fetching reserved dates:', error);
+        }
+    }
+
+    function highlightReservedDates(reservedDates) {
+        window.reservedDates = reservedDates;
+        const days = document.querySelectorAll('.jcalendar-set-day');
+
+        days.forEach(day => {
+            const span = day.querySelector('.resevColor');
+            if (span) {
+                day.removeChild(span);
+            }
+        });
+
+        days.forEach(day => {
+            const dayNumber = parseInt(day.innerText, 10);
+            if (!isNaN(dayNumber)) {
+                const selectedDate = new Date(instance.getValue());
+                const dayDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), dayNumber);
+                const currentMonth = selectedDate.getMonth();
+                const currentYear = selectedDate.getFullYear();
+                if (reservedDates.some(date => date.getTime() === dayDate.getTime())) {
+                    const span = document.createElement('span');
+                    span.classList.add('resevColor');
+                    day.appendChild(span);
+
+                    const label = document.createElement('label');
+                    label.id = `label${dayNumber}`;
+                    label.innerText = 'Y';
+                    label.hidden = true;
+                    day.appendChild(label);
+                    // 클릭 이벤트 추가 (이벤트 리스너는 한 번만 등록)
+                    if (!day.hasAttribute('data-event-listener')) {
+                        day.setAttribute('data-event-listener', 'true'); // 중복 등록 방지용 속성 추가
+                        day.addEventListener('click', function() {
+                            if (reservedDates.some(date => date.getTime() === dayDate.getTime())) {
+                                fetchReservationsForDate(dayNumber);
+                                window.selectedDateValue = `${currentYear}${currentMonth + 1 < 10 ? '0' + (currentMonth + 1) : currentMonth + 1}${dayNumber < 10 ? '0' + dayNumber : dayNumber}`;
+                            } else {
+                                displayNoReservationsMessage(dayNumber);
+                                window.selectedDateValue = `${currentYear}${currentMonth + 1 < 10 ? '0' + (currentMonth + 1) : currentMonth + 1}${dayNumber < 10 ? '0' + dayNumber : dayNumber}`;
+                            }
+                        });
+                    }
+                } else {
+                    // 예약이 없는 날짜에도 클릭 이벤트 추가 (이벤트 리스너는 한 번만 등록)
+                    if (!day.hasAttribute('data-event-listener')) {
+                        day.setAttribute('data-event-listener', 'true'); // 중복 등록 방지용 속성 추가
+                        day.addEventListener('click', function() {
+                            displayNoReservationsMessage(dayNumber);
+                            window.selectedDateValue = `${currentYear}${currentMonth + 1 < 10 ? '0' + (currentMonth + 1) : currentMonth + 1}${dayNumber < 10 ? '0' + dayNumber : dayNumber}`;
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    async function fetchReservationDoctorName(doctorNo) {
+        try {
+            const response = await fetch('/medicalCenter/reservation/result', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ doctorNo })
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch doctor name for doctorNo: ${doctorNo}`);
+            }
+            const doctorName = await response.text(); // 서버에서 반환된 의사 이름을 읽음
+            return doctorName; // 의사 이름을 반환
+        } catch (error) {
+            console.error('Error fetching doctor name:', error);
+            return 'Unknown Doctor'; // 에러 발생 시 기본값으로 'Unknown Doctor'를 반환
+        }
+    }
+
+    // 예약이 없는 날짜를 클릭했을 때 메시지를 표시하는 함수
+    function displayNoReservationsMessage(day) {
+        const label = document.querySelector(`#label${day}`);
+        const reservationList = document.getElementById('reservationList');
+        reservationList.innerHTML = ''; // 기존 내용을 초기화
+
+        // 라벨이 없거나 비어 있는 경우 메시지 표시
+        if (!label || label.innerText === '') {
+            reservationList.innerHTML = '<p class="reservation-none">예약 일정이 없습니다.</p>';
+        }
+    }
+
+    // 예약 목록을 생성하고 의사 이름을 포함하여 추가하는 함수
+    async function fetchReservationsForDate(day) {
+        const selectedDate = new Date(instance.getValue());
+        const year = selectedDate.getFullYear();
+        const month = selectedDate.getMonth() + 1; // months are 0-indexed
+        const clubResvTime = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+
+        try {
+            const response = await fetch('/medicalCenter/getReservationsForDate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: clubResvTime
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch reservations for date');
+            }
+            const data = await response.json(); // 서버에서 반환된 예약 데이터를 읽음
+
+            // 예약 목록을 표시할 HTML 생성
+            const reservationList = document.getElementById('reservationList');
+            reservationList.innerHTML = ''; // 기존 내용을 초기화
+
+            if (data.length === 0) {
+                // 데이터가 없을 경우 예약 없음 메시지를 표시
+                displayNoReservationsMessage(day);
+            } else {
+                // 데이터가 있을 경우 각 예약 데이터를 처리하여 목록에 추가
+                for (const reservation of data) {
+                    const reservationDoctorName = await fetchReservationDoctorName(reservation.doctorNo);
+                    const div = document.createElement('div');
+                    div.classList.add('reservation');
+                    div.innerHTML = `
+                        <div class="reservation-item">
+                            <div class="stapper-div"></div>
+                            <div class="reservation-fontList">
+                                <p class="reservation-clubName">${reservationDoctorName}</p>
+                                <p class="reservation-clubResvTime">${reservation.drApptTime}</p>
+                            </div>
+                        </div>
+                    `;
+                    reservationList.appendChild(div);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching reservations for date:', error);
+        }
     }
 }
 
 
-
-
-
-// 예약 수정 및 삭제 버튼 클릭 시 
+// 예약 수정 버튼 클릭 시 
 const updateBtn = document.querySelector("#reservationUpdate");
 if(updateBtn){
-updateBtn.addEventListener("click",() => {
-    // http://localhost/myPage/myInfo/update
+updateBtn.addEventListener("click", () => {
+    // window.selectedDateValue에서 연도, 월, 일을 추출하여 Date 객체 생성
+    const selectedDate = new Date(window.selectedDateValue.slice(0, 4), window.selectedDateValue.slice(4, 6) - 1, window.selectedDateValue.slice(6, 8));
+    const isReserved = window.reservedDates.some(date => date.getTime() === selectedDate.getTime());
 
-    location.href = location.href +"/update";
-
-});}
+    if (window.selectedDateValue) {
+        if (isReserved) {
+            location.href = `/medicalCenter/reservationCheck/update/${window.selectedDateValue}`;
+        } else {
+            alert('예약이 없는 날짜입니다. 수정할 수 없습니다.');
+        }
+    } else {
+        alert('날짜를 선택해 주세요.');
+    }
+});
+}
 
 function showSection(sectionId, sectionBtnId) {
     console.log("Trying to show section with ID:", sectionId);
@@ -848,6 +842,8 @@ function renderCaregiversList(data) {
 }
 
 function sendSelectedCaregiverId(caregiverId) {
+    console.log(`Sending selected caregiver ID: ${caregiverId}`);
+    
     const formData = new FormData();
     formData.append('caregiverId', caregiverId);
 
@@ -856,6 +852,7 @@ function sendSelectedCaregiverId(caregiverId) {
         body: formData
     })
     .then(response => {
+        console.log(`Received response with status: ${response.status}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -863,7 +860,7 @@ function sendSelectedCaregiverId(caregiverId) {
     })
     .then(data => {
         console.log('Server response:', data);
-        renderCaregiverInfo(data); // 받아온 정보를 화면에 렌더링하는 함수 호출
+        renderCaregiverInfo(data);
     })
     .catch(error => {
         console.error('Error sending selected caregiver ID:', error);
@@ -871,19 +868,16 @@ function sendSelectedCaregiverId(caregiverId) {
 }
 
 function renderCaregiverInfo(caregiverInfo) {
-    // 요양사 정보를 출력할 DOM 요소를 선택합니다.
-    const caregiverTable = document.getElementById("caregiversList");
+    console.log('Rendering caregiver info:', caregiverInfo);
 
-    // 새로운 요양사 정보를 추가하기 전에 기존의 요소를 모두 제거합니다.
+    const caregiverTable = document.getElementById("caregiversList");
     caregiverTable.innerHTML = '';
 
-    // 요양사 정보가 비어있는지 확인합니다.
-    if (caregiverInfo === null || Object.keys(caregiverInfo).length === 0) {
+    if (!caregiverInfo || Object.keys(caregiverInfo).length === 0) {
         caregiverTable.innerHTML = "<p>선택된 요양사 정보가 없습니다.</p>";
         return;
     }
 
-    // 요양사 정보를 테이블 형태로 출력하기 위한 HTML 문자열을 작성합니다.
     let table = `
         <table class="caregiver-table">
             <thead>
@@ -899,10 +893,6 @@ function renderCaregiverInfo(caregiverInfo) {
                 </tr>
             </thead>
             <tbody>
-    `;
-
-    // 요양사 정보를 반복하여 HTML 문자열에 추가합니다.
-    table += `
         <tr>
             <td>${caregiverInfo.caregiversNo}</td>
             <td>${caregiverInfo.caregiversName}</td>
@@ -913,20 +903,15 @@ function renderCaregiverInfo(caregiverInfo) {
             <td>${translateWorkHours(caregiverInfo.caregiversWorkHours)}</td>
             <td>${translateRole(caregiverInfo.caregiversRole)}</td>
         </tr>
-    `;
-
-    // 테이블 마무리 태그를 추가합니다.
-    table += `
             </tbody>
         </table>
     `;
 
-    // caregiverTable 요소에 테이블 HTML을 삽입합니다.
     caregiverTable.innerHTML = table;
+
+    console.log('Caregiver info rendered successfully');
 }
 
-
-// 성별 변환 함수
 function translateGender(gender) {
     switch (gender.toLowerCase()) {
         case 'male': return '남성';
@@ -935,7 +920,6 @@ function translateGender(gender) {
     }
 }
 
-// 경력 변환 함수
 function translateExperience(experience) {
     switch (experience.toLowerCase()) {
         case 'novice': return '3년 미만';
@@ -945,7 +929,6 @@ function translateExperience(experience) {
     }
 }
 
-// 근무 시간 변환 함수
 function translateWorkHours(workHours) {
     switch (workHours.toLowerCase()) {
         case 'morning': return '오전 (09:00 - 13:00)';
@@ -955,7 +938,6 @@ function translateWorkHours(workHours) {
     }
 }
 
-// 역할 변환 함수
 function translateRole(role) {
     switch (role.toLowerCase()) {
         case 'companionship': return '정서적 지원(대화, 동반 등)';
@@ -964,6 +946,7 @@ function translateRole(role) {
         default: return role;
     }
 }
+
 
 function hideSurveyForm() {
     const surveyForm = document.getElementById("surveyForm");

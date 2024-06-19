@@ -103,7 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
             animate();
         });
     }
-
+    
+    const prevButton = document.querySelector('.carouselControlPrev2');
+    const nextButton = document.querySelector('.carouselControlNext2');
+    
     function prevSlide() {
         if (isAnimating) return;
         isAnimating = true;
@@ -130,9 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const prevButton = document.querySelector('.carousel-control-prev2');
-    const nextButton = document.querySelector('.carousel-control-next2');
-
     prevButton.addEventListener('click', function() {
         prevSlide();
     });
@@ -142,7 +142,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     animate(); // 애니메이션 시작
+
+    // 전역 범위에서 함수 정의
+    window.prevSlide = prevSlide;
+    window.nextSlide = nextSlide;
 });
+
 
 
 

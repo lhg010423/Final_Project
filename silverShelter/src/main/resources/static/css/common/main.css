@@ -11,12 +11,7 @@
     src: local(☺), url("../fonts/NotoSans-Bold.woff2") format("woff2"), url("../fonts/NotoSans-Bold.woff") format("woff");
     /* IE 9+, 모던 브라우저 */
 }
-@font-face {
-    font-family: "Cora-Regular";
-    font-weight: 300;
-    src: local(☺), url("../fonts/Cora-Regular.woff2") format("woff2"), url("../fonts/Cora-Regular.woff") format("woff");
-    /* IE 9+, 모던 브라우저 */
-}
+
 * {
 	
 	/*border:1px solid rgb(255, 206, 206);*/
@@ -242,7 +237,7 @@
 .carousel2 {
     position: relative;
     width: 100%;
-    max-width: 1920px;
+    max-width: 1910px;
     
     overflow: hidden;
     
@@ -271,14 +266,15 @@
     
 }
 
-.carousel-control-prev2,
-.carousel-control-next2 {
+.carouselControlPrev2,
+.carouselControlNext2 {
 	
     position: absolute;
     top: 45%;
     transform: translateY(50%);
     
-    color: white;
+    color: transparent;
+    background-color: transparent;
     border: none;
     font-size: 24px;
     padding: 10px;
@@ -288,11 +284,11 @@
     
 }
 
-.carousel-control-prev2 {
+.carouselControlPrev2 {
     left: 10px;
 }
 
-.carousel-control-next2 {
+.carouselControlNext2 {
     right: 10px;
 }
 /* 캐러셀2 end */

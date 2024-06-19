@@ -1,0 +1,39 @@
+#main-container{
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	width: 100%;
+	min-height: 200px;
+	
+}
+
+#fieldset{
+	
+	border: 1px solid lightgrey;
+	display: flex;
+	
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+		
+}
+#container-1{
+	
+	display: flex;
+	
+	justify-content: center;
+	
+	
+	
+}
+
+#container-2{
+	
+	display: flex;
+	
+	justify-content: center;
+	
+	
+}
