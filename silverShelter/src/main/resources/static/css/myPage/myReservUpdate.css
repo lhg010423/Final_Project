@@ -1,3 +1,11 @@
+* {
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+   	max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -7,12 +15,24 @@
 
 /* 전체 예약 섹션을 세로로 정렬하기 위해 flex 속성 사용 */
 .reservation-container {
+    margin: 10px;
     display: flex;
+    align-items: center;
     flex-direction: column;
 }
 
 .reservation-header {
-    margin-bottom: 10px;
+    width: 65%;
+    display: flex;
+    align-items: start;
+    justify-content: flex-start; /* 추가된 부분 */
+    margin-bottom: 20px;
+}
+
+/* 예약 확인 문구 왼쪽 정렬 */
+.reservation-header h1 {
+    font-size: 40px;
+    text-align: left;
 }
 
 /* 캘린더와 예약 목록을 가로로 정렬하기 위해 flex 속성 사용 */
@@ -23,53 +43,10 @@
     align-items: flex-start;
 }
 
-/* 캘린더 컨테이너의 크기 설정 */
-.calendar-container {
-    width: 700px;
-    height: 700px;
-}
-
-/* jsuites 캘린더 스타일 */
-.jsuites-calendar {
-    font-size: 25px;
-    height: 100%;
-}
-
-.jsuites-calendar .jcalendar {
+.table-list {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-/* 캘린더 날짜 스타일 */
-.jcalendar-set-day {
-    height: 80px;
-    font-size: 18px; /* 글꼴 크기 */
-}
-
-.jsuites-calendar .jcalendar-header,
-.jsuites-calendar .jcalendar-footer {
-    flex: 0 0 auto;
-}
-
-.jsuites-calendar .jcalendar-body {
-    width: 100%;
-    height: 100%;
-    flex: 1 1 auto; 
-}
-
-/* 예약이 있다면 색이 변경됨 */
-.jcalendar-set-day .resevColor {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #1A2050;
-    margin: auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    padding: 20px;
+    border-collapse: collapse;
 }
 
 /* 요일 스타일 */
@@ -81,7 +58,7 @@
     width: 50px;  /* 너비 */
     height: 50px;  /* 높이 */
     border-radius: 50%;  /* 동그랗게 만들기 */
-    background-color: black;  /* 배경색 */
+    background-color: coral;  /* 배경색 */
 }
 
 /* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
@@ -89,7 +66,6 @@
     display: flex;
     align-items: center;  /* 수직 중앙 정렬 */
     padding-bottom: 30px;  /* 항목 간의 간격 */
-    /* margin-bottom: 30px; */
 }
 
 /* 텍스트 스타일 */
@@ -97,16 +73,24 @@
     margin-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
 }
 
-.reservation-font p {
-    margin: 0;  /* 문단 간의 기본 간격 제거 */
-}
 
 .reservation-fontList{
-    margin-left: 5px;
+    margin-left: 15px;
+}
+
+.time-container {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.reservation-clubResvTime {
+    margin-right: 10px; /* 텍스트와 셀렉트 박스 간의 간격 */
 }
 
 /* 예약 목록 스타일 */
 .border-container {
+    height: 680px;
+    width: 750px;
     border: 1px solid #EEEEEE;
     border-radius: 3px;
     margin-right: 20px;
@@ -125,15 +109,23 @@
 
 /* 예약 수정 버튼 스타일 */
 .reservation-update {
-    font-size: 16px;  /* 폰트 크기 */
+    font-size: 25px;  /* 폰트 크기 */
     font-weight: bolder;
     padding: 10px 50px;  /* 안쪽 여백 (패딩) */
     border: none;
-    margin: 5px;  /* 버튼 간의 간격 */
+    margin: 10px;  /* 버튼 간의 간격 */
     border-radius: 5px;  /* 모서리 둥글게 */
     background-color: #f0f0f0;  /* 배경색 */
 }
-
+.reservation-delete{
+    font-size: 25px;  /* 폰트 크기 */
+    font-weight: bolder;
+    padding: 10px 50px;  /* 안쪽 여백 (패딩) */
+    border: none;
+    margin: 10px;  /* 버튼 간의 간격 */
+    border-radius: 5px;  /* 모서리 둥글게 */
+    background-color: #f0f0f0;  /* 배경색 */
+}
 
 /* 버튼에 마우스를 올렸을 때 스타일 */
 .reservation-update:hover,
@@ -145,10 +137,31 @@
 
 .reservation-clubName{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
     padding-bottom: 5px;
 }
 
 .reservation-clubResvTime{
-    font-size: 16px;
+    font-size: 25px;
+}
+
+.table-list th,
+.table-list td {
+    border: 1px solid #EEEEEE;
+    font-size: 25px;
+    padding: 10px;  /* 패딩을 추가하여 간격 조정 */
+    align-items: center;
+}
+
+.reservation-indicator {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: coral;
+    margin: 0 auto; 
+}
+
+.reservationTime{
+    font-size: 20px;
 }

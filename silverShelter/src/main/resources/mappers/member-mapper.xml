@@ -9,13 +9,36 @@
 	<!-- parameterType 속성은 필수 속성이 아님. 왜? TypeHandler를 이용해서 자료형을 판별할 수 있음 -->
 	
 	<!-- 로그인 -->
-	<select id="login" resultType='Member'>
+	<!-- <select id="login" resultType='Member'>
 		SELECT MEMBER_ID, MEMBER_NO, MEMBER_EMAIL, MEMBER_NAME, MEMBER_PW,
-		MEMBER_TEL, MEMBER_ROLE, MEMBER_ADDRESS, GUARDIAN_TEL
+		MEMBER_TEL, MEMBER_ROLE, MEMBER_ADDRESS, GUARDIAN_TEL, CAREGIVERS_NO
 		FROM "MEMBER"
 		WHERE MEMBER_ID = #{memberId}
 		AND MEMBER_DEL_FL ='N'
-	</select>
+	</select> -->
+	<select id="login" resultType="Member">
+    SELECT 
+        M.MEMBER_ID, 
+        M.MEMBER_NO, 
+        M.MEMBER_EMAIL, 
+        M.MEMBER_NAME, 
+        M.MEMBER_PW,
+        M.MEMBER_TEL, 
+        M.MEMBER_ROLE, 
+        M.MEMBER_ADDRESS, 
+        M.GUARDIAN_TEL, 
+        M.CAREGIVERS_NO,
+        E.EXAM_ROOM_TYPE,
+        C.CAREGIVERS_NAME
+    FROM MEMBER M
+    JOIN EXAMINATION E ON M.EXAM_ID = E.EXAM_ID
+    JOIN CAREGIVERS C ON M.CAREGIVERS_NO = C.CAREGIVERS_NO
+    WHERE 
+        M.MEMBER_ID = #{memberId}
+        AND M.MEMBER_DEL_FL = 'N'
+</select>
+
+	
 
 	<select id="foundIdCount">
 		SELECT COUNT(*)

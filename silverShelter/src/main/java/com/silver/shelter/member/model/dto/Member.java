@@ -25,11 +25,13 @@ public class Member {
 	private String memberDelFl;    // 회원 탈퇴 여부
 	private int memberRole;        // 관리자 계정 판별
 	private String caregiversName; // 요양사 이름
+	private String caregiversNo;
 	private int roomNo;            // 방 번호
 	private String examStatus;     // 심사 승인 여부
 	private String examDate;       // 심사 신청일
 	private int examId;
-//	private String caregiversName;
+	private String examRoomType;
+	//	private String caregiversName;
 	
 	
 	

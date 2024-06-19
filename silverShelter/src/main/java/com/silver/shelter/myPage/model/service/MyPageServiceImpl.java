@@ -45,4 +45,10 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		return mapper.myReserUpdate(clubresv);
 	}
+	
+	@Override
+	public int deleteReservation(ClubReservation clubReserv) {
+		
+		return mapper.deleteReservation(clubReserv);
+	}
 }

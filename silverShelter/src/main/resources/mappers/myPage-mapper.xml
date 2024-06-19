@@ -8,6 +8,7 @@
 		FROM CLUB_RESERVATION
 		JOIN CLUB_TYPE USING(CLUB_CODE)
 		WHERE MEMBER_NO= #{memberNo}
+		AND RESERVATION_DEL_FL = 'N'
 	</select>
 			  
 	<!-- 예약된 날짜 달력에 표시 -->			  
@@ -15,6 +16,7 @@
 		SELECT TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') clubResvTime  
 		FROM CLUB_RESERVATION
 		WHERE MEMBER_NO= #{memberNo}
+		AND RESERVATION_DEL_FL = 'N'
 	
 	</select> 
 	
@@ -26,14 +28,25 @@
 		JOIN CLUB_TYPE USING(CLUB_CODE)
 		WHERE MEMBER_NO= #{memberNo}
 		AND TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') = #{clubResvTime}
+		AND RESERVATION_DEL_FL = 'N'
 		ORDER BY CLUB_RESV_TIME
 	</select>
 	
-	
+	<!-- 일정 수정하기 -->
 	<update id="myReserUpdate">
 		UPDATE CLUB_RESERVATION
 		SET CLUB_RESV_TIME = TO_DATE(#{clubResvTime}, 'YYYY-MM-DD HH24:MI')
 		WHERE CLUB_CODE = #{clubCode}
 		AND MEMBER_NO = #{memberNo}
 	</update>
+	
+	<!-- 일정 삭제하기 -->
+	<update id="deleteReservation">
+		UPDATE CLUB_RESERVATION
+		SET RESERVATION_DEL_FL = 'Y'
+		WHERE CLUB_CODE = #{clubCode}
+		AND MEMBER_NO = #{memberNo}
+		AND CLUB_RESV_NO = #{clubResvNo}
+	</update>
+	
 </mapper>

@@ -15,4 +15,10 @@ public interface MyPageService {
 
 	int myReserUpdate(ClubReservation clubresv);
 
+	/** 예약 삭제 하기 
+	 * @param clubReserv
+	 * @return
+	 */
+	int deleteReservation(ClubReservation clubReserv);
+
 }

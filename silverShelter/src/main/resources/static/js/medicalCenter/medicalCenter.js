@@ -429,10 +429,7 @@ window.selectedDateValue = null; // 전역 변수로 선언
 window.reservedDates = []; // 예약된 날짜들을 저장하는 배열
 
 async function loadTabContent(htmlFile, sectionId = null, callback = null) {
-    console.log(`loadTabContent called with htmlFile: ${htmlFile}, sectionId: ${sectionId}, callback: ${callback}`);
-
     try {
-        // HTML 파일 가져오기
         const response = await fetch(htmlFile);
         if (!response.ok) {
             throw new Error(`Failed to fetch ${htmlFile}`);
@@ -441,7 +438,7 @@ async function loadTabContent(htmlFile, sectionId = null, callback = null) {
         const html = await response.text();
         console.log('Fetched HTML content:', html);
 
-        // 탭 컨텐츠를 담을 컨테이너 찾기
+        const html = await response.text();
         const tabContentContainer = document.getElementById('tabContentContainer');
         if (!tabContentContainer) {
             console.error('tabContentContainer element not found.');
@@ -627,7 +624,6 @@ function initializeCalendar() {
             // 예약 목록을 표시할 HTML 생성
             const reservationList = document.getElementById('reservationList');
             reservationList.innerHTML = ''; // 기존 내용을 초기화
-
             if (data.length === 0) {
                 // 데이터가 없을 경우 예약 없음 메시지를 표시
                 displayNoReservationsMessage(day);
@@ -675,10 +671,6 @@ updateBtn.addEventListener("click", () => {
     }
 });
 }
-
-
-
-
 
 function showSection(sectionId, sectionBtnId) {
     console.log("Trying to show section with ID:", sectionId);

@@ -42,10 +42,33 @@ document.querySelectorAll('.reservation-delete').forEach(button => {
             "clubCode": clubCode,
             "clubResvNo": clubResvNo
         };
+        if(obj)
+
 
         if(confirm('일정을 삭제하시겠습니까?')){
 
             console.log(obj);
+
+            fetch('/myPage/deleteReservation',{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(obj)
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                
+                if(data > 0){
+                    location.href = 'http://localhost/myPage/myInfo';
+                
+                } else {
+                    alert('삭제 실패');
+                    location.href = location.href;
+                }
+
+            })
+            .catch(error => {
+                console.log('삭제 중 오류 발생', error);
+            })
         }
     })
 })

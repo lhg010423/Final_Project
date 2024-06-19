@@ -380,6 +380,7 @@ public class AdminController {
 		map.put("readCount", board.getReadCount());
 		map.put("boardNo", board.getBoardNo());
 		map.put("boardCode", boardCode);
+//		map.put("", board)
 		
 		
 		return map;
