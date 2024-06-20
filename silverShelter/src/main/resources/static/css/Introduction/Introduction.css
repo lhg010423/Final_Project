@@ -31,6 +31,12 @@ h3 {
 
 }
 
+.facility-links a:hover {
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+    text-underline-offset: 15px;
+}
+
 .facility-links a:active {
     text-decoration: underline;
     text-decoration-thickness: 3px;
