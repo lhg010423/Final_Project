@@ -77,12 +77,13 @@ main {
 /* 좌우 div 크기 지정 */
 .adminLeft, .adminRight {
     width: 50%;
-    height: auto;
+    height: 800px;
     margin: 30px;
     background-color: white;
     border-radius: 5px;
     border-color: #ddd;
     box-sizing: border-box;
+    overflow: auto;
     /* display: flex; */
     /* box-shadow:#3C3C3B; */
 }

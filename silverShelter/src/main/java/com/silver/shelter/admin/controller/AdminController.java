@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.silver.shelter.admin.model.dto.Reservation;
 import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.board.model.dto.Board;
-import com.silver.shelter.board.model.dto.Comment;
 import com.silver.shelter.board.model.service.BoardService;
 import com.silver.shelter.board.model.service.CommentService;
 import com.silver.shelter.careGiver.model.CareGiver;
@@ -273,26 +273,37 @@ public class AdminController {
 	}
 
 	
-	
-	
-	
-	
-	/** 예약페이지 이동
+	/** 일정 예약 페이지 이동
 	 * @return
 	 */
 	@GetMapping("reservation")
-	public String reservation(@RequestParam Map<String, Object> paramMap) {
-		
-//		ClubReservation clubList = service.clubAllSelect(paramMap);
-//		DoctorAppointment docList = service.docAllSelect(paramMap);
-		
-		
-		
+	public String reservation() {
 		return "admin/reservation";
 	}
 	
 	
+	/** 일정 유무 조회
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("getReservedDates")
+	public List<Reservation> getReservedDates(@RequestParam Map<String, Object> paramMap) {
+		
+		return service.getReservedDates();
+	}
 	
+	
+	@ResponseBody
+	@PostMapping("reservation")
+	public List<Reservation> reservationAllSelect(@RequestBody String resvTime) {
+		
+		ClubReservation reservation = ClubReservation.builder()
+				.clubResvTime(resvTime)
+//				.memberNo(loginMember.getMemberNo())
+				.build();
+		
+		return service.reservationAllSelect(reservation);
+	}
 	
 	
 	
