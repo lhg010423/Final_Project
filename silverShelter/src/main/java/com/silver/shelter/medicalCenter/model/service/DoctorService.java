@@ -25,4 +25,6 @@ public interface DoctorService {
 
 	String getdrnamebydrno(String doctorNo);
 
+	String getDepByDrNo(String doctorNo);
+
 }

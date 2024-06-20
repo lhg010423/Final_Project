@@ -28,4 +28,6 @@ public interface DoctorMapper {
 
 	String getdrnamebydrno(String doctorNo);
 
+	String getDepByDrNo(String doctorNo);
+
 }

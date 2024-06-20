@@ -60,4 +60,9 @@ public class DoctorServiceImpl implements DoctorService{
 	public String getdrnamebydrno(String doctorNo) {
 		return mapper.getdrnamebydrno(doctorNo);
 	}
+
+	@Override
+	public String getDepByDrNo(String doctorNo) {
+		return mapper.getDepByDrNo(doctorNo);
+	}
 }

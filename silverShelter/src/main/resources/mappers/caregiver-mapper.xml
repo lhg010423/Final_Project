@@ -8,12 +8,12 @@
 	<select id="getAllCareGivers" resultType="com.silver.shelter.careGiver.model.CareGiver">
 	    SELECT C.CAREGIVERS_NO, CAREGIVERS_NAME, CAREGIVERS_AGE, CAREGIVERS_GENDER,
 	           CAREGIVERS_TEL, CAREGIVERS_EXPERIENCE, CAREGIVERS_WORK_HOURS, CAREGIVERS_ROLE
-	    FROM CAREGIVERS C
-	    WHERE NOT EXISTS (
-	        SELECT 1
-	        FROM MEMBER M
-	        WHERE M.CAREGIVERS_NO = C.CAREGIVERS_NO
-	    )
-	    ORDER BY C.CAREGIVERS_NO ASC
+			    FROM CAREGIVERS C
+			    WHERE NOT EXISTS (
+			        SELECT 1
+			        FROM MEMBER M
+			        WHERE M.CAREGIVERS_NO = C.CAREGIVERS_NO
+			    )
+			    ORDER BY C.CAREGIVERS_NO ASC
 	</select>
 </mapper>

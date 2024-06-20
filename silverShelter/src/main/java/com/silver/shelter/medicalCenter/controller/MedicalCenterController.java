@@ -127,6 +127,17 @@ public class MedicalCenterController {
 
 	    return doctorName; // 의사 이름을 클라이언트로 반환
 	}
+	
+	@ResponseBody
+	@PostMapping("reservation/doctorDep")
+	public String getDepByDrNo(@RequestBody Map<String, String> requestBody) {
+		String doctorNo = requestBody.get("doctorNo");
+		
+		// 서비스 호출 및 로직 처리
+		String doctorDep = doctorService.getDepByDrNo(doctorNo);
+		
+		return doctorDep;
+	}
 
 
 
