@@ -283,7 +283,7 @@ public class AdminController {
 	@GetMapping("reservation")
 	public String reservation(@RequestParam Map<String, Object> paramMap) {
 		
-		ClubReservation clubList = service.clubAllSelect(paramMap);
+//		ClubReservation clubList = service.clubAllSelect(paramMap);
 //		DoctorAppointment docList = service.docAllSelect(paramMap);
 		
 		

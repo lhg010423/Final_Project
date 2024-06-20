@@ -78,7 +78,7 @@ main {
 /* 좌우 div 크기 지정 */
 .adminLeft, .adminRight {
     width: 50%;
-    height: 500px;
+    height: 800px;
     overflow-y: auto; /* 세로 스크롤바 추가 */
     margin: 30px;
     background-color: white;
