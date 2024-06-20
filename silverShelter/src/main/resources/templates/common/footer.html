@@ -1,0 +1,112 @@
+<style>
+
+footer {
+
+	width: 100%;
+	height: 200px;
+	background-color: #3C3C3B;
+	display: flex;
+
+	justify-content: center;
+	align-items: flex-start;
+	
+	
+}
+
+
+
+footer p {
+
+	color: #FAFAFA;
+	
+	
+	margin: 14px 0;
+}
+
+
+  
+footer a {
+
+    color: #FAFAFA;
+	
+	font-weight: 100;
+}
+
+footer span {
+
+	color: #FAFAFA;
+	padding: 0 10px;
+}
+
+.logo-footer{
+
+    width: 50%;
+	height: 85%;
+}
+
+.footer-section-1{
+	width: 20vw;
+	color: white;
+	font-size: 14px;
+}
+
+.emptyDiv{
+	height: 4vh;
+}
+
+.logo-div{
+	display: flex;
+}
+.footer-section-2{
+	display: flex;
+	flex-direction: column;
+	
+	height: 100%;
+	justify-content: space-evenly;
+}
+
+.footer-section-2 article{
+	color: white;
+	font-size: 14px;
+}
+
+</style>
+
+<footer>
+	
+	
+	<secton class="footer-section-1">
+		<div class="emptyDiv"></div>
+		<div class="logo-div">
+			<img src="/images/main/Logo4.png" class="logo-footer">
+		</div>
+		<p>ⓒGolden Prestige Inc. All Rights Reserved.</p>
+	</secton>
+	
+	<section class="footer-section-2">
+		<article>
+			대표이사 : 이 형 구<br>			<br>
+			소재지 : 서울 중구 남대문로 1 그레이츠청계 3층 E반<br>
+			사업자 번호 :  050-24-0224-997
+		</article>
+		
+	    <article>
+	        
+	        <a href="#">이용약관</a>    
+	            <span> </span>
+	    	<a href="#">개인정보처리방침</a>    
+	    	    <span> </span>
+			<a href="#">고객센터</a>    
+		</article>
+	</section>
+</footer>
+
+<script th:inline="javascript">
+  const message =  /*[[${message}]]*/ "전달 받은 message";
+ 	
+	
+  if(message != null) alert(message);
+  
+  
+  
+</script>

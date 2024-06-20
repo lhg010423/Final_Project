@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.silver.shelter.board.model.mapper.BoardMapper">
+
+	
+	
+	<resultMap type="Board" id="board_rm">
+	
+		<id property="boardNo" column="BOARD_NO"/>
+		
+		<collection 
+			property="commentList"
+			select="commentListSelect"
+			column="BOARD_NO"
+			javaType="java.util.ArrayList"
+			ofType="Comment"
+		/>
+			
+	</resultMap>
+	
+	
+	<!-- 게시판 종류 조회,
+		각각 별칭으로 지정한 이유 : BoardType DTO가 없어서 자동 매칭이 안됨 -->
+	<select id="selectBoardTypeList">
+		SELECT BOARD_CODE "boardCode", BOARD_NAME "boardName"
+		FROM "BOARD_TYPE"
+		ORDER BY BOARD_CODE
+	</select>
+	
+	
+	<!-- 삭제되지 않은 게시글 수 조회 -->
+	<select id="boardAllCount">
+		SELECT COUNT(*)
+		FROM "BOARD"
+		WHERE BOARD_CODE = #{boardCode}
+		AND BOARD_DEL_FL = 'N'
+	</select>
+	
+	
+	<!-- 삭제되지 않은 게시글 전체 조회 -->
+	<select id="boardAllSelect">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_WRITE_DATE, READ_COUNT, LIKE_COUNT, BOARD_CODE
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_CODE = #{boardCode}
+		AND BOARD_DEL_FL = 'N'
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 삭제되지 않고 검색한 게시글 수 조회 -->
+	<select id="boardSearchCount">
+		SELECT COUNT(*)
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_CODE = #{boardCode}
+		AND BOARD_DEL_FL = 'N'
+		
+		<choose>
+			
+			<!-- 제목으로 검색 -->
+			<when test='key == "t"'>
+				AND BOARD_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			
+			<!-- 작성자으로 검색 -->
+			<when test='key == "w"'>
+				AND MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+			
+			
+		</choose>
+		
+	</select>
+	
+	
+	<!-- 삭제되지 않고 검색한 게시글 조회 -->
+	<select id="boardSearchSelect">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_WRITE_DATE, READ_COUNT, LIKE_COUNT, BOARD_CODE
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_CODE = #{boardCode}
+		AND BOARD_DEL_FL = 'N'
+	
+		<choose>
+			
+			<!-- 제목으로 검색 -->
+			<when test='key == "t"'>
+				AND BOARD_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			
+			<!-- 작성자으로 검색 -->
+			<when test='key == "w"'>
+				AND MEMBER_NAME LIKE '%' || #{query} || '%'
+			</when>
+		
+		</choose>
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+	<!-- 게시글 상세보기 -->
+	<select id="boardDetailSelect" resultMap="board_rm">
+		SELECT b.BOARD_NO, b.BOARD_TITLE, b.BOARD_CONTENT, m.MEMBER_NAME, b.BOARD_WRITE_DATE,
+			b.BOARD_UPDATE_DATE, b.READ_COUNT, b.LIKE_COUNT, b.BOARD_CODE, b.MEMBER_NO
+		FROM "BOARD" b
+		JOIN "MEMBER" m ON b.MEMBER_NO = m.MEMBER_NO
+		WHERE BOARD_CODE = #{boardCode}
+		AND BOARD_NO = #{boardNo}
+	</select>
+	
+	
+	<update id="boardUpdate">
+		UPDATE "BOARD" SET
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
+	
+	
+	<!-- 조회수 1 증가 -->
+	<update id="readCountUpdate">
+		UPDATE "BOARD" SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
+	<!-- 조회수 조회 -->	
+	<select id="readCountSelect">
+		SELECT READ_COUNT
+		FROM "BOARD"
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	
+	<!-- 게시글 삭제하기 -->
+	<update id="boardDelete">
+		UPDATE "BOARD" SET
+		BOARD_DEL_FL = 'Y'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
+
+	<select id="commentListSelect" resultType="Comment">
+   		SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+			    BOARD_NO, MEMBER_NO, MEMBER_NAME, PARENT_COMMENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE BOARD_NO = #{boardNo}) C
+		WHERE COMMENT_DEL_FL = 'N'
+		OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+						WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+						AND COMMENT_DEL_FL = 'N')
+		START WITH PARENT_COMMENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO
+   	</select>
+	
+	
+	
+
+	
+	<!-- 메인페이지 하단 공지 게시글 1개 조회하기 -->
+	<select id="mainBoardSelect" resultType="Board" parameterType="int">
+	    SELECT BOARD_TITLE, TO_CHAR(BOARD_WRITE_DATE, 'YYYY-MM-DD') AS BOARD_WRITE_DATE, BOARD_CODE, BOARD_NO
+	    FROM "BOARD"
+	    WHERE BOARD_CODE = #{boardCode}
+	    AND ROWNUM = 1
+	    ORDER BY BOARD_WRITE_DATE DESC
+	</select>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

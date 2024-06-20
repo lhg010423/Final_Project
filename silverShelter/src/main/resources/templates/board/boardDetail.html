@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|${board.boardTitle} - 게시글 상세보기|">게시글 상세보기</title>
+
+    <!-- main css -->
+	<link rel="stylesheet" href="/css/common/main.css">
+	
+	<!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+
+    <link rel="stylesheet" href="/css/board/boardDetail.css">
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/headerNav}"></th:block>
+
+        <!-- <img src="/images/main/main.png" class="main"> -->
+        <th:block th:replace="~{common/mainNav}"></th:block>
+    
+        <!-- header를 제외한 나머지 공간 -->
+        <section class="boardMain">
+
+            <!-- a태그있는 상단 공간 -->
+            <div class="boardTop">
+                <th:block th:each="boardType : ${application.boardTypeList}">
+                    <a th:text="${boardType.boardName}"
+                        th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}">게시판 이름</a>
+                </th:block>
+
+                <th:block th:unless="${application.boardTypeList}">
+
+                    <h1>값 없음</h1>
+                </th:block>
+            </div>
+
+
+            <!-- 상단 a태그 공간을 제외한 나머지 공간 전부 -->
+            <div class="boardBody">
+
+                <!-- 게시글 공간 -->
+                <div class="boardDetail-area">
+
+                    <!-- 게시글 제목 공간 -->
+                    <div class="boardTitle-area">
+
+                        <a th:text="목록으로"
+                           th:href="@{/board/{boardCode} (boardCode=${board.boardCode}, cp=${cp}, key=${session.key}, query=${session.query})}"></a>
+                        <br>
+
+                        <span th:text="${board.boardTitle}"></span>
+
+                    </div>
+
+                    <!-- 작성자 정보 공간 -->
+                    <div class="writer-area">
+
+                        <div class="writer-left-area">
+                            <span id="writer" th:text="${board.memberName}">작성자</span><br>
+                            <span th:text="|작성일 ${board.boardWriteDate}|">작성일</span><br>
+                            <span th:if="${board.boardUpdateDate}" th:text="|수정일 ${board.boardUpdateDate}|">수정일</span>
+                        </div>
+
+                        <div class="writer-right-area">
+                            <span th:text="|조회수 ${board.readCount}|">조회수</span>
+                            <span th:text="|좋아요 ${board.likeCount}|">좋아요</span>
+
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <hr>    
+
+                    <div class="boardContent-area">
+
+                        <article class="boardContent"
+                            th:text="${board.boardContent}">
+
+
+                        </article>
+
+                    </div>
+                    
+                </div>
+
+                <div class="board-btn-area">
+
+                    <th:block th:if="${author}">
+                        <a id="updateBtn"
+                        th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${board.boardCode}, boardNo=${boardNo})}"
+                        >수정하기</a>
+                        <button id="deleteBtn">삭제하기</button>
+                    </th:block>
+                </div>
+                <!-- th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${boardList.boardCode}, boardNo=${boardNo}, cp=${cp}${session.key != null and session.key != '' ? ', key=' + session.key : ''}${session.query != null and session.query != '' ? ', query=' + session.query : ''})}" -->
+                    
+                <!-- 댓글 공간 -->
+                <div id="commentArea">
+
+                    <!-- 댓글 모록 -->
+                    <div class="comment-list-area">
+
+                        <ul id="commentList">
+
+                            <li class="comment-row"
+                                th:each="comment : ${board.commentList}"
+                                th:classappend="${comment.parentCommentNo} != 0 ? child-comment"
+                                th:object="${comment}">
+
+                                <th:block th:if="*{commentDelFl} == 'Y'">
+                                    삭제된 댓글 입니다
+                                </th:block>
+
+                                <th:block th:if="*{commentDelFl} == 'N'">
+                                    <p class="comment-writer">
+                                        
+                    
+                                        <span th:text="*{memberName}">작성자</span>
+                                        <span class="comment-date" th:text="*{commentWriteDate}">작성일</span>
+                                    </p>
+                    
+                                    <p class="comment-content" th:text="*{commentContent}">댓글 내용</p>
+                    
+                                    <!-- 버튼 영역 -->
+                                    <div class="comment-btn-area">
+                                        <button th:onclick="|showInsertComment(*{commentNo}, this)|">답글</button>
+                    
+                                        <th:block th:if="${session.loginMember != null and session.loginMember.memberNo == comment.memberNo}">
+                                            <button th:onclick="|showUpdateComment(*{commentNo}, this)|">수정</button>
+                                            <button th:onclick="|deleteComment(*{commentNo})|">삭제</button>
+                                        </th:block>
+                                        <!-- 로그인 회원과 댓글 작성자가 같은 경우 -->
+                    
+                                    </div>
+                                </th:block>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 댓글 작성 공간 -->
+                    <div class="comment-write-area">
+
+                        <textarea id="commentContent"></textarea>
+                        <button id="addComment">
+                            댓글<br>
+                            등록
+                        </button>
+                    </div>
+                </div> <!-- 댓글 공간 끝 -->
+
+
+
+            </div>
+
+
+
+
+        </section>
+		<th:block th:replace="~{common/footer}"></th:block>
+    
+    </main>
+	
+    <script th:inline="javascript">
+
+        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
+
+        const boardCode = /*[[${board.boardCode}]]*/ "게시판 코드";
+
+        const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
+
+        const cp = /*[[${board.cp}]]*/ "현제페이지";
+    </script>
+	
+    <script src="/js/board/boardUpdate.js"></script>
+    <script src="/js/board/comment.js"></script>
+
+</body>
+</html>

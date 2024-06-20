@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+	
+	/*border:1px solid rgb(255, 206, 206);*/
+	
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+
+   
+    margin: 0;
+    
+    
+ }
+ 
+ #foundIdArea{
+	
+	height: 80vh;
+	
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	
+	flex-direction: column;
+ }
+ 
+ .foundIdTitle{
+	
+	font-size: 55px;
+ }
+ 
+ .text{
+	
+	font-weight: bold;
+ }
+ 
+ 
+ .memberNames{
+	
+	width : 28vw;
+	height: 5vh;
+	
+	margin-bottom : 2vh;
+	margin-left : 1vw;
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+  .memberEmail{
+	
+	width : 28vw;
+	height: 5vh;
+	margin-bottom : 1vh;
+	
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+ 
+  .lineDiv{
+	
+	border : 2px solid #666565;
+	
+	width: 38vw;
+ }
+ 
+ .foundIdBtn{
+	color: #FFFFFF;
+	background-color: #1A2050;
+	
+	border: none;
+	
+	font-size : 18px;
+	
+	width: 18vw;
+	height: 5vh;
+	
+	border-radius: 6px;
+ }
+ 
+ .foundIdBtn:hover{
+	border: 1px solid #1A2050;
+	background-color: #ffffff;
+	
+	color: #1A2050;
+ }
+ 
+ .foundIdBtn:active{
+	color: #FFFFFF;
+	background-color: #1A2050;
+ }

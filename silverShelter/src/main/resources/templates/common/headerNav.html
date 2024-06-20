@@ -1,0 +1,40 @@
+<section class="main-balconi">
+        <nav class="navi">
+        	<div class="logo-div">
+                <a href="/" class="logo-div2">
+                    <img src="/images/main/Logo444.png" alt="Logo" id="logo">
+                </a>
+			</div>
+			    
+            <div class="login-join">
+				<!-- 로그인 안됐을 때-->
+				<th:block th:if="${session.loginMember == null}">
+		        	<a href="/member/login" class="login">로그인 &nbsp;</a>
+		            	<!--<span> &nbsp;| &nbsp; </span>-->
+		            <a href="/introduction/moveInGuide" class="joinMember">&nbsp;입주안내</a>
+				</th:block>
+				
+				<!-- 로그인 됐을 때 -->
+				<th:block th:if="${session.loginMember != null}" id="logonDiv">
+					<div class="myInfo" th:object="${session.loginMember}">
+						<a href="#" id="memberName" th:text="*{memberName}" class="memberName">성함</a>&nbsp;님
+						<br>환영합니다
+					</div>
+						
+					<div id="logonDropdown">
+						<a href="/myPage/myInfo" id="myInfoBtn">내 정보</a>
+						<div class="modalLine"></div>
+						<a href="/member/logout" id="logoutBtn">로그아웃</a>
+					</div>
+				</th:block>
+		
+            	<div>
+                	<a href="#" class="hidden-bar">
+                    	<i class="fa-solid fa-bars" id="three-line"></i>
+                	</a>
+            	</div>
+				
+            </div>
+        </nav>
+    
+</section>

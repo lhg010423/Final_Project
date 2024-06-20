@@ -1,0 +1,311 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular';
+}
+
+main {
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+/* 조각 css */
+.facility-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.facility-links a {
+    font-weight: 500;
+    font-size: 30px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    color: inherit;
+}
+
+.facility-links a:active {
+    text-decoration-thickness: 3px;
+    text-underline-offset: 15px;
+    font-weight: 900;
+}
+
+/* ------------------------------ */
+.guest-room-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.guest-room-header {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.guest-room-header h1 {
+    border-bottom: 3px solid black;
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.guest-room-img-container {
+    width: 525px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 이미지가 컨테이너를 넘지 않도록 숨김 처리 */
+}
+
+.guest-room-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 컨테이너에 맞도록 조정 */
+}
+.selection-container{
+    display: flex;
+    margin-top: 30px;
+    width: 525px;
+    flex-direction: column;
+}
+/* 시간 부분 */
+.time-title {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.time-title p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.calendar-time-container {
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 요소 간의 공간을 균등하게 분배 */
+    width: 100%; /* 전체 너비 사용 */
+    max-width: 900px; /* 최대 너비 설정 */
+}
+
+.calendar-container {
+    flex: 1; /* 요소가 가로 공간을 나누어 가질 수 있도록 */
+}
+
+.check-container {
+    flex: 1; /* 요소가 가로 공간을 나누어 가질 수 있도록 */
+    margin-left: 20px; /* 두 섹션 간의 간격 설정 */
+}
+
+.time-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    width: 100%; /* 전체 너비를 사용 */
+    justify-items: center; /* 가운데 정렬 */
+}
+
+.time-option {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 콘텐츠를 수평으로 가운데 정렬 */
+    padding: 5px; /* 레이블 주위의 여백을 줄이기 위해 padding 값을 줄임 */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    height: 30px; /* 일관성을 위해 고정된 높이 */
+    box-sizing: border-box; /* 높이에 padding과 border를 포함 */
+}
+
+.time-option label {
+    display: flex; /* 수정: flexbox를 사용하여 자식 요소를 가운데 정렬 */
+    align-items: center; /* 추가: 수직 가운데 정렬 */
+    justify-content: center; /* 추가: 수평 가운데 정렬 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    height: 30px; /* 고정된 높이 */
+    box-sizing: border-box; /* 패딩과 보더를 높이에 포함 */
+}
+
+.time-selection input[type="radio"] {
+    display: none;
+}
+
+.time-selection input[type="radio"]:checked + label {
+    background-color: #1A2050;
+    color: #fff;
+}
+
+/* 예약 버튼 */
+#reserve-button {
+    display: block;
+    width: 148px;
+    padding: 10px;
+    margin: 20px auto 0;
+    background-color: #1A2050;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 달력 부분  */
+#calendar-2 {
+    width: 100%; /* 원하는 너비 */
+    max-width: 600px; /* 최대 너비 */
+    height: auto; /* 높이를 자동으로 조절 */
+}
+
+/* 로그인 하지 않았을 때  */
+.login-notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px; /* 원하는 대로 마진을 조절하세요 */
+}
+
+#login-logo {
+    width: 200px;
+    height: auto;
+    margin: 20px 0; /* 위아래로 20px의 마진 추가 */
+}
+
+
+.login-notice h1 {
+    margin: 20px 0; /* 위아래로 20px의 마진 추가 */
+}
+
+.login-notice .text {
+    margin: 10px 0; /* 위아래로 10px의 마진 추가 */
+}
+
+.login-notice a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #1A2050;
+    color: #fff;
+    text-decoration: none; /* 밑줄 없애기 */
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* 예약시 주의 사항 안내 섹션 */
+.reservation-guidelines-container {
+    margin: 20px; /* 컨테이너 전체에 마진 추가 */
+}
+
+.reservation-guidelines {
+    margin: 20px 0; /* 섹션 자체에 상하 마진 추가 */
+    padding: 20px; /* 섹션 내부 여백 추가 */
+    border: 1px solid #ddd; /* 섹션에 테두리 추가 */
+    border-radius: 5px; /* 섹션 모서리 둥글게 */
+    background-color: #fcfcfc; /* 배경색 추가 */
+}
+
+.reservation-guidelines h2 {
+    margin: 20px 0; /* h2 요소에 상하 마진 추가 */
+    font-size: 24px; /* 폰트 크기 조정 */
+    font-weight: bold; /* 폰트 굵기 조정 */
+}
+
+.reservation-guidelines h3 {
+    margin: 15px 0; /* h3 요소에 상하 마진 추가 */
+    font-size: 20px; /* 폰트 크기 조정 */
+    font-weight: bold; /* 폰트 굵기 조정 */
+}
+
+.reservation-guidelines ul {
+    margin: 10px 0; /* ul 요소에 상하 마진 추가 */
+    padding-left: 20px; /* 리스트의 왼쪽 여백 추가 */
+}
+
+.reservation-guidelines ul li {
+    margin-bottom: 10px; /* 리스트 항목 간격 조정 */
+    line-height: 1.5; /* 리스트 항목 줄 간격 조정 */
+}
+
+/* 스포츠센터 css */
+
+/* 이미지 컨테이너 설정 */
+.sports-img-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
+    gap: 10px; /* 그리드 간격 */
+    width: 100%; /* 전체 너비 */
+    max-width: 600px; /* 최대 너비 설정 */
+    margin: 0 auto 20px; /* 가운데 정렬 및 아래쪽 여백 */
+}
+
+/* 이미지 래퍼 설정 */
+.image-wrapper {
+    position: relative;
+    cursor: pointer;
+    width: 100%; /* 고정 너비 제거 */
+    height: 0;
+    padding-top: 87.5%; /* 16:9 비율을 유지하기 위해 비율 조정 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+}
+
+/* 선택 가능한 이미지 설정 */
+.selectable-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 컨테이너를 덮도록 설정 */
+    transition: opacity 0.3s; /* 투명도 전환 효과 */
+}
+
+/* 오버레이 설정 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경색 */
+    color: white; /* 텍스트 색상 */
+    font-size: 24px; /* 텍스트 크기 */
+    opacity: 0; /* 초기 투명도 */
+    transition: opacity 0.3s; /* 투명도 전환 효과 */
+}
+
+/* 선택된 이미지의 투명도 설정 */
+.image-wrapper.selected .selectable-image {
+    opacity: 0.3;
+}
+
+/* 선택된 이미지의 오버레이 투명도 설정 */
+.image-wrapper.selected .overlay {
+    opacity: 1;
+}
+
+.timeout{
+    background-color: #eeee;
+    text-decoration: line-through;
+
+}

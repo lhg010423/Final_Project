@@ -1,0 +1,194 @@
+<style>
+    
+/* 전체 예약 섹션을 세로로 정렬하기 위해 flex 속성 사용 */
+.reservation-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-header {
+    margin-bottom: 10px;
+}
+
+/* 캘린더와 예약 목록을 가로로 정렬하기 위해 flex 속성 사용 */
+.reservation-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* 캘린더 컨테이너의 크기 설정 */
+.calendar-container {
+    width: 700px;
+    height: 700px;
+}
+
+/* jsuites 캘린더 스타일 */
+.jsuites-calendar {
+    font-size: 25px;
+    height: 100%;
+}
+
+.jsuites-calendar .jcalendar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 캘린더 날짜 스타일 */
+.jcalendar-set-day {
+    height: 80px;
+    font-size: 18px; /* 글꼴 크기 */
+}
+
+.jsuites-calendar .jcalendar-header,
+.jsuites-calendar .jcalendar-footer {
+    flex: 0 0 auto;
+}
+
+.jsuites-calendar .jcalendar-body {
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto; 
+}
+
+/* 예약이 있다면 색이 변경됨 */
+.jcalendar-set-day .resevColor {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1A2050;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 요일 스타일 */
+.jcalendar-weekday {
+    width: 120px;
+}
+
+.stapper-div {
+    width: 50px;  /* 너비 */
+    height: 50px;  /* 높이 */
+    border-radius: 50%;  /* 동그랗게 만들기 */
+    background-color: black;  /* 배경색 */
+}
+
+/* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
+.reservation-item {
+    display: flex;
+    align-items: center;  /* 수직 중앙 정렬 */
+    padding-bottom: 30px;  /* 항목 간의 간격 */
+    /* margin-bottom: 30px; */
+}
+
+/* 텍스트 스타일 */
+.reservation-font {
+    margin-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
+}
+
+.reservation-font p {
+    margin: 0;  /* 문단 간의 기본 간격 제거 */
+}
+
+.reservation-fontList{
+    margin-left: 5px;
+}
+
+/* 예약 목록 스타일 */
+.border-container {
+    border: 1px solid #EEEEEE;
+    border-radius: 3px;
+    margin-right: 20px;
+}
+
+.reservation-list {
+    padding-left: 10px;
+    flex: 1;
+}
+
+/* 예약 수정 및 삭제 버튼 스타일 */
+.reservation-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 예약 수정 버튼 스타일 */
+.reservation-update {
+    font-size: 16px;  /* 폰트 크기 */
+    font-weight: bolder;
+    padding: 10px 50px;  /* 안쪽 여백 (패딩) */
+    border: none;
+    margin: 5px;  /* 버튼 간의 간격 */
+    border-radius: 5px;  /* 모서리 둥글게 */
+    background-color: #f0f0f0;  /* 배경색 */
+}
+
+
+/* 버튼에 마우스를 올렸을 때 스타일 */
+.reservation-update:hover,
+.reservation-delete:hover {
+    font-weight: bolder;
+    background-color: #1A2050;  /* 호버 시 배경색 */
+    color: #FFFF;
+}
+
+.reservation-clubName{
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+
+.reservation-clubResvTime{
+    font-size: 16px;
+}
+</style>
+<body>
+    <div class="reservation-container">
+
+        <div class="reservation-header">
+            <h1>◾ 예약 수정</h1>
+        </div>
+
+        <section class="reservation-section">
+            <!-- 캘린더 영역 -->
+            <div class="border-container calendar-container">
+
+                <div id="calendar1">
+                </div>
+
+            </div>
+
+            <form th:action="@{/medicalCenter/reservationCheck/myReserUpdate/{date}(date=${date})}" method="POST" >
+                <!-- 예약 목록을 표시할 영역 -->
+                <div id="reservationList" class="reservation-list">
+
+                    <th:block th:each="resv : ${reservationList}">
+                        <div class="reservation-item" th:object="${resv}">
+                            <div class="stapper-div"></div>
+                            <div class="reservation-fontList">
+                                <p class="reservation-clubResvTime" th:text="*{clubResvTime}"></p>
+                                <input type="hidden" name="clubResvTime" id="clubResvTime" th:value="*{clubResvTime}">
+ <!-- 예약 수정 및 삭제 버튼 -->    
+                            <div class="reservation-actions">
+                                <button class="reservation-update" id="reservationDelete">삭제하기</button>
+                            </div>
+                        </div>
+
+                        </div>
+                    </th:block>
+                </div>
+
+
+            </form>
+        </section>
+
+
+    </div>
+</body>
+

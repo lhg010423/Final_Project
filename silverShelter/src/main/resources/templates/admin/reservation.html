@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 의료 · 예약</title>
+
+    <!-- 왼쪽 nav 부분 및 전체페이지 공간지정 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+
+</head>
+<body>
+    <main>
+
+        <!-- 왼쪽 nav 부분 -->
+        <th:block th:replace="~{admin/admin}"></th:block>
+
+
+
+        <!-- nav를 제외한 오른쪽 메인 페이지 -->
+        <section class="adminMain">
+
+            <div class="adminHeader">
+                <span>관리자 페이지 - 의료 · 예약</span>
+            </div>
+
+            <div class="adminBody">
+
+                <div class="adminLeft">
+
+                   
+                </div>
+                
+                <div class="adminRight"></div>
+            </div>
+
+
+        </section>
+        
+    </main>
+
+
+</body>
+</html>

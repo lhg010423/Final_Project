@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기 결과</title>
+	
+	<th:block th:replace="~{common/common}"></th:block>
+	
+	<link rel="stylesheet" href="/css/member/idResult.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+</head>
+<body>
+
+	<th:block th:replace="~{common/mainNav}"></th:block>
+	<th:block th:replace="~{common/headerNav}"></th:block>
+	
+	<div style="height: 10vh;"></div>
+	
+	<section id="idResultArea">
+		
+		<div class="idResultTitle">아이디 찾기</div>
+				
+			<span class="idResultText-2">회원님의 아이디 찾기 결과입니다</span>
+		
+			<section class="idResultText">
+				<div id="result-container">
+					아이디 : <span th:text="${memberId}"></span>
+				</div>
+			</section>
+			
+			<div id="loginFoundPwBtn">
+				<a href="/member/login" id="loginUnderBtn">로그인</a> 
+				<span> | </span>
+				<a href="/member/foundPw" id="foundPwUnderBtn">비밀번호 찾기</a>
+			</div>		
+		
+	</section>
+	
+	<th:block th:replace="~{common/footer}"></th:block>
+</body>
+</html>

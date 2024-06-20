@@ -1,0 +1,169 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+	
+	/*border:1px solid rgb(255, 206, 206);*/
+	
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+
+   
+    margin: 0;
+    
+    
+ }
+ 
+ body{
+	background-color: #Fefefe;
+ }
+ 
+ .login-form{
+	
+	display: flex;
+	
+	justify-content: space-evenly;
+	align-items: center;
+	
+	flex-direction: column;
+	height: 90vh;
+ }
+ 
+ #loginArea{
+	
+	height: 60vh;
+	
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	
+	flex-direction: column;
+ }
+ 
+ .loginTitle{
+	font-size: 55px;
+ }
+ 
+  .text{
+	
+	font-weight: bold;
+  }
+  
+ .memberId{
+	
+	width : 28vw;
+	height: 5vh;
+	margin-bottom : 1vh;
+	
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+ .memberPw{
+	width : 28vw;
+	
+	height: 5vh;
+	
+	margin-top: 1vh;
+	
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline : none;
+	
+	font-size: 16px;
+ }
+ 
+ .saveId{
+	
+	width: 100%;
+	margin-left: 10vw;
+	
+ }
+ 
+ .lineDiv{
+	
+	border : 2px solid #666565;
+	
+	width: 38vw;
+ }
+ 
+ /*.btnDiv{
+	display: flex;
+	width:38vw;
+	height: 0;
+	
+ }*/
+ 
+ .loginBtn{
+	color: #FFFFFF;
+	background-color: #1A2050;
+	
+	border: none;
+	
+	font-size : 18px;
+	
+	width: 18vw;
+	height: 5vh;
+	
+	border-radius: 6px;
+ }
+ 
+ .loginBtn:hover{
+	
+	border: 1px solid #1A2050;
+	background-color: #ffffff;
+	
+	color: #1A2050;
+ }
+ 
+ .loginBtn:active{
+	
+	color: #FFFFFF;
+	background-color: #1A2050;
+ }
+ 
+ .signupBtn{
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	color:#ffffff;
+	background-color: #1A2050;
+	
+	font-size: 17px;
+	text-decoration: none;
+	text-align: center;
+	
+	border-radius: 6px;
+	width: 18vw;
+	height: 5vh;
+	
+	margin-left: 2vw;
+ }
+ 
+ .signupBtn:hover{
+	
+	border: 1px solid #1A2050;
+	background-color: #ffffff;
+	
+	color: #1A2050;
+	
+ }
+ 
+  .signupBtn:active{
+	
+	color: #FFFFFF;
+	background-color: #1A2050;
+ }

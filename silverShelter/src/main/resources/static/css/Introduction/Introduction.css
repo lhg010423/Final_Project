@@ -1,0 +1,375 @@
+
+/* 단지소개/입주안내 정리 */
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+*{
+    font-family: 'Pretendard-Regular';
+}
+h3 {
+    margin-bottom: 20px;
+    line-height: 1.6; /* Add this line */
+}
+.facility-links {
+    margin-top: 10vh;
+    text-align: center;
+}
+
+.facility-links a {
+    font-weight: 500;
+    font-size: 40px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px 10px 10px;
+    color: inherit;
+    
+    font-weight: bold;
+
+}
+
+.facility-links a:active {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 15px;
+    font-weight: 900;
+    
+}
+.line-div{
+	
+	width: 44vw;
+	text-align: center;
+	height: 1px;
+	
+	margin-top: 5vh;
+	margin-left:28vw;
+	
+	background-color: lightgrey;
+}
+/* 클래식/프리미엄/vip 버튼 정리 */
+.room-grade {
+	
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.room-grade button {
+	
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    color: #000;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.room-grade button:hover,
+.room-grade button:active {
+    background-color: #1A2050;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 900;
+}
+
+/* 이미지 컨테이너 */
+.room-image-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: 300px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-img {
+    width: 1920px;
+    height: 800px;
+}
+
+#classic-img {
+    width: 800px;
+    height: 300px;
+}
+
+/* 룸 정보 */
+.room-info-container {
+    padding-top: 30px;
+    padding-bottom: 80px;
+    width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.room-description {
+    padding-top: 20px;
+}
+
+.room-description h4 {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* 컨시어지 서비스 */
+.concierge-service-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.concierge-service-container {
+    width: 700px;
+}
+
+#concierge-service-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.concierge-service-text {
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.concierge-service-text h1 {
+    margin-bottom: 20px;
+}
+
+.concierge-service-text h3 {
+    margin-bottom: 20px;
+}
+
+/* 하우스키핑 서비스 */
+.housekeeping-service-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.housekeeping-service-details {
+    width: 400px;
+    padding-right: 20px;
+}
+
+.housekeeping-service-image {
+    width: 400px;
+}
+
+.housekeeping-service-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.housekeeping-service-details h1 {
+    margin-bottom: 20px;
+}
+
+.housekeeping-service-details h3 {
+    margin-bottom: 20px;
+}
+
+/* 케어 솔루션 섹션 */
+.care-solution-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.care-solution-image {
+    width: 400px;
+}
+
+.care-solution-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.care-solution-text {
+    width: 400px;
+    padding-left: 20px;
+}
+
+.care-solution-text h1 {
+    margin-bottom: 20px;
+}
+
+.care-solution-text h3 {
+    margin-bottom: 20px;
+}
+
+/* 플로어 플랜 섹션 */
+.floor-plan-section {
+    padding-top: 150px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.floor-plan-image img {
+    width: 800px;
+    height: 400px;
+    padding-top: 10px;
+}
+
+.floor-plan-details,
+.room-count,
+.building-usage {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 30px;
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 20px;
+}
+
+
+/* moveInGuide  */
+
+.intro-header {
+    text-align: center;
+    margin: 100px auto 0;
+    width: 800px;
+    margin-bottom: 100px;
+}
+
+.entry-conditions {
+    margin: 0 auto;
+    width: 800px;
+}
+
+.entry-cost {
+    margin: 100px auto 0;
+    width: 800px;
+    margin-bottom: 100px;
+}
+
+.entry-cost-description {
+    text-align:right;
+    margin-bottom: 20px;
+}
+
+.entry-cost-description h6 {
+    display: inline;
+    margin-right: 10px; /* h6와 테이블 사이의 간격 조정 */
+}
+
+/*  */
+/* 테이블 스타일링 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid #000; /* 외곽선 추가 */
+}
+
+th, td {
+    border: 1px solid #000; /* 테이블 셀에 border 추가 */
+    padding: 10px; /* 셀 안의 여백 추가 */
+    text-align: center;
+
+}
+
+td{
+    font-size: 18px;
+}
+
+th, td:nth-child(1) {
+    background-color: #F8F5F5; /* 첫 번째 열의 배경색 */
+    font-size: 20px;
+}
+
+
+th:first-child, td:first-child {
+    width: 200px; /* 첫 번째 열의 너비를 200px로 설정 */
+    height: 70px;
+    font-size: 20px;
+}
+/*  */
+
+
+.entry-procedure {
+    margin: 100px auto 0;
+    width: 800px;
+    margin-bottom: 100px;
+} 
+
+.procedure-steps-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.procedure-step {
+    border: 2px solid #DDDDDD; /* 테두리 추가 */
+    text-align: center;
+    width: 150px;
+    height: 120px;
+    display: flex; /* 가로로 정렬하기 위해 인라인 블록 요소로 설정 */
+    /* margin-left: 20px; */
+    flex-direction: column; /* 내용을 세로로 정렬하기 위해 */
+    justify-content: space-evenly; /* 세로 방향 가운데 정렬 */
+    
+    
+    border-radius: 5px;
+}
+
+.apply-button-container{
+    margin: 100px auto 0;
+    width: 800px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+} 
+
+.apply-button-container a {
+    background-color: #1A2050;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 900;
+    width: 200px; /* 원하는 너비 */
+    height: 50px; /* 원하는 높이 */
+    font-size: 20px; /* 원하는 글자 크기 */
+    text-decoration: none; /* 밑줄 제거 */
+    display: flex; /* 수평 가운데 정렬을 위해 */
+    justify-content: center; /* 수평 가운데 정렬을 위해 */
+    align-items: center; /* 세로 가운데 정렬을 위해 */
+}
+
+.apply-button-container a:hover{
+
+	background-color: #fff;
+	color: #1A2050;
+	border:1px solid #1A2050;
+}
+
+.i-div {
+    height: 100px;
+    line-height: 100px;
+}
+
+i{
+    font-size: 30px;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- main css -->
+    <link rel="stylesheet" href="/css/common/main.css">
+    <!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/communication/reservation.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+
+    <title>스포츠센터 예약</title>
+</head>
+<body> 
+  <main>
+    <th:block th:replace="~{common/headerNav}"></th:block>   
+    <th:block th:replace="~{common/mainNav}"></th:block>   
+    
+    <section>
+        <div class="guest-info-container">
+          <!-- 조각 들어갈 위치 -->
+          <th:block th:replace="~{communication/communicationCommon}"></th:block>
+          <div class="guest-room-section">
+            <div class="guest-room-header">
+              <h1>스포츠센터</h1>   
+            </div>
+
+            <form action="/communication/communicationReservation" method="POST"></form>
+            
+            <div class="sports-img-container">
+              
+
+              <div class="image-wrapper">
+                <img src="/images/communication/pottery.webp" alt="도예" class="selectable-image">
+                <div class="overlay">도예</div>
+                <input type="hidden" class="selected-sport" name="selectedSport" value="7">
+              </div>
+            
+              <div class="image-wrapper">
+                  <img src="/images/communication/moving.webp" alt="영화" class="selectable-image">
+                  <div class="overlay">영화</div>
+                  <input type="hidden" class="selected-sport" name="selectedSport" value="6">
+              </div>
+              
+              <div class="image-wrapper">
+                  <img src="/images/communication/crossStitch.webp" alt="십자수" class="selectable-image">
+                  <div class="overlay">십자수</div>
+                  <input type="hidden" class="selected-sport" name="selectedSport" value="8">
+              </div>
+              
+              <div class="image-wrapper">
+              </div>
+
+            </div>
+
+            <th:block th:if="${session.loginMember == null}">
+              <div class="login-notice">
+                <img id="login-logo" src="/images/main/Logo4.png">
+                <h1>서비스를 이용하시려면 로그인이 필요합니다.</h1>
+                <div class="text">Golden Prestige Corperation</div>
+                <a href="/member/login">로그인 하러가기</a>
+              </div>
+            </th:block>
+
+            <th:block th:if="${session.loginMember != null}">
+              
+                <div class="selection-container">
+                  <div class="calendar-time-container">
+                    <!-- 캘린더 -->
+                    <div id='calendar-2'></div>
+                    <div class="check-container">
+                      <div class="time-title">
+                        <p>시간</p>
+                      </div>
+                      <div class="time-selection">
+                        <div class="time-option">
+                          <input type="radio" id="time-09" name="time" value="09:00">
+                          <label for="time-09">09:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-10" name="time" value="10:00">
+                          <label for="time-10">10:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-11" name="time" value="11:00">
+                          <label for="time-11">11:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-12" name="time" value="12:00">
+                          <label for="time-12">12:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-13" name="time" value="13:00">
+                          <label for="time-13">13:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-14" name="time" value="14:00">
+                          <label for="time-14">14:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-15" name="time" value="15:00">
+                          <label for="time-15">15:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-16" name="time" value="16:00">
+                          <label for="time-16">16:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-17" name="time" value="17:00">
+                          <label for="time-17">17:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-18" name="time" value="18:00">
+                          <label for="time-18">18:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-19" name="time" value="19:00">
+                          <label for="time-19">19:00</label>
+                        </div>
+                        <div class="time-option">
+                          <input type="radio" id="time-20" name="time" value="20:00">
+                          <label for="time-20">20:00</label>
+                        </div>
+                        <!-- 게스트룸 -->
+                        <input type="hidden" value="1" id="clubCode">
+                      </div>
+                      <div class="reserve-container">
+                        <button id="reserve-button">예약하기</button>
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </th:block>
+
+            <div class="reservation-guidelines-container">
+              <section class="reservation-guidelines">
+                <h2>▪ 예약시 주의 사항 안내</h2>
+                <h3>1. 예약 확인 및 변경</h3>
+                <ul>
+                  <li>
+                    예약을 완료한 후, 마이 페이지에서 예약 내역을 확인해주세요.
+                  </li>
+                  <li>
+                    예약 내용에 오류가 있거나 변경이 필요한 경우, 마이 페이지에서 수정하거나 저희에게 연락해주세요.
+                  </li>
+                </ul>
+                <h3>2. 시간 확인</h3>
+                <ul>
+                  <li>
+                    예약하신 시간과 인원을 정확히 확인해주세요.
+                  </li>
+                  <li>
+                    시간 변경이 필요한 경우, 마이 페이지에서 수정하거나 저희에게 연락해주세요.
+                  </li>
+                </ul>
+                <h3>3. 기타 주의 사항</h3>
+                <ul>
+                  <li>
+                    예약 전 시설의 이용 규정 및 안내사항을 반드시 숙지해주세요.
+                  </li>
+                  <li>
+                    예약하신 시설의 이용 시 주의사항을 준수해주세요.
+                  </li>
+                </ul>
+                <h3>
+                  4. 문의 및 도움이 필요한 경우
+                </h3>
+                <ul>
+                  <li>
+                    예약에 관한 문의나 도움이 필요한 경우, 언제든지 연락해주세요.
+                  </li>
+                  <li>
+                    친절한 직원이 최선을 다해 도와드리겠습니다.
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+      </div>
+    </section>
+  </main>
+  <!--footer-->
+  <th:block th:replace="~{/common/footer.html}"></th:block>
+  <script src="/js/communication/communicationReservation.js"></script>
+</body>
+</html>
+
+</body>
+</html>

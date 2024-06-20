@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의료센터</title>
+    <link rel="stylesheet" href="/css/medicalCenter/medicalCenter.css">
+    <!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+    <link rel="stylesheet" href="/css/member/login.css">
+
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+
+</head>
+<body>
+    <th:block th:replace="~{common/headerNav}"></th:block>
+    <th:block th:replace="~{common/mainNav}"></th:block>
+    <main>
+        <header>
+            <th:block th:replace="~{medicalCenter/medicalHeader}"></th:block>
+        </header>
+        <div id="tabContentContainer"></div>
+    </main>
+    <div style="height: 100px;"></div>
+    <!--footer-->
+    <th:block th:replace="~{common/footer}"></th:block>
+</body>
+<script src="/js/medicalCenter/medicalCenter.js"></script>
+<!-- 내정보 모달 (내정보 / 로그아웃 나오는 창) -->
+<script src="/js/common/headerNav.js"></script>
+</html>

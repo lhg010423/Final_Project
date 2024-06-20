@@ -1,0 +1,36 @@
+<div style="height: 2vh;"></div>
+<div class="line-div"></div>
+
+
+
+
+<sectio id="main-container">
+	
+	<fieldset id="fieldset">
+		<section id="container-1">
+				<span><h3>객실 정보 : <span th:text="${session.loginMember.examRoomType}" /></h3> </span>
+		</section>
+		
+		<br>
+		
+		<section>
+			<span style="color: coral;">* 객실변경은 고객센터로 문의바랍니다.</span>
+		</section>
+		
+		<br><br><br>
+		
+		<section id="container-2">
+			<span><h4>요양사 정보 : <span th:text="${session.loginMember.caregiversName}" /></h4> </span>
+		</section>
+		
+		<br>
+		
+		<section>
+				<span style="color: coral;">* 담당 요양사의 변경은 "의료센터 -> 요양사 매칭" 으로 다시 진행 가능합니다.</span>
+		</section>
+		
+		<div style="height: 3vh;" />
+	</fieldset>
+	
+	
+</section>

@@ -1,0 +1,107 @@
+    <li class="dateInfo" th:each="date : ${dates}" th:text="${date}"></li>
+    <script type="text/javascript">
+        window.onload = function() {
+            let datesStr = /*[[${dates}]]*/ '[]'; // 예: "[date1, date2, date3]"
+            let dates = JSON.parse(datesStr); // 문자열을 배열로 변환
+            console.log(dates);
+            dates.forEach(function(date) {
+                // 각 날짜에 대한 작업 수행
+                console.log("dkfsjdlfjskjkljskdlfkls");
+            });
+        }
+    </script>
+
+    <form action="/medicalCenter/reservation/doctorReservation" method="POST">
+        <div class="selection-container">
+          
+          <div class="calendar-time-container">
+            <!-- 캘린더 -->
+            <div id='calendar'></div>
+
+            <div class="check-container">
+
+              <div class="time-title">
+
+                <p>시간</p>
+
+              </div>
+
+              <div class="time-selection">
+
+                <div class="time-option">
+
+                  <input type="radio" id="time-09" name="time" value="09:00">
+                  <label for="time-09">09:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-10" name="time" value="10:00">
+                  <label for="time-10">10:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-11" name="time" value="11:00">
+                  <label for="time-11">11:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-12" name="time" value="12:00">
+                  <label for="time-12">12:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-13" name="time" value="13:00">
+                  <label for="time-13">13:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-14" name="time" value="14:00">
+                  <label for="time-14">14:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-15" name="time" value="15:00">
+                  <label for="time-15">15:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-16" name="time" value="16:00">
+                  <label for="time-16">16:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-17" name="time" value="17:00">
+                  <label for="time-17">17:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-18" name="time" value="18:00">
+                  <label for="time-18">18:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-19" name="time" value="19:00">
+                  <label for="time-19">19:00</label>
+                </div>
+
+                <div class="time-option">
+                  <input type="radio" id="time-20" name="time" value="20:00">
+                  <label for="time-20">20:00</label>
+                </div>
+                
+                <!-- 게스트룸
+                <input type="hidden" value="1" id="clubCode"> -->
+              </div>
+              
+              <div class="reserve-container">
+                <button id="reserve-button">예약하기</button>
+              </div>  
+              
+            </div>
+          </div>
+          
+
+        </div>
+
+      </form>
+

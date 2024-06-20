@@ -1,0 +1,106 @@
+<th:block th:if="${session.loginMember == null}">
+    <div id="doctorMatchingPage">
+        <h1 id="doctorMatchingTitle">Golden Prestage 의료센터에 오신 것을 환영합니다</h1>
+        <div id="doctorMatchingLoginForm">
+            <div id="doctorMatchingLogin">
+                <article class="login-form">
+
+                    <form action="/member/login" method="GET" id="loginArea">
+                        
+                        <!-- 아이디, 비번 입력 -->
+                        <img id="doctorMatchingMainLogo" src="/images/main/Logo4.png">
+                            <h1>서비스를 이용하시려면 로그인이 필요합니다.</h1>
+                            
+                            <div class="text">Golden Prestige Corperation</div>
+                            <button id="docLoginBtn">로그인 페이지로 이동</button>
+                            
+                    </form>
+                
+                </article>
+            </div>
+            <div id="doctorMatchingIntro">
+                <img id="signupemoji" src="/images/medicalCenter/signupemoji.png">
+                <h3 id="signupIntro1">회원가입 후, 다음 서비스를 이용하실 수 있습니다.</h3>
+                <h4 id="signupIntro2">입주신청<br><br>인터넷 예약 및 확인<br><br>자유, 문의게시판 글 작성<br><br>여가문화 서비스 신청</h4>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block th:if="${session.loginMember != null}">
+<div id="reservationPage">
+    <h1 id="doc-mat-title">온라인 진료예약</h1>
+    <div id="reservationForm">
+        <div id="reservation-content2" class="reservation-content section2-2">
+            <div id="resTitle">
+                <h2 id="res-dep-choice">진료과 선택</h2>
+            </div>
+            <div id="resimgs">
+                <div class="resImg" data-image="/images/medicalCenter/재활의학과.png">
+                    <img src="/images/medicalCenter/재활의학과.png" alt="재활의학과">
+                    <h4 class="resImgIntro">재활의학과</h4>
+                </div>
+                <div class="resImg" data-image="/images/medicalCenter/내과.png">
+                    <img src="/images/medicalCenter/내과.png" alt="내과">
+                    <h4 class="resImgIntro">내과</h4>   
+                </div>
+                <div class="resImg" data-image="/images/medicalCenter/한방과.png">
+                    <img src="/images/medicalCenter/한방과.png" alt="한방과">
+                    <h4 class="resImgIntro">한방과</h4>
+                </div>
+                <div class="resImg" data-image="/images/medicalCenter/가정의학과.png">
+                    <img src="/images/medicalCenter/가정의학과.png" alt="가정의학과">
+                    <h4 class="resImgIntro">가정의학과</h4>
+                </div>
+            </div>
+            <input type="hidden" id="selectedDepartment" value="">
+            <button id="resNextButton">다음</button>
+        </div>
+        <div id="reservation-content3" class="reservation-content section2-3">
+        </div>
+        <div id="reservation-content4" class="reservation-content section2-4">
+        </div>
+        <div id="btn-reserve">
+            <div id="reservation-toggleButton1">
+                <div id="res-numTitle">
+                    <h1 class="res-num">1</h1>
+                    <h2 class="res-num-title">환자정보</h2>
+                </div>
+                <div id="reservation-person">
+                    <ul>
+                        <li>
+                            <h3 th:text="${session.loginMember.memberName}"></h3>
+                        </li>
+                        <li>
+                            <h3 th:text="${session.loginMember.memberTel}"></h3>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="reservation-toggleButton reservation-active" data-target="2">
+                <div id="res-numTitle1">
+                    <h1 class="res-num">2</h1>
+                    <h2 class="res-num-title">진료과</h2>
+                </div>
+                <img id="toggleButtonImage" alt="">
+                <h3 id="toggleButtonImageIntro"></h3>
+            </button>
+            <button class="reservation-toggleButton" data-target="3">
+                <div id="res-numTitle2">
+                    <h1 class="res-num">3</h1>
+                    <h2 class="res-num-title">의료진</h2>
+                </div>
+                <img id="toggleButtonImage2" alt="">
+                <h3 id="toggleButtonImageIntro2"></h3>
+                </button>
+            <button class="reservation-toggleButton" data-target="4">
+                <div id="res-numTitle3">
+                    <h1 class="res-num">4</h1>
+                    <h2 class="res-num-title">진료일시</h2>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</th:block>

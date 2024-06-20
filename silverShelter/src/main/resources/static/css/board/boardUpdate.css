@@ -1,0 +1,181 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+/* 게시판 전체 영역 */
+.boardMain {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+/* 게시판 상단 공간 */
+.boardTop {
+    height: 20%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.boardTop a {
+    margin: 20px;
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 상단 a태그를 제외한 나머지 메인 공간 */
+.boardBody {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 게시글 공간 */
+.boardDetail-area {
+    display: flex;
+    width: 800px;
+    min-height: 600px;
+    /* background-color: gray; */
+    border: 1px solid black;
+    flex-direction: column;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* 게시글 header부분*********************************************** */
+/* 이전으로 a태그 */
+.boardTitle > a {
+    color: black;
+    font-size: 13px;
+}
+
+.boardTitle-area {
+    flex: 0 0 auto; /* 고정 높이 */
+}
+
+
+/* 게시글 제목 */
+.boardTitle-area > input{
+    /* height: 30px; */
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.2); */
+    outline: none;
+}
+
+/* 작성자, 작성일, 수정일, 조회수, 좋아요 공간 */
+.writer-area {
+    display: flex;
+    justify-content: space-between;
+    /* flex: 1 1 auto; 남은 공간 차지 */
+    margin-bottom: 15px;
+}
+
+
+
+/* 작성자 */
+#writer {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+    
+/* 작성일, 수정일 */
+.writer-left-area span:nth-of-type(2),
+.writer-left-area span:nth-of-type(3) {
+    color: gray;
+    font-size: 13px;
+}
+        
+
+/* 조회수, 좋아요 공간 지정 */
+.writer-right-area {
+    display: flex;
+    width: 200px;
+    justify-content: flex-end;
+}
+
+/* 조회수, 좋아요 마진 설정 */
+.writer-right-area span{
+    margin-right: 20px;
+}
+
+.boardDetail-area hr {
+    border: 1px solid #ddd;
+    /* border-color: #ddd; */
+    outline: none;
+}
+
+
+/* 게시글 내용 공간 */
+.boardContent-area {
+    flex: auto; /* 남은 공간 차지 */
+    margin-top: 15px;
+    /* overflow-y: auto; 내용이 넘칠 경우 수직 스크롤 표시 */
+    /* height: auto; 높이 자동 조절 */
+}
+
+/* 게시글 내용 */
+#boardContent {
+    width: 100%;
+    height: 100%;
+    resize: none; /* 크기 조절 불가능하도록 설정 */
+    outline: none; /* 포커스 효과 제거 */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.2); */
+    box-sizing: border-box; /* 내부 여백을 포함한 전체 크기를 지정 */
+    white-space: pre-wrap; /* 공백 유지 및 자동 줄 바꿈 */
+}
+
+.board-btn-area {
+    width: 800px;
+    margin: 20px 0;
+    display: flex;
+	justify-content: flex-end;
+}
+
+/* 수정, 삭제 버튼 */
+.board-btn-area * {
+    text-decoration: none;
+    margin-left: 10px;
+    width: 70px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    border: 0;
+    background-color: #1A2050;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    box-sizing: border-box;
+}
+
+
+.board-btn-area *:hover {
+    background-color: white;
+    color : #1A2050;
+    border: 2px solid #1A2050;
+    box-sizing: border-box; /* a태그 hover시 크기 변하는거 막음 */
+}

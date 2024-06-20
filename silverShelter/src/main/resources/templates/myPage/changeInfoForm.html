@@ -1,0 +1,181 @@
+<div id="formHeader">
+                <div class="notice">
+                    <div style="color:coral;">* 은 필수 입력 항목입니다. 정보 수정 시 빈 칸 없이 입력 바랍니다.</div>
+                    
+                </div>
+                <div class="line-div"></div>
+            </div>
+            <!-- 입력양식 -->
+            <form id="infoForm" action="/member/changeInfo" method="POST">
+        
+                <!-- 아이디컨테이너 -->
+                <div class="id-container">
+
+
+                    <label for="memberId" class="id-label">
+                        <span class="star"></span>&nbsp;
+                        <span>아이디</span>
+                    </label>
+                        
+                    <div id="inputDiv">
+						
+                        <input th:value="${session.loginMember.memberId}"
+							   type="text" 
+                               placeholder="아이디" 
+                               autocomplete="off"
+                               id="memberId"
+							   name="memberId"
+							   readonly />
+							   
+                        <br>
+                        <span style="font-size: 12px;
+                                     letter-spacing: -1px;"
+                              class="signUp-message" id="idMessage" >* 아이디는 변경할 수 없습니다</span>
+                    </div>
+                </div>
+
+                <!-- 비밀번호 컨테이너 -->
+                <div class="pw-container">
+
+                    <label for="memberPw" class="pw-label">
+                        <span class="star">*</span> 
+                        <span>비밀번호</span> 
+                    </label>
+                    
+                    <div id="pwInputDiv">
+                        <input type="password"
+                               placeholder="비밀번호"
+                               maxlength="20"
+                               id="memberPw"
+							   name="memberPw"
+							   class="memberPw">
+                        <br>
+                        <span style="font-size: 12px;
+                                     letter-spacing: -1px;"
+                              class="signUp-message" id="pwMessage">* 6~20자 이내의 영문, 숫자, 특수문자(!,@,#,_,-)로 입력하세요</span>
+                    </div>
+                </div>
+                
+                <!-- 비밀번호 확인 컨테이너 -->
+                <div class="pwConfirm-container">    
+                    <label for="memberPw-confirm" class="pwConfirm-label">
+                        <span class="star">*</span> <span>비밀번호 확인</span>
+                    </label> 
+
+                    <div>
+                        <input type="password" 
+                               placeholder="비밀번호 확인" 
+							   maxlength="20"
+							   id="memberPwConfirm"
+							   name="memberPwConfirm"
+							   class="memberPwConfirm"
+                               >
+                    </div>
+                </div>
+                
+                <!-- 이름컨테이너 -->
+                <div class="memberName-container">
+					
+                    <label for="memberName" class="memberName-label">
+                        &nbsp;<span>성함</span>
+                    </label>
+
+                    <div>
+                        <input th:value="${session.loginMember.memberName}"
+							   type="text" 
+							   placeholder="성함" 
+							   id="memberName"
+							   name="memberName"
+							   readonly /><br>
+					   	<span style="font-size: 12px; letter-spacing: -1px;"
+                         	  class="signUp-message" id="nameMessage" >* 이름은 변경할 수 없습니다</span>	   
+                    </div>
+                </div>    
+
+                <!-- 전화번호 컨테이너 -->
+                <div class="tel-container">
+                    <label for="memberTel" class="tel-label">
+                        &nbsp;<span>휴대폰 번호</span>
+                    </label>
+
+                    <div>
+                        <input th:value="${session.loginMember.memberTel}"
+							   type="text" 
+                               placeholder="'-'를 포함하여 입력해주세요" 
+                               autocomplete="off"
+                               id="memberTel"
+							   name="memberTel"><br>
+							   <span style="font-size: 12px; letter-spacing: -1px;"
+		                        	 class="signUp-message" id="telMessage">* '-' 를 포함해주세요</span>
+                    </div>
+                </div>
+                
+                <!-- 이메일 컨테이너 -->
+                <div class="email-container">
+                    <label for="memberEmail" class="email-label">
+                        &nbsp;<span>이메일</span>
+                    </label>    
+                
+                    <div>
+                        <input th:value="${session.loginMember.memberEmail}"
+							   type="text" 
+							   placeholder="이메일" 
+							   autocomplete="off" id="memberEmail" name="memberEmail">
+                    </div>
+                </div>
+
+                <!-- 보호자 연락처 -->
+                <div class="guardian-tel-container">    
+                    <label for="guardianTel" class="guardian-tel-label">
+                        <span class="star">*</span> <span>보호자 연락처</span>
+                    </label> 
+
+                    <div id="guardianTelInputDiv">
+                        <input th:value="${session.loginMember.guardianTel}"
+							   type="text" 
+							   placeholder="'-'를 포함하여 입력해주세요"
+							   autocomplete="off" 
+							   id="guardianTel"
+							   name="guardianTel">
+                        <br>
+                        <span style="font-size: 12px;
+                                     letter-spacing: -1px;"
+                              class="signUp-message" 
+                              id="guardianTelMessage">* 보호자 전화번호를 입력해주세요.(- 포함)</span>
+                    </div>
+                </div>
+
+
+                <!-- 주소 입력란 -->
+                <fieldset class="addr-fieldset">
+                    <div class="add-div-1">
+                        <span class="addr">주소</span> 
+                        <button type = "button" 
+                                id="searchAddress">검색</button>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" name="memberAddress" id="postcode" th:value="${postcode}" placeholder="우편번호" autocomplete="off">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" name="memberAddress" id="roadAddress" th:value="${roadAddress}" placeholder="도로명 / 지번 주소" autocomplete="off">
+                    </div>
+                    
+                    <br>
+
+                    <div>
+                        <span id="guide" style="color:#999;display:none"></span>
+                        <input type="text" name="memberAddress" id="detailAddress" th:value="${detailAddress}" placeholder="상세주소" autocomplete="off">
+                    </div>
+                </fieldset>
+                
+
+                <div class="prev-next-btn-container">
+                    <button type="submit" id="submitBtn">변경</button>
+                </div>
+            </form>				

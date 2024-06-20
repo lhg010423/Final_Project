@@ -1,0 +1,1098 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    /* border: 1px solid red; */
+    padding: 0;
+    margin: 0;
+    font-family: 'Pretendard-Regular';
+}
+
+button {
+    cursor: pointer;
+}
+
+/* 헤더 */
+#mediNav {
+    display: flex;
+    justify-content: center;
+}
+
+#mediNav * {
+    width: 190px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    cursor: pointer;
+    font-size: 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-bottom: 80px;
+}
+
+#mediNav *:hover{
+    background-color: #1A2050;
+    color: white;
+}
+.selected-tab {
+    background-color: #1A2050;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.underTabPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#section-select {
+    display: flex;
+    width: 400px;
+    height: 100px;
+    justify-content: space-between;
+}
+
+#sectionBtn1, #sectionBtn2 {
+    border-style: none;
+    font-size: 25px;
+    font-weight: bold;
+    border-top: 5px solid white;
+    border-bottom: 5px solid #1A2050;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    width: 200px;
+    height: 100px;
+    transition: 0.2s;
+    background-color: white;
+}
+
+#sectionBtn1:hover, #sectionBtn2:hover {
+    border-bottom: 20px solid #252e74;
+}
+
+.sectionBtnClicked {
+    border-bottom: 20px solid #252e74;
+}
+
+#section1, #section2 {
+    display: none;
+    justify-content: center;
+    background-color: white;
+}
+
+#section1.active, #section2.active {
+    display: flex;
+}
+
+#floors {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+#floors * {
+    width: 100px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 25px;
+    font-weight: bold;
+    transition: 0.2s;
+    border: 0.5px solid black;
+    cursor: pointer;
+}
+
+#departments * {
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 25px;
+    font-weight: bold;
+    transition: 0.2s;
+    border: 0.5px solid black;
+    cursor: pointer;
+}
+
+#floors *:hover, .floorChecked {
+    background-color: #232e7e;
+    color: white;
+}
+
+#departments {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-right: 20px;
+}
+
+#departments *:hover, .dep-floorChecked {
+    background-color: #232e7e;
+    color: white;
+}
+
+#departmentsIntro {
+    width: auto;
+    height: auto;
+    display: flex;
+}
+
+#floorImg * {
+    width: 800px;
+    height: 570px;
+    display: none;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#floor-sec1 {
+    display: flex;
+}
+
+#mediHeaderImg {
+    width: 1000px;
+    height: 600px;
+    object-fit: cover;
+}
+
+#departmentIntro {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px;
+    display: flex;
+}
+
+#dep-sec21.active, #dep-sec22.active, #dep-sec23.active, #dep-sec24.active {
+    border: 1px solid #ccc;
+    padding: 70px;
+    border-radius: 10px;
+    margin: 50px;
+    width: 800px;
+    height: 570px;
+}
+
+.dep-sec {
+    display: none;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    margin-top: 50px;
+}
+
+#dep-sec21 ul, #dep-sec22 ul, #dep-sec23 ul, #dep-sec24 ul {
+    list-style-type: circle;
+    padding-left: 20px;
+
+}
+
+li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.floorChecked1 {
+    border: 1px solid #ccc;
+    padding: 70px;
+    border-radius: 10px;
+    width: 600px;
+    height: auto;
+}
+
+.mediDepImg {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.mediDepImg1 {
+    width: 200px;
+    margin-bottom: 50px;
+}
+
+#docLoginBtn {
+    width: 300px;
+    height: 70px;
+    background-color: #1A2050;
+    color: white;
+    font-size: 25px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.doctorIntroDiv {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.doctorIntroImg {
+    width: 250px;
+    height: 250px;
+    margin-right: 15px;
+}
+
+.doctorIntroArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.docNameIntro {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.docNameIntro1 {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.docIntro {
+    text-align: center;
+}
+
+/* 로그인 전 진료예약 */
+#doctorMatchingTitle {
+    margin-top: 80px;
+    padding-bottom: 100px;
+}
+
+#doctorMatchingLoginForm {
+    border: #ccc 0.5px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#doctorMatchingLoginForm * {
+    text-align: center;
+}
+
+#doctorMatchingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#doctorMatchingMainLogo {
+    width: 200px;
+}
+
+#doctorMatchingIntro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: #ccc solid 0.5px;
+    height: 800px;
+    margin-left: 30px;
+}
+
+#signupIntro1, #signupIntro2 {
+    width: 600px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#signupemoji {
+    width: 200px;
+    margin-bottom: 100px;
+}
+
+
+/* 로그인 후 진료예약 */
+#doctorMatchingPage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+#doctorMatchingTitle {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form {
+    text-align: center;
+}
+
+.memberId {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.saveId {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.saveId input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.btnDiv {
+    margin-top: 20px;
+}
+
+.loginBtn, .signupBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginBtn:hover, .signupBtn:hover {
+    background-color: #0056b3;
+}
+
+/* 진료예약 페이지 스타일 */
+
+#reservationPage h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#reservationForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    margin-top: 100px;
+}
+
+.reservation-content {
+    display: none;
+    text-align: center;
+    border: #333 1px solid;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 50px;
+}
+
+#reservation-content-inside {
+    display: flex;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+#resTitle {
+    padding-right: 850px;
+    padding-bottom: 70px;
+    font-size: 30px;
+}
+
+#resimgs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 90px;
+    margin-right: 50px;
+}
+
+.resImg {
+    display: flex;
+    width: 200px;
+    padding: 30px;
+    flex-direction: column;
+    border: #ccc 0.6px solid;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.resImg img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.resImgIntro {
+    margin-top: 10px;
+    font-size: 30px;
+    color: #333;
+}
+
+#resNextButton {
+    margin-top: 20px;
+    padding: 20px 50px;
+    background-color: #232e7e;
+    color: #fff;
+    border: white solid 0.6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 25px;
+    border-radius: 10px;
+}
+
+#resNextButton:hover {
+    color: #1A2050;
+    background-color: #fff;
+    border: #ccc 0.6px solid;
+}
+
+#btn-reserve {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-toggleButton {
+    width: 300px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #1A2050;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 30px;
+    border: #fff solid 1px;
+}
+
+.reservation-active {
+    width: 300px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: 0.3s;
+    font-size: 30px;
+    color: white;
+    background-color: #232e7e;
+    cursor: default;
+    border: #232e7e solid 1px;
+}
+
+#reservation-toggleButton1 {
+    width: 300px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #1A2050;
+    color: #fff;
+    font-size: 30px;
+    border: #fff solid 1px;
+}
+
+.reservation-toggleButton:hover {
+    cursor: default;
+}
+
+#reservation-person {
+    color: white;
+    text-align: center;
+}
+
+#reservation-person * {
+    color: white;
+}
+
+#toggleButtonImage {
+    width: 100px;
+    filter: invert(100%);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#toggleButtonImage2 {
+    width: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#toggleButtonImage:hover {
+    filter: invert(100%);
+}
+
+#res-numTitle {
+    display: flex;
+    align-items: last baseline;
+}
+
+#res-numTitle1, #res-numTitle2, #res-numTitle3 {
+    display: flex;
+    align-items: last baseline;
+}
+
+#res-numTitle h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#res-numTitle1 h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#res-numTitle2 h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#res-numTitle3 h1, h2 {
+    color: white;
+    padding-left: 30px;
+}
+
+#btn-reserve3 h1, h2 {
+    color: white;
+}
+
+#btn-reserve4 h1 {
+    font-size: 40px;
+}
+
+#btn-reserve h2 {
+    font-size: 30px;
+}
+
+#res-dep-choice, #res-dep-choice1 {
+    color: #333;
+}
+
+#res-dep-choice1 {
+    font-size: 45px;
+    padding-bottom: 40px;
+    font-weight: bold;
+}
+
+
+#toggleButtonImageIntro, #toggleButtonImageIntro2 {
+    color: white;
+}
+
+.doc-choice-profile {
+    width: 300px;
+    border-radius: 5px;
+}
+
+#doc-choice1 {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    margin-right: 60px;
+    border: #ccc;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+    0 2px 2px rgba(0,0,0,0.11), 
+    0 4px 4px rgba(0,0,0,0.11), 
+    0 6px 8px rgba(0,0,0,0.11),
+    0 8px 16px rgba(0,0,0,0.11);
+}
+
+#doc-choice1:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+}
+
+.doc-intro-left {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.doc-choice-name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.doc-choice-speciality {
+    font-size: 25px;
+    text-align: left;
+    margin: 30px;
+}
+
+#doc-choice2 {
+    display: flex;
+}
+
+#doc-mat-title {
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+#doc-choice-next {
+    margin-top: 20px;
+    padding: 20px 50px;
+    background-color: #232e7e;
+    color: #fff;
+    border: white solid 0.6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 25px;
+    border-radius: 10px;
+    width: 145;
+    height: 72;
+}
+
+#doc-choice-next:hover {
+    color: #1A2050;
+    background-color: #fff;
+    border: #ccc 0.6px solid;
+}
+
+#resTitle2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#funeral {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px;
+    padding-top: 70px;
+}
+
+.container * {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.left {
+    align-self: flex-start;
+    text-align: left;
+    font-weight: lighter;
+}
+
+.right {
+    align-self: flex-end;
+    text-align: right;
+    font-weight: bold;
+    padding-left: 500px;
+}
+
+.left-light {
+    align-self: flex-start;
+    text-align: left;
+    font-weight: lighter;
+}
+
+.right-light {
+    align-self: flex-end;
+    text-align: right;
+    font-weight: lighter;
+}
+
+#introBox {
+    display: flex;
+    border: #ccc 1px solid;
+}
+
+.introBox {
+    border-left: #ccc 1px solid;
+    border-right: #ccc 1px solid;
+}
+
+/* dateResult */
+.selection-container{
+    display: flex;
+    margin: 30px;
+    flex-direction: column;
+}
+
+/* 시간 부분 */
+.time-title {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.time-title p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.calendar-time-container{
+    display: flex;
+}
+
+/* jsuites 캘린더 스타일 */
+.jsuites-calendar {
+    font-size: 25px;
+    height: 600px;
+    width: 600px;
+}
+
+.jcalendar-table {
+    height: 600px;
+    width: 600px;
+}
+
+.jsuites-calendar .jcalendar {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 캘린더 날짜 스타일 */
+.jcalendar-set-day {
+    height: 100px;
+    width: 100px;
+    font-size: 18px; /* 글꼴 크기 */
+    box-sizing: border-box; /* 추가: 패딩, 보더 포함 */
+}
+
+.jsuites-calendar .jcalendar-header,
+.jsuites-calendar .jcalendar-footer {
+    flex: 0 0 auto;
+}
+
+.jsuites-calendar .jcalendar-body {
+    width: auto;
+    height: auto;
+    flex: auto; 
+}
+
+/* 요일 스타일 */
+.jcalendar-weekday {
+    width: 120px;
+}
+
+#reservation-content4 {
+    padding: 40px;
+}
+
+.check-container {
+    flex: 1; /* 요소가 가로 공간을 나누어 가질 수 있도록 */
+    margin-left: 30px; /* 두 섹션 간의 간격 설정 */
+    width: 100px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.jcalendar-container{
+    width: 100%;
+    height: 100%;
+}
+
+#reservation-content4 {
+    display: flex;
+}
+
+.time-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-items: center; /* 가운데 정렬 */
+}
+
+.time-option {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 콘텐츠를 수평으로 가운데 정렬 */
+    padding: 10px; /* 레이블 주위의 여백을 줄이기 위해 padding 값을 줄임 */
+    margin: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 50px;
+    height: 40px; /* 일관성을 위해 고정된 높이 */
+    box-sizing: border-box; /* 높이에 padding과 border를 포함 */
+}
+
+.time-option label {
+    display: flex; /* 수정: flexbox를 사용하여 자식 요소를 가운데 정렬 */
+    align-items: center; /* 추가: 수직 가운데 정렬 */
+    justify-content: center; /* 추가: 수평 가운데 정렬 */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box; /* 패딩과 보더를 높이에 포함 */
+    font-size: larger;
+}
+
+.time-selection input[type="radio"] {
+    display: none;
+}
+
+.time-selection input[type="radio"]:checked + label {
+    background-color: #1A2050;
+    color: #fff;
+}
+
+/* 예약 버튼 */
+#reserve-button {
+    display: block;
+    width: 148px;
+    padding: 20px;
+    margin: 20px auto 0;
+    background-color: #1A2050;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: larger;
+}
+
+/* 달력 부분  */
+
+
+.jcalendar-set-day {
+    height: 100px;
+    width: 100px;
+    font-size: 18px; /* 글꼴 크기 */
+    box-sizing: border-box; /* 추가: 패딩, 보더 포함 */
+}
+
+.dateInfo {
+    display: none;
+}
+
+#calendar {
+   width: 100%; 
+}
+/* 진료예약완료 */
+
+#reservation {
+    border: #333 solid 1px;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 1000px;
+}
+
+#res-tit {
+    color: #333;
+    font-size: 40px;
+    padding: 40px;
+}
+
+#res-res {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+#res-left, #res-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+#btnimg {
+    width: 250px;
+    margin: 10px;
+}
+
+#doctor-dep, #doctor-room {
+    font-size: 25px;
+}
+
+/* 요양사 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+/* 요양사매칭 */
+.caregiver-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 23px;
+    text-align: left;
+}
+
+.caregiver-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.caregiver-table th,
+.caregiver-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+.caregiver-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.caregiver-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.caregiver-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.caregiver-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 설문조사 */
+
+#surveyForm {
+    background-color: #fff;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    padding-left: 300px;
+    padding-right: 300px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#surveyFormTit {
+    text-align: center;
+}
+
+#surveyFormTit1 {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 30px;
+    color: #4b4b4b;
+}
+
+#surveyForm p {
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+#surveyForm input[type="radio"] {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#surveyForm label {
+    cursor: pointer;
+    font-size: 23px;
+    margin: 30px;
+}
+
+#surveyForm button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+#surveyForm button[type="submit"]:hover {
+    background-color: #007a65;
+}
+
+#loginServey {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.caregiver-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+.caregiver-table th, .caregiver-table td {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+}
+
+.caregiver-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.select-button {
+    display: block;
+    width: 100px;
+    padding: 10px;
+    background-color: #009879;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}

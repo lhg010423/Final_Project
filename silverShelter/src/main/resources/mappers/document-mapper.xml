@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.silver.shelter.examination.model.mapper.ExaminationMapper">
+
+	<!-- 중복 신청인지 확인 -->
+	<select id="checkApplicantInfo">
+		SELECT COUNT(*) FROM "EXAMINATION"
+		WHERE EXAM_NAME = #{examName}
+		AND EXAM_PHONE = #{examPhone}
+		AND EXAM_EMAIL = #{examEmail}
+	</select>
+	
+	<!--  심사 테이블 입력 -->
+	<insert id="insertApplicantInfo" useGeneratedKeys="true" parameterType="Examination">
+	
+		<selectKey order="BEFORE" resultType="_int" keyProperty="examId">
+			SELECT SEQ_EXAMINATION_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO "EXAMINATION"
+		VALUES( #{examId},
+				#{examName},
+				#{examEmail},
+				#{examPhone},
+				DEFAULT,
+				SYSDATE,
+				#{examRoomCapacity},
+				#{examRoomType}
+		)
+	</insert>
+	
+	<!-- 심사 서류 모두 삽입 -->
+	<insert id="insertDocument" parameterType="list">
+		INSERT INTO "DOCUMENT"
+		
+		<foreach collection="list" item="doc"
+			open="(" close=")" separator=" UNION " >
+			SELECT NEXT_DOC_NO(), 
+			#{doc.documentOriginalName},
+			#{doc.documentPath},
+			#{doc.docTypeCode},
+			#{doc.examId}
+			FROM DUAL
+		</foreach>
+	</insert>
+	
+	
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.silver.shelter.communication.model.mapper.CommunicationMapper">
+
+	<!-- 일정 추가 -->
+	<insert id="reservation">
+		INSERT INTO CLUB_RESERVATION
+		VALUES(SEQ_CLUB_RESV_NO.NEXTVAL, #{clubCode}, #{memberNo}, TO_DATE(#{clubResvTime}, 'YYYY"년"MM"월"DD"일"HH24:MI'), '2층','N')
+	</insert>
+	
+	<!-- 일정 조회 -->
+    <select id="selectReservation" resultType="int">
+        SELECT COUNT(*)
+        FROM CLUB_RESERVATION
+        WHERE MEMBER_NO = #{memberNo}
+        AND CLUB_RESV_TIME = TO_DATE(#{clubResvTime}, 'YYYY"년"MM"월"DD"일"HH24:MI')
+        AND RESERVATION_DEL_FL='N'
+    </select>
+    
+</mapper>

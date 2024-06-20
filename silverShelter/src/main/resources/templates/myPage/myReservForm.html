@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://jsuites.net/v5/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+    <link rel="stylesheet" href="/css/myPage/myReserv.css">
+    <title>예약 확인</title>
+</head>
+<body>
+    <div class="reservation-container">
+
+        <div class="reservation-header">
+            <h1>◾ 예약 확인</h1>
+        </div>
+
+        <section class="reservation-section">
+            <!-- 캘린더 영역 -->
+            <div class="border-container calendar-container">
+
+                <div id="calendar">
+                    <span id="clubResvColor"></span>
+                </div>
+
+            </div>
+
+            <!-- 예약 목록을 표시할 영역 -->
+            <div id="reservationList" class="reservation-list">
+
+            </div>
+        </section>
+        
+        <!-- 예약 수정 및 삭제 버튼 -->
+        <div class="reservation-actions">
+            <button class="reservation-update" id="reservationUpdate">수정</button>
+        </div>
+
+        
+    </div>
+
+    <script src="/js/myPage/myReser.js"></script>
+</body>
+</html>

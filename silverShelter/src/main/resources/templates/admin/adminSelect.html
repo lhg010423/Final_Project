@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 회원 정보 조회</title>
+
+    <!-- 왼쪽 nav 부분 및 전체페이지 공간지정 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/adminSelect.css}">
+
+</head>
+<body>
+    <main>
+
+        <!-- 왼쪽 nav 부분 -->
+        <th:block th:replace="~{admin/admin}"></th:block>
+
+
+
+        <!-- nav를 제외한 오른쪽 메인 페이지 -->
+        <section class="adminMain">
+
+            <!-- 페이지 상단 메인 글씨 -->
+            <div class="adminHeader">
+                <span>관리자 페이지 - 회원 정보 조회</span>
+            </div>
+
+
+
+            <div class="adminBody">
+
+                <!-- 회원 게시판 출력 -->
+                <div class="adminLeft">
+
+                    <div class="table-area">
+                        
+                        <table class="list-table">
+                            
+                            <thead>
+                                <tr>
+                                    <!-- 이름, 아이디 검색 가능하게 할 예정 -->
+                                    <th>회원 이름</th>
+                                    <th>회원 아이디</th>
+                                </tr>
+                            </thead>
+                            
+                            
+                            <tbody>
+                                
+                                <!-- 회원이 없을 때 -->
+                                <th:block th:if="${#lists.isEmpty(memberList)}">
+                                    <tr>
+                                        <th colspan="6">회원이 존재하지 않습니다.</th>
+                                    </tr>
+                                </th:block>
+                                
+                                <!-- 회원이 있을 때 -->
+                                <th:block th:unless="${#lists.isEmpty(memberList)}">
+                                    
+                                    <tr th:each="member : ${memberList}" th:object="${member}" id="memberBtn">
+                                        
+                                        <td>
+                                            <button class="memberId"
+                                            th:name="*{memberNo}" th:text="*{memberName}"></button>
+                                        </td>
+
+                                        <td th:text="${member.memberId}"></td>
+
+                                        
+                                    </tr>
+                                </th:block>
+                                
+                                
+                                
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                        
+                    <!-- pagination, 검색창 공간 -->
+                    <div class="bottom-area">
+
+                        <!-- pagination 공간 -->
+                        <div class="pagination-area">
+
+                            <!-- 일반 목록 조회(검색X) -->
+                            <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
+                                
+                                <!-- 첫페이지 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=1)}">&lt;&lt;</a></li>
+
+                                <!-- 이전 목록 마지막 번호로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=*{prevPage})}">&lt;</a></li>
+
+                                <!-- 특정 페이지로 이동 -->
+                                <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+
+                                    <!-- 현재 보고있는 페이지 -->
+                                    <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+
+                                    <!-- 보고있지 않은 페이지 -->
+                                    <li th:unless="${i} == *{currentPage}"><a th:href="@{/admin/adminSelect(cp=${i})}" th:text="${i}"></a></li>
+
+                                </th:block>
+
+                                <!-- 다음 목록 시작 번호로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=*{nextPage})}">&gt;</a></li>
+
+                                <!-- 끝 페이지로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=*{maxPage})}">&gt;&gt;</a></li>
+
+
+                            </ul>
+
+                            <!-- 검색할 경우 -->
+                            <ul class="pagination" th:if="${param.key}" th:object="${pagination}" th:unless="${#lists.isEmpty(memberList)}">
+
+                                <!-- 첫 페이지로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+
+                                <!-- 이전 목록 마지막 번호로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=${pagination.prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+
+                                <!-- 특정페이지로 이동 -->
+                                <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
+
+                                    <!-- 현재 보고 있는 페이지 -->
+                                    <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+
+                                    <!-- 보고있지 않은 페이지 -->
+                                    <li th:unless="${i} == *{currentPage}">
+                                        <a th:href="@{/admin/adminSelect(cp=${i}, key=${param.key}, query=${param.query})}" th:text="${i}"></a>
+                                    </li>
+
+                                </th:block>
+
+                                <!-- 일치하는 페이지가 없을 경우 -->
+                                <th:block th:unless="*{startPage lt endPage}">
+                                    <li>
+                                        <a class="current">1</a>
+                                    </li>
+                                </th:block>
+
+                                <!-- 다음 목록 시작 번호로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=*{nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
+
+                                <!-- 끝 페이지로 이동 -->
+                                <li><a th:href="@{/admin/adminSelect(cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+
+                            </ul>
+
+
+
+
+                        </div>
+
+
+                        <!-- 검색창 공간 -->
+                        <form th:action="@{/admin/adminSelect}" method="get" class="boardSearch">
+
+                            <select name="key" id="searchKey">
+                                <option value="n">이름</option>
+                                <option value="i">아이디</option>
+                                <!-- <option value="ni">이름+아이디</option> -->
+                            </select>
+
+                            <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                            <button>검색하기</button>
+                        </form>
+
+                    </div>
+                        
+                    
+                        
+
+
+
+
+
+                </div>
+                
+                <!-- 회원 상세 정보 -->
+                <div class="adminRight">
+
+                    <h2>회원 상세 정보</h2>
+                    <form action="/admin/adminSelect" method="POST" id="memberForm">
+
+                        <div id="name-area">
+                            <label for="name">이름</label>
+                            <span id="nameInput" name="name"></span><br>
+                        </div>
+                            
+                        <div id="id-area">
+                            <label for="id">아이디</label>
+                            <span id="idInput"></span><br>
+                        </div>
+                            
+                        <div id="tel-area">
+                            <label for="tel">전화번호</label>
+                            <span id="telInput"></span>
+                        </div>
+
+                        <div id="gdtel-area">
+                            <label for="gdtel">보호자 전화번호</label>
+                            <span id="gdtelInput"></span>
+                        </div>
+
+                        <div id="postCode-area">
+                            <label for="postCode">우편번호</label>
+                            <span id="postCode"></span>
+                        </div>
+
+                        <div id="address-area">
+                            <label for="address">주소</label>
+                            <span id="address"></span>
+                        </div>
+
+                        <div id="detailAddress-area">
+                            <label for="detailAddress">상세주소</label>
+                            <span id="detailAddress"></span>
+                        </div>
+
+                        <div id="caregiversName-area">
+                            <label for="caregiversName">담당 요양사 이름</label>
+                            <span id="caregiversName"></span>
+                        </div>
+
+                        <div id="roomNo-area">
+                            <label for="roomNo">방 번호</label>
+                            <span id="roomNo"></span>
+                        </div>
+
+                    
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+        
+    </main>
+
+
+    <script src="/js/admin/admin.js"></script>
+
+</body>
+</html>

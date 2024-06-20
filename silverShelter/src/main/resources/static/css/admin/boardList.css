@@ -1,0 +1,328 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* 페이지 가로, 세로 길이 전체로 적용 */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 공간 확인용 */
+/* * {
+    border: 1px solid black; 
+} */
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* 왼쪽 nav */
+.adminNav {
+    width:15%;
+    height: 100%;
+    background-color: #3C3C3B;
+    
+}
+
+/* nav 글자 크기 및 색상 지정 */
+.adminNav a {
+    display: block; /* a태그는 inline 요소라서 높이 변경이 안됨 */
+    color: white;
+    margin: 50px 20px;
+    font-size: 30px;
+    text-decoration: none; /* a태그 밑줄 제거 */
+    font-weight: bold;
+}
+
+/* nav를 제외한 오른쪽 메인 페이지 */
+.adminMain {
+    width: 85%;
+    height: 100%;
+    background-color: #F2F2F9;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 <span> 부분 공간 */
+.adminHeader {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    
+}
+
+/* 상단 메인 글씨 크기 및 두께 지정 */
+.adminHeader > span {
+    font-size: 50px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* adminHeader 아래 메인 공간지정 */
+.adminBody {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* 좌우 div 크기 지정 */
+.adminLeft, .adminRight {
+    width: 50%;
+    height: auto;
+    margin: 30px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: #ddd;
+    box-sizing: border-box;
+    /* display: flex; */
+    /* box-shadow:#3C3C3B; */
+}
+
+/* 게시글 종류 이동하는 공간 */
+.adminLeft-header {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    /* justify-content: center; */
+}
+
+/* 게시글 종류 이동 a태그 */
+.adminLeft-header a {
+    color: black;
+    text-decoration: none;
+} 
+
+/* 게시판 공간 띄우기 */
+.board-area {
+
+    box-sizing: border-box;
+    padding: 50px;
+    height: 70%;
+}
+
+
+/* 왼쪽 게시글 위치 지정 */
+.list-table {
+    box-sizing: border-box;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: space-evenly; */
+    border-collapse: collapse; /* 테이블 사이 공백 없애기 */
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 50px;
+}
+
+
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody td {
+    height: 40px;
+    text-align: center; /* 가로 가운데 정렬 */
+    vertical-align: middle; /* 세로 가운데 정렬 */
+}
+
+#memberId {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+
+/* 위에 게시판을 제외한 pagination, 검색창 공간 */
+.bottom-area {
+    display: flex;
+    /* justify-content: flex-end; */
+    flex-direction: column;
+    height: 30%;
+    background-color: gray;
+    
+}
+
+/* Pagination 리스트 점제거 후 위치 지정 */
+.pagination {
+    list-style: none; /* 리스트 점 제거 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* pagination 각 번호 간격 띄우기 */
+.pagination li {
+    padding: 0 5px;
+}
+
+/* Pagination 밑줄 없애고 색상 변경 */
+.pagination a {
+    display: inline-block; /* 요소를 인라인 및 블록 요소로 표시하여 크기를 조절할 수 있음 */
+    width: 30px; /* 페이지 번호의 크기 조정 */
+    height: 30px; /* 페이지 번호의 크기 조정 */
+    border-radius: 50%; /* 동그란 형태로 스타일 지정 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    line-height: 30px; /* 텍스트를 수직으로 가운데 정렬 */
+    color: black; /* 텍스트 색상 지정 */
+    font-size: 14px; /* 폰트 크기 조정 */
+    text-decoration: none; /* 밑줄 제거 */
+    transition: background-color 0.3s ease; /* 배경색 변화에 대한 부드러운 전환 효과 적용 */
+}
+
+.pagination a:hover {
+    background-color: #555; /* 마우스 호버시 배경색 변화 */
+}
+
+/* pagination 현제 페이지 번호 색상 지정 */
+.pagination .current {
+    background-color: #333; /* 배경색 지정 */
+    color: white; /* 텍스트 색상을 하얀색으로 지정 */
+    /* background-color: #1A2050;
+    color: white !important;
+    border: none; 
+    border-radius: 20px;  */
+}
+
+
+
+/* 하단 검색창 공간 */
+#boardSearch {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px;
+}
+
+/* select, 검색창, 검색하기버튼 세로크기 및 색상 지정 */
+#boardSearch * {
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    background-color: white;
+    outline: none;
+    /* justify-content: center; */
+}
+
+
+/* 검색창 왼쪽 select태그 */
+#searchKey {
+    width: 100px;
+}
+
+/* 검색창 크기 지정 */
+#searchQuery {
+    width: 200px;
+}
+
+
+
+
+
+
+
+
+
+/* ********************************************************************** */
+
+.adminRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch; /* 세로공간 모두 채움 */
+    padding: 30px;
+    overflow: auto; /* 스크롤 생기게 하는거 */
+}
+
+
+
+
+
+.boardTitle-area {
+    flex: 0 0 auto; /* 고정 높이 */
+}
+
+
+/* 게시글 제목 */
+.boardTitle-area > span{
+    display: block; /* 블록 요소로 변경 */
+    font-size: 25px;
+    width: 100%;
+}
+
+/* 작성자, 작성일, 수정일, 조회수, 좋아요 공간 */
+.writer-area {
+    display: flex;
+    justify-content: space-between;
+    /* flex: 1 1 auto; 남은 공간 차지 */
+    margin-bottom: 15px;
+}
+
+
+
+/* 작성자 */
+#writer {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+    
+/* 작성일, 수정일 */
+.writer-left-area span:nth-of-type(2),
+.writer-left-area span:nth-of-type(3) {
+    color: gray;
+    font-size: 13px;
+}
+        
+
+/* 조회수, 좋아요 공간 지정 */
+.writer-right-area {
+    display: flex;
+    width: 200px;
+    justify-content: flex-end;
+}
+
+/* 조회수, 좋아요 마진 설정 */
+.writer-right-area span{
+    margin-right: 20px;
+}
+
+.boardDetail-area hr {
+    border: 1px solid #ddd;
+}
+
+
+/* 게시글 내용 공간 */
+.boardContent-area {
+    flex: auto; /* 남은 공간 차지 */
+    margin-top: 15px;
+    min-height: 300px;
+    /* overflow-y: auto; 내용이 넘칠 경우 수직 스크롤 표시 */
+    /* height: auto; 높이 자동 조절 */
+}
+
+/* 게시글 내용 */
+.boardContent {
+    white-space: pre-wrap;
+    border-radius: 5px;
+    /* border: 1px solid #ddd; */
+    outline: none;
+    border: none;
+    /* padding: 30px; */
+}

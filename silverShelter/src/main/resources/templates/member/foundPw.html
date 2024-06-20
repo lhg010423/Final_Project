@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+	<!-- header Nav 용 css-->
+	<th:block th:replace="~{common/common}"></th:block>
+	
+		
+		
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+	
+</head>
+<body>
+	
+	<th:block th:replace="~{common/mainNav}"></th:block>
+	<th:block th:replace="~{common/headerNav}"></th:block>
+	
+	<div style="height: 13vh;"></div>
+	
+	<form action="/member/checkIdTel" method="POST" id="foundPwArea">
+				
+		<div class="foundPwTitle">
+			비밀번호 찾기
+		</div>
+		               
+			<div class="text"> Golden Prestige Corperation</div>
+						
+			    <section>
+		        	 아이디 &nbsp;<input type="text"
+	                            class="memberIde"
+	                            placeholder="아이디를 입력해주세요"
+	                            name="memberId"
+	                            id="memberId"
+	   						    autocomplete="off">
+		            <br>
+		            
+					전화번호 &nbsp;
+						<input type="text"
+			                   class="memberTel"
+			            	   placeholder= "전화번호를 입력해주세요"
+			                   name="memberTel"
+			                   id="memberTel"
+							   autocomplete="off">
+		                        
+		          </section>
+					
+	              <div class="btnDiv">
+	              	<button id="foundPwBtn" class="foundPwBtn" type="button">정보 조회</button>
+				  </div>
+	
+	</form>
+	
+	<th:block th:replace="~{member/changePwModal}"></th:block>
+	
+	<!--footer-->
+	<th:block th:replace="~{common/footer}"></th:block>
+	
+	<!--foundPw 용 JS-->
+	<script src="/js/member/foundPw.js"></script>
+	
+</body>
+</html>

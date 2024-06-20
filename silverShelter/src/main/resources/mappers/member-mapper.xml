@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.silver.shelter.member.model.mapper.MemberMapper">
+			   
+	<!-- namespace에 연결할 Mapper 인터페이스 패키지명 + 인터페이스 명 작성 -> 매퍼 인터페이스 안에 메서드 호출 
+		시, xml파일에 작성된 태그중, 메서드명과 같은 id를 가진 SQL이 수행된다 -->
+
+	<!-- parameterType 속성은 필수 속성이 아님. 왜? TypeHandler를 이용해서 자료형을 판별할 수 있음 -->
+	
+	<!-- 로그인 -->
+	<!-- <select id="login" resultType='Member'>
+		SELECT MEMBER_ID, MEMBER_NO, MEMBER_EMAIL, MEMBER_NAME, MEMBER_PW,
+		MEMBER_TEL, MEMBER_ROLE, MEMBER_ADDRESS, GUARDIAN_TEL, CAREGIVERS_NO
+		FROM "MEMBER"
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_DEL_FL ='N'
+	</select> -->
+	<select id="login" resultType="Member">
+    SELECT 
+        M.MEMBER_ID, 
+        M.MEMBER_NO, 
+        M.MEMBER_EMAIL, 
+        M.MEMBER_NAME, 
+        M.MEMBER_PW,
+        M.MEMBER_TEL, 
+        M.MEMBER_ROLE, 
+        M.MEMBER_ADDRESS, 
+        M.GUARDIAN_TEL, 
+        M.CAREGIVERS_NO,
+        E.EXAM_ROOM_TYPE,
+        C.CAREGIVERS_NAME
+    FROM MEMBER M
+    LEFT JOIN EXAMINATION E ON M.EXAM_ID = E.EXAM_ID
+    LEFT JOIN CAREGIVERS C ON M.CAREGIVERS_NO = C.CAREGIVERS_NO
+    WHERE 
+        M.MEMBER_ID = #{memberId}
+        AND M.MEMBER_DEL_FL = 'N'
+</select>
+
+	
+
+	<select id="foundIdCount">
+		SELECT COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_NAME = #{memberName}
+		AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+
+	<select id="foundId">
+		SELECT *
+		FROM "MEMBER"
+		WHERE MEMBER_NAME = #{memberName}
+		AND MEMBER_EMAIL =#{memberEmail}
+	
+	</select>
+	
+	<select id="findPw">
+		SELECT MEMBER_PW
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<update id="secession">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_FL = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<select id="checkIdTel">
+		SELECT *
+		FROM "MEMBER"
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_TEL = #{memberTel}
+	</select>
+ 
+ 	<update id="updatePw">
+   		UPDATE "MEMBER" SET 
+    	MEMBER_PW = #{encPw}
+    	WHERE MEMBER_ID = #{memberId}
+	</update>
+	
+	<select id="selectSignUp">
+		SELECT * 
+		FROM "EXAMINATION"
+		WHERE EXAM_ID = #{examId}
+				
+	</select>
+	
+	<update id="updateInfo">
+		UPDATE "MEMBER" SET 
+			MEMBER_PW = #{memberPw},
+			MEMBER_TEL = #{memberTel},
+			MEMBER_EMAIL = #{memberEmail},
+			GUARDIAN_TEL = #{guardianTel},
+			MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_ID =#{memberId}
+	</update>
+	
+	<update id="updateInfo2">
+		UPDATE "MEMBER" SET 
+			MEMBER_TEL = #{memberTel},
+			MEMBER_EMAIL = #{memberEmail},
+			GUARDIAN_TEL = #{guardianTel},
+			MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_ID =#{memberId}
+	</update>
+</mapper>

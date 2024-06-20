@@ -1,0 +1,965 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NotoSans-Bold";
+    font-weight: 700;
+    src: local(☺), url("../fonts/NotoSans-Bold.woff2") format("woff2"), url("../fonts/NotoSans-Bold.woff") format("woff");
+    /* IE 9+, 모던 브라우저 */
+}
+
+* {
+	
+	/*border:1px solid rgb(255, 206, 206);*/
+	
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+	
+   	max-width: 100%;
+    margin: 0;
+}
+
+
+
+
+/*.main {
+		
+    width: 100vw;
+    height: 100%;
+
+    object-fit: cover;
+}*/
+
+#blur-title{
+	width: 100%;
+	margin:0;
+}
+
+#blur-title h1{
+	
+	display: flex;
+    position: absolute;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 42px;
+    width: 100vw;
+    height: 125.4%;
+    
+    
+    backdrop-filter: blur(5px);
+ 	background-color: rgb(60, 60, 59, 0.3); /* 반투명한 배경 색상 추가 */
+   
+   
+    
+    top: 0vw;
+}
+
+.a .fade-in{
+	
+	font-family: "Cora-Regular";
+	color: #fff;
+}
+#bgvideo {
+  
+  position:fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: -9999;
+}
+
+
+
+.section-1 {
+
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 16rem;
+
+}
+
+
+.info-1 {
+    list-style: none;
+}
+
+.section-1 h2 span {
+
+    font-size: 170%;
+}
+
+.content-1 {
+    font-size: 18px;
+    font-weight: 500;
+    width: 30vw;
+}
+
+.content-1-1 {
+    font-size: 18px;
+    font-weight: 500;
+    width: 30vw;
+}
+.content-1-1 div{
+	text-align: center;
+}
+
+.information {
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+
+    height: 100%;
+}
+
+
+/*  캐러셀 css*/
+.carousel {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    
+    
+    overflow: hidden;
+
+
+
+    margin-top: 40px;
+
+
+}
+
+.carousel-inner {
+    display: flex;
+    
+    transition: transform 0.5s ease-in-out;
+	
+
+
+}
+
+.carousel-item {
+
+    min-width: 100%;
+
+    position: relative;
+    height: 450px;
+}
+
+.img-1 {
+    width: 100%;
+    height:95%
+}
+
+.img-2 {
+    width: 100%;
+    height: 95%;
+}
+
+.img-3 {
+    width: 98%;
+    height: 95%;
+}
+
+.carousel-caption {
+
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carousel-indicators {
+
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.indicator.active {
+    background-color: #333;
+}
+
+/* 위까지 캐러셀 css */
+
+.section-2 {
+
+    display: flex;
+    
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100vw;
+
+    height: 100%;
+
+    font-size: 24px;
+
+    padding-top: 16rem;
+}
+
+
+
+
+/* 캐러샐2 */
+
+.carousel2 {
+    position: relative;
+    width: 100%;
+    max-width: 1910px;
+    
+    overflow: hidden;
+    
+    background-color: #fff;
+}
+
+.carousel-inner2 {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-items {
+    min-width: 50%; /* 두 개의 이미지가 보이도록 설정 */
+    box-sizing: border-box;
+    position: relative;
+    height: 500px; /* 고정된 높이 설정 */
+
+    padding: 0 1vw;
+}
+
+.carousel-items img {
+    width: 100%;
+    height: 100%; /* 부모 요소의 높이에 맞추기 */
+   
+    object-fit : cover;
+    
+}
+
+.carouselControlPrev2,
+.carouselControlNext2 {
+	
+    position: absolute;
+    top: 45%;
+    transform: translateY(50%);
+    
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    
+    z-index: 1;
+
+    
+}
+
+.carouselControlPrev2 {
+    left: 10px;
+}
+
+.carouselControlNext2 {
+    right: 10px;
+}
+/* 캐러셀2 end */
+
+/* section 3 , life with golden prestige */
+
+.section-3{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+
+    width: 100vw;
+    height: 120vh;
+
+    font-size: 24px;
+
+}
+
+.h2-cont{
+
+    width: 39vw;
+    margin-left: 1vw;
+}
+
+.lifeWith{
+
+    text-align: center;
+    
+
+}
+
+.info-3{
+    display: flex;
+
+    flex-direction: column;
+}
+
+.content-3{
+
+    font-size: 19px;
+
+    width: 20vw;
+    text-align: center;
+}
+
+.section-3-cont{
+    display: flex;
+    flex-direction: column;
+}
+
+.section-3-1{
+
+   margin-top: 1vh;
+   width: 38vw;
+   height: 26vh;
+}
+
+.section-3-Btn{
+
+    display: flex;
+    flex-direction: row;
+}
+
+.section-3-2{
+    margin :1vh 0 0 0 ;
+
+    width: 60%;
+    height: 95%;
+}
+
+.section-3-3{
+
+	width: 60%;
+	
+    margin : 0 0 0 1vh;
+
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-around;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+
+.section-3-4{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1A2050;
+
+    border-radius: 6px;
+    color: #FFFFFF;
+    text-decoration: none;
+
+    height: 5vh;
+}
+
+.section-3-4:hover{
+
+    border-radius: 6px;
+    border: 1px solid #1A2050;
+    background-color: #FFFFFF;
+
+    color: #1A2050;
+}
+
+.section-3-4:active{
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #1A2050;
+
+}
+
+/* section4, health care service*/
+
+.section-4{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	
+	flex-direction: column;
+	
+	margin-top: 3vh;
+	
+	height: 80vh;
+}
+
+.section-4-1{
+	text-align: center;
+	width: 45vw;
+	font-size: 36px;
+	
+	font-family: cora, sans-serif;
+	font-style: normal;
+	font-weight: 800;
+}
+
+.section-4-2{
+	
+	font-size:18px;
+}
+
+.section-4-3-Btn{
+	width: 36vw;
+}
+
+.section-4-3-doc{
+	width:100%;
+}
+.section-4-3{
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	
+	margin-top: 1vh; 
+	
+	
+}
+
+.section-4-3-1{
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: center;
+	width: 20vw;
+	font-size: 18px;
+}
+
+.section-4-3-1-1{
+	
+	display: flex;
+	
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1A2050;
+
+    border-radius: 6px;
+    color: #FFFFFF;
+    text-decoration: none;
+	
+	text-align: center;
+    height: 5vh;
+}
+
+.section-4-3-1-1:hover{
+
+    border-radius: 6px;
+    border: 1px solid #1A2050;
+    background-color: #FFFFFF;
+
+    color: #1A2050;
+}
+
+.section-4-3-1-1:active{
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #1A2050;
+
+}
+
+
+.section-4-3-2{
+	width: 50%;
+	margin : 2vh 0 0 1vw;
+}
+
+/* community and cultures*/
+
+.section-5{
+	
+	display: flex;
+	
+	align-items: center;	
+	justify-content: center;
+	flex-direction: column;
+	
+	height: 100vh;
+
+	margin-top: 10vh ;	
+}
+
+.section-5-1{
+	
+	text-align: center;
+	width: 45vw;
+	font-size: 36px;
+}
+
+
+.section-5-2{
+	
+	font-size:18px;
+	
+	
+}
+
+
+.section-5-3{
+	
+	display: flex;
+	
+	justify-content: space-between;
+}
+
+
+
+.section-5-4{
+	
+	display: flex;
+	
+	flex-direction: row;
+	
+	margin: 0 0 0 3px;
+	
+	
+}
+
+.section-5-4-1{
+	
+	display: flex;
+	
+	flex-direction: column;
+	
+	justify-content: space-around;
+	
+	text-align: center;
+	
+	width: 17vw;
+	margin : 0 0 0 1vw;
+}
+
+.weather-container{
+	
+	position: sticky;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 16vw;
+    height: 18vh;
+    
+    margin-left: 10px ; 
+    
+    border: 1px solid lightgrey;
+    box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.05);
+    
+    border-radius: 4px;
+}
+
+.weather-info{
+	
+	text-align: left;
+}
+#weatherIcon {
+    width: 30%;
+    height: auto;
+}
+
+#temperature{
+	font-weight: 900;
+	font-size: 30px;
+}
+
+.section-5-4-2{
+	
+	
+	
+	display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1A2050;
+
+    border-radius: 6px;
+    color: #FFFFFF;
+    text-decoration: none;
+	
+	text-align: center;
+	width: 17vw;
+    height: 5vh;
+    
+    
+}
+
+.section-5-4-2:hover{
+	
+	position: relative;
+	
+    border-radius: 6px;
+    border: 1px solid #1A2050;
+    background-color: #FFFFFF;
+
+    color: #1A2050;
+    
+    margin-top:1px;
+}
+
+.section-5-4-2:active{
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #1A2050;
+
+}
+
+
+
+/* 게시판 */
+.section-6{
+	
+	display: flex;
+	
+	align-items: center;	
+    flex-direction: column;
+
+	
+	width: 100vw;
+	height: 80vh;
+	    
+}
+
+.section-6-1{
+	font-size:36px;
+	
+	margin :10vh;
+}
+
+
+
+
+.section-6-2{
+	display: grid;
+ 	grid-template-columns: repeat(3, minmax(auto, 1fr));
+  	gap: 3rem;
+  	list-style: none;
+
+    justify-content: space-around;
+  	
+}
+
+.section-6-2 li span {
+    display: block; /* 각 요소를 수직으로 쌓기 위해 block 요소로 설정 */
+}
+.section-6-2 > li{
+	
+	
+	position: relative;
+    min-height: 25rem;
+    border-top: 1px solid rgb(249, 249, 249);
+    background: rgb(255, 255, 240);
+    
+    width: 22vw;
+}
+
+/* 공지게시판 1 a태그 */
+.section-6-2-1{
+    
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    
+    
+    padding: 60px 40px;
+    display: block; /*각 요소를 수직으로 쌓기 위해 block 요소로 설정*/
+    flex: auto;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+
+/* 공지게시판 1 글씨 */
+.section-6-2-1 span:nth-of-type(1) {
+    /* justify-content: flex-end; */
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+
+
+/* 골지게시판 날짜 */
+.section-6-2-1 span:nth-of-type(3) {
+    /* align-self: flex-end; */
+    /* justify-content: flex-end; */
+    margin-top: auto;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+    
+}
+
+
+/* 공지게시판 2 a태그 */
+.section-6-2-2{
+    
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    
+    
+    padding: 60px 40px;
+    display: block; /*각 요소를 수직으로 쌓기 위해 block 요소로 설정*/
+    flex: auto;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+/* 공지게시판 2 글씨 */
+.section-6-2-2 span:nth-of-type(1) {
+    /* justify-content: flex-end; */
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 공지게시판 2 날짜 */
+.section-6-2-2 span:nth-of-type(3) {
+    /* align-self: flex-end; */
+    /* justify-content: flex-end; */
+    margin-top: auto;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+    
+}
+
+/* 공지게시판 3 a태그 */
+.section-6-2-3{
+    
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    
+    
+    padding: 60px 40px;
+    display: block; /*각 요소를 수직으로 쌓기 위해 block 요소로 설정*/
+    flex: auto;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+/* 공지게시판 3 글씨 */
+.section-6-2-3 span:nth-of-type(1) {
+    /* justify-content: flex-end; */
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 골지게시판 날짜 */
+.section-6-2-3 span:nth-of-type(3) {
+    /* align-self: flex-end; */
+    /* justify-content: flex-end; */
+    margin-top: auto;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+    
+}
+/*.section-6-2-2{
+	
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    
+    height: 100%;
+    padding: 8rem 4rem 5.4rem 4rem;
+    
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+}*/
+
+/*.section-6-2-3{
+	
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 8rem 4rem 5.4rem 4rem;
+}*/
+
+/* 내부 세부 조정*/
+.p-6-2-1{
+	    
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+}
+
+.p-6-2-2{
+	    
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+}
+
+.p-6-2-3{
+	    
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    color: #3c3c3b;
+}
+
+/* 내부 세부 조정*/
+/*-----------*/
+.section-6-2-1 > span{
+
+    padding-top: 0.4rem;
+    color: #666666;
+}
+
+.section-6-2-2 > span{
+
+    padding-top: 0.4rem;
+    color: #666666;
+}
+
+.section-6-2-3 > span{
+
+    padding-top: 0.4rem;
+    color: #666666;
+}
+
+
+
+/* 더보기 */
+.section-6-3{
+	
+	display: flex;
+	justify-content: end;
+	margin-right: 5vw;
+}
+
+
+.section-6-3 > a {
+	
+	text-decoration: none;
+}
+
+/* 글자 등장 관련 */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.slide-in {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 1s ease-in, transform 1s ease-in;
+}
+
+.slide-visible {
+    opacity: 1;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,216 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+	
+	/*border:1px solid rgb(255, 206, 206);*/
+	
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+
+   
+    margin: 0;
+    
+    
+ }
+ 
+ #foundPwArea{
+	
+	height: 80vh;
+	
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	
+	flex-direction: column;
+ }
+ 
+  .foundPwTitle{
+	
+	font-size: 55px;
+ }
+ 
+  .text{
+	
+	font-weight: bold;
+  }
+  
+ .memberIde{
+	
+	width : 28vw;
+	height: 5vh;
+	
+	margin-bottom : 2vh;
+	margin-left : 1vw;
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+ .memberTel{
+	
+	width : 28vw;
+	height: 5vh;
+	margin-bottom : 1vh;
+	
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+  .foundPwBtn{
+	color: #FFFFFF;
+	background-color: #1A2050;
+	
+	border: none;
+	
+	font-size : 18px;
+	
+	width: 18vw;
+	height: 5vh;
+	
+	border-radius: 6px;
+ }
+ 
+ .foundPwBtn:hover{
+	border: 1px solid #1A2050;
+	background-color: #ffffff;
+	
+	color: #1A2050;
+	font-weight: bold;
+ }
+ 
+ .foundPwBtn:active{
+	color: #FFFFFF;
+	background-color: #1A2050;
+ }
+
+
+/* 비번 변경을 위한 모달창 css*/
+#pwChangeModal {
+	
+    
+    
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    
+    z-index: 1;
+    
+    left: 0;
+    top: 0;
+    
+    width: 100%;
+    height: 100%;
+    
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+}
+
+.modal-content {
+	
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    position: relative; 
+    
+    background-color: #fefefe;
+    
+    margin: auto;
+    padding: 20px;
+    
+    border: 1px solid #888;
+
+    width: 90%;
+    max-width: 500px;
+    
+    height: auto;
+    
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    gap: 15px; /* 내부 요소 간격 */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.pwInput {
+    margin-top: 1vh;
+   
+    width: 16vw;
+    height: 5vh;
+        
+    border :none;
+}
+
+
+.pwInput:focus{
+	
+	
+	border-bottom: 1px solid #1A2050;
+	outline: none;
+}
+
+.lineDivv{
+	width: 10vw;
+	
+	height: 2px;
+	color: #000000;
+}
+#changePwBtn{
+	width: 8vw;
+	height: 5vh;
+	
+	background-color: #1A2050;
+	color: #FFFFFF;
+	
+	border: none;
+	border-radius: 6px;
+	
+	
+}
+
+#changePwBtn:hover{
+	
+	background-color: #FFFFFF;
+	border: 2px solid #1A2050;
+	color: #1A2050;
+	cursor: pointer;
+	
+}
+
+#changePwBtn:active{
+	
+	background-color: #1A2050;
+	color:#FFFFFF;
+	
+}

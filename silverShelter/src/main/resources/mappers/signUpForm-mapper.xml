@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.silver.shelter.signUp.model.mapper.signUpFormMapper">
+
+		
+	<select id="checkId">
+		SELECT COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_DEL_FL='N'
+		AND MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="signUpForm">
+      INSERT INTO "MEMBER"
+      VALUES(SEQ_MEMBER_NO.NEXTVAL,
+             #{memberId},
+             #{memberPw},
+             #{memberName},
+             #{memberEmail},
+             #{memberAddress},
+             #{memberTel},
+             #{guardianTel},         
+             DEFAULT,
+             DEFAULT,
+             DEFAULT,<!-- 관리자 1/ 일반 2 -->
+             NULL,
+             NULL,
+             #{examId}
+      )      
+   </insert>
+	
+</mapper>

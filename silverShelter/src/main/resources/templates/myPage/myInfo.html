@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPage</title>
+    <link rel="stylesheet" href="/css/myPage/myInfo.css">
+	
+	<link rel="stylesheet" href="/css/myPage/changeInfoForm.css">
+	<link rel="stylesheet" href="/css/myPage/secessionForm.css">
+	<link rel="stylesheet" href="/css/myPage/roomCaregiverForm.css">
+    <!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/main/favicon.png">
+</head>
+<body>
+    <th:block th:replace="~{common/headerNav}"></th:block>
+    <th:block th:replace="~{common/mainNav}"></th:block>
+	
+    <section>
+        <section class="section-1-empty"></section>
+        
+		<img src="/images/myPage/myPageTry3.png" id="banner" alt="메인">
+        
+		<section class="section-2-banner">
+            
+			<div class="overlay">
+                
+				<img src="/images/myPage/diary2.png"><br><br><br>
+                
+				<h3>안녕하세요.</h3><br>
+                <span>
+                    <span th:text="${session.loginMember.memberName}" class="memberN"></span>&nbsp;<span>님!</span>
+					<!--<br>-->
+                </span>
+            </div>
+        </section>
+    </section>
+
+    <section class="section-3-banner-forMyPage">
+        <ul class="myPageNavi">
+			<li class="li-1">
+                <a href="#" id="roomCareGiver" data-form="roomCareGiverForm">객실 / 요양사</a>
+            </li>
+            <li class="li-2">
+                <a href="#" id="changeInfo" data-form="changeInfoForm">정보 변경</a>
+            </li>
+            <li class="li-3">
+                <a href="#" id="myReserv" data-form="myReservForm">예약 확인</a>
+            </li>
+            <li class="li-4">
+                <a href="#" id="secession" data-form="secessionForm">회원 탈퇴</a>
+            </li>
+			
+			
+        </ul>
+		
+		
+    </section>
+	
+    <!-- Form containers -->
+	<section class="container-2">
+	    <div id="changeInfoForm" class="form-container" style="display: none;">
+	        <th:block th:replace="~{myPage/changeInfoForm}"></th:block>
+	    </div>
+		
+	    <div id="myReservForm" class="form-container" style="display: none;">
+	        <th:block th:replace="~{myPage/myReservForm}"></th:block>
+	    </div>
+		
+	    <div id="secessionForm" class="form-container" style="display: none;">
+	        <th:block th:replace="~{myPage/secessionForm}"></th:block>
+	    </div>
+		
+		<div id="roomCareGiverForm" class="form-container" style="display: none;">
+			<th:block th:replace="~{myPage/roomCareGiverForm}"></th:block>
+			<!--<span>객실 정보 : </span><span th:text="${session.loginMember.examRoomType}" />
+			<br><span>요양사 정보 : </span> <span th:text="${session.loginMember.caregiversNo}" />-->
+		</div>
+	</section>
+    
+	<div style="height: 15vh;"></div>
+    <!--footer-->
+	<script src="/js/myPage/myInfo.js"></script>
+    <th:block th:replace="~{common/footer}"></th:block>
+    
+	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

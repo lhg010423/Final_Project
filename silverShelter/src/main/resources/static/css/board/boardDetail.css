@@ -1,0 +1,329 @@
+html, body {
+    height: 145%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+/* 게시판 전체 영역 */
+.boardMain {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+/* 게시판 상단 공간 */
+.boardTop {
+    height: 20%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.boardTop a {
+    margin: 20px;
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 상단 a태그를 제외한 나머지 메인 공간 */
+.boardBody {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 게시글 공간 */
+.boardDetail-area {
+    display: flex;
+    width: 800px;
+    min-height: 600px;
+    /* background-color: gray; */
+    border: 1px solid black;
+    flex-direction: column;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* 게시글 header부분*********************************************** */
+
+.boardTitle-area {
+    flex: 0 0 auto; /* 고정 높이 */
+}
+
+
+/* 게시글 제목 */
+.boardTitle-area > span{
+    display: block; /* 블록 요소로 변경 */
+    font-size: 25px;
+    width: 100%;
+}
+
+.boardTitle-area > a{
+	text-decoration: none;
+}
+
+/* 작성자, 작성일, 수정일, 조회수, 좋아요 공간 */
+.writer-area {
+    display: flex;
+    justify-content: space-between;
+    /* flex: 1 1 auto; 남은 공간 차지 */
+    margin-bottom: 15px;
+}
+
+
+
+/* 작성자 */
+#writer {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+    
+/* 작성일, 수정일 */
+.writer-left-area span:nth-of-type(2),
+.writer-left-area span:nth-of-type(3) {
+    color: gray;
+    font-size: 13px;
+}
+        
+
+/* 조회수, 좋아요 공간 지정 */
+.writer-right-area {
+    display: flex;
+    width: 200px;
+    justify-content: flex-end;
+}
+
+/* 조회수, 좋아요 마진 설정 */
+.writer-right-area span{
+    margin-right: 20px;
+}
+
+.boardDetail-area hr {
+    border: 1px solid #ddd;
+}
+
+
+/* 게시글 내용 공간 */
+.boardContent-area {
+    flex: auto; /* 남은 공간 차지 */
+    margin-top: 15px;
+    /* overflow-y: auto; 내용이 넘칠 경우 수직 스크롤 표시 */
+    /* height: auto; 높이 자동 조절 */
+}
+
+/* 게시글 내용 */
+.boardContent {
+    white-space: pre-wrap;
+    border-radius: 5px;
+    /* border: 1px solid #ddd; */
+    outline: none;
+    border: none;
+    /* padding: 30px; */
+}
+
+
+/* 수정, 삭제 버튼 공간지정 */
+.board-btn-area {
+    width: 800px;
+    margin: 20px 0;
+    display: flex;
+	justify-content: flex-end;
+}
+
+/* 수정, 삭제 버튼 */
+.board-btn-area * {
+    text-decoration: none;
+    margin-left: 10px;
+    width: 70px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    
+    background-color: #1A2050;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    box-sizing: border-box;
+}
+
+
+.board-btn-area *:hover {
+    background-color: white;
+    color : #1A2050;
+    border: 1px solid #1A2050;
+    box-sizing: border-box; /* a태그 hover시 크기 변하는거 막음 */
+}
+
+.board-btn-area *:active {
+    background-color: #1a2050;
+    color : #fff;
+    
+    box-sizing: border-box; /* a태그 hover시 크기 변하는거 막음 */
+}
+
+/* 삭제하기 버튼 */
+
+
+
+
+/* 댓글 ***************************************** */
+
+#commentArea {
+    width: 800px;
+}
+
+
+/* 댓글 공간 */
+.comment-write-area {
+    display: flex;
+    min-height: 100px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.comment-write-area > textarea {
+    flex-basis: 75%;
+    margin-right: 10px;
+    resize: none;
+    font-size: 15px;
+    
+    outline: none;
+}
+
+.comment-write-area > button {
+    flex-basis: 7%;
+    height: 85px;
+    font-weight: bold;
+    border: 0;
+    background-color: #1A2050;
+    color: white;
+    cursor: pointer;
+}
+
+#commentList{
+	padding: 0;
+	list-style: none;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+}
+
+.comment-writer {
+	display: flex;
+	align-items: center;
+}
+
+.comment-writer > span{
+    font-weight: bold;
+    margin-left : 10px;
+}
+
+.comment-date{
+	font-size: 0.8em;
+	color: #aaa;
+}
+
+
+.comment-btn-area { 
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* 버튼 */
+.comment-btn-area button{
+    width: 80px;
+    height: 30px;
+	margin-left: 10px;
+
+    font-size: 15px;
+    font-weight: bold;
+    border: 0;
+    background-color: #1A2050;
+    /* background-color: #455ba8; */
+    color : white;
+
+    cursor: pointer;
+}
+
+.comment-btn-area button:hover{
+    background-color: white;
+    color : #1A2050;
+    border: 2px solid #1A2050;
+}
+
+.update-textarea{
+	width: 100%;
+    height: 90px;
+    resize: none;
+}
+
+.comment-row{
+	border-top : 1px solid #ccc;
+	padding : 15px 0;
+}
+
+
+.child-comment{
+	padding-left : 50px;
+	position: relative;
+}
+
+/* 
+.child-comment:before {
+	content: "\f0a4";
+	font-family: "FontAwesome";
+	
+	position : absolute;
+	left : 0;
+	top : 35px;
+} */
+
+
+/* 답글 */
+.commentInsertContent{
+	width: 100%;
+    height: 90px;
+    resize: none;
+    margin-top : 20px;
+}
+
+
+
+/* 댓글 내용 */
+.comment-content{
+	white-space: pre-wrap; /* 작성된 문자열 모양 그대로(공백 유지) */
+}
+
+
+/* 
+.comment {
+    margin-bottom: 10px; 댓글 간의 간격 설정
+    padding: 10px; 댓글의 패딩 설정
+}
+
+.child-comments {
+    margin-top: 10px; 대댓글과 부모 댓글 사이의 간격 설정
+} */
+
+
+
+
+

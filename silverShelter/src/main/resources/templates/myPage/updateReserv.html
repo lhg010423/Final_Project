@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+    <link rel="stylesheet" href="/css/myPage/myReservUpdate.css">
+    <title>예약 확인</title>
+</head>
+<body>
+    <div style="height: 12vh;"></div>
+    <div class="reservation-container">
+
+        <div class="reservation-header">
+            <h1>◾ 예약 수정</h1>
+        </div>
+        
+        <section class="reservation-section">
+    
+            <div class="border-container">
+
+                <div id="reservationDetail">
+
+                    <table class="table-list">
+                        <thead>
+                            <tr>
+                                <th  th:text="${clubResvTime}"></th>
+                                <th>게스트룸</th>
+                                <th>골프</th>
+                                <th>수영</th>
+                                <th>사우나</th>
+                                <th>게이트볼</th>
+                                <th>영화</th>
+                                <th>도예</th>
+                                <th>십자수</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!-- 각 시간 에 반복문 실행 -->
+                            <th:block th:each="timeSlot : ${timeSlots}">
+                                <tr>
+                                    <!-- 시간을 첫번째 열에 표시 -->
+                                    <th th:text="${timeSlot}"></th>
+                                    <!-- 클럽 이름에 대한 반복문  -->
+                                    <th:block th:each="clubName, clubIndex : ${clubNames}">
+                                        <th>
+                                            <!-- 예약 리스트를 반복하며 현재 시간 슬롯과 클럽 이름이 일치하는지 확인 -->
+                                            <span th:each="resv : ${reservationList}" 
+                                            th:if="${resv.clubResvTime == timeSlot and resv.clubName == clubName}" 
+                                            class="reservation-indicator"></span>
+                                        </th>
+                                    </th:block>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="reservationList" class="reservation-list">
+                <div class="reservation-date">
+                    <h1 th:text="${formattedDate}">오늘 몇월며칠?</h1>
+                </div>
+                <th:block th:each="resv : ${reservationList}" th:object="${resv}">
+                    <form th:action="@{/myPage/myInfo/myReserUpdate/{date}(date=${date})}" method="POST">
+                        <div class="reservation-item">
+                            <div class="stapper-div"></div>
+                            <div class="reservation-fontList">
+                                
+
+                                <p class="reservation-clubName" th:text="*{clubName}"></p>
+
+                                <input type="hidden" name="clubCode" id="clubCode" th:value="*{clubCode}">
+                                <input type="hidden" name="clubResvNo" id="clubResvNo" th:value="*{clubResvNo}">
+                                
+                                <div class="time-container">
+                                    <p class="reservation-clubResvTime" th:text="*{clubResvTime}"></p>
+                                    <input type="hidden" name="clubResvTime" id="clubResvTime" th:value="*{clubResvTime}">
+                                    <select id="reservationTime" name="reservationTime" class="reservationTime">
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                    </select>
+                                </div>
+                                <!-- 예약 수정 및 삭제 버튼 -->
+                                <div class="reservation-actions">
+                                    <button class="reservation-update" id="reservationUpdate">수정</button>
+                                    <button class="reservation-delete" id="reservationDelete">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </th:block>
+            </div>
+        </section>
+    </div>
+    <div style="height: 12vh;"></div>
+    <script src="/js/myPage/myReserUpdate.js"></script>
+    <th:block th:replace="~{/common/footer}"></th:block>
+
+
+</body>
+</html>

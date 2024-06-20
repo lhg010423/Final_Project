@@ -1,0 +1,198 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+	
+	/*border:1px solid rgb(255, 206, 206);*/
+	
+    font-family: 'Pretendard-Regular';
+    color: #3C3C3B;
+ }
+
+ body{
+	
+    height: 100vh;
+ }
+ 
+ .line{
+	
+	width: 65vw;
+	
+	border: 1px solid lightgrey;
+	
+	margin-top:2vh;
+ }
+ #secessionArea{
+	
+	height: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	
+	flex-direction: column;
+ }
+ 
+ .secessionTitle{
+	
+	display: flex;
+	justify-content: center;
+	font-size: 25px;
+	
+	font-weight: 800;
+ }
+ 
+  .text{
+	
+	font-weight: bold;
+  }
+ 
+ .info00{
+	
+	color: coral;
+	
+	font-size: 12px;
+ }
+ 
+.pwBtnContainer{
+	
+	display: flex;
+	
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+ .memberPw2{
+	
+	width : 20vw;
+	height: 5vh;
+		
+	
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+  .memberPwConfirm2{
+	
+	width : 20vw;
+	height: 5vh;
+		
+	border-radius: 6px;
+	
+	border: 1px solid #ACACAC;
+	
+	outline: none;
+	
+	font-size: 16px;
+ }
+ 
+ 
+  .lineDiv{
+	
+	border : 1px solid #666565;
+	
+	width: 38vw;
+ }
+ 
+ .secessionBtn{
+	color: #FFFFFF;
+	background-color: #1A2050;
+	
+	border: none;
+	
+	font-size : 18px;
+	
+	width: 18vw;
+	height: 5vh;
+	
+	border-radius: 6px;
+ }
+ 
+ .secessionBtn:hover{
+	border: 1px solid #1A2050;
+	background-color: #ffffff;
+	
+	color: #1A2050;
+ }
+ 
+ .secessionBtn:active{
+	color: #FFFFFF;
+	background-color: #1A2050;
+ }
+
+ /* -- 약관 container-- */
+ 
+.terms-container {
+
+    display: flex;
+
+    
+    justify-content: space-around;
+    flex-direction: column;
+	align-items: center;
+
+    background-color: #fff;
+
+    
+    border-radius: 2px;
+    
+    
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 20px;
+}
+
+
+.terms-content {
+
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 5vh;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fefefe;
+}
+
+.pwContainer,
+.pwConfirmContainer
+{
+
+    display: flex;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 26vw;
+    
+    padding-right: 2vw;
+    margin-right:1vw;
+   
+}
+
+.pwSpan{
+    padding: 0;
+    font-size: 16px;
+    
+}
+
+.btnDiv{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	margin-top:2vh;
+	
+}

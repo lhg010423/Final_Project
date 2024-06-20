@@ -1,0 +1,543 @@
+
+*{
+     /* border: 0.1px solid rgb(238, 177, 187);  */
+    font-size: 20px;
+}
+
+body{
+	height: 100%;
+	min-height: 99vh;
+}
+
+.signUp-Form{
+	
+	height: 100%;
+}
+
+.agreement-head {
+    padding-top: 20px; /* 약관동의 위 여백 설정 */
+    margin-bottom: 20px; /* 약관동의 아래 여백 설정 */
+    display: flex;
+
+    justify-content: center;
+}
+
+#formHeader{
+
+    display: flex;
+    justify-content: center;  
+}
+
+
+
+
+
+.agreement-head h1{
+    font-size: 40px;
+}
+
+/* 나머지 요소들의 스타일은 여기에 추가 */
+
+#formHeader{
+
+    display:flex;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.line-div{
+
+    width: 65vw;
+    height: 2px;
+    
+    background-color: lightgrey;
+    margin-bottom: 5vh;
+}
+
+
+#notice{
+	color: rgb(253, 111, 60);
+	font-size: 14px;
+}
+
+.notice{
+
+    width: 65%;
+    display: flex;
+
+    justify-content: space-around;
+    
+}
+
+
+
+.star{
+    color:rgb(253, 111, 60);
+}
+
+.line-div{
+
+    width: 65vw;
+    height: 2px;
+    
+    background-color: lightgrey;
+    margin-bottom: 5vh;
+}
+
+#infoForm{
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+	
+    
+}
+
+/* 아이디 인풋 컨테이너 */
+.id-container {
+    display: flex;
+    align-items:center;
+    width: 50vw;
+    margin-bottom: 1vh;
+}
+
+.id-label{
+    display: flex;
+    
+    
+    align-items: center;
+
+    width: 10vw;
+   
+   
+    
+}
+
+
+#memberId{
+
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+    
+
+}
+
+#inputDiv{
+    padding-top: 23px;
+}
+
+/* 비밀번호 입력 컨테이너 */
+
+.pw-container{
+    display: flex;
+
+    width: 50vw;
+
+    margin-bottom: 3vh;
+}
+
+.pw-label{
+    display: flex;
+    
+    justify-content: start;
+    align-items: center;
+
+    width: 10vw;
+}
+
+#pwInputDiv{
+
+    padding-top:23px;
+}
+
+#memberPw{
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+    
+}
+
+/* 비밀번호 입력 확인 컨테이너 */
+
+.pwConfirm-container{
+    display: flex;
+
+    width: 50vw;
+
+    margin-bottom: 5vh;
+}
+
+.pwConfirm-label{
+
+    display: flex;
+    
+    justify-content: start;
+    align-items: center;
+
+    width: 10vw;
+}
+
+#memberPwConfirm{
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+   
+}
+
+/* 이름 입력 컨테이너 */
+.memberName-container{
+    display: flex;
+
+    width: 50vw;
+
+    margin-bottom: 5vh;
+}
+
+.memberName-label{
+
+    display: flex;
+    
+    justify-content: start;
+    align-items: center;
+
+    width: 10vw;
+
+}
+
+#memberName{
+
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+  
+}
+
+/* 전화번호 입력 컨테이너 */
+
+.tel-container{
+
+    display: flex;
+
+    width: 50vw;
+
+    margin-bottom: 5vh;
+}
+
+.tel-label{
+
+    display: flex;
+    
+    justify-content: start;
+    align-items: center;
+
+    width: 10vw;
+
+}
+
+#memberTel{
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+  
+}
+
+/* 이메일 입력 컨테이너 */
+
+.email-container{
+    display: flex;
+
+    width: 50vw;
+
+    margin-bottom: 5vh;
+}
+
+.email-label{
+    
+    display: flex;
+    
+    justify-content: start;
+    align-items: center;
+
+    width: 10vw;
+}
+
+#memberEmail{
+
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+
+}
+
+
+/* 보호자 연락처 입력 컨테이너 */
+
+.guardian-tel-container{
+    display: flex;
+    align-items: center;
+    width: 50vw;
+
+    margin-bottom: 10vh;
+
+}
+
+.guardian-tel-label{
+    display: flex;
+    
+   
+    align-items: center;
+
+    width: 10vw;
+
+    padding-bottom: 23px;
+}
+
+#guardianTel{
+    width: 35vw;
+    height: 5vh;
+
+    border-radius: 6px;
+
+}
+
+
+/* --------------------주소란-------------------- */
+
+.addr-fieldset{
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+    width: 30%;
+    
+    margin-bottom: 5vh;
+}
+
+.add-div-1{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#searchAddress{
+
+    width: 6vw;
+    height: 4vh;
+
+    border: none;
+
+    background-color: #1A2050;
+    color: #ffffff;
+    cursor: pointer;
+
+    border-radius: 6px;
+}
+
+.addr-search-btn:hover{
+
+    border: 1px solid #1A2050;
+    background-color: #ffffff;
+    color: #1A2050;
+}
+
+.addr-search-btn:active{
+    border: none;
+    background-color: #1A2050;
+    color: #ffffff;
+}
+
+/* 주소란 */
+#postcode{
+    border: none; 
+    
+    outline: none;
+    border-bottom: 1px solid lightgrey;
+
+    width: 80%;
+
+   
+    
+
+}
+
+#postcode:focus-within{
+
+    border-bottom: 1px solid;
+    border-bottom-color: #1A2050;
+}
+
+#roadAddress{
+
+    border: none; 
+    
+    outline: none;
+    border-bottom: 1px solid lightgrey;
+
+    width: 80%;
+
+    
+    
+
+}
+
+#roadAddress:focus-within{
+
+    border-bottom: 1px solid;
+    border-bottom-color: #1A2050;
+}
+
+
+#detailAddress{
+    border: none; 
+    
+    outline: none;
+    border-bottom: 1px solid lightgrey;
+
+    width: 80%;
+
+   
+    margin-bottom : 2vh;
+}
+
+#detailAddress:focus-within{
+
+    border-bottom: 1px solid;
+    border-bottom-color: #1A2050;
+}
+/* 주소란 */
+
+/* 제출 버튼 */
+.buttonDiv{
+
+    width: 20vw;
+    display: flex;
+
+    justify-content: space-around;
+    margin: 4vh 0 6vh 0;
+}
+
+.confirm{ color : green; }
+.error{ color : red; }
+
+#careGiverBtn{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    background-color: #1a2050;
+
+    color: #FFFFFF;
+    width: 9vw;
+    height: 5vh;
+
+    border-radius: 6px;
+}
+
+#careGiverBtn:hover{
+    
+    border:1px solid #1a2050;
+    background-color: #ffffff;
+    color: #1A2050;
+}
+
+#nextBtn1{
+	
+	background-color: #1A2050;
+	color: #ffffff;
+	width: 9vw;
+	height: 5vh;
+	
+	border-radius: 6px;
+	
+}
+
+#nextBtn1:hover{
+	
+	border:1px solid #1a2050;
+    background-color: #ffffff;
+    color: #1A2050;
+
+	cursor: pointer;
+}
+
+#submitBtn{
+    width: 9vw;
+    height: 5vh;
+
+    background-color: #1A2050;
+
+    color: #ffffff;
+    border-radius: 6px;
+
+    border:none;
+
+    cursor: pointer;
+}
+
+
+
+/* 분기 이후 css*/
+
+*{
+    /* border: 0.1px solid rgb(238, 177, 187);  */
+   font-size: 20px;
+   font-family: 'Pretendard-Regular';
+   color: #3C3C3B;
+   margin: 0;
+}
+
+
+
+.submit-container{
+  
+   display: flex;
+
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   
+	height: 15vh;
+	margin-bottom: 12vh;
+}
+
+.submit-container h4{
+    font-size: 25px;
+}
+
+
+.infoCareGiver span {
+    font-size: 14px;
+    
+    color: coral;
+}
+
+
+
+
+
+
+
+
