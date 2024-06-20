@@ -248,7 +248,8 @@ public class MemberController {
 							 @RequestParam("memberAddress") String[] memberAddress,
 							 RedirectAttributes ra) {
 		
-		
+		log.info("inputMember =={}" , inputMember);
+		log.info("memberAddress =={}" , memberAddress);
 		int result = service.updateInfo(inputMember, memberAddress);
 		
 		String path;

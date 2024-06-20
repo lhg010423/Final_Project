@@ -176,16 +176,20 @@ public class MemberServiceImpl implements MemberService{
 		// 주소 관련
 		if(memberAddress !=null && !String.join(",", memberAddress).equals(",,,")) {
 			
-			String memAddr = String.join("^^^", memberAddress);
+			String memAddr = String.join("^^^", inputMember.getMemberAddress());
 			inputMember.setMemberAddress(memAddr);
 			
 		}else {
 			inputMember.setMemberAddress(null);
 		}
-
+		int result;
+		if (inputMember.getMemberPw() != null && !inputMember.getMemberPw().isEmpty() ) {
+			result = mapper.updateInfo(inputMember);
+		} else {
+			result = mapper.updateInfo2(inputMember);
+		}
 		
 		
-		
-		return mapper.updateInfo(inputMember);
+		return result;
 	}
 }

@@ -47,8 +47,8 @@
                     <!-- 게시글 제목 공간 -->
                     <div class="boardTitle-area">
 
-                        <a th:text="이전으로"
-                        th:href="@{/board/{boardCode} (boardCode=${board.boardCode}, cp=${cp}, key=${session.key}, query=${session.query})}"></a>
+                        <a th:text="목록으로"
+                           th:href="@{/board/{boardCode} (boardCode=${board.boardCode}, cp=${cp}, key=${session.key}, query=${session.query})}"></a>
                         <br>
 
                         <span th:text="${board.boardTitle}"></span>
@@ -160,10 +160,10 @@
 
 
         </section>
-    
+		<th:block th:replace="~{common/footer}"></th:block>
     
     </main>
-
+	
     <script th:inline="javascript">
 
         const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
@@ -174,7 +174,7 @@
 
         const cp = /*[[${board.cp}]]*/ "현제페이지";
     </script>
-
+	
     <script src="/js/board/boardUpdate.js"></script>
     <script src="/js/board/comment.js"></script>
 

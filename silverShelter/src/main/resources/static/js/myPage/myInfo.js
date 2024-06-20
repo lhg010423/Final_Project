@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
 	
     const checkObj = {
-        "memberPw": false,
-        "memberPwConfirm": false,
-        "memberTel": false,
-        "guardianTel": false,
+        "memberPw": true,
+        "memberPwConfirm": true,
+        "memberTel": true,
+        "guardianTel": true,
         "memberAddress": false
     };
 
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const addr1 = addressFields.roadAddress.value.trim().length > 0;
         const addr2 = addressFields.detailAddress.value.trim().length > 0;
 
-        if ((addr0 && addr1) || (addr0 && addr2) || (addr1 && addr2)) {
+        if ( (addr0 && addr1) || (addr0 && addr2) || (addr1 && addr2) ) {
             checkObj.memberAddress = true;
         } else {
             checkObj.memberAddress = false;
@@ -221,7 +221,25 @@ document.addEventListener("DOMContentLoaded", function() {
                         break;
                 }
                 alert(str);
-                document.querySelector(`#${key}`).focus();
+                if(key == 'memberAddress') {
+                	const memberAddress = document.querySelectorAll(`[name='${key}']`);
+                    
+                    /* console.log(memberAddress[0].value);
+                    console.log(memberAddress[1].value);
+                    console.log(memberAddress[2].value;) */
+
+                    if(memberAddress[0].value == 0) {
+                        memberAddress[0].focus();
+                    } else if(memberAddress[1].value == 0) {
+                        memberAddress[1].focus();
+                    } else if(memberAddress[2].value == 0) {
+                        memberAddress[2].focus();
+                    }
+
+				} else {
+                	document.querySelector('#${key}').focus();
+				}
+                
                 e.preventDefault();
                 return;
             }

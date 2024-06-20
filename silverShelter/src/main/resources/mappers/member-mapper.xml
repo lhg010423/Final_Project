@@ -94,6 +94,15 @@
 			MEMBER_EMAIL = #{memberEmail},
 			GUARDIAN_TEL = #{guardianTel},
 			MEMBER_ADDRESS = #{memberAddress}
-		WHERE MEMBER_ID =#{memberId}	
+		WHERE MEMBER_ID =#{memberId}
+	</update>
+	
+	<update id="updateInfo2">
+		UPDATE "MEMBER" SET 
+			MEMBER_TEL = #{memberTel},
+			MEMBER_EMAIL = #{memberEmail},
+			GUARDIAN_TEL = #{guardianTel},
+			MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_ID =#{memberId}
 	</update>
 </mapper>
