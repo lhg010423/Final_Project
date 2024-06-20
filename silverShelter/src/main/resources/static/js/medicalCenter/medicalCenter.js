@@ -7,8 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let lastSelectedDay = '';
     let drRoom = '';
     let lastSelectedDep = '';
-    let instance = '';
-    let resDocName = '';
 
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
@@ -625,7 +623,6 @@ function initializeCalendar() {
         const year = selectedDate.getFullYear();
         const month = selectedDate.getMonth() + 1; // months are 0-indexed
         const clubResvTime = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
-
         try {
             const response = await fetch('/medicalCenter/getReservationsForDate', {
                 method: 'POST',
@@ -659,6 +656,7 @@ function initializeCalendar() {
                                 <p class="reservation-dep">${reservationDoctorDep}</p>
                                 <p class="reservation-clubName">${reservationDoctorName}</p>
                                 <p class="reservation-clubResvTime">${reservation.drApptTime}</p>
+                                <p style="color:white;" class="reservation-resNo">${reservation.drApptNo}</p>
                             </div>
                         </div>
                     `;
@@ -669,27 +667,6 @@ function initializeCalendar() {
             console.error('Error fetching reservations for date:', error);
         }
     }
-}
-
-
-// 예약 수정 버튼 클릭 시 
-const updateBtn = document.querySelector("#reservationUpdate");
-if(updateBtn){
-updateBtn.addEventListener("click", () => {
-    // window.selectedDateValue에서 연도, 월, 일을 추출하여 Date 객체 생성
-    const selectedDate = new Date(window.selectedDateValue.slice(0, 4), window.selectedDateValue.slice(4, 6) - 1, window.selectedDateValue.slice(6, 8));
-    const isReserved = window.reservedDates.some(date => date.getTime() === selectedDate.getTime());
-
-    if (window.selectedDateValue) {
-        if (isReserved) {
-            location.href = `/medicalCenter/reservationCheck/update/${window.selectedDateValue}`;
-        } else {
-            alert('예약이 없는 날짜입니다. 수정할 수 없습니다.');
-        }
-    } else {
-        alert('날짜를 선택해 주세요.');
-    }
-});
 }
 
 function showSection(sectionId, sectionBtnId) {
@@ -987,7 +964,7 @@ function hideSurveyForm() {
     }
 }
 
-// 캘린더를 클릭해도 크기가 바뀌지 않도록 유지
+// 캘린더의 크기를 클릭 후에도 유지
 document.querySelectorAll('.jcalendar-set-day').forEach(day => {
     day.addEventListener('click', (event) => {
         const calendarContainer = document.querySelector('.calendar-container');
@@ -999,59 +976,102 @@ document.querySelectorAll('.jcalendar-set-day').forEach(day => {
     });
 });
 
-document.querySelectorAll('.reservation-fontList').forEach(button => {
 
-    button.addEventListener('click',e => {
-        // 클릭된 div 내부의 텍스트를 전역변수에 저장
+// 예약 관련 요소 클릭 이벤트 처리
+document.addEventListener('click', e => {
+    if (
+        e.target.matches('.stapper-div') ||
+        e.target.matches('.reservation-fontList') ||
+        e.target.matches('.reservation-dep') ||
+        e.target.matches('.reservation-clubName') ||
+        e.target.matches('.reservation-clubResvTime')
+    ) {
+        let stapperDiv;
+        let resDocNo;
 
-    })
-})
-{/* <p class="reservation-clubName">${reservationDoctorName}</p>
-<p class="reservation-clubResvTime">${reservation.drApptTime}</p> */}
+        // 모든 .stapper-div 요소의 배경색 초기화
+        const stapper = document.getElementsByClassName('stapper-div');
+        for (let i = 0; i < stapper.length; i++) {
+            stapper[i].style.backgroundColor = '#ffffff';
+        }
 
-// 모든 삭제 버튼 선택 
-document.querySelectorAll('.reservation-delete').forEach(button => {
+        // 클릭된 요소가 .stapper-div 인 경우
+        if (e.target.matches('.stapper-div')) {
+            stapperDiv = e.target;
+            const parentReservationFontList = stapperDiv.closest('.reservation-item');
+            if (parentReservationFontList) {
+                const reservationClubNo = parentReservationFontList.querySelector('.reservation-resNo');
+                if (reservationClubNo) {
+                    resDocNo = reservationClubNo.textContent.trim();
+                }
+            }
+        } else {
+            // 클릭된 요소의 부모 요소에서 .stapper-div 및 .reservation-resNo 찾기
+            const parentReservationFontList = e.target.closest('.reservation-item');
+            if (parentReservationFontList) {
+                stapperDiv = parentReservationFontList.querySelector('.stapper-div');
+                const reservationClubNo = parentReservationFontList.querySelector('.reservation-resNo');
+                if (reservationClubNo) {
+                    resDocNo = reservationClubNo.textContent.trim();
+                }
+            }
+        }
 
-    button.addEventListener('click',e => {
+        // .stapper-div 요소가 존재할 경우 배경색 변경
+        if (stapperDiv) {
+            stapperDiv.style.backgroundColor = '#1A2050';
+        }
 
-        e.preventDefault();
+        // resDocNo를 콘솔에 출력 (테스트 용도)
+        if (resDocNo) {
+            console.log('resDocNo:', resDocNo);
+        }
 
-         // 클릭된 버튼과 가장 가까운 '.reservation-item' 요소를 찾습니다.
-        const currentReservation = e.target.closest('.reservation-item');
-        const clubCode = currentReservation.querySelector('#clubCode').value;
-        const clubResvNo = currentReservation.querySelector('#clubResvNo').value;
+            // Select the .reservation-delete element
+    const deleteButton = document.getElementById('reservationDelete');
+    
+    // Check if the element exists before adding the event listener
+    if (deleteButton) {
+    deleteButton.addEventListener('click', e => {
+    // Prevent the default behavior if necessary (for links or form buttons)
+    e.preventDefault();
 
-        const obj = {
-            "clubCode": clubCode,
-            "clubResvNo": clubResvNo
-        };
-        if(obj)
-
-
+        // Add your logic here
+        console.log('Delete button clicked!');
+    
+        console.log('옴');
+    
         if(confirm('일정을 삭제하시겠습니까?')){
-
-            console.log(obj);
-
-            fetch('/myPage/deleteReservation',{
+    
+            console.log(resDocNo);
+    
+            fetch('/medicalCenter/deleteReservation',{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(obj)
+                body: JSON.stringify(resDocNo)
             })
             .then(resp => resp.json())
             .then(data => {
                 
                 if(data > 0){
-                    location.href = 'http://localhost/myPage/myInfo';
+                    alert('예약이 성공적으로 삭제되었습니다.');
+                    location.href = location.href;
                 
                 } else {
                     alert('삭제 실패');
                     location.href = location.href;
                 }
-
+    
             })
             .catch(error => {
                 console.log('삭제 중 오류 발생', error);
             })
         }
     })
-})
+    }else {
+    console.log('nooooooo');
+    }
+
+    }
+});
+

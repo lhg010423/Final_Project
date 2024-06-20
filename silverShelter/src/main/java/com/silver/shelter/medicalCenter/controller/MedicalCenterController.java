@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.careGiver.model.SurveyForm;
 import com.silver.shelter.careGiver.service.CareGiverClustering;
 import com.silver.shelter.careGiver.service.KMeansClusteringService;
+import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
 import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
 import com.silver.shelter.medicalCenter.model.service.DoctorService;
@@ -236,7 +238,7 @@ public class MedicalCenterController {
 	    
     @Autowired
     private com.silver.shelter.careGiver.service.caregiverService caregiverService;
-
+    private AdminService adservice;
     private static final Logger logger = LoggerFactory.getLogger(MedicalCenterController.class);
 
     @PostMapping("/selectCaregiver")
@@ -251,10 +253,7 @@ public class MedicalCenterController {
             logger.info("Updated caregiver ID in MEMBER table");
 
             CareGiver caregiverInfo = caregiverService.getCaregiverInfoById(caregiverId);
-            if (caregiverInfo == null) {
-                logger.warn("No caregiver information found for ID: {}", caregiverId);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 ID의 요양사 정보를 찾을 수 없습니다.");
-            }
+            loginMember.setCaregiversName(caregiverInfo.getCaregiversName());
 
             logger.info("Retrieved caregiver information: {}", caregiverInfo);
             return ResponseEntity.ok().body(caregiverInfo);
@@ -365,6 +364,17 @@ public class MedicalCenterController {
 		
 		return path;
 	}
+	
+	@ResponseBody
+	@PostMapping("deleteReservation")
+	public int deleteReservation(
+	    @SessionAttribute("loginMember") Member loginMember,
+	    @RequestBody int resDocNo) {
+
+		return doctorService.deleteReservation(resDocNo);
+	}
+	
+	
 	
 }
 	

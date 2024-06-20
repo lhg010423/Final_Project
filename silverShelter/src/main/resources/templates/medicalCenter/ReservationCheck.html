@@ -80,20 +80,24 @@
     height: 20px;
     border-radius: 50%;  /* 동그랗게 만들기 */
     border: #1A2050 solid 1px;
-    margin: 30px;
+    margin-left: 30px;
+    margin-right: 10px;
 }
 
 /* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
 .reservation-item {
     display: flex;
     align-items: center;  /* 수직 중앙 정렬 */
-    padding-bottom: 30px;  /* 항목 간의 간격 */
     /* margin-bottom: 30px; */
+    padding-bottom: 15px;
 }
 
 /* 텍스트 스타일 */
 .reservation-font {
-    margin-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
+    padding-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .reservation-font p {
@@ -101,7 +105,10 @@
 }
 
 .reservation-fontList {
-    margin-left: 5px;
+    padding-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;    border-radius: 10px;
 }
 
 .reservation-fontList:hover {
@@ -170,6 +177,34 @@
     padding-bottom: 5px;
 }
 </style>
+<th:block th:if="${session.loginMember == null}">
+    <div id="doctorMatchingPage">
+        <h1 id="doctorMatchingTitle">Golden Prestage 의료센터에 오신 것을 환영합니다</h1>
+        <div id="doctorMatchingLoginForm">
+            <div id="doctorMatchingLogin">
+                <article class="login-form">
+
+                    <form action="/member/login" method="GET" id="loginArea">
+                        
+                        <!-- 아이디, 비번 입력 -->
+                        <img id="doctorMatchingMainLogo" src="/images/main/Logo4.png">
+                            <h1>서비스를 이용하시려면 로그인이 필요합니다.</h1>
+                            
+                            <div class="text">Golden Prestige Corperation</div>
+                            <button id="docLoginBtn">로그인 페이지로 이동</button>
+                            
+                    </form>
+                </article>
+            </div>
+            <div id="doctorMatchingIntro">
+                <img id="signupemoji" src="/images/medicalCenter/signupemoji.png">
+                <h3 id="signupIntro1">회원가입 후, 다음 서비스를 이용하실 수 있습니다.</h3>
+                <h4 id="signupIntro2">입주신청<br><br>인터넷 예약 및 확인<br><br>자유, 문의게시판 글 작성<br><br>여가문화 서비스 신청</h4>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block id="loginServey" th:if="${session.loginMember != null}">
 <div class="reservation-container">
 
     <div class="reservation-header">
@@ -194,8 +229,9 @@
     
     <!-- 예약 수정 및 삭제 버튼 -->
     <div class="reservation-actions">
-        <button class="reservation-delete" id="reservationDelete">삭제</button>
+        <button style="display: none;" class="reservation-delete" id="reservationDelete">삭제</button>
     </div>
 
     
 </div>
+</th:block>

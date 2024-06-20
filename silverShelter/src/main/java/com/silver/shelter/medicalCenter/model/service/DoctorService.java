@@ -27,4 +27,6 @@ public interface DoctorService {
 
 	String getDepByDrNo(String doctorNo);
 
+	int deleteReservation(int reservation);
+
 }
