@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let drRoom = '';
     let lastSelectedDep = '';
     let instance = '';
+    let resDocName = '';
 
     function initializeReservationButtons() {
         const reservationPage = document.getElementById("reservationPage");
@@ -586,6 +587,26 @@ function initializeCalendar() {
         }
     }
 
+    async function fetchReservationDoctorDep(doctorNo) {
+        try {
+            const response = await fetch('/medicalCenter/reservation/doctorDep', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ doctorNo })
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch doctor name for doctorNo: ${doctorNo}`);
+            }
+            const depName = await response.text(); // 서버에서 반환된 의사 이름을 읽음
+            return depName; // 의사 이름을 반환
+        } catch (error) {
+            console.error('Error fetching doctor name:', error);
+            return 'Unknown Dep'; // 에러 발생 시 기본값으로 'Unknown Doctor'를 반환
+        }
+    }
+
     // 예약이 없는 날짜를 클릭했을 때 메시지를 표시하는 함수
     function displayNoReservationsMessage(day) {
         const label = document.querySelector(`#label${day}`);
@@ -628,12 +649,14 @@ function initializeCalendar() {
                 // 데이터가 있을 경우 각 예약 데이터를 처리하여 목록에 추가
                 for (const reservation of data) {
                     const reservationDoctorName = await fetchReservationDoctorName(reservation.doctorNo);
+                    const reservationDoctorDep = await fetchReservationDoctorDep(reservation.doctorNo);
                     const div = document.createElement('div');
                     div.classList.add('reservation');
                     div.innerHTML = `
                         <div class="reservation-item">
                             <div class="stapper-div"></div>
                             <div class="reservation-fontList">
+                                <p class="reservation-dep">${reservationDoctorDep}</p>
                                 <p class="reservation-clubName">${reservationDoctorName}</p>
                                 <p class="reservation-clubResvTime">${reservation.drApptTime}</p>
                             </div>
@@ -975,3 +998,56 @@ document.querySelectorAll('.jcalendar-set-day').forEach(day => {
         calendarContainer.style.height = `${calendarRect.height}px`;
     });
 });
+
+document.querySelectorAll('.reservation-delete').forEach(button => {
+
+    button.addEventListener('click',e => {
+
+    })
+})
+// 모든 삭제 버튼 선택 
+document.querySelectorAll('.reservation-delete').forEach(button => {
+
+    button.addEventListener('click',e => {
+
+        e.preventDefault();
+
+         // 클릭된 버튼과 가장 가까운 '.reservation-item' 요소를 찾습니다.
+        const currentReservation = e.target.closest('.reservation-item');
+        const clubCode = currentReservation.querySelector('#clubCode').value;
+        const clubResvNo = currentReservation.querySelector('#clubResvNo').value;
+
+        const obj = {
+            "clubCode": clubCode,
+            "clubResvNo": clubResvNo
+        };
+        if(obj)
+
+
+        if(confirm('일정을 삭제하시겠습니까?')){
+
+            console.log(obj);
+
+            fetch('/myPage/deleteReservation',{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(obj)
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                
+                if(data > 0){
+                    location.href = 'http://localhost/myPage/myInfo';
+                
+                } else {
+                    alert('삭제 실패');
+                    location.href = location.href;
+                }
+
+            })
+            .catch(error => {
+                console.log('삭제 중 오류 발생', error);
+            })
+        }
+    })
+})

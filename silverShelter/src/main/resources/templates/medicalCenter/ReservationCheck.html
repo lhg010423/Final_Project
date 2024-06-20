@@ -64,7 +64,7 @@
     height: 20px;
     border-radius: 50%;
     background-color: #1A2050;
-    margin: auto;
+    margin: 0;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -76,11 +76,11 @@
 }
 
 .stapper-div {
-    width: 50px;  /* 너비 */
-    height: 50px;  /* 높이 */
+    width: 20px;
+    height: 20px;
     border-radius: 50%;  /* 동그랗게 만들기 */
-    background-color: black;  /* 배경색 */
-    margin: 0;
+    border: #1A2050 solid 1px;
+    margin: 30px;
 }
 
 /* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
@@ -104,6 +104,11 @@
     margin-left: 5px;
 }
 
+.reservation-fontList:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
 /* 예약 목록 스타일 */
 .border-container {
     border: 1px solid #EEEEEE;
@@ -119,6 +124,8 @@
 
 .reservation-none {
     margin-left: 40px;
+    font-weight: bold;
+    font-size: 35px;  /* 폰트 크기 */
 }
 
 
@@ -128,13 +135,12 @@
     justify-content: flex-end;
 }
 
-/* 예약 수정 버튼 스타일 */
-.reservation-update {
-    font-size: 16px;  /* 폰트 크기 */
+.reservation-delete{
+    font-size: 25px;  /* 폰트 크기 */
     font-weight: bolder;
     padding: 10px 50px;  /* 안쪽 여백 (패딩) */
     border: none;
-    margin: 5px;  /* 버튼 간의 간격 */
+    margin: 10px;  /* 버튼 간의 간격 */
     border-radius: 5px;  /* 모서리 둥글게 */
     background-color: #f0f0f0;  /* 배경색 */
 }
@@ -150,12 +156,18 @@
 
 .reservation-clubName{
     font-weight: bold;
-    font-size: 20px;
-    padding-bottom: 5px;
+    font-size: 30px;
+    padding-bottom: 10px;
 }
 
 .reservation-clubResvTime{
-    font-size: 16px;
+    font-size: 25px;
+}
+
+.reservation-dep {
+    font-size: 35px;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 </style>
 <div class="reservation-container">
@@ -182,7 +194,7 @@
     
     <!-- 예약 수정 및 삭제 버튼 -->
     <div class="reservation-actions">
-        <button class="reservation-update" id="reservationUpdate">수정</button>
+        <button class="reservation-delete" id="reservationDelete">삭제</button>
     </div>
 
     

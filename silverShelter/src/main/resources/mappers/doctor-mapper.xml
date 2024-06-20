@@ -76,4 +76,11 @@
         FROM DOCTOR d
         WHERE d.DOCTOR_NO = #{doctorNo}
 	</select>
+	
+	<select id="getDepByDrNo">
+		SELECT dm.MAJOR_NAME
+		FROM DOCTOR d
+		JOIN DOCTOR_MAJOR dm ON d.MAJOR_CODE = dm.MAJOR_CODE
+		WHERE d.DOCTOR_NO = #{doctorNo}
+	</select>
 </mapper>
