@@ -9,9 +9,11 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Service
 @PropertySource("classpath:/config.properties") // config.properties 파일로부터 프로퍼티를 로드합니다.
 public class AuthService {
 
@@ -24,7 +26,7 @@ public class AuthService {
     private String clientSecret;    
     
     // Access Token을 가져오는 메서드입니다.
-    public static String getAccessToken() throws IOException, InterruptedException {
+    public String getAccessToken() throws IOException, InterruptedException {
         // HttpClient 객체를 생성합니다.
         HttpClient client = HttpClient.newHttpClient();
 

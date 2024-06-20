@@ -10,12 +10,6 @@ public class SilverShelterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SilverShelterApplication.class, args);
 
-//        try {
-//            KMeansClustering.main(args);
-//        } catch (IOException e) {
-//            System.err.println("An error occurred while running KMeansClustering: " + e.getMessage());
-//            e.printStackTrace();
-//        }
 
 	}
 
