@@ -999,12 +999,16 @@ document.querySelectorAll('.jcalendar-set-day').forEach(day => {
     });
 });
 
-document.querySelectorAll('.reservation-delete').forEach(button => {
+document.querySelectorAll('.reservation-fontList').forEach(button => {
 
     button.addEventListener('click',e => {
+        // 클릭된 div 내부의 텍스트를 전역변수에 저장
 
     })
 })
+{/* <p class="reservation-clubName">${reservationDoctorName}</p>
+<p class="reservation-clubResvTime">${reservation.drApptTime}</p> */}
+
 // 모든 삭제 버튼 선택 
 document.querySelectorAll('.reservation-delete').forEach(button => {
 
