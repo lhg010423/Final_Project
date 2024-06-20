@@ -34,6 +34,10 @@ main {
     text-decoration: none;
     cursor: pointer;
 }
+.boardHeader a:hover {
+
+	border-bottom: 2px solid #1a2050;	
+}
 
 /* 게시판 목록 및 페이지네이션 영역 */
 .boardBody {
@@ -139,6 +143,10 @@ td {
     white-space: nowrap; /* 텍스트를 한 줄로 표시 */
 }
 
+td > a{
+	text-decoration: none;
+}
+
 tr {
     height: 40px;
 }
@@ -211,6 +219,11 @@ tr {
     margin: 0 10px;
 }
 
+#boardSearch > button:hover {
+	
+	cursor: pointer;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.8); ;
+}
 
 /* 검색창 왼쪽 select태그 */
 #searchKey {
