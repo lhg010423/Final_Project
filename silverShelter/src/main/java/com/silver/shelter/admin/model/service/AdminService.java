@@ -1,7 +1,9 @@
 package com.silver.shelter.admin.model.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.silver.shelter.admin.model.dto.Reservation;
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
@@ -97,6 +99,17 @@ public interface AdminService {
 	 * @return
 	 */
 	Board boardDetailSelect(Object boardNo);
+
+	/** 일정 상세조회
+	 * @param reservation
+	 * @return
+	 */
+	List<Reservation> reservationAllSelect(ClubReservation reservation);
+
+	/** 일정 조회
+	 * @return
+	 */
+	List<Reservation> getReservedDates();
 
 	
 	

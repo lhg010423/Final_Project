@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import com.silver.shelter.admin.model.dto.Reservation;
 import com.silver.shelter.admin.model.mapper.AdminMapper;
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.dto.Pagination;
@@ -363,6 +364,25 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Board boardDetailSelect(Object boardNo) {
 		return mapper.boardDetailSelect(boardNo);
+	}
+
+
+	/** 일정 상세 조회
+	 *
+	 */
+	@Override
+	public List<Reservation> reservationAllSelect(ClubReservation reservation) {
+		
+		return mapper.reservationAllSelect(reservation);
+	}
+
+
+	/** 일정 조회
+	 *
+	 */
+	@Override
+	public List<Reservation> getReservedDates() {
+		return mapper.getReservedDates();
 	}
    
 }

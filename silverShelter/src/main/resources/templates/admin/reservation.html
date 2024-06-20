@@ -8,6 +8,9 @@
     <!-- 왼쪽 nav 부분 및 전체페이지 공간지정 css -->
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
 
+    <script src="https://jsuites.net/v5/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v5/jsuites.css" type="text/css" />
+    <link rel="stylesheet" href="/css/admin/reservation.css">
 </head>
 <body>
     <main>
@@ -27,11 +30,24 @@
             <div class="adminBody">
 
                 <div class="adminLeft">
+                    <div class="border-container calendar-container">
 
+                        <div id="calendar">
+                            <span id="clubResvColor"></span>
+                        </div>
+        
+                    </div>
                    
                 </div>
                 
-                <div class="adminRight"></div>
+                <div class="adminRight">
+
+                    <!-- 예약 목록을 표시할 영역 -->
+                    <div id="reservationList" class="reservation-list">
+
+                    </div>
+
+                </div>
             </div>
 
 
@@ -40,5 +56,7 @@
     </main>
 
 
+    <script src="/js/admin/reservation.js"></script>
+    <!-- <script src="/js/myPage/myReser.js"></script> -->
 </body>
 </html>
