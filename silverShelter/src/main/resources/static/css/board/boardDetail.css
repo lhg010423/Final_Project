@@ -34,7 +34,13 @@ main {
     text-decoration: none;
     cursor: pointer;
 }
-
+.sepaLine{
+	width: 50vw;
+	border:1px solid lightgrey ;
+	
+	margin-top: 3vh;
+	margin-bottom: 5vh;
+}
 /* 상단 a태그를 제외한 나머지 메인 공간 */
 .boardBody {
     height: 80%;
@@ -200,6 +206,8 @@ main {
 
 .comment-write-area > textarea {
     flex-basis: 75%;
+    
+    height: 77px;
     margin-right: 10px;
     resize: none;
     font-size: 15px;
@@ -209,9 +217,10 @@ main {
 
 .comment-write-area > button {
     flex-basis: 7%;
-    height: 85px;
+    height: 80px;
     font-weight: bold;
     border: 0;
+    border-radius: 5px;
     background-color: #1A2050;
     color: white;
     cursor: pointer;

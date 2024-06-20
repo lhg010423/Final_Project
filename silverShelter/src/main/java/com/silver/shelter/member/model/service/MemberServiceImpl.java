@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.silver.shelter.examination.model.dto.Examination;
@@ -33,11 +34,11 @@ public class MemberServiceImpl implements MemberService{
 	
 		String bcryptPassword = bcrypt.encode(inputMember.getMemberPw() );
 		
-		log.info("bcryptPassword : " + bcryptPassword);
+		//log.info("bcryptPassword : " + bcryptPassword);
 		
 		  Member loginMember = mapper.login(inputMember.getMemberId() );
 
-			log.info("1 : " + loginMember);
+			//log.info("1 : " + loginMember);
 		  
 		  if( loginMember == null) return null;
 		  
@@ -62,9 +63,10 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public int signUp(Member inputMember, String[] memberAddress) {
 		// 입력되지 않은 주소 -> inputMember.getMemberAddress() => ' , ,  '
-		log.info("뭐가넘어오나"+inputMember);
+		//log.info("뭐가넘어오나"+inputMember);
 		if( !inputMember.getMemberAddress().equals(",,") ) {
 			// join ("구분자", 배열) ^^^ 를 사용한 이유는 
 			// 주소나 상세주소에 없을것 같은 특수문자를 사용한것임.
@@ -105,6 +107,7 @@ public class MemberServiceImpl implements MemberService{
 
 	// 회원 탈퇴
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public int secession(Map<String, String> map, Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
@@ -140,6 +143,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 비밀번호 업데이트 하기
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public boolean updatePw(String memberId, String newPw) {
 		
 		String encPw = bcrypt.encode(newPw);
@@ -163,6 +167,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 정보 수정 메서드
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public int updateInfo(Member inputMember, String[] memberAddress) {
 		
 		
