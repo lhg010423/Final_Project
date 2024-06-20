@@ -65,4 +65,9 @@ public class DoctorServiceImpl implements DoctorService{
 	public String getDepByDrNo(String doctorNo) {
 		return mapper.getDepByDrNo(doctorNo);
 	}
+
+	@Override
+	public int deleteReservation(int reservation) {
+		return mapper.deleteReservation(reservation);
+	}
 }
