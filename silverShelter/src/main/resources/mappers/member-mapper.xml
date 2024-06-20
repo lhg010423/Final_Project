@@ -31,8 +31,8 @@
         E.EXAM_ROOM_TYPE,
         C.CAREGIVERS_NAME
     FROM MEMBER M
-    JOIN EXAMINATION E ON M.EXAM_ID = E.EXAM_ID
-    JOIN CAREGIVERS C ON M.CAREGIVERS_NO = C.CAREGIVERS_NO
+    LEFT JOIN EXAMINATION E ON M.EXAM_ID = E.EXAM_ID
+    LEFT JOIN CAREGIVERS C ON M.CAREGIVERS_NO = C.CAREGIVERS_NO
     WHERE 
         M.MEMBER_ID = #{memberId}
         AND M.MEMBER_DEL_FL = 'N'
@@ -95,6 +95,15 @@
 			MEMBER_EMAIL = #{memberEmail},
 			GUARDIAN_TEL = #{guardianTel},
 			MEMBER_ADDRESS = #{memberAddress}
-		WHERE MEMBER_ID =#{memberId}	
+		WHERE MEMBER_ID =#{memberId}
+	</update>
+	
+	<update id="updateInfo2">
+		UPDATE "MEMBER" SET 
+			MEMBER_TEL = #{memberTel},
+			MEMBER_EMAIL = #{memberEmail},
+			GUARDIAN_TEL = #{guardianTel},
+			MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_ID =#{memberId}
 	</update>
 </mapper>

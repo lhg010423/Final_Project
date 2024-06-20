@@ -48,5 +48,11 @@ public interface MemberMapper {
 	 */
 	int signUpForm(Member inputMember);
 
+	/** 비밀번호 입력이 없는 상태에서의 정보 변경 쿼리
+	 * @param inputMember
+	 * @return
+	 */
+	int updateInfo2(Member inputMember);
+
 	
 }

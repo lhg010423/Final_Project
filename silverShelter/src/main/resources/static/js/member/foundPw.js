@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
     const memberId = document.querySelector("#memberId");
     const memberTel = document.querySelector("#memberTel");
     const foundPwBtn = document.querySelector("#foundPwBtn");
