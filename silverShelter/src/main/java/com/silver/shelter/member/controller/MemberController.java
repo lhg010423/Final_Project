@@ -72,49 +72,49 @@ public class MemberController {
 						Model model,
 						@RequestParam(value="saveId",required= false) String saveId,
 						HttpServletResponse resp) {
-		
+
 		Member loginMember = service.login(inputMember);
 		
-		log.info("asdf" + loginMember);
+		//log.info("asdf" + loginMember);
 		if(loginMember == null) {
-			
-			ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인하세요");
-						
-			
-			return "redirect:/member/login";
+		
+		ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인하세요");
+					
+		
+		return "redirect:/member/login";
 		}
 		
 		model.addAttribute("loginMember",loginMember);
 		
 		if(loginMember != null) {
-			//log.debug("adsfasdfasdfasdf");
-			
-			model.addAttribute("loginMember", loginMember);
+		//log.debug("adsfasdfasdfasdf");
 		
-			Cookie cookie = new Cookie("saveId" , loginMember.getMemberId() );
+		model.addAttribute("loginMember", loginMember);
+		
+		Cookie cookie = new Cookie("saveId" , loginMember.getMemberId() );
+		
+		cookie.setPath("/");
+		
+		// 만료기간
+		if (saveId != null) {
 			
-			cookie.setPath("/");
-			
-			// 만료기간
-			if (saveId != null) {
-				
-				cookie.setMaxAge( 60* 60 * 24 * 30);
-			}else {
-				cookie.setMaxAge(0);
-			}
-			
-			resp.addCookie(cookie);
+			cookie.setMaxAge( 60* 60 * 24 * 30);
+		}else {
+			cookie.setMaxAge(0);
+		}
+		
+		resp.addCookie(cookie);
 		}
 		
 		
-		 if (loginMember.getMemberRole() == '1') {
-			 
-		        return "redirect:/admin/adminMain";
-		        
-	    } else {
-	    	
-		        return "redirect:/";
-	    }
+		if (loginMember.getMemberRole() == '1') {
+		 
+		    return "redirect:/admin/adminMain";
+		    
+		} else {
+		
+		    return "redirect:/";
+		}
 		
 	}
 	

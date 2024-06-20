@@ -1,6 +1,9 @@
 package com.silver.shelter.signUp.model.service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.signUp.model.mapper.signUpFormMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ public class signUpFormServiceImpl implements signUpFormService{
 
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public int signUp(Member inputMember, String[] memberAddress) {
 		// 입력되지 않은 주소 -> inputMember.getMemberAddress() => ' , ,  '
 		log.info("뭐가넘어오나"+inputMember);

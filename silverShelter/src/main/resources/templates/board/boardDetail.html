@@ -29,15 +29,17 @@
                 <th:block th:each="boardType : ${application.boardTypeList}">
                     <a th:text="${boardType.boardName}"
                         th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}">게시판 이름</a>
+						
                 </th:block>
-
+				
                 <th:block th:unless="${application.boardTypeList}">
 
                     <h1>값 없음</h1>
                 </th:block>
             </div>
-
-
+			<div style="display: flex;">
+				<div class="sepaLine"></div>
+			<div></div>
             <!-- 상단 a태그 공간을 제외한 나머지 공간 전부 -->
             <div class="boardBody">
 
@@ -46,7 +48,7 @@
 
                     <!-- 게시글 제목 공간 -->
                     <div class="boardTitle-area">
-
+					<div class="lines"></div>
                         <a th:text="목록으로"
                            th:href="@{/board/{boardCode} (boardCode=${board.boardCode}, cp=${cp}, key=${session.key}, query=${session.query})}"></a>
                         <br>
