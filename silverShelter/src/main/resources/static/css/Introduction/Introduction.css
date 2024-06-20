@@ -10,7 +10,10 @@
 *{
     font-family: 'Pretendard-Regular';
 }
-
+h3 {
+    margin-bottom: 20px;
+    line-height: 1.6; /* Add this line */
+}
 .facility-links {
     margin-top: 10vh;
     text-align: center;
@@ -101,7 +104,7 @@
 
 /* 룸 정보 */
 .room-info-container {
-    padding-top: 10px;
+    padding-top: 30px;
     padding-bottom: 80px;
     width: 800px;
     margin: 0 auto;

@@ -99,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function() {
             obj.clubSport = selectedValue;
         });
     });
-
     // Fetch 요청을 보내는 함수 정의
     function sendReservation() {
         console.log("전송할 데이터:", obj); // 전송할 데이터 디버깅
@@ -115,9 +114,11 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 if (data == 1) {
                     alert("예약 되었습니다.");
-                    location.href = "/";
+                    location.href = "/myPage/myInfo";
+
                 } else if (data == 3) {
                     alert("예약 있음 확인 바람");
+
                 } else {
                     alert("예약 실패");
                     location.href = location.pathname;
@@ -130,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("모든 필드를 채워주세요.");
         }
     }
-
     // 예약 버튼 클릭 이벤트 리스너
     submitButton.addEventListener('click', function(e) {
         e.preventDefault();

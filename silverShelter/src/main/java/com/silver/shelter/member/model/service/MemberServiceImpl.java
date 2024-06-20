@@ -36,6 +36,8 @@ public class MemberServiceImpl implements MemberService{
 		log.info("bcryptPassword : " + bcryptPassword);
 		
 		  Member loginMember = mapper.login(inputMember.getMemberId() );
+
+			log.info("1 : " + loginMember);
 		  
 		  if( loginMember == null) return null;
 		  
@@ -146,8 +148,11 @@ public class MemberServiceImpl implements MemberService{
 		param.put("memberId", memberId);
 		param.put("encPw", encPw);
 		
+		log.info("비밀번호는 ? == {}",encPw);
+		
 		int result = mapper.updatePw(param);
 		
+		log.info("1이 들어와야함 == {}", result);
 		return result > 0;
 	}
 
