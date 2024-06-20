@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.service.BoardService;
@@ -49,7 +50,11 @@ public class MainController {
 		return decodeServiceKey;
 	}
 	
-	
+	@RequestMapping("loginError")
+	public String loginError(RedirectAttributes ra) {
+		ra.addFlashAttribute("message", "로그인 후 이용해주세요");
+		return "redirect:/";
+	}
 	
 	
 

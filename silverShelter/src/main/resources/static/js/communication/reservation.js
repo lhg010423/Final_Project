@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data == 1) {
                     alert("예약 되었습니다.");
-                    location.href = "/";
+                    location.href = "/myPage/myInfo";
                 } else if (data == 3) {
                     alert("예약 있음 확인 바람");
                 } else {

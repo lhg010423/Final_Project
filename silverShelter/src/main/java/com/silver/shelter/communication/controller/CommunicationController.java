@@ -67,7 +67,7 @@ public class CommunicationController {
 	    int count = service.selectReservation(reservation);
 	    
 	    if(count > 0) {
-	    	
+
 	    	// 있다면 3 반환 
 	    	return 3;
 	    	

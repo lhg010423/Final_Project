@@ -5,7 +5,7 @@ const addTarget = document.querySelector("#addTarget");
 const addTargetPopupLayer = document.querySelector("#addTargetPopupLayer");
 
 // 닫기 버튼
-const closeBtn =document.querySelector("#closeBtn");
+const chattingCloseBtn =document.querySelector("#closeBtn");
 
 // 사용자 검색결과
 const targetInput = document.querySelector("#targetInput");
@@ -30,7 +30,7 @@ addTarget.addEventListener("click", e => {
 });
 
 // 검색 팝업 레이어  닫기
-closeBtn.addEventListener("click", e => {
+chattingCloseBtn.addEventListener("click", e => {
 	addTargetPopupLayer.classList.toggle("popup-layer-close");
 	resultArea.innerHTML = "";
 });

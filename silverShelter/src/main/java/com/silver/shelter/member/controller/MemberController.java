@@ -75,7 +75,7 @@ public class MemberController {
 		
 		Member loginMember = service.login(inputMember);
 		
-		
+		log.info("asdf" + loginMember);
 		if(loginMember == null) {
 			
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인하세요");
@@ -220,12 +220,19 @@ public class MemberController {
 	 */
 	@PostMapping("updatePw")
 	@ResponseBody
-	public Map<String, Object> updatePw(@RequestBody Map<String, String> req){
+	public Map<String, Object> updatePw(@RequestBody Map<String, String> req) {
+		
 	    String memberId = req.get("memberId");
 	    String newPw = req.get("newPw");
-
+	    
+	    log.info("아이디넘어오고있어? == {}",memberId);
+	    
+	    log.info("새 비밀번호는? : == {} ",newPw);
+	    
 	    boolean success = service.updatePw(memberId, newPw);
 
+	    log.info("여기 성공 실패 ? : == {}",success);
+	    
 	    Map<String, Object> resp = new HashMap<>();
 	    resp.put("success", success);
 

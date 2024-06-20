@@ -12,8 +12,13 @@
 }
 
 .reservation-header {
+
     margin-bottom: 10px;
 }
+.reservation-header h1{
+    font-size: 30px;
+}
+
 
 /* 캘린더와 예약 목록을 가로로 정렬하기 위해 flex 속성 사용 */
 .reservation-section {
@@ -76,12 +81,14 @@
 .jcalendar-weekday {
     width: 120px;
 }
-
+.reservation-fontList{
+    padding-left: 15px;
+}
 .stapper-div {
     width: 50px;  /* 너비 */
     height: 50px;  /* 높이 */
     border-radius: 50%;  /* 동그랗게 만들기 */
-    background-color: black;  /* 배경색 */
+    background-color: #1A2050;  /* 배경색 */
 }
 
 /* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
@@ -125,7 +132,7 @@
 
 /* 예약 수정 버튼 스타일 */
 .reservation-update {
-    font-size: 16px;  /* 폰트 크기 */
+    font-size: 25px;  /* 폰트 크기 */
     font-weight: bolder;
     padding: 10px 50px;  /* 안쪽 여백 (패딩) */
     border: none;
@@ -145,10 +152,10 @@
 
 .reservation-clubName{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
     padding-bottom: 5px;
 }
 
 .reservation-clubResvTime{
-    font-size: 16px;
+    font-size: 25px;
 }

@@ -16,11 +16,7 @@
         </div>
         
         <section class="reservation-section">
-
-            <div>
-                <h1>2024-06-21</h1>
-            </div>
-
+    
             <div class="border-container">
 
                 <div id="reservationDetail">
@@ -63,11 +59,16 @@
             </div>
 
             <div id="reservationList" class="reservation-list">
+                <div class="reservation-date">
+                    <h1 th:text="${formattedDate}">오늘 몇월며칠?</h1>
+                </div>
                 <th:block th:each="resv : ${reservationList}" th:object="${resv}">
                     <form th:action="@{/myPage/myInfo/myReserUpdate/{date}(date=${date})}" method="POST">
                         <div class="reservation-item">
                             <div class="stapper-div"></div>
                             <div class="reservation-fontList">
+                                
+
                                 <p class="reservation-clubName" th:text="*{clubName}"></p>
 
                                 <input type="hidden" name="clubCode" id="clubCode" th:value="*{clubCode}">

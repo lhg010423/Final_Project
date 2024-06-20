@@ -1,7 +1,7 @@
 * {
     font-family: 'Pretendard-Regular';
     color: #3C3C3B;
-   	max-width: 100%;
+    max-width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -31,8 +31,19 @@
 
 /* 예약 확인 문구 왼쪽 정렬 */
 .reservation-header h1 {
-    font-size: 40px;
+    font-size: 30px;
     text-align: left;
+}
+
+/* 날짜를 가운데 정렬 */
+.reservation-date {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.reservation-date h1 {
+    font-size: 40px;
 }
 
 /* 캘린더와 예약 목록을 가로로 정렬하기 위해 flex 속성 사용 */
@@ -41,6 +52,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    padding-bottom: 30px;
 }
 
 .table-list {
@@ -55,26 +67,26 @@
 }
 
 .stapper-div {
-    width: 50px;  /* 너비 */
-    height: 50px;  /* 높이 */
-    border-radius: 50%;  /* 동그랗게 만들기 */
-    background-color: coral;  /* 배경색 */
+    width: 50px; /* 너비 */
+    height: 50px; /* 높이 */
+    border-radius: 50%; /* 동그랗게 만들기 */
+    background-color: #1A2050; /* 배경색 */
 }
 
 /* 예약 항목 컨테이너를 가로로 정렬하기 위해 flex 사용 */
 .reservation-item {
     display: flex;
-    align-items: center;  /* 수직 중앙 정렬 */
-    padding-bottom: 30px;  /* 항목 간의 간격 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding-bottom: 10px; /* 항목 간의 간격 */
+    flex-direction: row; /* 항목을 가로로 정렬 */
 }
 
 /* 텍스트 스타일 */
 .reservation-font {
-    margin-left: 15px;  /* 둥근 div와 텍스트 간의 간격 */
+    margin-left: 15px; /* 둥근 div와 텍스트 간의 간격 */
 }
 
-
-.reservation-fontList{
+.reservation-fontList {
     margin-left: 15px;
 }
 
@@ -91,7 +103,6 @@
 .border-container {
     height: 680px;
     width: 750px;
-    border: 1px solid #EEEEEE;
     border-radius: 3px;
     margin-right: 20px;
 }
@@ -99,6 +110,8 @@
 .reservation-list {
     padding-left: 10px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* 예약 수정 및 삭제 버튼 스타일 */
@@ -109,47 +122,54 @@
 
 /* 예약 수정 버튼 스타일 */
 .reservation-update {
-    font-size: 25px;  /* 폰트 크기 */
+    font-size: 25px; /* 폰트 크기 */
     font-weight: bolder;
-    padding: 10px 50px;  /* 안쪽 여백 (패딩) */
+    padding: 10px 50px; /* 안쪽 여백 (패딩) */
     border: none;
-    margin: 10px;  /* 버튼 간의 간격 */
-    border-radius: 5px;  /* 모서리 둥글게 */
-    background-color: #f0f0f0;  /* 배경색 */
+    margin: 10px; /* 버튼 간의 간격 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #f0f0f0; /* 배경색 */
 }
-.reservation-delete{
-    font-size: 25px;  /* 폰트 크기 */
+
+.reservation-delete {
+    font-size: 25px; /* 폰트 크기 */
     font-weight: bolder;
-    padding: 10px 50px;  /* 안쪽 여백 (패딩) */
+    padding: 10px 50px; /* 안쪽 여백 (패딩) */
     border: none;
-    margin: 10px;  /* 버튼 간의 간격 */
-    border-radius: 5px;  /* 모서리 둥글게 */
-    background-color: #f0f0f0;  /* 배경색 */
+    margin: 10px; /* 버튼 간의 간격 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #f0f0f0; /* 배경색 */
 }
 
 /* 버튼에 마우스를 올렸을 때 스타일 */
 .reservation-update:hover,
 .reservation-delete:hover {
     font-weight: bolder;
-    background-color: #1A2050;  /* 호버 시 배경색 */
+    background-color: #1A2050; /* 호버 시 배경색 */
     color: #FFFF;
 }
 
-.reservation-clubName{
+.reservation-clubName {
     font-weight: bold;
     font-size: 30px;
     padding-bottom: 5px;
 }
 
-.reservation-clubResvTime{
+.reservation-clubResvTime {
     font-size: 25px;
+
+}
+
+thead th,
+tbody th {
+    width: 100px;
+    height: 50px;
 }
 
 .table-list th,
 .table-list td {
     border: 1px solid #EEEEEE;
-    font-size: 25px;
-    padding: 10px;  /* 패딩을 추가하여 간격 조정 */
+    font-size: 16px;
     align-items: center;
 }
 
@@ -158,10 +178,10 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: coral;
-    margin: 0 auto; 
+    background-color: #1A2050;
+    margin: 0 auto;
 }
 
-.reservationTime{
+.reservationTime {
     font-size: 20px;
 }
