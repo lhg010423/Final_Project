@@ -30,6 +30,8 @@ public class LoginFilter implements Filter{
 		// 얻어왔으나, 없을 때 -> 로그인이 되어있지 않은 상태
 		if(session.getAttribute("loginMember") == null) {
 			
+			String requestedUrl = req.getRequestURI();
+			session.setAttribute("requestedUrl", requestedUrl);
 			// loginError 재요청 
 			// resp를 이용해서 원하는 곳으로 리다이렉트
 			resp.sendRedirect("/loginError");
