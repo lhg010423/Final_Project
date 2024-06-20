@@ -14,7 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.service.BoardService;
+import com.silver.shelter.member.model.dto.Member;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
