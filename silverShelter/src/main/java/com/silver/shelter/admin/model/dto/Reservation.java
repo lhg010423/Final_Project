@@ -21,7 +21,7 @@ public class Reservation {
     
     private Long memberName; // 예약을 한 회원의 고유 식별자
     
-    private Date reservationDate; // 예약 날짜
+    private String reservationDate; // 예약 날짜
     
     private int reservationTime; // 예약 시간
     

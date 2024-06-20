@@ -1,11 +1,15 @@
 package com.silver.shelter.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.silver.shelter.board.model.dto.Comment;
+import com.silver.shelter.board.model.dto.Pagination;
 import com.silver.shelter.board.model.mapper.CommentMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +44,50 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public int update(Comment comment) {
 		return mapper.update(comment);
+	}
+
+	// 검색안한 댓글 전체 조회
+	@Override
+	public Map<String, Object> commentAllSelect(int boardNo, int cp) {
+		
+		int commentCount = mapper.commentAllCount(boardNo);
+		
+		Pagination pagination = new Pagination(cp, commentCount);
+		
+		int limit = pagination.getLimit();
+		int offset = (cp - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Comment> commentList = mapper.commentAllSelect(boardNo, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pagination", pagination);
+		map.put("commentList", commentList);
+		
+		return map;
+	}
+
+	// 검색한 댓글 전체 조회
+	@Override
+	public Map<String, Object> commentSearchSelect(Map<String, Object> paramMap, int cp) {
+		
+		int commentCount = mapper.commentSearchCount(paramMap);
+		
+		Pagination pagination = new Pagination(cp, commentCount);
+		
+		int limit = pagination.getLimit();
+		int offset = (cp - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Comment> commentList = mapper.commentSearchSelect(paramMap, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pagination", pagination);
+		map.put("commentList", commentList);
+		
+		return map;
 	}
 	
 	

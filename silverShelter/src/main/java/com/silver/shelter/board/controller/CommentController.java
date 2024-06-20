@@ -1,7 +1,9 @@
 package com.silver.shelter.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,10 +30,32 @@ public class CommentController {
 	 * @param boardNo
 	 * @return
 	 */
-	@GetMapping("")
-	public List<Comment> select(@RequestParam("boardNo") int boardNo) {
-		return service.select(boardNo);
-	}
+//	@GetMapping("")
+//	public Map<String, Object> select(
+//			@RequestParam("boardNo") int boardNo,
+//			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+//			Model model,
+//			@RequestParam Map<String, Object> paramMap
+//			) {
+//		
+//		// return에 if문 못씀 삼항 연산자로 써야함
+//		
+//		Map<String, Object> map = null;
+//		
+//		
+//		if(paramMap.get("key") == null) {
+//			map = service.commentAllSelect(boardNo, cp);
+//			
+//		} else {
+//			
+//			paramMap.put("boardNo", boardNo);
+//			
+//			map = service.commentSearchSelect(paramMap, cp);
+//			
+//		}
+//		
+//		return map;
+//	}
 	
 	
 	/** 댓글, 대댓글 작성
