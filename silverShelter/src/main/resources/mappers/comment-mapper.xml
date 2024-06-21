@@ -60,7 +60,7 @@
 	<!-- 검색안한 댓글 전체 수 조회 -->
 	<select id="commentAllCount">
 		SELECT COUNT(*)
-		FROM COMMENT
+		FROM "COMMENT"
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 	
@@ -69,7 +69,7 @@
 	<select id="commentAllSelect">
 		SELECT COMMENT_NO, COMMENT_CONTENT, MEMBER_NAME,
 			COMMENT_WRITE_DATE, BOARD_NO, PARENT_COMMENT_NO, COMMENT_DEL_FL
-		FROM COMMENT
+		FROM "COMMENT"
 		JOIN MEMBER USING(MEMBER_NO)
 		WHERE BOARD_NO = #{boardNo}
 		ORDER BY COMMENT_WRITE_DATE DESC
@@ -79,20 +79,20 @@
 	<!-- 검색한 댓글 전체 수 조회 -->
 	<select id="commentSearchCount">
 		SELECT COUNT(*)
-		FROM COMMENT
-		JOIN MEMBER USING(MEMBER_NO)
+		FROM "COMMENT"
+		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOARD_NO = #{boardNo}
 		
 		<choose>
 		
 			<!-- 작성자 검색 -->
-			<when test='key == "w"'>
-				AND MEMBER_NAME LIKE '%' || #{query} || '%'
+			<when test='commentKey == "w"'>
+				AND MEMBER_NAME LIKE '%' || #{commentQuery} || '%'
 			</when>
 		
 			<!-- 댓글 내용 검색 -->
-			<when test='key == "c"'>
-				AND COMMENT_CONTENT LIKE '%' || #{query} || '%'
+			<when test='commentKey == "c"'>
+				AND COMMENT_CONTENT LIKE '%' || #{commentQuery} || '%'
 			</when>
 		
 		</choose>
@@ -104,20 +104,20 @@
 	<select id="commentSearchSelect">
 		SELECT COMMENT_NO, COMMENT_CONTENT, MEMBER_NAME,
 			COMMENT_WRITE_DATE, BOARD_NO, PARENT_COMMENT_NO, COMMENT_DEL_FL
-		FROM COMMENT
-		JOIN MEMBER USING(MEMBER_NO)
+		FROM "COMMENT"
+		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOARD_NO = #{boardNo}
 		
 		<choose>
 		
 			<!-- 작성자 검색 -->
-			<when test='key == "w"'>
-				AND MEMBER_NAME LIKE '%' || #{query} || '%'
+			<when test='commentKey == "w"'>
+				AND MEMBER_NAME LIKE '%' || #{commentQuery} || '%'
 			</when>
 		
 			<!-- 댓글 내용 검색 -->
-			<when test='key == "c"'>
-				AND COMMENT_CONTENT LIKE '%' || #{query} || '%'
+			<when test='commentKey == "c"'>
+				AND COMMENT_CONTENT LIKE '%' || #{commentQuery} || '%'
 			</when>
 		
 		</choose>

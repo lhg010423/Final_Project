@@ -52,6 +52,8 @@ public class CommentServiceImpl implements CommentService{
 		
 		int commentCount = mapper.commentAllCount(boardNo);
 		
+		System.out.println("commentCount @@@@@@@@@@ "+commentCount);
+		
 		Pagination pagination = new Pagination(cp, commentCount);
 		
 		int limit = pagination.getLimit();
