@@ -21,16 +21,20 @@ main {
 }
 
 .facility-links a {
+    border-radius: 5px;
     font-weight: 500;
     font-size: 30px;
     text-decoration: none;
     display: inline-block;
-    margin: 0 10px 10px 10px;
-    color: inherit;
+    margin: 10px;
+    padding: 20px;
 }
 
 .facility-links a:hover {
+    width: 150px;
 	font-weight: 900;
+    background-color: #1A2050;
+    color: #fcfcfc;
 	
 }
 
@@ -59,7 +63,7 @@ main {
     border-bottom: 3px solid black;
     margin: 0;
     padding-bottom: 10px;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -325,5 +329,10 @@ main {
 .timeout{
     background-color: #eeee;
     text-decoration: line-through;
+}
 
+.links-area{
+    display: flex;
+    height: 120px;
+    width: 40px;
 }
