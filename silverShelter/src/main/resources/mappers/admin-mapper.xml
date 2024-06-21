@@ -357,6 +357,76 @@
 		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
 		ORDER SIBLINGS BY COMMENT_NO
    	</select>
+   	
+
+
+	<!-- 일정 조회 -->
+   	<select id="getReservedDates">
+   		SELECT TO_DATE(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate"
+   		FROM DOCTOR_APPOINTMENT
+   		
+   		UNION
+   		
+   		SELECT TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate"
+   		FROM CLUB_RESERVATION
+   	</select>
+   	
+   	
+   	
+   	<!-- 해당 날짜 일정 전체 조회하기 -->
+   	<select id="reservationAllSelect">
+   		SELECT
+	
+			CLUB_NAME AS "type",
+			CONCAT('CR_', CLUB_RESV_NO) AS "resvId",
+			MEMBER_NAME AS "memberName",
+			TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate",
+			TO_CHAR(CLUB_RESV_TIME, 'HH24') AS "reservationTime"
+		
+		FROM CLUB_RESERVATION
+		JOIN MEMBER USING(MEMBER_NO)
+		JOIN CLUB_TYPE USING(CLUB_CODE)
+		WHERE TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') = TO_DATE(#{reservation}, 'YY-MM-DD')
+		
+		UNION
+			
+		SELECT
+			
+			MAJOR_NAME AS "type",
+			CONCAT('DR_', DR_APPT_NO) AS "resvId",
+			MEMBER_NAME AS "memberName",
+			TO_DATE(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate",
+			TO_CHAR(DR_APPT_TIME, 'HH24') AS "reservationTime"
+		
+		FROM DOCTOR
+		JOIN DOCTOR_APPOINTMENT USING(DOCTOR_NO)
+		JOIN DOCTOR_MAJOR USING(MAJOR_CODE)
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') = TO_DATE(#{reservation}, 'YY-MM-DD')
+   	
+   	</select>
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
 	
 
 </mapper>

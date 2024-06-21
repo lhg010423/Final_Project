@@ -26,3 +26,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('hiddenBar or sideNav not found');
     }
 });
+

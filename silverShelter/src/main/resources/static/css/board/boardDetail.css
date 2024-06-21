@@ -20,10 +20,11 @@ main {
 
 /* 게시판 상단 공간 */
 .boardTop {
-    height: 20%;
+    height: 9%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
+  
 }
 
 
@@ -33,14 +34,16 @@ main {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    
+   	margin-bottom: 1vh;
 }
-.sepaLine{
-	width: 50vw;
-	border:1px solid lightgrey ;
+
+.boardTop a:hover {
 	
-	margin-top: 3vh;
-	margin-bottom: 5vh;
+	border-bottom: 2px solid #1A2050;
+	 
 }
+
 /* 상단 a태그를 제외한 나머지 메인 공간 */
 .boardBody {
     height: 80%;
@@ -59,7 +62,9 @@ main {
     border: 1px solid black;
     flex-direction: column;
     padding: 30px;
+    margin-top: 55px;
     box-sizing: border-box;
+   
 }
 
 /* 게시글 header부분*********************************************** */
@@ -226,6 +231,13 @@ main {
     cursor: pointer;
 }
 
+.comment-write-area > button:hover{
+	
+	border: 1px solid #1a2050;
+	color: #1A2050;
+	background-color: #fff;
+}
+
 #commentList{
 	padding: 0;
 	list-style: none;
@@ -265,6 +277,8 @@ main {
     font-size: 15px;
     font-weight: bold;
     border: 0;
+    
+    border-radius: 5px;
     background-color: #1A2050;
     /* background-color: #455ba8; */
     color : white;
@@ -275,7 +289,7 @@ main {
 .comment-btn-area button:hover{
     background-color: white;
     color : #1A2050;
-    border: 2px solid #1A2050;
+    border: 1px solid #1A2050;
 }
 
 .update-textarea{

@@ -1,0 +1,48 @@
+
+<h1 class="surveyFormTit" id="surveyFormTit1">Golden Prestage 의료센터에는 전문 요양사들이 등록되어있습니다</h1>
+<h1 id="surveyFormTit" class="surveyFormTit">AI 요양사 매칭 사전 설문 조사</h1>
+    <form id="surveyForm" action="/medicalCenter/careGiversResult" method="POST">
+        <p>선호하는 요양사 성별:</p>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">남자</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">여자</label><br>
+
+        <p>선호하는 요양사 나이대:</p>
+        <input type="radio" id="young" name="age" value="20-40">
+        <label for="young">20-40</label><br>
+        <input type="radio" id="middle" name="age" value="40-50">
+        <label for="middle">40-50</label><br>
+        <input type="radio" id="old" name="age" value="50+">
+        <label for="old">50+</label><br>
+
+        <p>선호하는 요양사 경력:</p>
+        <input type="radio" id="novice" name="experience" value="novice">
+        <label for="novice">3년 미만</label><br>
+        <input type="radio" id="intermediate" name="experience" value="intermediate">
+        <label for="intermediate">3-7년</label><br>
+        <input type="radio" id="experienced" name="experience" value="experienced">
+        <label for="experienced">8년 이상</label><br>
+
+        <p>선호하는 요양사 근무시간:</p>
+        <input type="radio" id="morning" name="workTime" value="morning">
+        <label for="morning">오전 (09:00 - 13:00)</label><br>
+        <input type="radio" id="afternoon" name="workTime" value="afternoon">
+        <label for="afternoon">오후 (13:00 - 18:00)</label><br>
+        <input type="radio" id="evening" name="workTime" value="evening">
+        <label for="evening">저녁 (18:00 - 22:00)</label><br>        
+
+        <p>요양사에게 원하는 주요 역할:</p>
+        <input type="radio" id="companionship" name="role" value="companionship">
+        <label for="companionship">정서적 지원(대화, 동반 등)</label><br>
+        <input type="radio" id="personalCare" name="role" value="personalCare">
+        <label for="personalCare">의료적 지원(투약, 간호 등)</label><br>
+        <input type="radio" id="housekeeping" name="role" value="housekeeping">
+        <label for="housekeeping">일상생활 지원(세탁, 청소 등)</label><br>
+
+        <button type="submit">제출하기</button>
+    </form>
+    <div id="caregiversList">
+
+        <!-- 이곳에 서버에서 받은 요양사 데이터가 추가될 것입니다. -->
+    </div>

@@ -17,6 +17,7 @@
         FROM DOCTOR_APPOINTMENT da
         JOIN DOCTOR d ON da.DOCTOR_NO = d.DOCTOR_NO
         WHERE d.DOCTOR_NAME = #{resDoctorName}
+        AND da.DR_APPT_STATUS = 'N'
     </select>
     
     <select id="getNoByDoctorName">
@@ -48,6 +49,7 @@
 		    DOCTOR_APPOINTMENT
 		WHERE MEMBER_NO= #{memberNo}
 		AND TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') = #{clubResvTime}
+		AND DR_APPT_STATUS = 'N'
 		ORDER BY DR_APPT_TIME
 	</select>
 	
@@ -56,6 +58,7 @@
 		SELECT TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') drApptTime  
 		FROM DOCTOR_APPOINTMENT
 		WHERE MEMBER_NO= #{memberNo}
+		AND DR_APPT_STATUS = 'N'
 	</select> 
 	
 	<!-- 예약된 예약리스트 가져오기 -->
@@ -68,6 +71,7 @@
 		FROM DOCTOR_APPOINTMENT
 		WHERE MEMBER_NO= #{memberNo}
 		AND TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') = #{drApptTime}
+		AND DR_APPT_STATUS = 'N'
 		ORDER BY DR_APPT_TIME
 	</select>
 	
@@ -83,4 +87,10 @@
 		JOIN DOCTOR_MAJOR dm ON d.MAJOR_CODE = dm.MAJOR_CODE
 		WHERE d.DOCTOR_NO = #{doctorNo}
 	</select>
+	
+	<update id="deleteReservation" parameterType="int">
+	    UPDATE DOCTOR_APPOINTMENT
+	    SET DR_APPT_STATUS = 'Y'
+	    WHERE DR_APPT_NO = #{resDocNo}
+	</update>
 </mapper>

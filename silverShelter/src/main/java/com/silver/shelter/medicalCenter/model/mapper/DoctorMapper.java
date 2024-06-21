@@ -30,4 +30,6 @@ public interface DoctorMapper {
 
 	String getDepByDrNo(String doctorNo);
 
+	int deleteReservation(int reservation);
+
 }

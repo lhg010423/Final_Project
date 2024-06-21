@@ -37,15 +37,13 @@
             </div>
 
             <th:block th:if="${session.loginMember == null}">
-
               <div class="login-notice">
-                
                 <img id="login-logo" src="/images/main/Logo4.png">
                 <h1>서비스를 이용하시려면 로그인이 필요합니다.</h1>
 
                 <div class="text">Golden Prestige Corperation</div>
 
-                <a href="/member/login">로그인 하러가기</a>
+                <a href="javascript:void(0);" onclick="redirectToLogin()">로그인 하러가기</a>
 
               </div>
 
@@ -144,7 +142,7 @@
                   
   
                 </div>
-  
+                <input type="hidden" th:value="returnUrl" name="returnUrl">
               </form>
 
             </th:block>
@@ -211,7 +209,7 @@
     </section>
   </main>
     <!--footer-->
-    <th:block th:replace="~{/common/footer}"></th:block>
+    <th:block th:replace="~{common/footer}"></th:block>
     <script src="/js/communication/reservation.js"></script>
 </body>
 </html>

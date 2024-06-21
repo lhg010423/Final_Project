@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.silver.shelter.admin.model.dto.Reservation;
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
@@ -136,6 +137,19 @@ public interface AdminMapper {
 	 * @return
 	 */
 	Board boardDetailSelect(Object boardNo);
+
+
+	/** 해당 날짜 일정 전체 조회
+	 * @param reservation
+	 * @return
+	 */
+	List<Reservation> reservationAllSelect(ClubReservation reservation);
+
+
+	/** 일정 조회
+	 * @return
+	 */
+	List<Reservation> getReservedDates();
 
 
 	

@@ -1,3 +1,10 @@
+// 로그인 시 다시 일로 오게 만들거야 
+function redirectToLogin() {
+    const currentUrl = window.location.href;
+    window.location.href = `/member/login?returnUrl=${encodeURIComponent(currentUrl)}`;
+    console.log(currentUrl);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // 캘린더 요소를 가져와서 변수에 저장
     const calendar = document.getElementById('calendar-2');
@@ -123,3 +130,4 @@ document.addEventListener('DOMContentLoaded', function() {
         sendReservation();   // 예약 정보를 서버로 전송하는 함수를 호출합니다.
     });
 });
+
