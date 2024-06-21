@@ -48,7 +48,7 @@ public class MemberController {
       
 	   log.info("요청 주소는 ? == {}",returnUrl);
 	   
-	   return "/member/login";
+	   return "member/login";
    }
    
    @GetMapping("logout")
@@ -138,7 +138,7 @@ public class MemberController {
    @GetMapping("Introduction")
    public String Introduction() {
       
-      return "/member/Introduction";
+      return "member/Introduction";
    }
    
    /** 아이디 찾기 화면으로 가는 메서드
@@ -147,7 +147,7 @@ public class MemberController {
    @GetMapping("foundId")
    public String foundId() {
       
-      return "/member/foundId";
+      return "member/foundId";
    }
    
    
@@ -172,7 +172,7 @@ public class MemberController {
          
       }else {
          model.addAttribute("memberId", result);
-         return "/member/idResult";
+         return "member/idResult";
       }
       
          
@@ -279,7 +279,8 @@ public class MemberController {
            
            log.info("asdfasdf2222222");
             message = "정보 수정에 실패하였습니다.";
-            path = "/myPage/myInfo";  // 수정 실패 시 다시 수정 페이지로 리디렉트
+            
+            path = "myPage/myInfo";  // 수정 실패 시 다시 수정 페이지로 리디렉트
         }
 
         ra.addFlashAttribute("message", message);

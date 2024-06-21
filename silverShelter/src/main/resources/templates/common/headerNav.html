@@ -9,9 +9,9 @@
             <div class="login-join">
 				<!-- 로그인 안됐을 때-->
 				<th:block th:if="${session.loginMember == null}">
-		        	<a href="member/login" class="login">로그인 &nbsp;</a>
+		        	<a href="/member/login" class="login">로그인 &nbsp;</a>
 		            	<!--<span> &nbsp;| &nbsp; </span>-->
-		            <a href="introduction/moveInGuide" class="joinMember">&nbsp;입주안내</a>
+		            <a href="/introduction/moveInGuide" class="joinMember">&nbsp;입주안내</a>
 				</th:block>
 				
 				<!-- 로그인 됐을 때 -->
