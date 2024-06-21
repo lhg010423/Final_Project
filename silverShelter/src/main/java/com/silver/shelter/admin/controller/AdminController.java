@@ -1,5 +1,6 @@
 package com.silver.shelter.admin.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -293,18 +294,38 @@ public class AdminController {
 	}
 	
 	
-	@ResponseBody
-	@PostMapping("reservation")
-	public List<Reservation> reservationAllSelect(@RequestBody String resvTime) {
-		
-		ClubReservation reservation = ClubReservation.builder()
-				.clubResvTime(resvTime)
-//				.memberNo(loginMember.getMemberNo())
-				.build();
-		
-		return service.reservationAllSelect(reservation);
-	}
+//	@ResponseBody
+//	@PostMapping("reservation")
+//	public List<Reservation> reservationAllSelect(@RequestBody String resvTime) {
+//		
+//		ClubReservation reservation = ClubReservation.builder()
+//				.clubResvTime(resvTime)
+////				.memberNo(loginMember.getMemberNo())
+//				.build();
+//		
+//		return service.reservationAllSelect(reservation);
+//	}
 	
+	
+	
+	/** 특정 날짜의 예약 목록을 가져오는 함수
+	 * @param clubResvTime
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("getReservationsForDate")
+	public List<Reservation> getReservationsForDate(@RequestBody String clubResvTime) {
+		
+//		Reservation reservation = Reservation.builder()
+//				.reservationTime(clubResvTime)
+//				.build();
+		System.out.println("clubResvTime @@@@@@@@@ "+clubResvTime);
+		
+//		List<Reservation> re = service.getReservationsForDate(clubResvTime);
+		
+//		System.out.println(re);
+		return service.getReservationsForDate(clubResvTime);
+	}
 	
 	
 	
