@@ -16,7 +16,7 @@
 		WHERE MEMBER_ID = #{memberId}
 		AND MEMBER_DEL_FL ='N'
 	</select> -->
-	<select id="login" resultType="Member">
+<select id="login" resultType="Member">
     SELECT 
         M.MEMBER_ID, 
         M.MEMBER_NO, 
