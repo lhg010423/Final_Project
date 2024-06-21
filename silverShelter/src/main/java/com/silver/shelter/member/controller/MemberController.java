@@ -37,13 +37,18 @@ public class MemberController {
 
    private final MemberService service;
    
-   
    /** 로그인 페이지로 이동
     * @return
     */
    @GetMapping("login")
-   public String login() {
-      return "/member/login";
+   public String login(@RequestParam(value = "returnUrl",required=false)String returnUrl,
+		   							 Model model) {
+	   
+      model.addAttribute("returnUrl",returnUrl);
+      
+	   log.info("요청 주소는 ? == {}",returnUrl);
+	   
+	   return "member/login";
    }
    
    @GetMapping("logout")
@@ -56,7 +61,6 @@ public class MemberController {
       
       return "redirect:/";
    }
-   
    
    /** 로그인 메서드
     * @param inputMember
@@ -71,17 +75,21 @@ public class MemberController {
                   RedirectAttributes ra,
                   Model model,
                   @RequestParam(value="saveId",required= false) String saveId,
+                  @RequestParam(value = "returnUrl",required=false)String returnUrl,
                   HttpServletResponse resp) {
 
+	  log.info("처음 들어오는 주소는? == {}",returnUrl);
+	  
       Member loginMember = service.login(inputMember);
-      
+      String path = null;
       //log.info("asdf" + loginMember);
       if(loginMember == null) {
       
       ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인하세요");
                
+      path = "redirect:/member/login";
       
-      return "redirect:/member/login";
+      return path;
       }
       
       model.addAttribute("loginMember",loginMember);
@@ -99,6 +107,7 @@ public class MemberController {
       if (saveId != null) {
          
          cookie.setMaxAge( 60* 60 * 24 * 30);
+         
       }else {
          cookie.setMaxAge(0);
       }
@@ -109,11 +118,18 @@ public class MemberController {
       
       if (loginMember.getMemberRole() == '1') {
        
-          return "redirect:/admin/adminMain";
+    	  path = "redirect:/admin/adminMain";
+    	  
+          return path;
           
       } else {
-      
-          return "redirect:/";
+    	  
+    	  
+          path = (returnUrl != null && !returnUrl.isEmpty()) ? returnUrl : "/";
+    	  
+          log.info("이거 주소 보여줘 == {} ",returnUrl);
+          
+          return "redirect:"+path;
       }
       
    }
@@ -122,7 +138,7 @@ public class MemberController {
    @GetMapping("Introduction")
    public String Introduction() {
       
-      return "/member/Introduction";
+      return "member/Introduction";
    }
    
    /** 아이디 찾기 화면으로 가는 메서드
@@ -131,7 +147,7 @@ public class MemberController {
    @GetMapping("foundId")
    public String foundId() {
       
-      return "/member/foundId";
+      return "member/foundId";
    }
    
    
@@ -156,7 +172,7 @@ public class MemberController {
          
       }else {
          model.addAttribute("memberId", result);
-         return "/member/idResult";
+         return "member/idResult";
       }
       
          
@@ -239,7 +255,6 @@ public class MemberController {
        return resp;
    }
    
-   
    /** 내 정보 - 정보변경 처리 메서드
     * @return
     */
@@ -264,7 +279,8 @@ public class MemberController {
            
            log.info("asdfasdf2222222");
             message = "정보 수정에 실패하였습니다.";
-            path = "/myPage/myInfo";  // 수정 실패 시 다시 수정 페이지로 리디렉트
+            
+            path = "myPage/myInfo";  // 수정 실패 시 다시 수정 페이지로 리디렉트
         }
 
         ra.addFlashAttribute("message", message);

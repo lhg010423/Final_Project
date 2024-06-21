@@ -1,7 +1,7 @@
 const loginArea = document.querySelector("#loginArea");
 const memberId = document.querySelector("#memberId");
 const memberPw = document.querySelector("#memberPw");
-
+const loginBtn = document.querySelector("#loginBtn");
 loginArea.addEventListener("submit", e => {
 	
 	// 아이디 미작성시
@@ -21,7 +21,6 @@ loginArea.addEventListener("submit", e => {
 		memberPw.focus();
 		return;
 	}
-	
 	
 });
 
@@ -46,3 +45,4 @@ const autoFillMemberId = () => {
 
 
 document.addEventListener("DOMContentLoaded", autoFillMemberId);
+

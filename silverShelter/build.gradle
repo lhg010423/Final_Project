@@ -24,7 +24,6 @@ repositories {
 dependencies {
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 	implementation 'org.apache.commons:commons-csv:1.8' // 또는 최신 버전
-	// https://mvnrepository.com/artifact/org.json/json
 	implementation group: 'org.json', name: 'json', version: '20240303'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'

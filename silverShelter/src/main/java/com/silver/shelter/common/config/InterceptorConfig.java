@@ -14,6 +14,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public BoardTypeInterceptor boardTypeInterceptor() {
         return new BoardTypeInterceptor();
     }
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(boardTypeInterceptor())

@@ -111,6 +111,12 @@ public interface AdminService {
 	 */
 	List<Reservation> getReservedDates();
 
+	/** 특정 날짜의 예약 목록을 가져오는 함수
+	 * @param clubResvTime
+	 * @return
+	 */
+	List<Reservation> getReservationsForDate(String clubResvTime);
+
 	
 	
 	

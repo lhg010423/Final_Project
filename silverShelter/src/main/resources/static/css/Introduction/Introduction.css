@@ -111,7 +111,7 @@ h3 {
 /* 룸 정보 */
 .room-info-container {
     padding-top: 30px;
-    padding-bottom: 80px;
+    padding-bottom: 50px;
     width: 800px;
     margin: 0 auto;
     text-align: left;
@@ -170,6 +170,7 @@ h3 {
 .housekeeping-service-details {
     width: 400px;
     padding-right: 20px;
+    /* white-space : pre-line; */
 }
 
 .housekeeping-service-image {
@@ -182,6 +183,7 @@ h3 {
 }
 
 .housekeeping-service-details h1 {
+
     margin-bottom: 20px;
 }
 
@@ -259,7 +261,11 @@ h3 {
     width: 800px;
     margin-bottom: 100px;
 }
-
+ul.age-condition li,
+ul.health-condition li,
+ul.other-condition li {
+    padding-bottom: 10px; /* 원하는 padding-bottom 값으로 설정 */
+}
 .entry-conditions {
     margin: 0 auto;
     width: 800px;
