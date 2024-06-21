@@ -29,6 +29,7 @@
 					로그인
 				</div>
                 
+				
 				<div class="text"> Golden Prestige Corperation</div>
 				
 				    <section>
@@ -60,7 +61,7 @@
                         <button class="loginBtn">로그인</button>
 						<!--<a href="#" class="signupBtn">회원가입</a>-->
                     <!--</div>-->
-					
+					<input type="hidden" th:value="${returnUrl}" name="returnUrl">
         </form>
 		
      <div style="padding-top:0;">
@@ -71,11 +72,8 @@
 	
 	<!--footer-->
 	<th:block th:replace="~{common/footer}"></th:block>
-	
-	
+
 	<script src="/js/member/login.js"></script>
 	
-
-   
 </body>
 </html>
