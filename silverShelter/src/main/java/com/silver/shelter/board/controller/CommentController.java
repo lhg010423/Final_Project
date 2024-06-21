@@ -57,6 +57,11 @@ public class CommentController {
 //		return map;
 //	}
 	
+	@GetMapping("") // get요청온거를 잡아줌
+	public List<Comment> select(@RequestParam("boardNo") int boardNo) {
+		return service.select(boardNo);
+	}
+	
 	
 	/** 댓글, 대댓글 작성
 	 * @param comment
