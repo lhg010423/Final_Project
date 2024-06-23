@@ -72,7 +72,7 @@
 
                         <div class="writer-right-area">
                             <span th:text="|조회수 ${board.readCount}|">조회수</span>
-                            <span th:text="|좋아요 ${board.likeCount}|">좋아요</span>
+                            <span id="boardLike" th:text="|좋아요 ${board.likeCount}|">좋아요</span>
 
                         </div>
                         
@@ -275,6 +275,9 @@
         const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
 
         const cp = /*[[${board.cp}]]*/ "현제페이지";
+
+        let likeCheck = /*[[${board.likeCount}]]*/ "좋아요";
+
     </script>
 	
     <script src="/js/board/boardDetail.js"></script>

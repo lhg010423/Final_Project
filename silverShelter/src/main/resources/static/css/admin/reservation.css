@@ -164,3 +164,57 @@
 .reservation-clubResvTime{
     font-size: 25px;
 }
+
+
+
+/* ************************************************************************ */
+
+/* reservation.css */
+
+/* reservation.css */
+
+/* 전체 예약 목록 컨테이너 */
+.reservation-list {
+    margin-top: 20px;
+}
+
+/* 시간 그룹 */
+.time-group {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* 시간 레이블 */
+.reservation-time {
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 타입 그룹 */
+.type-group {
+    margin-top: 10px;
+}
+
+/* 타입 레이블 */
+.reservation-type {
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* 이름 */
+.memberName {
+    margin-left: 10px;
+    color: #888;
+}
+
+/* 예약이 없을 때 메시지 */
+.reservation-none {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+}

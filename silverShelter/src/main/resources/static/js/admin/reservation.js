@@ -138,38 +138,78 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log("예약 목록을 가져오는 중 오류 발생");
                 } else {
 
+                    // 시간을 기준으로 정렬하기위해 그룹화할 객체 생성
+                    const reservationByTime = {};
+
+
+
                     // 데이터가 있을 경우 예약 목록 표시
                     data.forEach(reservation => {
 
-                        const div = document.createElement('div');
-                        div.classList.add('reservation');
-                        div.innerHTML = `
-                            <div class="reservation-item">
-                                <span class="reservation-time">${reservation.reservationTime}</span>
-                            </div>
-                        `;
+                        // 예약을 구별할 유니크 키 생성 (예: "15-게스트룸")
+                        const time = reservation.reservationTime;
+
+                        // 만약 해당 키의 그룹이 없다면 새로 생성
+                        if(!reservationByTime[time]) {
+                            reservationByTime[time] = [];
+                        }
+
+                        if(!reservationByTime[time][reservation.type]) {
+                            reservationByTime[time][reservation.type] = new Set();
+                        }
+
+
+                        // 해당 그룹에 유저 이름 추가
+                        reservationByTime[time][reservation.type].add(reservation.memberName);
+                        
 
                     })
 
+                    // 그룹화한 데이터를 HTML로 변환하여 예약 리스트에 추가
+                    Object.keys(reservationByTime).forEach(time => {
+                        const timeDiv = document.createElement('div');
+                        timeDiv.classList.add('time-group');
+                        
+                        const timeSpan = document.createElement('span');
+                        timeSpan.classList.add('reservation-time');
+                        timeSpan.textContent = time;
+                        timeDiv.appendChild(timeSpan);
+                        
+                        reservationList.appendChild(timeDiv);
 
+                        // 각 타입별로 HTML 생성
+                        Object.keys(reservationByTime[time]).forEach(type => {
+                            const typeDiv = document.createElement('div');
+                            typeDiv.classList.add('type-group');
+
+                            const typeSpan = document.createElement('span');
+                            typeSpan.classList.add('reservation-type');
+                            typeSpan.textContent = type;
+                            typeDiv.appendChild(typeSpan);
+
+                            reservationByTime[time][type].forEach(memberName => {
+                                const memberNameSpan = document.createElement('span');
+                                memberNameSpan.classList.add('memberName');
+                                // memberNameButton.dataset.reservationId = memberName; // 예약 식별자 추가
+                                memberNameSpan.textContent = memberName;
+                                typeDiv.appendChild(memberNameSpan);
+                            });
+    
+                            timeDiv.appendChild(typeDiv);
+                        });
+
+                    });
                 }
-                
-
-
-
-
             })
-        
-
-
+            .catch(error => {
+                console.log("예약 목록을 가져오는 중 오류 발생:", error);
+            })
     }
 
-
-
     fetchReservedDates();
+
+
 });
-
-
 
 
 

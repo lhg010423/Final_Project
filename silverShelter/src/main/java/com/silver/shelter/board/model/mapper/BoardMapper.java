@@ -134,6 +134,13 @@ public interface BoardMapper {
 	List<Comment> commentAllSelect(long boardNo);
 
 
+	/** 좋아요 해제
+	 * @param map
+	 * @return
+	 */
+	int boardLikeDelete(Map<String, Object> map);
+
+
 	
 
 
