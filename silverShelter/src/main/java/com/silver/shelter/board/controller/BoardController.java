@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -256,6 +257,13 @@ public class BoardController {
 		
 		return path;
 	}
+	
+	@ResponseBody
+	@PostMapping("like")
+	public int boardList(@RequestBody Map<String, Object> map) {
+		return service.boardLike(map);
+	}
+	
 	
 	
 	/** 게시글 수정 페이지로 이동

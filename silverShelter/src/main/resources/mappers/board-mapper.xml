@@ -176,8 +176,10 @@
 
 	
 	
-	
-	
+	<!-- 좋아요 해제 -->
+	<!-- <delect id="boardLikeDelete">
+		DELETE FROM "LIKE"
+	</delect> -->
 	
 	
 	

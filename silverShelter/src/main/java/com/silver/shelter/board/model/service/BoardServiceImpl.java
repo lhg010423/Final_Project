@@ -158,7 +158,24 @@ public class BoardServiceImpl implements BoardService{
 		return -1;
 	}
 
-
+	
+	
+	// 게시글 좋아요
+	@Override
+	public int boardLike(Map<String, Object> map) {
+		
+		int result = 0;
+		
+		// 좋아요가 체크되어 있을 때
+//		if(map.get("likeCheck") == 1) {
+//			result = mapper.boardLikeDelete(map);
+//		}
+		
+		
+		
+		return 0;
+	}
+		
 
 
 	/** 게시글 상세조회
@@ -266,6 +283,10 @@ public class BoardServiceImpl implements BoardService{
 		
 		return commentList;
 	}
+
+
+
+
 	
 	
 	

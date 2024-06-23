@@ -103,5 +103,15 @@ public interface BoardService {
 
 
 
+	/** 게시글 좋아요
+	 * @param map
+	 * @return
+	 */
+	int boardLike(Map<String, Object> map);
+
+
+
+
+
 
 }

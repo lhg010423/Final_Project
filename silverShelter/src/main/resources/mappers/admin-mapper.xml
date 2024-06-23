@@ -422,7 +422,8 @@
 			CONCAT('CR_', CLUB_RESV_NO) AS "resvId",
 			MEMBER_NAME AS "memberName",
 			TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate",
-			TO_CHAR(CLUB_RESV_TIME, 'HH24') AS "reservationTime"
+			TO_NUMBER(TO_CHAR(CLUB_RESV_TIME, 'HH24')) AS "reservationTime",
+			2 AS "typeOrder"
 		
 		FROM CLUB_RESERVATION
 		JOIN MEMBER USING(MEMBER_NO)
@@ -437,14 +438,16 @@
 			CONCAT('DR_', DR_APPT_NO) AS "resvId",
 			MEMBER_NAME AS "memberName",
 			TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate",
-			TO_CHAR(DR_APPT_TIME, 'HH24') AS "reservationTime"
+			TO_NUMBER(TO_CHAR(DR_APPT_TIME, 'HH24')) AS "reservationTime",
+			1 AS "typeOrder"
 		
 		FROM DOCTOR
 		JOIN DOCTOR_APPOINTMENT USING(DOCTOR_NO)
 		JOIN DOCTOR_MAJOR USING(MAJOR_CODE)
 		JOIN MEMBER USING(MEMBER_NO)
 		WHERE TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') = #{clubResvTime}
-   	
+		
+   		ORDER BY "typeOrder", "reservationTime", "type", "memberName"
    	</select>
    	
    	

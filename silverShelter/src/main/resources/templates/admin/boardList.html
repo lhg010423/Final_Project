@@ -380,14 +380,14 @@
                         </div>
         
                         <!-- 검색창 공간 -->
-                        <form th:action="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo})}" method="GET" id="boardSearch">
+                        <form th:action="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo})}" method="GET" id="commentSearch">
         
-                            <select name="commentKey" id="searchKey">
+                            <select name="commentKey" id="searchKey2">
                                 <option value="w">작성자</option>
                                 <option value="c">내용</option>
                             </select>
         
-                            <input type="text" name="commentQuery" id="searchQuery" placeholder="검색어를 입력해주세요.">
+                            <input type="text" name="commentQuery" id="searchQuery2" placeholder="검색어를 입력해주세요.">
         
                             <button>검색하기</button>
         
