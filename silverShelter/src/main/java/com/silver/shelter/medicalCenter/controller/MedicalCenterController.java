@@ -28,7 +28,7 @@ import com.silver.shelter.admin.model.service.AdminService;
 import com.silver.shelter.careGiver.model.CareGiver;
 import com.silver.shelter.careGiver.model.SurveyForm;
 import com.silver.shelter.careGiver.service.CareGiverClustering;
-import com.silver.shelter.careGiver.service.KMeansClusteringService;
+import com.silver.shelter.careGiver.service.ClusteringService;
 import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.medicalCenter.model.dto.Doctor;
 import com.silver.shelter.medicalCenter.model.dto.DoctorAppointment;
@@ -197,7 +197,7 @@ public class MedicalCenterController {
 	}
 	
 
-    private final KMeansClusteringService clusteringService;
+    private final ClusteringService clusteringService;
     private final CareGiverClustering cgc = new CareGiverClustering();
     // 클라이언트에서 전달된 데이터를 기반으로 클러스터링 수행하고 결과를 반환
     @PostMapping("careGivers")
@@ -237,7 +237,7 @@ public class MedicalCenterController {
     }
 	    
     @Autowired
-    private com.silver.shelter.careGiver.service.caregiverService caregiverService;
+    private com.silver.shelter.careGiver.service.CaregiverService caregiverService;
     private AdminService adservice;
     private static final Logger logger = LoggerFactory.getLogger(MedicalCenterController.class);
 
