@@ -111,31 +111,31 @@ public class BoardServiceImpl implements BoardService{
 	 *
 	 */
 	@Override
-	public Map<String, Object> boardDetail(Map<String, Object> map) {
+	public Board boardDetailSelect(Map<String, Object> map) {
 		
-		Map<String, Object> result = new HashMap<>();
+//		Map<String, Object> result = new HashMap<>();
 		
-		Board boardDetail = mapper.boardDetail(map);
+//		Board boardDetail = mapper.boardDetailSelect(map);
 		
-		// 수정 및 삭제 권한 확인
-	    boolean canModify = false;
-	    boolean canDelete = false;
-		
-	    // 로그인한 회원 == 게시글 작성자 || 관리자계정
-	    if(map.get("memberNo") != null) {
-	    	
-	    	if((int)map.get("memberNo") == boardDetail.getMemberNo() || (int)map.get("memberNo") == 1 ) {
-	    		canModify = true;
-	    		canDelete = true;
-	    	}
-	    }
+//		// 수정 및 삭제 권한 확인
+//	    boolean canModify = false;
+//	    boolean canDelete = false;
+//		
+//	    // 로그인한 회원 == 게시글 작성자 || 관리자계정
+//	    if(map.get("memberNo") != null) {
+//	    	
+//	    	if((int)map.get("memberNo") == boardDetail.getMemberNo() || (int)map.get("memberNo") == 1 ) {
+//	    		canModify = true;
+//	    		canDelete = true;
+//	    	}
+//	    }
 	    
-	    result.put("boardList", boardDetail);
-	    result.put("canModify", canModify);
-	    result.put("canDelete", canDelete);
+//	    result.put("boardList", boardDetail);
+//	    result.put("canModify", canModify);
+//	    result.put("canDelete", canDelete);
 	    
 	    
-		return result;
+		return mapper.boardDetailSelect(map);
 	}
 
 
@@ -158,16 +158,36 @@ public class BoardServiceImpl implements BoardService{
 		return -1;
 	}
 
-
-
-
-	/** 게시글 상세조회
-	 *
-	 */
+	
+	
+	// 게시글 좋아요
 	@Override
-	public Board boardDetailSelect(Map<String, Object> map) {
-		return mapper.boardDetailSelect(map);
+	public int boardLike(Map<String, Integer> map) {
+		
+		int result = 0;
+		
+		// 좋아요가 체크되어 있을 때
+		if(map.get("likeCheck") == 1) {
+			result = mapper.boardLikeDelete(map);
+			
+		// 좋아요가 체크 안되어있을 때	
+		} else {
+			result = mapper.boardLikeInsert(map);
+		}
+		
+		
+		// 해당 게시글의 좋아요 개수 반환
+		if(result > 0) {
+			return mapper.likeCountSelect(map.get("boardNo"));
+		}
+		
+		
+		return -1;
 	}
+		
+
+
+
 
 
 
@@ -266,6 +286,30 @@ public class BoardServiceImpl implements BoardService{
 		
 		return commentList;
 	}
+
+
+
+	// 게시글 작성하기
+	@Override
+	public int boardInsert(Board inputBoard) {
+		
+		int result = mapper.boardInsert(inputBoard);
+		
+		if(result == 0) return 0;
+		
+		int boardNo = inputBoard.getBoardNo();
+		
+		
+		return boardNo;
+	}
+
+
+
+
+
+
+
+
 	
 	
 	

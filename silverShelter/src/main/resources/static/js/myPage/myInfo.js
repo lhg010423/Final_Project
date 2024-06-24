@@ -220,19 +220,20 @@ document.addEventListener("DOMContentLoaded", function() {
                         str = "주소가 유효하지 않습니다";
                         break;
                 }
-                alert(str);
-                if(key == 'memberAddress') {
-                	const memberAddress = document.querySelectorAll(`[name='${key}']`);
-                    
-                    /* console.log(memberAddress[0].value);
-                    console.log(memberAddress[1].value);
-                    console.log(memberAddress[2].value;) */
+                    alert(str);
+                    e.preventDefault();
 
-                    if(memberAddress[0].value == 0) {
+            if(key == 'memberAddress') {
+                	
+            	const memberAddress = document.querySelectorAll(`[name='${key}']`);
+		            /* console.log(memberAddress[0].value);
+    	            console.log(memberAddress[1].value);
+                    console.log(memberAddress[2].value;) */
+                if(memberAddress[0].value == 0) {
                         memberAddress[0].focus();
                     } else if(memberAddress[1].value == 0) {
                         memberAddress[1].focus();
-                    } else if(memberAddress[2].value == 0) {
+	                } else if(memberAddress[2].value == 0) {
                         memberAddress[2].focus();
                     }
 

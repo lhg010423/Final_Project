@@ -596,7 +596,78 @@ FOREIGN KEY ("CHATTING_NO") REFERENCES "CHATTING_ROOM";
 ALTER TABLE "MESSAGE"
 ADD CONSTRAINT "FK_SENDER_NO"
 FOREIGN KEY ("SENDER_NO") REFERENCES "MEMBER";
--- 시퀀스 생성
+
+
+-- 좋아요 -----------------------------------------------------------------------------
+CREATE TABLE "BOARD_LIKE" (
+	"BOARD_NO"	NUMBER		NOT NULL,
+	"MEMBER_NO"	NUMBER		NOT NULL
+);
+
+COMMENT ON COLUMN "BOARD_LIKE"."BOARD_NO" IS '게시글 번호(PK)';
+
+COMMENT ON COLUMN "BOARD_LIKE"."MEMBER_NO" IS '회원번호';
+
+
+-- 기본키 추가
+ALTER TABLE "BOARD_LIKE" ADD CONSTRAINT "PK_BOARD_LIKE" PRIMARY KEY (
+	"BOARD_NO",
+	"MEMBER_NO"
+);
+
+
+
+-- 기본키 해제
+ALTER TABLE "BOARD_LIKE" DROP CONSTRAINT "PK_BOARD_LIKE";
+
+
+
+-- 외래 키 추가 (BOARD 테이블)
+ALTER TABLE "BOARD_LIKE" ADD CONSTRAINT "FK_BOARD_TO_BOARD_LIKE_1" FOREIGN KEY (
+	"BOARD_NO"
+)
+REFERENCES "BOARD" (
+	"BOARD_NO"
+);
+
+
+-- 외래 키 추가 (MEMBER 테이블)
+ALTER TABLE "BOARD_LIKE" ADD CONSTRAINT "FK_MEMBER_TO_BOARD_LIKE_1" FOREIGN KEY (
+	"MEMBER_NO"
+)
+REFERENCES "MEMBER" (
+	"MEMBER_NO"
+);
+
+
+-- 외래 키 제약 조건 FK_BOARD_TO_BOARD_LIKE_1 삭제
+ALTER TABLE "BOARD_LIKE" DROP CONSTRAINT "FK_BOARD_TO_BOARD_LIKE_1";
+
+-- 외래 키 제약 조건 FK_MEMBER_TO_BOARD_LIKE_1 삭제
+ALTER TABLE "BOARD_LIKE" DROP CONSTRAINT "FK_MEMBER_TO_BOARD_LIKE_1";
+
+
+
+
+
+-- 회원 탈퇴시 회원이 작성한 댓글 자동 삭제하는 쿼리 -------------------------------------------------------------------------------
+-- 외래 키 제약 조건 설정 SQL
+
+-- 댓글 테이블에 외래 키 제약 조건 추가: 회원 탈퇴 시 회원이 작성한 댓글 및 대댓글 자동 삭제
+ALTER TABLE "COMMENT"
+ADD CONSTRAINT fk_member_comment  -- COMMENT 테이블에 외래 키 제약 조건 추가
+FOREIGN KEY (MEMBER_NO)           -- MEMBER_NO 컬럼을 외래 키로 설정
+REFERENCES "MEMBER"(MEMBER_NO)      -- 외래 키가 참조할 테이블은 MEMBER 테이블의 MEMBER_NO 컬럼
+ON DELETE CASCADE;                -- 부모 테이블에서 레코드가 삭제되면 자식 테이블에서도 자동으로 삭제됨
+
+-- 대댓글에 대한 외래 키 제약 조건 추가: 댓글과 대댓글 간의 관계에서도 동작하도록 함
+ALTER TABLE "COMMENT"
+ADD CONSTRAINT fk_parent_comment FOREIGN KEY (PARENT_COMMENT_NO)
+REFERENCES "COMMENT"(COMMENT_NO) ON DELETE CASCADE;
+
+
+
+-- 시퀀스 생성 ------------------------------------------------------------------------------------------------------------------
 CREATE SEQUENCE SEQ_ROOM_NO NOCACHE;
 CREATE SEQUENCE SEQ_MESSAGE_NO NOCACHE;
 SELECT * FROM "MEMBER";

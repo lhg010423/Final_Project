@@ -1,5 +1,6 @@
 package com.silver.shelter.board.controller;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -10,13 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.dto.Comment;
@@ -120,16 +125,19 @@ public class BoardController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardCode", boardCode);
 		map.put("boardNo", boardNo);
-//		if(loginMember != null) {
-//			map.put("memberNo", loginMember.getMemberNo());			
-//		}
 		
+		// 로그인 했을 때만 memberNo 추가
+		if(loginMember != null) {
+			map.put("memberNo", loginMember.getMemberNo());			
+		}
 		
+		// 게시글 상세정보 불러오기
 		Board board = service.boardDetailSelect(map);
 		
 		
 		String path = null;
 		
+		// 조회 결과가 없을 때
 		if(board == null) {
 			path = "redirect:/board/" + boardCode;
 			
@@ -252,10 +260,81 @@ public class BoardController {
 		model.addAttribute("commentPage", commentPage);
 		model.addAttribute("commentList", commentMap.get("commentList"));
 		model.addAttribute("pagination", commentMap.get("pagination"));
+		model.addAttribute("commentCount", commentMap.get("commentCount"));
 		
 		
 		return path;
 	}
+	
+	
+	/** 게시글 작성 폼으로 이동
+	 * @param boardCode
+	 * @return
+	 */
+	@GetMapping("{boardCode:[0-9]+}/insert")
+	public String boardInsert(@PathVariable("boardCode") int boardCode) {
+		return "board/boardWrite";
+	}
+	
+	
+	/** 게시글 작성
+	 * @param boardCode
+	 * @param inputBoard
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@PostMapping("{boardCode:[0-9]+}/insert")
+	public String boardInsert(
+			@PathVariable("boardCode") int boardCode,
+			@ModelAttribute Board inputBoard,
+			@SessionAttribute("loginMember") Member loginMember,
+//			@RequestParam("images") List<MultipartFile> images,
+			RedirectAttributes ra)
+			throws IllegalStateException, IOException{
+		
+		
+		inputBoard.setBoardCode(boardCode);
+		inputBoard.setMemberNo(loginMember.getMemberNo());
+		
+		int boardNo = service.boardInsert(inputBoard);
+		
+		String path = null;
+		String message = null;
+		
+		if(boardNo > 0) {
+			// /board/1/2000
+			path = "/board/" + boardCode + "/" + boardNo; // 상세 조회
+			message = "게시글이 작성 되었습니다";
+			
+		} else {
+			// 상대경로
+			path = "insert";
+			message = "게시글 작성 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+	
+	
+	
+	
+	
+	/** 게시글 좋아요 체크/해제
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("like")
+	public int boardList(@RequestBody Map<String, Integer> map) {
+		return service.boardLike(map);
+	}
+	
 	
 	
 	/** 게시글 수정 페이지로 이동

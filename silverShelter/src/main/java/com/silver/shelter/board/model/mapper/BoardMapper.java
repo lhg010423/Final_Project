@@ -134,6 +134,34 @@ public interface BoardMapper {
 	List<Comment> commentAllSelect(long boardNo);
 
 
+	/** 좋아요 해제
+	 * @param map
+	 * @return
+	 */
+	int boardLikeDelete(Map<String, Integer> map);
+
+
+	/** 좋아요 체크
+	 * @param map
+	 * @return
+	 */
+	int boardLikeInsert(Map<String, Integer> map);
+
+
+	/** 좋아요 수 조회
+	 * @param integer
+	 * @return
+	 */
+	int likeCountSelect(Integer integer);
+
+
+	/** 게시글 작성
+	 * @param inputBoard
+	 * @return
+	 */
+	int boardInsert(Board inputBoard);
+
+
 	
 
 

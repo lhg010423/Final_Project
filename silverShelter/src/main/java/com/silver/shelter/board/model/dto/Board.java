@@ -22,6 +22,7 @@ public class Board {
 	private int readCount;
 	private String boardDelFl;
 	private int likeCount;
+	private int likeCheck;
 	private String boardYn;
 	private int boardCode;
 	private int memberNo;

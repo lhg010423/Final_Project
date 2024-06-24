@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="|${board.boardTitle} - 게시글 상세보기|">게시글 상세보기</title>
 
@@ -23,7 +24,7 @@
         <th:block th:replace="~{common/mainNav}"></th:block>
     
         <!-- header를 제외한 나머지 공간 -->
-        <section class="boardMain">
+        <section class="boardMain" th:object="${board}">
 
             <!-- a태그있는 상단 공간 -->
             <div class="boardTop">
@@ -72,7 +73,11 @@
 
                         <div class="writer-right-area">
                             <span th:text="|조회수 ${board.readCount}|">조회수</span>
-                            <span th:text="|좋아요 ${board.likeCount}|">좋아요</span>
+                            <i class="fa-heart" id="boardLike"
+                                th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"
+                            ></i>
+                            <span th:text="*{likeCount}">0</span>
+                            <!-- <span id="boardLike" th:text="|좋아요 ${board.likeCount}|">좋아요</span> -->
 
                         </div>
                         
@@ -173,25 +178,26 @@
                         <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{prevPage})}">&lt;</a></li>
 
                         <!-- 특정 페이지로 이동 -->
-                        <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
-
-                            <!-- 현제 보고있는 페이지 -->
-                            <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
-
-                            <!-- 보고있지 않은 페이지 -->
-                            <li th:unless="${i} == *{currentPage}">
-                                <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${i})}" th:text="${i}"></a>
-                            </li>
-
+                        <th:block th:if="${commentCount} lt 11">
+                            <!-- 댓글이 10개 이하인 경우 1페이지만 표시 -->
+                            <li><a class="current">1</a></li>
                         </th:block>
 
-                        <!-- 일치하는 게시글이 없을 경우 -->
-                        <th:block th:unless="*{startPage lt endPage}">
-                            <li>
-                                <a class="current">1</a>
-                            </li>
-                        </th:block>
+                        <!-- 댓글이 10개가 넘으면 표시 -->
+                        <th:block th:if="${commentCount} gt 10">
 
+                            <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                                
+                                <!-- 현제 보고있는 페이지 -->
+                                <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+                                
+                                <!-- 보고있지 않은 페이지 -->
+                                <li th:unless="${i} == *{currentPage}">
+                                    <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${i})}" th:text="${i}"></a>
+                                </li>
+                                
+                            </th:block>
+                        </th:block>
 
                         <!-- 다음 목록 시작 번호로 이동 -->
                         <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{nextPage})}">&gt;</a></li>
@@ -211,18 +217,28 @@
                         <!-- 이전 목록 마지막 페이지로 이동 -->
                         <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${prevPage}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}">&lt;&lt;</a></li>
 
+
                         <!-- 특정 페이지로 이동 -->
-                        <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                        <th:block th:if="${commentCount} lt 11">
+                            <!-- 댓글이 10개 이하인 경우 1페이지만 표시 -->
+                            <li><a class="current">1</a></li>
+                        </th:block>
 
-                            <!-- 현제 페이지 -->
-                            <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+                        <th:block th:if="${commentCount} gt 10">
 
-                            <!-- 보고있지 않은 페이지 -->
-                            <li th:unless="${i} == *{currentPage}">
-                                <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${i}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}"
-                                th:text="${i}"></a>
-                            </li>
-
+                            <!-- 특정 페이지로 이동 -->
+                            <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                                
+                                <!-- 현제 페이지 -->
+                                <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
+                                
+                                <!-- 보고있지 않은 페이지 -->
+                                <li th:unless="${i} == *{currentPage}">
+                                    <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${i}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}"
+                                    th:text="${i}"></a>
+                                </li>
+                                
+                            </th:block>
                         </th:block>
 
                         <!-- 일치하는 게시글이 없을 경우 -->
@@ -275,6 +291,9 @@
         const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
 
         const cp = /*[[${board.cp}]]*/ "현제페이지";
+
+        let likeCheck = /*[[${board.likeCount}]]*/ "좋아요";
+
     </script>
 	
     <script src="/js/board/boardDetail.js"></script>

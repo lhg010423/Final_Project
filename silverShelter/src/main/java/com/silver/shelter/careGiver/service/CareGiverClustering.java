@@ -2,25 +2,25 @@ package com.silver.shelter.careGiver.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.silver.shelter.careGiver.model.CareGiver;
 @Service
 public class CareGiverClustering {
 
     private List<CareGiver> clusterCentroids; // 클러스터 중심값을 저장할 리스트
 
-    // 클러스터링 메서드
+ // 클러스터링 메서드
     public List<List<CareGiver>> clusterCareGivers(List<CareGiver> caregivers, int numClusters) {
         // 클러스터 중심 초기화
         List<List<CareGiver>> clusters = initializeClusters(caregivers, numClusters);
 
-        // 초기 클러스터 중심 설정
+        // 랜덤으로 초기 클러스터 중심 설정
         clusterCentroids = new ArrayList<>();
+        List<Integer> randomIndices = generateRandomIndices(caregivers.size(), numClusters);
         for (int i = 0; i < numClusters; i++) {
-            clusterCentroids.add(caregivers.get(i)); // 초기에는 데이터 포인트 그대로 클러스터 중심으로 사용
+            clusterCentroids.add(caregivers.get(randomIndices.get(i)));
         }
 
         // 클러스터 할당
@@ -41,6 +41,16 @@ public class CareGiverClustering {
         }
 
         return clusters;
+    }
+
+    // 랜덤 인덱스 생성 메서드
+    private static List<Integer> generateRandomIndices(int dataSize, int numIndices) {
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < dataSize; i++) {
+            indices.add(i);
+        }
+        Collections.shuffle(indices);
+        return indices.subList(0, numIndices);
     }
 
     // 초기 클러스터 설정

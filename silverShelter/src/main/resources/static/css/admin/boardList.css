@@ -341,13 +341,15 @@ tbody td {
 /* 댓글 ***************************************** */
 
 #commentArea {
-    width: 800px;
+    width: 100%;
+
 }
 
 
 /* 댓글 공간 */
 .comment-write-area {
     display: flex;
+    /* flex-basis: 75%; */
     min-height: 100px;
     justify-content: center;
     margin: 30px 0;
@@ -480,13 +482,13 @@ tbody td {
 
 /* 검색창 공간 *************************************************************** */
 
-#boardSearch {
+#commentSearch {
     display: flex;
     justify-content: space-evenly;
     padding: 40px;
 }
 
-#boardSearch * {
+#commentSearch * {
     height: 40px;
     padding: 8px;
     border-radius: 5px;
@@ -498,18 +500,18 @@ tbody td {
     margin: 0 10px;
 }
 
-#boardSearch > button:hover {
+#commentSearch > button:hover {
 	
 	cursor: pointer;
 	box-shadow: 0 3px 3px rgba(0,0,0,0.8); ;
 }
 
 /* 검색창 왼쪽 select태그 */
-#searchKey {
+#searchKey2 {
     width: 100px;
 }
 
 /* 검색창 크기 지정 */
-#searchQuery {
+#searchQuery2 {
     width: 200px;
 }
