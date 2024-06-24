@@ -31,7 +31,7 @@ public class signUpFormController {
 	 * @param memberId
 	 * @return
 	 */
-	@GetMapping("/checkId")
+	@GetMapping("checkId")
     public ResponseEntity<Integer> checkId(@RequestParam("memberId") String memberId) {
         int result = service.checkId(memberId);
         return ResponseEntity.ok(result);
