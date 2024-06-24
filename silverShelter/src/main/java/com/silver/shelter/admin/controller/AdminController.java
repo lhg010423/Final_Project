@@ -1,5 +1,7 @@
 package com.silver.shelter.admin.controller;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.silver.shelter.admin.model.dto.Reservation;
 import com.silver.shelter.admin.model.service.AdminService;
@@ -25,6 +28,10 @@ import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -385,45 +392,165 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@ResponseBody
-	@PostMapping("boardList")
-	public Map<String, Object> boardList(
-//			@PathVariable("boardCode") int boardCode,
-			@RequestBody int boardNo
-//			@SessionAttribute("loginMember") Member loginMember,
-//			HttpSession session,
-//			HttpServletRequest req,
-//			HttpServletResponse resp
-//			Model model
-			
+	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
+	public String boardDetail(
+			@PathVariable("boardCode") int boardCode,
+			@PathVariable("boardNo") int boardNo,
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap, // 게시글 검색,
+			@RequestParam(value="commentPage", required = false, defaultValue = "1") int commentPage,
+			@RequestParam(value="commentKey", required = false) String commentKey, // 댓글 검색 키
+			@RequestParam(value="commentQuery", required = false) String commentQuery, // 댓글 검색 쿼리
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			HttpSession session,
+			HttpServletRequest req,
+			HttpServletResponse resp,
+			Model model
 			) {
 		
-		System.out.println("컨트롤러 진입 확인");  // 디버깅 출력
-		
+		// 데이터 전달용 객체 생성
 		Map<String, Object> map = new HashMap<>();
+		map.put("boardCode", boardCode);
+		map.put("boardNo", boardNo);
 		
-		Map<String, Object> paramMap = new HashMap<>();
-//		paramMap.put("boardCode", boardCode);
-		paramMap.put("boardNo", boardNo);
+		// 로그인 했을 때만 memberNo 추가
+		if(loginMember != null) {
+			map.put("memberNo", loginMember.getMemberNo());			
+		}
 		
-//		int boardNo = (int) paramMap.get("boardNo");
-		
-		Board board = service.boardDetailSelect(boardNo);
-//		List<Comment> commentList = cs.select(boardNo);
-		
-		System.out.println("board 확인용"+board);
-		
-		map.put("boardTitle", board.getBoardTitle());
-		map.put("boardContent", board.getBoardContent());
-		map.put("memberName", board.getMemberName());
-		map.put("boardWriteDate", board.getBoardWriteDate());
-		map.put("readCount", board.getReadCount());
-		map.put("boardNo", board.getBoardNo());
-		map.put("boardCode", board.getBoardCode());
-//		map.put("commentList", commentList);
+		// 게시글 상세정보 불러오기
+		Board board = service.boardDetailSelect(map);
 		
 		
-		return map;
+		String path = null;
+		
+		// 조회 결과가 없을 때
+		if(board == null) {
+			path = "redirect:/admin/" + boardCode;
+			
+		} else {
+			
+			// 로그인 안함 || 로그인한 회원 != 게시글 작성자
+			if(loginMember == null ||
+					loginMember.getMemberNo() != board.getMemberNo()) {
+				
+				
+				Cookie[] cookies = req.getCookies();
+				
+				Cookie c = null;
+				
+				for(Cookie temp : cookies) {
+					
+					if(temp.getName().equals("readBoardNo")) {
+						c = temp;
+						break;
+					}
+				}
+				
+				
+				int result = 0;
+				
+				
+				// readBoardNo 에 쿠키가 없을 때
+				if(c == null) {
+					
+					c = new Cookie("readBoardNo", "[" + boardNo + "]");
+					result = bs.readCountUpdate(boardNo);
+					
+				} else {
+					
+					if(c.getValue().indexOf("[" + boardNo + "]") == -1) {
+						
+						c.setValue(c.getValue() + "[" + boardNo + "]");
+						result = bs.readCountUpdate(boardNo);
+					}
+				}
+				
+				
+				// 조회수 증가 성공
+				if(result > 0) {
+					board.setReadCount(result);
+					
+					// 쿠키 적용 경로 설정
+					c.setPath("/");
+					
+					// 수명 지정
+					
+					// 현제 시간 얻어오기
+					LocalDateTime now = LocalDateTime.now();
+					
+					// 다음날 지정
+					LocalDateTime nextDayMidnight = now.plusDays(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
+					
+					// 다음날 자정까지 남은 시간 계산 - now, nextDayMidnight 사이를 초단위로 계산
+					long secondsUntilNextDay = Duration.between(now, nextDayMidnight).getSeconds();
+					
+					// 쿠키 수명 설정
+					c.setMaxAge((int)secondsUntilNextDay);
+					
+					resp.addCookie(c); // 클라이언트로 전달
+				}
+				
+			}
+			
+			
+			path = "admin/boardDetail";
+		}
+		
+		
+		// 검색 쿼리 및 페이지 번호 저장(목록으로 버튼 클릭 시 사용할 것)
+		session.setAttribute("key", paramMap.getOrDefault("key", ""));
+		session.setAttribute("query", paramMap.getOrDefault("query", ""));
+//				session.setAttribute("cp", cp);
+		
+		// 수정, 삭제 권한
+		boolean author = true;
+		
+		// 로그인 함 - 관리자 페이지라 생략
+//		if(loginMember != null ) {
+//			
+//			// 로그인한 회원 == 게시글 작성자 ||
+//			// 		로그인한 회원 == 관리자 계정
+//			if(loginMember.getMemberNo() == board.getMemberNo() || 
+//					loginMember.getMemberRole() == 1) {
+//
+//				author = true;
+//			}
+//		}
+		
+		// 댓글 --------------------------------------------------
+		
+		// 결과 저장용 Map
+		Map<String, Object> commentMap = null;
+		
+		Map<String, Object> cparamMap = new HashMap<>();
+		cparamMap.put("boardNo", boardNo);
+		cparamMap.put("commentKey", commentKey);
+		cparamMap.put("commentQuery", commentQuery);
+		
+		
+		if(commentKey == null) {
+			
+			commentMap = cs.commentAllSelect(boardNo, commentPage);
+		} else {
+			
+			commentMap = cs.commentSearchSelect(cparamMap, commentPage);
+		}
+		
+		
+		
+		model.addAttribute("board",board);
+		model.addAttribute("author", author);
+		model.addAttribute("cp", cp);
+		model.addAttribute("commentKey", commentKey);
+		model.addAttribute("commentQuery", commentQuery);
+		model.addAttribute("commentPage", commentPage);
+		model.addAttribute("commentList", commentMap.get("commentList"));
+		model.addAttribute("pagination", commentMap.get("pagination"));
+		model.addAttribute("commentCount", commentMap.get("commentCount"));
+		
+		
+		return path;
 		
 	}
 	

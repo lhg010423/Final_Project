@@ -26,12 +26,12 @@
 
             </div>
 
-            <div class="adminBody">
+            <div class="adminBody-area">
 
                 <!-- 게시판 종류별로 출력 -->
-                <div class="adminLeft">
+                <div class="adminBody">
 
-                    <div class="adminLeft-header">
+                    <div class="boardHeader">
 
                         <th:block th:each="boardType : ${application.boardTypeList}">
                             <a th:text="${boardType.boardName}"
@@ -76,18 +76,20 @@
                                     <!-- 게시글이 있을 때 -->
                                     <th:block th:unless="${#lists.isEmpty(boardList)}">
                                         <tr th:each="board : ${boardList}" th:object="${board}" class="tbody-tr">
-                                            <!-- <td th:classappend="${board.boardCode == 1} ? 'board-Title' : ''"
-                                                th:data-board-code="${board.boardCode}"
-                                                th:data-board-no="${board.boardNo}"
-                                                class="board-cell"
-                                                th:text="${board.boardTitle}"> -->
+                                            <td th:classappend="${board.boardCode == 1} ? 'boardTitle' : ''">
 
-                                            <td>
-                                                <button class="boardTitleBtn"
-                                                    th:data-board-no="${board.boardNo}" 
-                                                    th:data-board-code="${board.boardCode}"
-                                                    th:text="${board.boardTitle}">
-                                                </button>
+                                                <!-- 검색 안했을 때 -->
+                                                <a th:unless="${param.key}"
+                                                th:href="@{/admin/{boardCode}/{boardNo} (boardCode=${board.boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage})}"
+                                                th:text="${board.boardTitle}"
+                                                >제목</a>
+        
+                                                <!-- 검색 했을 때 -->
+                                                <a th:if="${param.key}"
+                                                th:href="@{/admin/{boardCode}/{boardNo} (boardCode=${board.boardCode}, boardNo=${board.boardNo}, cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}"
+                                                th:text="${board.boardTitle}"
+                                                >제목</a>
+        
                                             </td>
                                             <!-- style부분에 boarCode == 1이면(공지게시판이면) 게시판에 출력이 안된다 -->
                                             <td th:text="${board.memberName}" th:style="${board.boardCode == 1 ? 'display:none' : ''}">작성자</td>
@@ -199,205 +201,6 @@
 
 
 
-                <div class="adminRight">
-
-                    <!-- 게시글 공간 -->
-                    <form action="/admin/{boardCode} (boardCode=${boardCode})" method="POST" id="boardForm">
-
-                        <!-- 게시글 제목 공간 -->
-                        <div class="boardTitle-area">
-                            <span id="titleSpan" name="name">게시글 제목</span>
-
-                        </div>
-
-                        <!-- 작성자 정보 공간 -->
-                        <div class="writer-area">
-
-                            <!-- 작성자, 작성일 공간 -->
-                            <div class="writer-left-area">
-                                <span id="writerSpan">작성자</span><br>
-                                <span id="writeDateSpan">작성일</span><br>
-                            </div>
-
-                            <!-- 좋아요 공간 -->
-                            <div class="writer-right-area">
-                                <span id="readCountSpan">조회수</span>
-
-                            </div>
-                            
-                            
-                        </div>
-                        
-                        <hr>    
-
-                        <!-- 게시글 내용 공간 -->
-                        <div class="boardContent-area">
-
-                            <!-- 게시글 내용 -->
-                            <article class="boardContent"
-                                id="contentSpan">게시글 내용
-                            </article>
-
-                        </div>
-
-                        <!-- <hr> -->
-                        <span>댓글</span>
-
-                        <!-- 댓글 공간 -->
-                        <div id="commentArea">
-                            
-                            <!-- 댓글 모록 -->
-                            <div class="comment-list-area">
-                                <ul id="commentList">
-                                    
-                                    <!-- th:each="comment : ${board.commentList}" -->
-                                    <li class="comment-row">
-
-                                        <th:block th:if="*{commentDelFl} == 'Y'">
-                                            삭제된 댓글 입니다
-                                        </th:block>
-
-                                        <th:block th:if="*{commentDelFl} == 'N'">
-                                            <p class="comment-writer">
-                                                
-                            
-                                                <span th:text="*{memberName}">작성자</span>
-                                                <span class="comment-date" th:text="*{commentWriteDate}">작성일</span>
-                                            </p>
-                            
-                                            <p class="comment-content" th:text="*{commentContent}">댓글 내용</p>
-                            
-                                            <!-- 버튼 영역 -->
-                                            <div class="comment-btn-area">
-                                                <button th:onclick="|showInsertComment(*{commentNo}, this)|">답글</button>
-                            
-                                                <th:block th:if="${session.loginMember != null and session.loginMember.memberNo == comment.memberNo}">
-                                                    <button th:onclick="|showUpdateComment(*{commentNo}, this)|">수정</button>
-                                                    <button th:onclick="|deleteComment(*{commentNo})|">삭제</button>
-                                                </th:block>
-                                                <!-- 로그인 회원과 댓글 작성자가 같은 경우 -->
-                            
-                                            </div>
-                                        </th:block>
-
-                                    </li>
-                                    
-                                </ul>
-                                
-                            </div>
-
-                            <div class="comment-write-area">
-
-                                <textarea id="commentContent"></textarea>
-                                <button id="addComment">
-                                    댓글<br>
-                                    등록
-                                </button>
-                            </div>
-
-                        </div> <!-- 댓글 공간 끝 -->
-                        
-
-                        <div class="pagination-area">
-
-                            <!-- 목록 조회(검색X) -->
-                            <ul class="pagination" th:unless="${param.commentKey}" th:object="${pagination}">
-        
-                                <!-- 첫페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=1)}">&lt;&lt;</a></li>
-        
-                                <!-- 이전 목록 마지막 페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{prevPage})}">&lt;</a></li>
-        
-                                <!-- 특정 페이지로 이동 -->
-                                <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
-        
-                                    <!-- 현제 보고있는 페이지 -->
-                                    <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
-        
-                                    <!-- 보고있지 않은 페이지 -->
-                                    <li th:unless="${i} == *{currentPage}">
-                                        <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${i})}" th:text="${i}"></a>
-                                    </li>
-        
-                                </th:block>
-        
-                                <!-- 일치하는 게시글이 없을 경우 -->
-                                <th:block th:unless="*{startPage lt endPage}">
-                                    <li>
-                                        <a class="current">1</a>
-                                    </li>
-                                </th:block>
-        
-        
-                                <!-- 다음 목록 시작 번호로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{nextPage})}">&gt;</a></li>
-        
-                                <!-- 마지막 페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{maxPage})}">&gt;&gt;</a></li>
-        
-                            </ul>
-        
-        
-                            <!-- 목록 조회(검색O) -->
-                            <ul class="pagination" th:if="${param.commentKey}" th:object="${pagination}">
-        
-                                <!-- 첫페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=1, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}">&lt;&lt;</a></li>
-                                
-                                <!-- 이전 목록 마지막 페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${prevPage}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}">&lt;&lt;</a></li>
-        
-                                <!-- 특정 페이지로 이동 -->
-                                <th:block th:if="*{startPage lt endPage}" th:each="i : *{#numbers.sequence(startPage, endPage)}">
-        
-                                    <!-- 현제 페이지 -->
-                                    <li th:if="${i} == *{currentPage}"><a class="current" th:text="${i}"></a></li>
-        
-                                    <!-- 보고있지 않은 페이지 -->
-                                    <li th:unless="${i} == *{currentPage}">
-                                        <a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=${i}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}"
-                                        th:text="${i}"></a>
-                                    </li>
-        
-                                </th:block>
-        
-                                <!-- 일치하는 게시글이 없을 경우 -->
-                                <th:block th:unless="*{startPage lt endPage}">
-                                    <li>
-                                        <a class="current">1</a>
-                                    </li>
-                                </th:block>
-        
-                                <!-- 다음 목록 시작 페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{nextPage}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}">&gt;</a></li>
-        
-                                <!-- 마지막 페이지로 이동 -->
-                                <li><a th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo}, commentPage=*{maxPage}, commentKey=${param.commentKey}, commentQuery=${param.commentQuery})}">&gt;&gt;</a></li>
-        
-                            </ul>
-        
-                        </div>
-        
-                        <!-- 검색창 공간 -->
-                        <form th:action="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode}, boardNo=${boardNo})}" method="GET" id="commentSearch">
-        
-                            <select name="commentKey" id="searchKey2">
-                                <option value="w">작성자</option>
-                                <option value="c">내용</option>
-                            </select>
-        
-                            <input type="text" name="commentQuery" id="searchQuery2" placeholder="검색어를 입력해주세요.">
-        
-                            <button>검색하기</button>
-        
-                        </form>
-        
-
-
-                    </form>
-                
-                </div>
             </div>
 
 
@@ -416,8 +219,9 @@
         
     </script>
 
-    <script src="/js/admin/boardList.js"></script>
-    <script src="/js/board/comment.js"></script>
+    <script src="/js/admin/boardList2.js"></script>
+    <!-- <script src="/js/admin/boardList.js"></script>
+    <script src="/js/admin/comment.js"></script> -->
 
 
 </body>
