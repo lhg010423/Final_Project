@@ -157,7 +157,7 @@ public class MemberController {
      * @param ra
      * @return
      */
-@PostMapping("idResult") 
+   @PostMapping("idResult") 
    public String foundId(@ModelAttribute Member member,
                       Model model,
                       RedirectAttributes ra) {
