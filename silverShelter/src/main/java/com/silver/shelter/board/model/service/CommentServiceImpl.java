@@ -66,6 +66,7 @@ public class CommentServiceImpl implements CommentService{
 		
 		map.put("pagination", pagination);
 		map.put("commentList", commentList);
+		map.put("commentCount", commentCount);
 		
 		return map;
 	}
@@ -88,6 +89,7 @@ public class CommentServiceImpl implements CommentService{
 		
 		map.put("pagination", pagination);
 		map.put("commentList", commentList);
+		map.put("commentCount", commentCount);
 		
 		return map;
 	}

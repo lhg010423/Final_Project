@@ -41,7 +41,7 @@ public interface BoardService {
 	 * @param map
 	 * @return
 	 */
-	Map<String, Object> boardDetail(Map<String, Object> map);
+//	Map<String, Object> boardDetail(Map<String, Object> map);
 
 
 
@@ -107,7 +107,17 @@ public interface BoardService {
 	 * @param map
 	 * @return
 	 */
-	int boardLike(Map<String, Object> map);
+	int boardLike(Map<String, Integer> map);
+
+
+
+
+
+	/** 게시글 작성하기
+	 * @param inputBoard
+	 * @return
+	 */
+	int boardInsert(Board inputBoard);
 
 
 

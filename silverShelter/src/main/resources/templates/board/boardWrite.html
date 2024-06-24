@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성하기</title>
+
+    <!-- main css -->
+	<link rel="stylesheet" href="/css/common/main.css">
+	
+	<!-- mainNav css -->
+    <th:block th:replace="~{common/common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/css/board/boardWrite.css}">
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/headerNav}"></th:block>
+
+        <!-- <img src="/images/main/main.png" class="main"> -->
+        <th:block th:replace="~{common/mainNav}"></th:block>
+
+
+        <form action="insert"
+            method="POST"  class="board-write" id="boardWriteFrom" 
+            enctype="multipart/form-data">
+            <!-- 파일 + 텍스트 파일을 보낼때 enctype="multipart/form-data" 를 씀 -->
+
+
+            <!-- 제목 -->
+            <h1 class="board-title">
+                <input type="text" name="boardTitle" placeholder="제목" value="">
+            </h1>
+
+
+            <!-- 내용 -->
+            <div class="board-content">
+                <textarea name="boardContent"></textarea>
+            </div>
+
+
+            <!-- 버튼 영역 -->
+            <div class="board-btn-area">
+                <button type="submit" id="writebtn">등록</button>
+                <button type="button" id="cancelBtn">취소</button>
+            </div>
+
+        </form>
+
+
+    </main>
+
+    <script src="/js/board/boardWrite.js"></script>
+
+</body>
+</html>
