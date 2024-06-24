@@ -76,6 +76,10 @@ public class CommentServiceImpl implements CommentService{
 	public Map<String, Object> commentSearchSelect(Map<String, Object> paramMap, int cp) {
 		
 		int commentCount = mapper.commentSearchCount(paramMap);
+		System.out.println("검색한 결과 개수 : " + commentCount);
+		
+		System.out.println("댓글 키, 쿼리값 확인용 : "+paramMap);
+		
 		
 		Pagination pagination = new Pagination(cp, commentCount);
 		
