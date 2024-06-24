@@ -22,10 +22,9 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		
-		
 		registry.addHandler(chattingWebsocketHandler, "/chattingSock")
 		.addInterceptors(handshakeInterceptor)
-		.setAllowedOriginPatterns("http://goldenprestige.store","http://127.0.0.1","http://192.168.50.236","http://13.125.120.147")
+		.setAllowedOriginPatterns("http://goldenprestige.store","http://13.125.120.147")
 		.withSockJS();
 	}
 	
