@@ -153,15 +153,29 @@ tr {
 
 
 
+.btn-area {
+    width: 650px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-area > button{
+    height: 40px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    background-color: white;
+    outline: none;
+    margin: 0 10px;
+    cursor: pointer;
+
+}
+
+
 
 /* Pagination ********************************************************** */
-
-
-
-/* 페이지네이션 스타일 */
-/* .pagination-area {
-    margin-top: 20px;
-} */
 
 
 /* Pagination 점 제거 */

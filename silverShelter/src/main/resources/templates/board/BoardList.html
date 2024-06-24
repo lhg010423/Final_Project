@@ -92,13 +92,18 @@
                                     <!-- style부분에 boarCode == 1이면(공지게시판이면) 게시판에 출력이 안된다 -->
                                     <td th:text="${board.memberName}" th:style="${board.boardCode == 1 ? 'display:none' : ''}">작성자</td>
                                     <td th:text="${board.readCount}" th:style="${board.boardCode == 1 ? 'display:none' : ''}">조회수</td>
-                                    <td th:text="${board.likeCount}" th:style="${board.boardCode == 1 ? 'display:none' : ''}">조회수</td>
+                                    <td th:text="${board.likeCount}" th:style="${board.boardCode == 1 ? 'display:none' : ''}">좋아요</td>
                                     <td th:text="${board.boardWriteDate}" th:classappend="${board.boardCode == 1} ? 'boardWriteDate' : ''">작성일</td>
                                 </tr>
                             </th:block>
                         </tbody>
                     </table>
                 </div>
+
+                <div class="btn-area">
+                    <button id="insertBtn" th:if="${session.loginMember}">글쓰기</button>
+                </div>
+
 
                 <div class="pagination-area">
 
@@ -193,7 +198,16 @@
         </section>
 
     </main>
+    
+    
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
+    <script th:inline="javascript">
+		const boardCode = /*[[${boardCode}]]*/ "게시판 코드 번호";
+	</script>
 	
-	<th:block th:replace="~{common/footer}"></th:block>
+    <script src="/js/board/boardList.js"></script>
+
 </body>
 </html>

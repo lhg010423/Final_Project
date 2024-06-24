@@ -1,0 +1,118 @@
+/* html, body {
+    height: 145%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+.board-write {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.board-title {
+    height: ;
+
+} */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form Styling */
+.board-write {
+    width: 800px;
+    margin-top: 50px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+/* Title Styling */
+.board-title {
+    margin-bottom: 20px;
+}
+
+.board-title input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Content Styling */
+.board-content {
+    margin-bottom: 20px;
+}
+
+.board-content textarea {
+    width: 100%;
+    height: 400px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* resize: vertical; */
+    resize: none;
+}
+
+/* Button Area Styling */
+.board-btn-area {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.board-btn-area button {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+    background-color: #1A2050;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.board-btn-area button:hover {
+    background-color: white;
+    color: #1A2050;
+    border: 1px solid #1A2050;
+}
+
+.board-btn-area button:active {
+    background-color: #1A2050;
+    color: white;
+    border: 0;
+}
+
+#cancelBtn { 
+    margin-left: 20px;
+}
