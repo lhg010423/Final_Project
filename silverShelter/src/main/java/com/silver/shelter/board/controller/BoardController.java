@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.dto.Comment;
 import com.silver.shelter.board.model.service.BoardService;
+import com.silver.shelter.board.model.service.CommentService;
 import com.silver.shelter.member.model.dto.Member;
 
 import jakarta.servlet.http.Cookie;
@@ -37,6 +38,8 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	
 	private final BoardService service;
+	
+	private final CommentService cs;
 
 	
 	/** 게시판 게시글 조회하기
@@ -102,7 +105,10 @@ public class BoardController {
 			@PathVariable("boardCode") int boardCode,
 			@PathVariable("boardNo") int boardNo,
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap,
+			@RequestParam Map<String, Object> paramMap, // 게시글 검색,
+			@RequestParam(value="commentPage", required = false, defaultValue = "1") int commentPage,
+			@RequestParam(value="commentKey", required = false) String commentKey, // 댓글 검색 키
+			@RequestParam(value="commentQuery", required = false) String commentQuery, // 댓글 검색 쿼리
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
 			HttpSession session,
 			HttpServletRequest req,
@@ -217,9 +223,35 @@ public class BoardController {
 			}
 		}
 		
+		// 댓글 --------------------------------------------------
+		
+		// 결과 저장용 Map
+		Map<String, Object> commentMap = null;
+		
+		Map<String, Object> cparamMap = new HashMap<>();
+		cparamMap.put("boardNo", boardNo);
+		cparamMap.put("commentKey", commentKey);
+		cparamMap.put("commentQuery", commentQuery);
+		
+		
+		if(commentKey == null) {
+			
+			commentMap = cs.commentAllSelect(boardNo, commentPage);
+		} else {
+			
+			commentMap = cs.commentSearchSelect(cparamMap, commentPage);
+		}
+		
+		
+		
 		model.addAttribute("board",board);
 		model.addAttribute("author", author);
 		model.addAttribute("cp", cp);
+		model.addAttribute("commentKey", commentKey);
+		model.addAttribute("commentQuery", commentQuery);
+		model.addAttribute("commentPage", commentPage);
+		model.addAttribute("commentList", commentMap.get("commentList"));
+		model.addAttribute("pagination", commentMap.get("pagination"));
 		
 		
 		return path;

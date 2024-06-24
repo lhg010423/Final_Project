@@ -360,33 +360,39 @@
    	
 
 
+
+
+
+
+
+
 	<!-- 일정 조회 -->
    	<select id="getReservedDates">
-   		SELECT TO_DATE(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate"
+   		SELECT TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate"
    		FROM DOCTOR_APPOINTMENT
    		
    		UNION
    		
-   		SELECT TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate"
+   		SELECT TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate"
    		FROM CLUB_RESERVATION
    	</select>
    	
    	
    	
    	<!-- 해당 날짜 일정 전체 조회하기 -->
-   	<select id="reservationAllSelect">
+   	<!-- <select id="reservationAllSelect">
    		SELECT
 	
 			CLUB_NAME AS "type",
 			CONCAT('CR_', CLUB_RESV_NO) AS "resvId",
 			MEMBER_NAME AS "memberName",
-			TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate",
+			TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate",
 			TO_CHAR(CLUB_RESV_TIME, 'HH24') AS "reservationTime"
 		
 		FROM CLUB_RESERVATION
 		JOIN MEMBER USING(MEMBER_NO)
 		JOIN CLUB_TYPE USING(CLUB_CODE)
-		WHERE TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') = TO_DATE(#{reservation}, 'YY-MM-DD')
+		WHERE TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') = TO_CHAR(#{reservation}, 'YYYY-MM-DD')
 		
 		UNION
 			
@@ -402,13 +408,44 @@
 		JOIN DOCTOR_APPOINTMENT USING(DOCTOR_NO)
 		JOIN DOCTOR_MAJOR USING(MAJOR_CODE)
 		JOIN MEMBER USING(MEMBER_NO)
-		WHERE TO_DATE(CLUB_RESV_TIME, 'YYYY-MM-DD') = TO_DATE(#{reservation}, 'YY-MM-DD')
+		WHERE TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') = TO_CHAR(#{reservation}, 'YYYY-MM-DD')
+   	
+   	</select> -->
+   	
+   	
+   	
+   	<!-- 특정 날짜의 예약 목록을 가져오는 함수 -->
+   	<select id="getReservationsForDate" resultType="Reservation">
+   		SELECT
+	
+			CLUB_NAME AS "type",
+			CONCAT('CR_', CLUB_RESV_NO) AS "resvId",
+			MEMBER_NAME AS "memberName",
+			TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate",
+			TO_CHAR(CLUB_RESV_TIME, 'HH24') AS "reservationTime"
+		
+		FROM CLUB_RESERVATION
+		JOIN MEMBER USING(MEMBER_NO)
+		JOIN CLUB_TYPE USING(CLUB_CODE)
+		WHERE TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') = #{clubResvTime}
+		
+		UNION
+			
+		SELECT
+			
+			MAJOR_NAME AS "type",
+			CONCAT('DR_', DR_APPT_NO) AS "resvId",
+			MEMBER_NAME AS "memberName",
+			TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate",
+			TO_CHAR(DR_APPT_TIME, 'HH24') AS "reservationTime"
+		
+		FROM DOCTOR
+		JOIN DOCTOR_APPOINTMENT USING(DOCTOR_NO)
+		JOIN DOCTOR_MAJOR USING(MAJOR_CODE)
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') = #{clubResvTime}
    	
    	</select>
-   	
-   	
-   	
-   	
    	
    	
    	

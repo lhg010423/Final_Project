@@ -384,5 +384,14 @@ public class AdminServiceImpl implements AdminService{
 	public List<Reservation> getReservedDates() {
 		return mapper.getReservedDates();
 	}
+
+
+	/** 특정 날짜의 예약 목록을 가져오는 함수
+	 *
+	 */
+	@Override
+	public List<Reservation> getReservationsForDate(String clubResvTime) {
+		return mapper.getReservationsForDate(clubResvTime);
+	}
    
 }
