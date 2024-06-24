@@ -39,7 +39,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 		log.info("{} 연결됨", session.getId());
 	}
 
-	// 클라리언트와 연결이 종료되면 실행된다. 
+	// 클라이언트와 연결이 종료되면 실행된다. 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
