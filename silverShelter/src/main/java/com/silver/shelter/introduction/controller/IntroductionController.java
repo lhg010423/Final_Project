@@ -12,7 +12,7 @@ public class IntroductionController {
 	@GetMapping("introduction") 
 	public String introduction() {
 		
-		return "introduction/complexOverview";
+		return "introduction/introduction";
 	}
 	
 	@GetMapping("moveInGuide")
