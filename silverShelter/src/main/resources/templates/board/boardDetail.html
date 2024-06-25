@@ -100,12 +100,13 @@
 
 
                 </div>
+                <!-- th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${board.boardCode}, boardNo=${boardNo})}" -->
 
                 <div class="board-btn-area">
 
                     <th:block th:if="${author}">
-                        <a id="updateBtn"
-                        th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${board.boardCode}, boardNo=${boardNo})}"
+                        <a id="updateBtn1"
+                        href="/"
                         >수정하기</a>
                         <button id="deleteBtn">삭제하기</button>
                     </th:block>
