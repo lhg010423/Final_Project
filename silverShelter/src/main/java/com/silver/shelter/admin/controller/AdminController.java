@@ -168,7 +168,6 @@ public class AdminController {
 	public String adminDocument(
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			Model model,
-//			@RequestParam(value="memberNo", required = false) int memberNo,
 			@RequestParam Map<String, Object> paramMap
 			) {
 		
@@ -208,7 +207,6 @@ public class AdminController {
 			@RequestBody Map<String, Integer> paramMap
 			) {
 		
-//			@RequestBody Member memberNo
 		// js로 다시 보낼 map
 		Map<String, Object> map = new HashMap<>();
 		
