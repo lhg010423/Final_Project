@@ -1,4 +1,7 @@
 
+document.addEventListener("DOMContentLoaded", function () {
+
+})
 document.querySelectorAll(".boardTitleBtn").forEach(button => {
     button.addEventListener("click", e => {
 
@@ -8,10 +11,7 @@ document.querySelectorAll(".boardTitleBtn").forEach(button => {
         console.log(boardNo);
         console.log(boardCode);
 
-        // const obj = {
-        //     "boardNo" : boardNo,
-        //     "boardCode" : boardCode
-        // }
+
 
 
         fetch("/admin/boardList", {
@@ -45,6 +45,40 @@ document.querySelectorAll(".boardTitleBtn").forEach(button => {
         })
     })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -835,18 +835,10 @@ SELECT LEVEL, C.*
 		ORDER SIBLINGS BY COMMENT_NO, COMMENT_WRITE_DATE DESC;
 		
 	
-	
-	
-	
-	
+-- 검색 안했을 때 댓글 수
 SELECT COUNT(*)
 	    FROM "COMMENT"
-	    JOIN MEMBER USING(MEMBER_NO)
 	    WHERE BOARD_NO = 293
-	    
-			AND MEMBER_NAME LIKE '%' || '일' || '%'
-			
-		
 	    AND (
 	        COMMENT_DEL_FL = 'N' OR
 	        EXISTS (
@@ -856,9 +848,256 @@ SELECT COUNT(*)
 	            AND COMMENT_DEL_FL = 'N'
 	        )
 	    );
+	
+	
+	
+	
+	
+SELECT *
+	    FROM "COMMENT"
+	    JOIN MEMBER USING(MEMBER_NO)
+	    WHERE BOARD_NO = 293
+	    
+	    AND MEMBER_NAME LIKE '%' || '일' || '%'
+	    AND (
+	        COMMENT_DEL_FL = 'N' OR
+	        EXISTS (
+	            SELECT 1
+	            FROM "COMMENT" SUB
+	            WHERE SUB.PARENT_COMMENT_NO = COMMENT_NO
+	            AND COMMENT_DEL_FL = 'N'
+	        )
+	    );
+
+ SELECT COMMENT_CONTENT, MEMBER_NAME
+ FROM "COMMENT"
+ JOIN "MEMBER" USING(MEMBER_NO)
+ WHERE BOARD_NO = 293
+ AND MEMBER_NAME LIKE '%' || '일' || '%'
+ AND COMMENT_DEL_FL = 'N';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT LEVEL, C.*
+FROM (
+    SELECT 
+        COMMENT_NO, 
+        COMMENT_CONTENT,
+        TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS COMMENT_WRITE_DATE,
+        BOARD_NO, 
+        MEMBER_NO, 
+        MEMBER_NAME, 
+        PARENT_COMMENT_NO, 
+        COMMENT_DEL_FL
+    FROM "COMMENT"
+    JOIN MEMBER USING(MEMBER_NO)
+    WHERE BOARD_NO = 293
+) C
+WHERE COMMENT_DEL_FL = 'N'
+   OR (
+       COMMENT_DEL_FL = 'Y' 
+       AND (
+           PARENT_COMMENT_NO IS NULL 
+           AND EXISTS (
+               SELECT 1 
+               FROM "COMMENT" SUB 
+               WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO 
+               AND SUB.COMMENT_DEL_FL = 'N'
+           )
+       )
+   )
+   OR (
+       COMMENT_NO IN (
+           SELECT PARENT_COMMENT_NO
+           FROM "COMMENT"
+           WHERE PARENT_COMMENT_NO IS NOT NULL
+           AND COMMENT_DEL_FL = 'N'
+       )
+   )
+START WITH PARENT_COMMENT_NO IS NULL
+CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+ORDER SIBLINGS BY COMMENT_NO;
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT LEVEL, C.*
+FROM (
+    SELECT 
+        COMMENT_NO, 
+        COMMENT_CONTENT,
+        TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS COMMENT_WRITE_DATE,
+        BOARD_NO, 
+        MEMBER_NO, 
+        MEMBER_NAME, 
+        PARENT_COMMENT_NO, 
+        COMMENT_DEL_FL
+    FROM "COMMENT"
+    JOIN MEMBER USING(MEMBER_NO)
+    WHERE BOARD_NO = #{boardNo}
+    <choose>
+        <!-- 작성자 검색 -->
+        <when test='commentKey == "w"'>
+            AND MEMBER_NAME LIKE '%' || #{commentQuery} || '%'
+        </when>
+    
+        <!-- 댓글 내용 검색 -->
+        <when test='commentKey == "c"'>
+            AND COMMENT_CONTENT LIKE '%' || #{commentQuery} || '%'
+        </when>
+    </choose>
+) C
+WHERE COMMENT_DEL_FL = 'N'
+   OR (
+       COMMENT_DEL_FL = 'Y' 
+       AND (
+           PARENT_COMMENT_NO IS NULL 
+           AND EXISTS (
+               SELECT 1 
+               FROM "COMMENT" SUB 
+               WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO 
+               AND SUB.COMMENT_DEL_FL = 'N'
+           )
+       )
+   )
+   OR (
+       COMMENT_NO IN (
+           SELECT PARENT_COMMENT_NO
+           FROM "COMMENT"
+           WHERE PARENT_COMMENT_NO IS NOT NULL
+           AND COMMENT_DEL_FL = 'N'
+           <choose>
+               <!-- 작성자 검색 -->
+               <when test='commentKey == "w"'>
+                   AND MEMBER_NAME LIKE '%' || #{commentQuery} || '%'
+               </when>
+            
+               <!-- 댓글 내용 검색 -->
+               <when test='commentKey == "c"'>
+                   AND COMMENT_CONTENT LIKE '%' || #{commentQuery} || '%'
+               </when>
+           </choose>
+       )
+   )
+START WITH PARENT_COMMENT_NO IS NULL
+CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+ORDER SIBLINGS BY COMMENT_NO;
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+    SELECT COUNT(*)
+    FROM "COMMENT" C
+    JOIN MEMBER M USING(MEMBER_NO)
+    WHERE BOARD_NO = 293
+	AND M.MEMBER_NAME LIKE '%' || '일' || '%'
+
+--            AND COMMENT_CONTENT LIKE '%' || #{commentQuery} || '%'
+
+    AND (
+        COMMENT_DEL_FL = 'N' OR
+        EXISTS (
+            SELECT 1
+            FROM "COMMENT" SUB
+            WHERE SUB.PARENT_COMMENT_NO = COMMENT_NO
+            AND COMMENT_DEL_FL = 'N'
+        )
+    );
+
+
+ SELECT *
+	    FROM "COMMENT" C
+	    JOIN "MEMBER" M USING(MEMBER_NO)
+	    WHERE C.BOARD_NO = 293
+	    AND M.MEMBER_NAME LIKE '%' || '일' || '%'
+		AND (
+	        COMMENT_DEL_FL = 'N' OR
+	        EXISTS (
+	            SELECT 1
+	            FROM "COMMENT" SUB
+	            WHERE SUB.PARENT_COMMENT_NO = COMMENT_NO
+	            AND COMMENT_DEL_FL = 'N'
+	        )
+	    );
+	   
+	   
+AND COMMENT_DEL_FL = 'N'
+
+--	            AND C.COMMENT_CONTENT LIKE '%' || #{commentQuery} || '%'
+
+SELECT LEVEL, C.*
+	    FROM (
+	        SELECT C.COMMENT_NO, C.COMMENT_CONTENT,
+	               TO_CHAR(C.COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+	               C.BOARD_NO, C.MEMBER_NO, M.MEMBER_NAME, C.PARENT_COMMENT_NO, C.COMMENT_DEL_FL
+	        FROM "COMMENT" C
+	        JOIN "MEMBER" M ON C.MEMBER_NO = M.MEMBER_NO
+	        WHERE C.BOARD_NO = 293
+	                AND M.MEMBER_NAME LIKE '%' || '일' || '%'	        
+	    ) C
+	    WHERE C.COMMENT_DEL_FL = 'N'
+	    OR 0 != (
+	        SELECT COUNT(*)
+	        FROM "COMMENT" SUB
+	        WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+	        AND C.COMMENT_DEL_FL = 'N'
+	    )
+	    START WITH C.PARENT_COMMENT_NO IS NULL
+	    CONNECT BY PRIOR C.COMMENT_NO = C.PARENT_COMMENT_NO
+	    ORDER SIBLINGS BY C.COMMENT_NO;
 	    
 	   
-	   UPDATE "BOARD" SET
-		BOARD_UPDATE_DATE = SYSDATE;
-	
-	COMMIT;
+	   
+	   
+SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+			    BOARD_NO, MEMBER_NO, MEMBER_NAME, PARENT_COMMENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE BOARD_NO = 293
+			AND MEMBER_NAME LIKE '%' || '일' || '%') C
+		WHERE COMMENT_DEL_FL = 'N'
+		OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+						WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+						AND COMMENT_DEL_FL = 'N')
+		START WITH PARENT_COMMENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO;
