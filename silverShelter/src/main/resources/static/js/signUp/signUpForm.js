@@ -288,9 +288,9 @@ function isItOkay() {
 			switch(key){
 				
 				case "memberId" : str = "아이디가 유효하지 않습니다"; break;
-				case "memberPw" : str = "아이디가 유효하지 않습니다"; break;
-				case "memberPwConfirm" : str = "아이디가 유효하지 않습니다"; break;
-				case "guardianTel" : str = "아이디가 유효하지 않습니다"; break;
+				case "memberPw" : str = "비밀번호가 유효하지 않습니다"; break;
+				case "memberPwConfirm" : str = "비밀번호가 유효하지 않습니다"; break;
+				case "guardianTel" : str = "보호자 연락처가 유효하지 않습니다"; break;
 			}
 			
 			alert(str);
