@@ -1,4 +1,5 @@
 # Final_Project
+<<<<<<< development
 
 
 Medical Center Application
@@ -26,3 +27,6 @@ Java Spring Framework를 사용하여 백엔드를 구현하였습니다.
 Spring MVC 아키텍처를 기반으로 웹 컨트롤러를 구성하였습니다.
 데이터베이스 연동을 위해 Spring Data JPA를 사용하였습니다.
 Frontend는 Thymeleaf 템플릿 엔진을 사용하여 구현하였습니다.
+=======
+HIHI~~ 
+>>>>>>> main
