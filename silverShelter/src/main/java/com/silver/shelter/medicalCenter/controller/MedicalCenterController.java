@@ -202,15 +202,15 @@ public class MedicalCenterController {
 	public String reservationSuccess() {
 		return "medicalCenter/reservationSuccess";
 	}
-	
-	/**
-	 * 간병인 매칭 결과 페이지로 이동합니다.
-	 * @return 간병인 매칭 결과 페이지의 뷰 이름
-	 */
-	@PostMapping("careGiversResult")
-	public String careGiversResult() {
-		return "medicalCenter/careGiversResult";
-	}
+//	
+//	/**
+//	 * 간병인 매칭 결과 페이지로 이동합니다.
+//	 * @return 간병인 매칭 결과 페이지의 뷰 이름
+//	 */
+//	@PostMapping("careGiversResult")
+//	public String careGiversResult() {
+//		return "#";
+//	}
 
     private final ClusteringService clusteringService;
     private final CareGiverClustering cgc = new CareGiverClustering();
@@ -256,7 +256,6 @@ public class MedicalCenterController {
 	    
     @Autowired
     private com.silver.shelter.careGiver.service.CaregiverService caregiverService;
-    private AdminService adservice;
 
     /**
      * 회원이 선택한 간병인을 처리하는 메서드입니다.
