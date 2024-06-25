@@ -15,18 +15,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketConfigurer{
 
-	private final HandshakeInterceptor handshakeInterceptor;
-	
-	private final ChattingWebsocketHandler chattingWebsocketHandler;
-	
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		
-		registry.addHandler(chattingWebsocketHandler, "/chattingSock")
-		.addInterceptors(handshakeInterceptor)
-		.setAllowedOriginPatterns("http://goldenprestige.store","http://13.125.120.147")
-		.withSockJS();
-	}
-	
-	
+   private final HandshakeInterceptor handshakeInterceptor;
+   
+   private final ChattingWebsocketHandler chattingWebsocketHandler;
+   
+   @Override
+   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+      
+      
+      registry.addHandler(chattingWebsocketHandler, "/chattingSock")
+      .addInterceptors(handshakeInterceptor)
+      .setAllowedOriginPatterns("http://localhost/","http://127.0.0.1/","http://192.168.50.236/"
+    		  					,"https://goldenprestige.store/","http://goldenprestige.store/",
+    		  					"http://13.125.120.147","https://13.125.120.147")
+      .withSockJS();
+   }
+   
 }
