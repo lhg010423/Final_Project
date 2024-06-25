@@ -10,21 +10,17 @@
 <body>
     <div style="height: 12vh;"></div>
     <div class="reservation-container">
-
         <div class="reservation-header">
             <h1>◾ 예약 수정</h1>
         </div>
         
         <section class="reservation-section">
-    
             <div class="border-container">
-
                 <div id="reservationDetail">
-
                     <table class="table-list">
                         <thead>
                             <tr>
-                                <th  th:text="${clubResvTime}"></th>
+                                <th th:text="${clubResvTime}"></th>
                                 <th>게스트룸</th>
                                 <th>골프</th>
                                 <th>수영</th>
@@ -35,7 +31,6 @@
                                 <th>십자수</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <!-- 각 시간 에 반복문 실행 -->
                             <th:block th:each="timeSlot : ${timeSlots}">
@@ -43,12 +38,12 @@
                                     <!-- 시간을 첫번째 열에 표시 -->
                                     <th th:text="${timeSlot}"></th>
                                     <!-- 클럽 이름에 대한 반복문  -->
-                                    <th:block th:each="clubName, clubIndex : ${clubNames}">
+                                    <th:block th:each="clubName : ${clubNames}">
                                         <th>
                                             <!-- 예약 리스트를 반복하며 현재 시간 슬롯과 클럽 이름이 일치하는지 확인 -->
                                             <span th:each="resv : ${reservationList}" 
-                                            th:if="${resv.clubResvTime == timeSlot and resv.clubName == clubName}" 
-                                            class="reservation-indicator"></span>
+                                                  th:if="${resv.clubResvTime == timeSlot and resv.clubName == clubName}" 
+                                                  class="reservation-indicator"></span>
                                         </th>
                                     </th:block>
                                 </tr>
@@ -67,13 +62,9 @@
                         <div class="reservation-item">
                             <div class="stapper-div"></div>
                             <div class="reservation-fontList">
-                                
-
                                 <p class="reservation-clubName" th:text="*{clubName}"></p>
-
                                 <input type="hidden" name="clubCode" id="clubCode" th:value="*{clubCode}">
                                 <input type="hidden" name="clubResvNo" id="clubResvNo" th:value="*{clubResvNo}">
-                                
                                 <div class="time-container">
                                     <p class="reservation-clubResvTime" th:text="*{clubResvTime}"></p>
                                     <input type="hidden" name="clubResvTime" id="clubResvTime" th:value="*{clubResvTime}">
@@ -106,8 +97,6 @@
     </div>
     <div style="height: 12vh;"></div>
     <script src="/js/myPage/myReserUpdate.js"></script>
-    <th:block th:replace="~{/common/footer}"></th:block>
-
-
+    <th:block th:replace="~{common/footer}"></th:block>
 </body>
 </html>
