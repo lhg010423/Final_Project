@@ -254,7 +254,6 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("updateAdminDocument")
 	public int updateAdminDocument(@RequestBody Map<String, Integer> map) {
-		
 
 		return service.updateAdminDocument(map.get("examId"));
 	}

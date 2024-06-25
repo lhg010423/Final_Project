@@ -196,8 +196,8 @@ async function fetchData(){
     const servicekey = await getServiceKey(); // 비동기 요청 1번째의 응답이 올대까지 기다림 
 
     //console.log("serviceKey : ", servicekey);
-
-    const url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
+    // http => s로 수정 
+    const url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
 
     //URLSearchParams : URL의 쿼리문자열을 쉽게 다룰 수 있게 해주는 내장 객체 
     // 단, 사용시 decode 서비스키 사용 -> URLSearchParams이 데이터를 인코딩하기 때문 
