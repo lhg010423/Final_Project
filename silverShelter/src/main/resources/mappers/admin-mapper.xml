@@ -422,7 +422,7 @@
 			CONCAT('CR_', CLUB_RESV_NO) AS "resvId",
 			MEMBER_NAME AS "memberName",
 			TO_CHAR(CLUB_RESV_TIME, 'YYYY-MM-DD') AS "reservationDate",
-			TO_NUMBER(TO_CHAR(CLUB_RESV_TIME, 'HH24')) AS "reservationTime",
+			TO_CHAR(TO_CHAR(CLUB_RESV_TIME, 'HH24:MI')) AS "reservationTime",
 			2 AS "typeOrder"
 		
 		FROM CLUB_RESERVATION
@@ -438,7 +438,7 @@
 			CONCAT('DR_', DR_APPT_NO) AS "resvId",
 			MEMBER_NAME AS "memberName",
 			TO_CHAR(DR_APPT_TIME, 'YYYY-MM-DD') AS "reservationDate",
-			TO_NUMBER(TO_CHAR(DR_APPT_TIME, 'HH24')) AS "reservationTime",
+			TO_CHAR(TO_CHAR(DR_APPT_TIME, 'HH24:MI')) AS "reservationTime",
 			1 AS "typeOrder"
 		
 		FROM DOCTOR
