@@ -58,7 +58,7 @@ document.querySelectorAll('.reservation-delete').forEach(button => {
             .then(data => {
                 
                 if(data > 0){
-                    location.href = 'http://localhost/myPage/myInfo';
+                    location.href = 'https://goldenprestige.store/myPage/myInfo';
                 
                 } else {
                     alert('삭제 실패');
