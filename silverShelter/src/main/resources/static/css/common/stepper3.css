@@ -4,8 +4,9 @@
     justify-content: center;
     align-items: center;
     padding-bottom: 50px;
+
 }
-.step-container .step-item:first-child {
+.numColor {
 
     display: inline-flex; /* 인라인 플렉스 박스로 설정합니다 */
     
@@ -28,7 +29,7 @@
 .numColor {
 	color: white;
 }
-.step-container .step-item:nth-of-type(2),
+.step-container .step-item:nth-of-type(1),
 .step-container .step-item:nth-of-type(3),
 .step-container .step-item:nth-of-type(4) {
 
@@ -41,10 +42,10 @@
     
     background-color: #f8f9fa;
     
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     
-    line-height: 30px; /* 높이와 일치하도록 조정 */
+    line-height: 50px; /* 높이와 일치하도록 조정 */
     text-align: center;
 }
 
