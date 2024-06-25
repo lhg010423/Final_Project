@@ -52,7 +52,7 @@ function updateButtonValue(examId) {
     button.name = examId;
 }
 
-const examStatusBtn= document.querySelector("#examStatusBtn");
+const examStatusBtn = document.querySelector("#examStatusBtn");
 
 examStatusBtn.addEventListener("click", (e) => {
     
