@@ -58,6 +58,7 @@ public class signUpFormController {
         if ("yes".equals(choice)) {
             // '예'를 선택한 경우의 로직
             session.setAttribute("inputMember", inputMember);
+            session.setAttribute("loginMember", inputMember);
             session.setAttribute("memberAddress", memberAddress);
             session.setAttribute("examId", examId);
         	return "redirect:/member/signUp2";
@@ -103,4 +104,33 @@ public class signUpFormController {
 	    return "member/signUp2"; // signUp2.html 또는 signUp2.jsp 뷰를 반환
 	}
 	
+	@GetMapping("member/success")
+	public String success(@SessionAttribute("inputMember") Member inputMember,
+	                          @SessionAttribute("memberAddress") String[] memberAddress,
+	                          @SessionAttribute("examId") int examId,
+	                          Model model, RedirectAttributes ra) {
+    	
+
+		int result = service.signUp(inputMember, memberAddress);
+
+		inputMember.setExamId(examId);
+
+		log.info("이제 잘 넘어오겠지? : "+inputMember);
+		String path = null;
+		String message = null;
+
+
+		if (result > 0) { // 성공
+			message = inputMember.getMemberName()+ " 님의 가입을 환영합니다!";
+			path = "/";
+
+		}else { // 실패
+			message = "회원 가입에 실패하였습니다";
+			path = "signUp";
+		}
+
+		ra.addFlashAttribute("message" ,message);
+
+		return "redirect:" + path;
+	}
 }
