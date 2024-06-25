@@ -1,6 +1,6 @@
 .adminBody-area {
     width: 96%;
-    height: 900px;
+    max-height: 800px;
     /* height: 800px; */
     overflow-y: auto; /* 세로 스크롤바 추가 */
     margin: 30px;
@@ -14,13 +14,13 @@
     /* justify-content: center; */
     align-items: center;
     padding: 30px;
-    overflow: auto;
-}
-
-.boardDetail-area {
-    
     /* overflow: auto; */
 }
+
+/* .boardDetail-area {
+    
+    overflow: auto;
+} */
 
 
 /* 게시글 header부분*********************************************** */
@@ -165,6 +165,7 @@
     min-height: 100px;
     justify-content: center;
     margin: 30px 0;
+    box-sizing: border-box;
 }
 
 .comment-write-area > textarea {
@@ -307,6 +308,11 @@
 
 
 /* Pagination ****************************************************** */
+
+
+.pagination-area {
+    min-height: 50px;
+}
 
 /* Pagination 점 제거 */
 .pagination-area ul {

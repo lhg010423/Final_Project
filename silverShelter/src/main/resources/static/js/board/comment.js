@@ -11,7 +11,7 @@ const selectCommentList = () => {
 
     console.log(boardNo);
 
-    fetch("/comment?boardNo=" + boardNo)
+    fetch("/board/select?boardNo=" + boardNo)
     .then(resp => resp.json())
     .then(commentMap => {
 
@@ -163,17 +163,20 @@ addComment.addEventListener("click", e => {
         "memberNo"       : loginMemberNo
     };
 
-    fetch("/comment", {
+    fetch("/comment/insert", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(data)
     })
     .then(resp => resp.text())
     .then(result => {
+
+
         console.log(result);
         if(result > 0) {
             alert("댓글 등록 완료");
             commentContent.value = "";
+            location.href=location.href;
             selectCommentList();
         } else {
             alert("댓글 등록 실패");
@@ -262,17 +265,18 @@ const insertChildComment = (parentCommentNo, btn) => {
         "parentCommentNo"   : parentCommentNo
     };
 
-    fetch("/comment", {
+    fetch("/comment/insert", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(obj)
     })
-    .then(resp => resp.json)
+    .then(resp => resp.text())
     .then(result => {
 
         if(result > 0) {
             alert("답글이 등록 되었습니다");
             selectCommentList();
+            location.href=location.href;
 
         } else {
             alert("답글 등록 실패");
@@ -291,7 +295,7 @@ const deleteComment = commentNo => {
     // 취소 선택 시
     if(!confirm("삭제 하시겠습니까?")) return;
 
-    fetch("/comment", {
+    fetch("/comment/delete", {
         method : "DELETE",
         headers : {"Content-Type" : "application/json"},
         body : commentNo
@@ -302,6 +306,7 @@ const deleteComment = commentNo => {
         if(result > 0) {
             alert("삭제 되었습니다");
             selectCommentList(); // 삭제한 후 댓글 다시 조회
+            location.href=location.href;
         } else {
             alert("삭제 실패");
         }
@@ -411,7 +416,7 @@ const updateComment = (commentNo, btn) => {
       "commentContent" : textarea.value
     }
   
-    fetch("/comment", {
+    fetch("/comment/update", {
       method : "PUT",
       headers : {"Content-Type" : "application/json"},
       body : JSON.stringify(data)
@@ -421,6 +426,8 @@ const updateComment = (commentNo, btn) => {
       if(result > 0){
         alert("댓글이 수정 되었습니다");
         selectCommentList();
+        location.href=location.href;
+
       } else {
         alert("댓글 수정 실패");
       }
