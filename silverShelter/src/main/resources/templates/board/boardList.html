@@ -30,7 +30,8 @@
             <div class="boardHeader">
                 <th:block th:each="boardType : ${application.boardTypeList}">
                     <a th:text="${boardType.boardName}"
-                        th:href="@{/board/{boardCode}(boardCode=${boardType.boardCode})}">게시판 이름</a>
+                        th:href="@{/board/{boardCode}(boardCode=${boardType.boardCode})}"
+                        th:classappend="${boardType.boardCode == 1 ? 'active' : ''}">게시판 이름</a>
                 </th:block>
 
                 <th:block th:unless="${application.boardTypeList}">
