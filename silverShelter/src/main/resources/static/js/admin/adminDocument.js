@@ -71,26 +71,27 @@ examStatusBtn.addEventListener("click", (e) => {
         } else{
             alert("서류 심사 통과")
 
-            fetch("/admin/signUpAdminDocument",{
-                method : "POST",
-                headers : {"Content-Type" : "application/json"},
-                body: JSON.stringify({"examId" : e.target.name})              
-            })
-            .then(resp2 => resp2.json())
-            .then(count => {
-                console.log("값이 어떻게 넘어오려나",count);
-                if(count == 0){
-                    alert("이메일 전송 실패..")
+            // fetch("/admin/signUpAdminDocument",{
+            //     method : "POST",
+            //     headers : {"Content-Type" : "application/json"},
+            //     body: JSON.stringify({"examId" : e.target.name})              
+            // })
+            // .then(resp2 => resp2.json())
+            // .then(count => {
+            //     console.log("값이 어떻게 넘어오려나",count);
+            //     if(count == 0){
+            //         alert("이메일 전송 실패..")
 
-                } else {
-                    alert("이메일이 전송되었습니다.")
+            //     } else {
+            //         alert("이메일이 전송되었습니다.")
 
-                }
-            })
+            //     }
+            // })
 
         }
 
         location.href = location.pathname;
+
     })
 
     

@@ -246,7 +246,10 @@ public class AdminServiceImpl implements AdminService{
    }
 
 
-   public String createSignUpUrl() {
+   /** url 조합 메서드 
+ * @return
+ */
+public String createSignUpUrl() {
       
       String url = "https://goldenprestige.store/member/signUp/";
       
