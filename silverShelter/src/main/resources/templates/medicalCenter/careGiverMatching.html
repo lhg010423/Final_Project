@@ -28,7 +28,7 @@
 <th:block id="loginServey" th:if="${session.loginMember != null}">
     <th:block id="caregiverInfo" th:if="${session.loginMember.caregiversName != null}">
         <div id="caregiverInfo1">
-            <h3 id="caregiverInfoTit">현재 요양사 정보 : <span th:text="${session.loginMember.caregiversName}" ></span> 요양사</h3>
+            <h3 id="caregiverInfoTit">현재 요양사 정보 : <span th:text="${session.loginMember.caregiversName}" /> 요양사</h3>
             <h4 id="caregiverInfoTit1">요양사 변경을 원한다면 요양사 매칭 사전 설문조사를 다시 작성해주세요</h4>
             <button id="AIBtn">요양사 매칭 사전 설문조사 바로가기</button>
         </div>
