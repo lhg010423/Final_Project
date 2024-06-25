@@ -15,13 +15,13 @@ document.querySelectorAll(".memberId").forEach(button => {
         })
         .then(resp => resp.json())
         .then(result => {
+            console.log(result);
 
             if(result == null) {
                 alert("값 없음");
                 e.preventDefault();
             } else {
 
-                console.log(result);
 
 
 
@@ -29,7 +29,7 @@ document.querySelectorAll(".memberId").forEach(button => {
                 nameInput.innerText = result.memberName;
 
                 const idInput = document.getElementById("idInput");
-                idInput.innerText = result.memberId;
+                idInput.innerText = result.memberNo;
 
                 const telInput = document.getElementById("telInput");
                 telInput.innerText = result.memberTel;

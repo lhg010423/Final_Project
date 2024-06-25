@@ -2,7 +2,6 @@ package com.silver.shelter.admin.controller;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import com.silver.shelter.board.model.dto.Board;
 import com.silver.shelter.board.model.service.BoardService;
 import com.silver.shelter.board.model.service.CommentService;
 import com.silver.shelter.careGiver.model.CareGiver;
-import com.silver.shelter.clubReservation.model.dto.ClubReservation;
 import com.silver.shelter.examination.model.dto.Examination;
 import com.silver.shelter.member.model.dto.Member;
 
@@ -130,27 +128,46 @@ public class AdminController {
 
 		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
 		map.put("memberName", memberInfo.getMemberName());
-		map.put("memberId", memberInfo.getMemberId());
+		map.put("memberNo", memberInfo.getMemberId());
 		map.put("memberEmail", memberInfo.getMemberEmail());
 		map.put("memberTel", memberInfo.getMemberTel());
 		map.put("guardianTel", memberInfo.getGuardianTel());
 		map.put("caregiversName", memberInfo.getCaregiversName());
 		map.put("roomNo", memberInfo.getRoomNo());
 		
-		if(memberInfo.getMemberAddress() != null) {
-			
-			String memberAddress = memberInfo.getMemberAddress();
-			
-			String[] arr = memberAddress.split("\\^\\^\\^");
-			
-			map.put("postCode", arr[0]);
-			map.put("address", arr[1]);
-			map.put("detailAddress", arr[2]);
-		}
+//		if(memberInfo.getMemberAddress() != null) {
+//			
+//			String memberAddress = memberInfo.getMemberAddress();
+//			
+//			String[] arr = memberAddress.split("\\^\\^\\^");
+//			
+//			map.put("postCode", arr[0]);
+//			map.put("address", arr[1]);
+//			map.put("detailAddress", arr[2]);
+//		}
+		
+		if (memberInfo.getMemberAddress() != null) {
+	        String memberAddress = memberInfo.getMemberAddress();
+	        String[] arr = memberAddress.split("\\^\\^\\^");
+
+	        if (arr.length > 0) {
+	            map.put("postCode", arr[0]);
+	        }
+	        if (arr.length > 1) {
+	            map.put("address", arr[1]);
+	        }
+	        if (arr.length > 2) {
+	            map.put("detailAddress", arr[2]);
+	        }
+	    }
+		
+		
+		
 		
 		// 이름, 아이디, 이메일, 전화번호, 보호자 전화번호, 방번호
 
 		
+		System.out.println("map 확인용 : "+map);
 		log.info("member {}", map.get("memberInfo"));
 		
 		
@@ -552,7 +569,24 @@ public class AdminController {
 	}
 	
 	
-	
+	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/update")
+	public String boardUpdate(
+			@PathVariable("boardCode") int boardCode,
+			@PathVariable("boardNo") int boardNo,
+//			@SessionAttribute("loginMember") Member loginMemberk,
+			Model model
+			) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardCode", boardCode);
+		map.put("boardNo", boardNo);
+		
+		Board board = bs.boardDetailSelect(map);
+		
+		model.addAttribute("board", board);
+		
+		return "/admin/boardUpdate";
+	}
 	
 	
 	
