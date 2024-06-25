@@ -2,38 +2,39 @@
 
 
 
-
 <div align=center>
-  KH 정보교육원 Final Project💻
-  <br>
-  <br>
-  Team SilverShelter
-  <br>
-  <br>
-  <br>
-  팀장 : 👩🏽 /SeonKyuKimm
-  <br>
-  팀원 박수찬 : 🧒 /gorru135
-  <br>
-  팀원 이형구 : 🧒 /lhg010423
-  <br>
-   팀원 최윤정 : 👩   /choiyunjung88 
+	KH 정보교육원 Final Project💻
+		<br>
+		<br>
+	Team SilverShelter
+		<br>
+		<br>
+		<br>
+	팀장 김선규: 👩🏽 /SeonKyuKimm
+		<br>
+	팀원 박수찬 : 🧒 /gorru135
+		<br>
+	팀원 이형구 : 🧒 /lhg010423
+		<br>
+	팀원 최윤정 : 👩 /choiyunjung88
 </div>
+
 <br>
+
 <div align=center>
 	<p>📚Languages</p>
 </div>
 <div align=center>
- ● HTML5 _ <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /><br>
-  ● CSS3 _ <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /><br>
-  ● JavaScript _ <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /><br>
-  ● Java _ <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" /><br>
-  ● Oracle _ <img src="https://img.shields.io/badge/Oracle%20SQL-F80000?style=flat&logo=Oracle&logoColor=white" /><br>
-  ● Phyton _<img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white">
+	● HTML5 _ <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /><br>
+	● CSS3 _ <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /><br>
+	● JavaScript _ <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /><br>
+	● Java _ <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" /><br>
+	● Oracle _ <img src="https://img.shields.io/badge/Oracle%20SQL-F80000?style=flat&logo=Oracle&logoColor=white" /><br>
+	● Phyton _<img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white">
 </div>
-
+	<br>
+	<br>
 <div align=center>
-  <br><br>
 	<p>🛠Tools & Engine</p>
 </div>
 <div align=center>
