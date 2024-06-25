@@ -1,32 +1,59 @@
-# <div align=center>Final_Project</div>
-<<<<<<< development
+<img src="https://capsule-render.vercel.app/api?type=waving&color=E9D427&height=150&section=header&text=Golden%20Prestige&fontSize=45" />
 
 
-Medical Center Application
 
-이 프로젝트는 의료 센터 예약 및 매칭 시스템을 구현한 웹 응용 프로그램입니다. 환자는 이 시스템을 사용하여 의사와 간병인을 예약하고 매칭할 수 있습니다.
 
-주요 기능
-의사 예약 시스템
+<div align=center>
+  KH 정보교육원 Final Project💻
+  <br>
+  <br>
+  Team SilverShelter
+  <br>
+  <br>
+  <br>
+  팀장 : 👩🏽 /SeonKyuKimm
+  <br>
+  팀원 박수찬 : 🧒 /gorru135
+  <br>
+  팀원 이형구 : 🧒 /lhg010423
+  <br>
+   팀원 최윤정 : 👩   /choiyunjung88 
+</div>
+<br>
+<div align=center>
+	<p>📚Languages</p>
+</div>
+<div align=center>
+ ● HTML5 _ <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white" /><br>
+  ● CSS3 _ <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" /><br>
+  ● JavaScript _ <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white" /><br>
+  ● Java _ <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Conda-Forge&logoColor=white" /><br>
+  ● Oracle _ <img src="https://img.shields.io/badge/Oracle%20SQL-F80000?style=flat&logo=Oracle&logoColor=white" /><br>
+  ● Phyton _<img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white">
+</div>
 
-특정 진료 과목의 의사를 선택하여 예약할 수 있는 기능입니다.
-선택한 의사의 가능한 예약 일정을 조회하고 선택할 수 있습니다.
+<div align=center>
+  <br><br>
+	<p>🛠Tools & Engine</p>
+</div>
+<div align=center>
+	<img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=Spring&logoColor=white" />
+	<img src="https://img.shields.io/badge/Tomcat-F8DC75?style=flat&logo=ApacheTomcat&logoColor=white" />
+  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=AmazonAWS&logoColor=white" />
+  <br>
+  <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" />
+  <img src="https://img.shields.io/badge/DBeaver-382923?style=flat&logo=DBeaver&logoColor=white" />
+  <img src="https://img.shields.io/badge/ThymeLeaf-005F0F?style=flat&logo=Thymeleaf&logoColor=white" />
+</div>
+<div>
 
-간병인 매칭 시스템
 
-사용자의 요구 사항을 기반으로 간병인을 클러스터링하고, 가장 적합한 간병인을 추천하는 기능입니다.
-클러스터링된 결과를 통해 가장 적합한 간병인을 클라이언트에 반환합니다.
 
-예약 확인 및 업데이트
+  
+</div>
+<br><br><br>
 
-예약한 서비스의 상세 정보를 확인하고, 필요에 따라 예약을 수정 또는 삭제할 수 있는 기능입니다.
-사용자는 자신의 예약 목록을 확인하고 업데이트할 수 있습니다.
 
-사용 기술 및 프레임워크
-Java Spring Framework를 사용하여 백엔드를 구현하였습니다.
-Spring MVC 아키텍처를 기반으로 웹 컨트롤러를 구성하였습니다.
-데이터베이스 연동을 위해 Spring Data JPA를 사용하였습니다.
-Frontend는 Thymeleaf 템플릿 엔진을 사용하여 구현하였습니다.
-=======
-HIHI~~ 
->>>>>>> main
+<img src="https://capsule-render.vercel.app/api?type=waving&color=E9D427&height=150&section=footer" />
+
+
