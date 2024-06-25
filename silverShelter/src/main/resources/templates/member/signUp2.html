@@ -8,7 +8,8 @@
     <th:block th:replace="~{common/common}"></th:block>
 
     <link rel="stylesheet" th:href="@{/css/signUp/signUpForm.css}">
-    
+    <link rel="stylesheet" href="/css/medicalCenter/medicalCenter.css">
+
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/main/favicon.png}">
 </head>
 <body>
@@ -22,7 +23,7 @@
 
             <!-- 요양사 설문조사 -->
             <h1 id="surveyFormTit">요양사 매칭 사전 설문 조사</h1>
-            <form id="surveyForm" action="/medicalCenter/careGiversResult" method="POST">
+            <form id="surveyForm">
                 <p>선호하는 요양사 성별:</p>
                 <input type="radio" id="male" name="gender" value="male">
                 <label for="male">남자</label><br>
@@ -76,8 +77,9 @@
     <th:block th:replace="~{common/footer}"></th:block>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!-- <script src="/js/signUp/signUpForm.js"></script> -->
-   
+    <script src="/js/signUp/signUpForm2.js"></script>
+    <!-- <script src="/js/medicalCenter/medicalCenter.js"></script> -->
+
     <script src="https://kit.fontawesome.com/f4ca9edfa4.js" crossorigin="anonymous"></script>
 </body>
 </html>

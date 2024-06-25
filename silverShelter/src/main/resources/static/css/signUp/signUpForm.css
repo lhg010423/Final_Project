@@ -534,8 +534,30 @@ body{
     color: coral;
 }
 
+#yesBtn {
+    width: 6vw;
+    height: 4vh;
 
+    border: none;
 
+    background-color: #1A2050;
+    color: #ffffff;
+    cursor: pointer;
+
+    border-radius: 6px;
+}
+#noBtn {
+    width: 6vw;
+    height: 4vh;
+
+    border: none;
+
+    background-color: #1A2050;
+    color: #ffffff;
+    cursor: pointer;
+
+    border-radius: 6px;
+}
 
 
 
