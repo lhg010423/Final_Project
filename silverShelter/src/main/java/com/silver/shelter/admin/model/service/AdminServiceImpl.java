@@ -248,7 +248,7 @@ public class AdminServiceImpl implements AdminService{
 
    public String createSignUpUrl() {
       
-      String url = "http://localhost/member/signUp/";
+      String url = "https://goldenprestige.store/member/signUp/";
       
       for(int i=0; i <6; i++) {
          int numberPath = (int)(Math.random()*5);
