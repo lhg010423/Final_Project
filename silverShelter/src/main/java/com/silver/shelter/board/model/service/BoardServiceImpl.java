@@ -136,9 +136,6 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.boardDetailSelect(map);
 	}
 
-
-
-
 	/** 조회수 증가
 	 *
 	 */
