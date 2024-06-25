@@ -1,6 +1,5 @@
 package com.silver.shelter.board.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.ui.Model;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.silver.shelter.board.model.dto.Comment;
@@ -30,9 +30,10 @@ public class CommentController {
 	 * @param boardNo
 	 * @return
 	 */
-	@GetMapping("")
-	public Map<String, Object> select(
+	@GetMapping("select")
+	public String select(
 			@RequestParam("boardNo") int boardNo,
+			@RequestParam("boardCode") int boardCode,
 			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
 			Model model,
 			@RequestParam Map<String, Object> paramMap
@@ -54,7 +55,12 @@ public class CommentController {
 			
 		}
 		
-		return map;
+		model.addAttribute("commentList", map.get("commentList"));
+		model.addAttribute("commentCount", map.get("commentCount"));
+		model.addAttribute("pagination", map.get("pagination"));
+		
+		
+		return "admin/" + boardCode + "/" + boardNo;
 	}
 	
 //	@GetMapping("") // get요청온거를 잡아줌
@@ -67,7 +73,7 @@ public class CommentController {
 	 * @param comment
 	 * @return
 	 */
-	@PostMapping("")
+	@PostMapping("insert")
 	public int insert(@RequestBody Comment comment) {
 		return service.insert(comment);
 	}
@@ -77,7 +83,7 @@ public class CommentController {
 	 * @param commentNo
 	 * @return
 	 */
-	@DeleteMapping("")
+	@DeleteMapping("delete")
 	public int delete(@RequestBody int commentNo) {
 		return service.delete(commentNo);
 	}
@@ -87,7 +93,7 @@ public class CommentController {
 	 * @param comment
 	 * @return
 	 */
-	@PutMapping("")
+	@PutMapping("update")
 	public int update(@RequestBody Comment comment) {
 		return service.update(comment);
 	}

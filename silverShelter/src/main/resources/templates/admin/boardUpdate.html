@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 한눈에 보기</title>
+
+    <!-- 왼쪽 nav 부분 및 전체페이지 공간지정 css -->
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/boardUpdate.css}">
+
+</head>
+<body>
+    <main>
+
+        <!-- 왼쪽 nav 부분 -->
+        <th:block th:replace="~{admin/admin}"></th:block>
+
+
+
+        <!-- nav를 제외한 오른쪽 메인 페이지 -->
+        <section class="adminMain">
+
+            <div class="adminHeader">
+                <span>관리자 페이지 - 한눈에 보기</span>
+            </div>
+
+            <div class="adminBody">
+
+                <div class="adminBody-area">
+
+                    <!-- 게시글 공간 -->
+                    <div class="boardDetail-area">
+                        
+                        <!-- 게시글 제목 공간 -->
+                        <div class="boardTitle-area">
+                            <div class="lines"></div>
+                            <a th:href="@{/admin/{boardCode} (boardCode=${board.boardCode}, cp=${cp}, key=${session.key}, query=${session.query})}">＜ 돌아가기</a>
+                            
+                            <br><br>
+                            
+                            <input id="boardTitle" th:value="${board.boardTitle}"></input>
+                            
+                        </div>
+                        
+                        <!-- 작성자 정보 공간 -->
+                        <div class="writer-area">
+                            
+                            <div class="writer-left-area">
+                                
+                                <span id="writer" th:text="${board.memberName}">작성자</span>
+                                
+                                <span th:text="|작성일 ${board.boardWriteDate}|">작성일</span>
+                                <span th:if="${board.boardUpdateDate}" th:text="|수정일 ${board.boardUpdateDate}|">수정일</span>
+                            </div>
+                            
+                            <div class="writer-right-area">
+                                <span th:text="|조회수 ${board.readCount}|">조회수</span>
+                                <i class="fa-heart" id="boardLike"
+                                th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"
+                                ></i>
+                                <span th:text="*{likeCount}">0</span>
+                                <!-- <span id="boardLike" th:text="|좋아요 ${board.likeCount}|">좋아요</span> -->
+                                
+                            </div>
+                        
+                        </div>
+                    
+                        <hr>    
+                        
+                        <div class="boardContent-area">
+                            
+                            <textarea id="boardContent"
+                                th:text="${board.boardContent}"></textarea>
+                            
+                        </div>
+                    
+                    </div>    
+            
+            
+            
+                    <div class="board-btn-area">
+
+                        
+                        <button id="updateBtn">수정하기</button>
+                        <button id="cancelBtn">취소하기</button>
+                        
+                    </div>
+                    <!-- th:href="@{/board/{boardCode}/{boardNo}/boardUpdate (boardCode=${boardList.boardCode}, boardNo=${boardNo}, cp=${cp}${session.key != null and session.key != '' ? ', key=' + session.key : ''}${session.query != null and session.query != '' ? ', query=' + session.query : ''})}" -->
+                    
+                    
+
+                    
+                
+                
+                </div> <!-- adminBody-area 끝 -->
+            </div> <!-- adminBody 끝 -->
+
+        
+        
+        </section>
+        
+    </main>
+
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
+        
+        const boardCode = /*[[${board.boardCode}]]*/ "게시판 코드";
+
+        const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
+
+        // if(message != null) alert(message);
+        
+        
+        
+    </script>
+
+
+    <script src="/js/admin/boardUpdate.js"></script>
+</body>
+</html>
