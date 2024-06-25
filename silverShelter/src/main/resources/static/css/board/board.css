@@ -34,7 +34,8 @@ main {
     text-decoration: none;
     cursor: pointer;
 }
-.boardHeader a:hover {
+.boardHeader a:hover,
+.boardHeader a.active {
 
 	border-bottom: 2px solid #1a2050;	
 }
