@@ -88,8 +88,8 @@ public class CommentServiceImpl implements CommentService{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		List<Comment> commentList = mapper.commentSearchSelect(paramMap, rowBounds);
-		System.out.println(commentList.get(0));
-		System.out.println(commentList.get(3));
+//		System.out.println(commentList.get(0));
+//		System.out.println(commentList.get(3));
 		
 		Map<String, Object> map = new HashMap<>();
 		
