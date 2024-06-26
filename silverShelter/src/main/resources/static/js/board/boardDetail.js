@@ -14,7 +14,7 @@ if(updateBtn != null) {
             "boardContent" : boardContent.value
         };
 
-        fetch(`/board/${boardCode}/${boardNo}/boardUpdate`, {
+        fetch(`board/${boardCode}/${boardNo}/boardUpdate`, {
             method : "PUT",
             headers : {"Content-Type" : "application/json"},
             body : JSON.stringify(obj)
@@ -23,14 +23,14 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
-                
+
                 alert("수정되었습니다.")
                 location.href="board/" + boardCode + "/" + boardNo;
 
             } else {
 
                 alert("수정 실패");
-                return;
+                // return;
             }
 
         })
