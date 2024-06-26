@@ -586,6 +586,8 @@ public class AdminController {
 		return "admin/boardUpdate";
 	}
 	
+	
+
 	/** 요양사 관리
 	 * @return
 	 */
