@@ -242,6 +242,7 @@ public class BoardController {
 		cparamMap.put("commentKey", commentKey);
 		cparamMap.put("commentQuery", commentQuery);
 		
+		System.out.println("boardNo : "+boardNo + "cp : " + commentPage);
 		
 		if(commentKey == null) {
 			
@@ -253,6 +254,8 @@ public class BoardController {
 		
 		System.out.println(commentKey);
 		System.out.println(commentQuery);
+		
+		System.out.println("commentMap : "+commentMap);
 		
 		model.addAttribute("board",board);
 		model.addAttribute("author", author);
