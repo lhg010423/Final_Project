@@ -296,7 +296,7 @@ const deleteComment = commentNo => {
     if(!confirm("삭제 하시겠습니까?")) return;
 
     fetch("/comment/delete", {
-        method : "DELETE",
+        method : "POST",
         headers : {"Content-Type" : "application/json"},
         body : commentNo
     })
@@ -307,8 +307,10 @@ const deleteComment = commentNo => {
             alert("삭제 되었습니다");
             selectCommentList(); // 삭제한 후 댓글 다시 조회
             location.href=location.href;
+
         } else {
             alert("삭제 실패");
+            //return;
         }
     })
     .catch(err => console.log(err));
@@ -417,7 +419,7 @@ const updateComment = (commentNo, btn) => {
     }
   
     fetch("/comment/update", {
-      method : "PUT",
+      method : "POST",
       headers : {"Content-Type" : "application/json"},
       body : JSON.stringify(data)
     })
@@ -430,6 +432,7 @@ const updateComment = (commentNo, btn) => {
 
       } else {
         alert("댓글 수정 실패");
+        //return;
       }
   
     })
