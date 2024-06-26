@@ -20,7 +20,7 @@ main {
 
 /* 게시판 상단 공간 */
 .boardHeader {
-    height: 20%;
+    height: 25%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -40,9 +40,17 @@ main {
 	border-bottom: 2px solid #1a2050;	
 }
 
+.boardHeader-name {
+    display: flex;
+    justify-content: center;
+
+}
+
+
+
 /* 게시판 목록 및 페이지네이션 영역 */
 .boardBody {
-    height: 80%;
+    height: 75%;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -23,8 +23,14 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
+                // alert("수정되었습니다.")
+                // location.href="/board/" + boardCode + "/" + boardNo;
+
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace('/boardUpdate', '');
                 alert("수정되었습니다.")
-                location.href="/board/" + boardCode + "/" + boardNo;
+                location.href = newUrl;
+
             } else {
                 alert("수정 실패");
             }
@@ -64,7 +70,7 @@ if(deleteBtn != null) {
         } else {
             
             fetch(`/board/${boardCode}/${boardNo}/boardDelete`, {
-                method : "DELETE",
+                method : "POST",
                 headers : {"Content-Type" : "application/json"},
                 body : boardNo
             })
@@ -76,15 +82,15 @@ if(deleteBtn != null) {
             })
             alert("게시글이 삭제되었습니다.");
 
-
         }
 
         location.href = `/board/${boardCode}`;
-
     })
-
-
 }
+
+
+
+
 
 // 좋아요 클릭 했을 때
 document.querySelector("#boardLike").addEventListener("click", e => {
