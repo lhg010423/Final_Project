@@ -14,8 +14,8 @@ if(updateBtn != null) {
             "boardContent" : boardContent.value
         };
 
-        fetch(`board/${boardCode}/${boardNo}/boardUpdate`, {
-            method : "PUT",
+        fetch(`/board/${boardCode}/${boardNo}/boardUpdate`, {
+            method : "POST",
             headers : {"Content-Type" : "application/json"},
             body : JSON.stringify(obj)
         })
