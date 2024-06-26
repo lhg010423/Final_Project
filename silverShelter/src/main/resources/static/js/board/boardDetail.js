@@ -25,7 +25,7 @@ if(updateBtn != null) {
             if(result > 0) {
 
                 alert("수정되었습니다.")
-                location.href="board/" + boardCode + "/" + boardNo;
+                location.href="goldenprestige.store/board/" + boardCode + "/" + boardNo;
 
             } else {
 
