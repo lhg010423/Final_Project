@@ -62,6 +62,8 @@ public class CommentServiceImpl implements CommentService{
 		
 		List<Comment> commentList = mapper.commentAllSelect(boardNo, rowBounds);
 		
+		System.out.println(commentList);
+		
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("pagination", pagination);

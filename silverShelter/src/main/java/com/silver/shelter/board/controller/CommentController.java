@@ -30,38 +30,38 @@ public class CommentController {
 	 * @param boardNo
 	 * @return
 	 */
-	@GetMapping("select")
-	public String select(
-			@RequestParam("boardNo") int boardNo,
-			@RequestParam("boardCode") int boardCode,
-			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
-			Model model,
-			@RequestParam Map<String, Object> paramMap
-			) {
-		
-		// return에 if문 못씀 삼항 연산자로 써야함
-		
-		Map<String, Object> map = null;
-		
-		
-		if(paramMap.get("key") == null) {
-			map = service.commentAllSelect(boardNo, cp);
-			
-		} else {
-			
-			paramMap.put("boardNo", boardNo);
-			
-			map = service.commentSearchSelect(paramMap, cp);
-			
-		}
-		
-		model.addAttribute("commentList", map.get("commentList"));
-		model.addAttribute("commentCount", map.get("commentCount"));
-		model.addAttribute("pagination", map.get("pagination"));
-		
-		
-		return "admin/" + boardCode + "/" + boardNo;
-	}
+//	@GetMapping("select")
+//	public String select(
+//			@RequestParam("boardNo") int boardNo,
+//			@RequestParam("boardCode") int boardCode,
+//			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+//			Model model,
+//			@RequestParam Map<String, Object> paramMap
+//			) {
+//		
+//		// return에 if문 못씀 삼항 연산자로 써야함
+//		
+//		Map<String, Object> map = null;
+//		
+//		
+//		if(paramMap.get("key") == null) {
+//			map = service.commentAllSelect(boardNo, cp);
+//			
+//		} else {
+//			
+//			paramMap.put("boardNo", boardNo);
+//			
+//			map = service.commentSearchSelect(paramMap, cp);
+//			
+//		}
+//		
+//		model.addAttribute("commentList", map.get("commentList"));
+//		model.addAttribute("commentCount", map.get("commentCount"));
+//		model.addAttribute("pagination", map.get("pagination"));
+//		
+//		
+//		return "admin/" + boardCode + "/" + boardNo;
+//	}
 	
 //	@GetMapping("") // get요청온거를 잡아줌
 //	public List<Comment> select(@RequestParam("boardNo") int boardNo) {
