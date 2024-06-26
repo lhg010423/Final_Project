@@ -284,12 +284,18 @@ public class AdminController {
 		
 		log.info("url 주소는? : "+ url);
 		
+		
 		if(url != null) {
 			
+			
 			return 1;
+		
+		} else {
+			
+			return 0;
 		}
 		
-		return 0;
+		
 	}
 
 	

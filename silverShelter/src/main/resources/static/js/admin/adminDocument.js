@@ -81,12 +81,14 @@ examStatusBtn.addEventListener("click", (e) => {
                 console.log("값이 어떻게 넘어오려나",count);
 
                 if(count == 0){
+                    
                     alert("이메일 전송 실패..")
+
                     return;
                     
                 } else {
                     alert("이메일이 전송되었습니다.")
-                    
+
                     location.href = location.pathname;
                 }
             })
