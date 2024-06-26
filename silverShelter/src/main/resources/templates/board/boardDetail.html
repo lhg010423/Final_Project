@@ -72,10 +72,12 @@
                         </div>
 
                         <div class="writer-right-area">
-                            <span th:text="|조회수 ${board.readCount}|">조회수</span>
+                            <span th:text="|조회수 &nbsp; ${board.readCount}|">조회수</span>
+                            &nbsp;&nbsp;
+
                             <i class="fa-heart" id="boardLike"
-                                th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"
-                            ></i>
+                                th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"></i>
+                            &nbsp;&nbsp;
                             <span th:text="*{likeCount}">0</span>
                             <!-- <span id="boardLike" th:text="|좋아요 ${board.likeCount}|">좋아요</span> -->
 
