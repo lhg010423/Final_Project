@@ -27,8 +27,7 @@ if(updateBtn != null) {
                 // var newUrl = currentUrl.replace('/boardUpdate', '');
                 // alert("수정되었습니다.")
                 // location.href = newUrl;
-                location.href = location.pathname
-                + "/update";
+                location.href = location.pathname + location.search;
                           
             } else {
 
