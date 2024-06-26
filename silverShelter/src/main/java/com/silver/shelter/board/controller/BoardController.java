@@ -394,7 +394,7 @@ public class BoardController {
 	 * @return
 	 */
 	@ResponseBody
-	@DeleteMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardDelete")
+	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardDelete")
 	public int boardDelete(@RequestBody int boardNo) {
 		return service.boardDelete(boardNo);
 	}
