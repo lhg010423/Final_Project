@@ -4,7 +4,7 @@
 
 
 <div align=center>
-	KH 정보교육원 Final Project💻<br>
+	<b>KH 정보교육원 Final Project💻</b><br>
 	240520~240627
 		<br>
 		<br>
