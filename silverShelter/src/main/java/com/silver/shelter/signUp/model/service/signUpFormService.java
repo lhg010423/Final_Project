@@ -16,4 +16,6 @@ public interface signUpFormService {
 	 */
 	int signUp(Member inputMember, String[] memberAddress);
 
+	int signUp2(Member inputMember, String[] memberAddress);
+
 }
