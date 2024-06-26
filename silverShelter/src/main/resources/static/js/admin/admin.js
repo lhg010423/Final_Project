@@ -41,6 +41,15 @@ document.querySelectorAll(".memberId").forEach(button => {
                 const roomNo = document.getElementById("roomNo");
                 roomNo.innerText = result.roomNo;
 
+                document.getElementById("postCode").innerText = result.postCode;
+                document.getElementById("address").innerText = result.address;
+                document.getElementById("detailAddress").innerText = result.detailAddress;
+                document.getElementById("caregiversName").innerText = result.caregiversName;
+                document.getElementById("roomNo").innerText = result.roomNo;
+
+
+
+
             }
         })
 
