@@ -28,5 +28,23 @@
              #{examId}
       )      
    </insert>
-	
+	<insert id="signUpForm2">
+		INSERT INTO "MEMBER"
+		VALUES (
+		    SEQ_MEMBER_NO.NEXTVAL,
+		    #{memberId},
+		    #{memberPw},
+		    #{memberName},
+		    #{memberEmail},
+		    #{memberAddress},
+		    #{memberTel},
+		    #{guardianTel},
+		    DEFAULT,
+		    DEFAULT,
+		    DEFAULT,
+		    (SELECT CAREGIVERS_NO FROM "CAREGIVERS" WHERE CAREGIVERS_NAME = #{caregiversName}),
+		    NULL,
+		    #{examId}
+		)    
+   </insert>
 </mapper>
