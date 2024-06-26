@@ -1,5 +1,8 @@
 package com.silver.shelter.signUp.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.silver.shelter.careGiver.repository.CaregiverDao;
+import com.silver.shelter.careGiver.service.CaregiverService;
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.signUp.model.service.signUpFormService;
 
@@ -25,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class signUpFormController {
 
 	public final signUpFormService service;
+    @Autowired
+    private CaregiverDao caregiverDao;
 
 
 	/** 아이디 중복검사 하는 ajax 메서드
@@ -100,10 +107,13 @@ public class signUpFormController {
 	    model.addAttribute("inputMember", inputMember);
 	    model.addAttribute("memberAddress", memberAddress);
 	    model.addAttribute("examId", examId);
+		caregiverDao.selectCaregiver(Integer.parseInt(inputMember.getCaregiversNo()), inputMember.getMemberNo());
+        
+        log.info("간병인이 성공적으로 업데이트 되었습니다.");
 
 	    return "member/signUp2"; // signUp2.html 또는 signUp2.jsp 뷰를 반환
 	}
-	
+
 	@GetMapping("member/success")
 	public String success(@SessionAttribute("inputMember") Member inputMember,
 	                          @SessionAttribute("memberAddress") String[] memberAddress,
@@ -113,6 +123,8 @@ public class signUpFormController {
 
 		int result = service.signUp(inputMember, memberAddress);
 
+
+	    
 		inputMember.setExamId(examId);
 
 		log.info("이제 잘 넘어오겠지? : "+inputMember);
