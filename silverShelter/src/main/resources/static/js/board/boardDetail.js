@@ -66,25 +66,27 @@ if(deleteBtn != null) {
         if(!answer) {
             alert("삭제 취소");
             return;
+
         } else {
             
             fetch(`/board/${boardCode}/${boardNo}/boardDelete`, {
-                method : "DELETE",
+                method : "POST",
                 headers : {"Content-Type" : "application/json"},
                 body : boardNo
             })
             .then(resp => resp.text())
             .then(result => {
+
                 if(result == 0 ) {
                     console.log("삭제 중 오류가 발생했습니다.");
+                
+                } else {
+                    alert("게시글이 삭제되었습니다.");
+                    location.href = `/board/${boardCode}`;
                 }
             })
-            alert("게시글이 삭제되었습니다.");
-
 
         }
-
-        location.href = `/board/${boardCode}`;
 
     })
 
