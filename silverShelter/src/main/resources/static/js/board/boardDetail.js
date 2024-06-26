@@ -22,15 +22,15 @@ if(updateBtn != null) {
         .then(resp => resp.text())
         .then(result => {
 
-            if(result < 0) {
-                alert("수정 실패");
-
-                return;
+            if(result > 0) {
+                
+                alert("수정되었습니다.")
+                location.href="board/" + boardCode + "/" + boardNo;
 
             } else {
-                alert("수정되었습니다.")
 
-                location.href="board/" + boardCode + "/" + boardNo;
+                alert("수정 실패");
+                return;
             }
 
         })
