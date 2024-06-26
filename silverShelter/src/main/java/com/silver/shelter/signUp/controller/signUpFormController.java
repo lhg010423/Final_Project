@@ -1,5 +1,8 @@
 package com.silver.shelter.signUp.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.silver.shelter.careGiver.repository.CaregiverDao;
+import com.silver.shelter.careGiver.service.CaregiverService;
 import com.silver.shelter.member.model.dto.Member;
 import com.silver.shelter.signUp.model.service.signUpFormService;
 
@@ -61,7 +66,7 @@ public class signUpFormController {
             session.setAttribute("loginMember", inputMember);
             session.setAttribute("memberAddress", memberAddress);
             session.setAttribute("examId", examId);
-        	return "redirect:/member/signUp2";
+        	return "member/signUp2";
         	
         } else  {
             // '아니오'를 선택한 경우의 로직
@@ -100,19 +105,22 @@ public class signUpFormController {
 	    model.addAttribute("inputMember", inputMember);
 	    model.addAttribute("memberAddress", memberAddress);
 	    model.addAttribute("examId", examId);
+        
+        log.info("간병인이 성공적으로 업데이트 되었습니다.");
 
 	    return "member/signUp2"; // signUp2.html 또는 signUp2.jsp 뷰를 반환
 	}
-	
+
 	@GetMapping("member/success")
 	public String success(@SessionAttribute("inputMember") Member inputMember,
 	                          @SessionAttribute("memberAddress") String[] memberAddress,
 	                          @SessionAttribute("examId") int examId,
 	                          Model model, RedirectAttributes ra) {
     	
+		int result = service.signUp2(inputMember, memberAddress);
 
-		int result = service.signUp(inputMember, memberAddress);
 
+	    
 		inputMember.setExamId(examId);
 
 		log.info("이제 잘 넘어오겠지? : "+inputMember);

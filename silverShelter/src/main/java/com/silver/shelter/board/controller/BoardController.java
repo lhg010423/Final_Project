@@ -383,8 +383,9 @@ public class BoardController {
 	 * @return
 	 */
 	@ResponseBody
-	@PutMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardUpdate")
+	@PostMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/boardUpdate")
 	public int boardUpdate(@RequestBody Map<String, Object> map) {
+		
 		return service.boardUpdate(map);
 	}
 	

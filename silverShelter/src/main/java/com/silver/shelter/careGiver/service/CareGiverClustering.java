@@ -3,7 +3,10 @@ package com.silver.shelter.careGiver.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import com.silver.shelter.careGiver.model.CareGiver;
 @Service
@@ -23,6 +26,7 @@ public class CareGiverClustering {
             clusterCentroids.add(caregivers.get(randomIndices.get(i)));
         }
 
+        
         // 클러스터 할당
         int[] clusterAssignments = assignClusters(caregivers, clusterCentroids);
 
@@ -40,9 +44,70 @@ public class CareGiverClustering {
             clusters.get(clusterAssignments[i]).add(caregivers.get(i));
         }
 
+        // 실루엣 점수 계산
+        double silhouetteScore = calculateSilhouetteScore(caregivers, clusterAssignments);
+        System.out.println("Silhouette Score: " + silhouetteScore);
+        
         return clusters;
+        
     }
 
+    // 실루엣 점수 계산 메서드
+    private double calculateSilhouetteScore(List<CareGiver> caregivers, int[] clusterAssignments) {
+        double[] silhouetteValues = new double[caregivers.size()];
+        for (int i = 0; i < caregivers.size(); i++) {
+            double a_i = calculateA(caregivers, clusterAssignments, i);
+            double b_i = calculateB(caregivers, clusterAssignments, i);
+            silhouetteValues[i] = (b_i - a_i) / Math.max(a_i, b_i);
+        }
+        return Arrays.stream(silhouetteValues).average().orElse(Double.NaN);
+    }
+
+    // 클러스터 내부 거리 평균 계산
+    private double calculateA(List<CareGiver> caregivers, int[] clusterAssignments, int index) {
+        int clusterLabel = clusterAssignments[index];
+        double sumDistance = 0;
+        int count = 0;
+
+        for (int i = 0; i < caregivers.size(); i++) {
+            if (clusterAssignments[i] == clusterLabel && i != index) {
+                sumDistance += calculateDistance(caregivers.get(index), caregivers.get(i));
+                count++;
+            }
+        }
+
+        return count > 0 ? sumDistance / count : 0;
+    }
+
+    // 다른 클러스터와의 평균 거리 계산
+    private double calculateB(List<CareGiver> caregivers, int[] clusterAssignments, int index) {
+        int clusterLabel = clusterAssignments[index];
+        Map<Integer, Double> clusterDistanceSum = new HashMap<>();
+        Map<Integer, Integer> clusterDataCount = new HashMap<>();
+
+        for (int i = 0; i < caregivers.size(); i++) {
+            if (clusterAssignments[i] != clusterLabel) {
+                int otherCluster = clusterAssignments[i];
+                double distance = calculateDistance(caregivers.get(index), caregivers.get(i));
+                clusterDistanceSum.put(otherCluster, clusterDistanceSum.getOrDefault(otherCluster, 0.0) + distance);
+                clusterDataCount.put(otherCluster, clusterDataCount.getOrDefault(otherCluster, 0) + 1);
+            }
+        }
+
+        double minAverageDistance = Double.MAX_VALUE;
+        for (Map.Entry<Integer, Double> entry : clusterDistanceSum.entrySet()) {
+            int cluster = entry.getKey();
+            double sumDistance = entry.getValue();
+            int count = clusterDataCount.get(cluster);
+            double averageDistance = sumDistance / count;
+            if (averageDistance < minAverageDistance) {
+                minAverageDistance = averageDistance;
+            }
+        }
+
+        return minAverageDistance;
+    }
+    
     // 랜덤 인덱스 생성 메서드
     private static List<Integer> generateRandomIndices(int dataSize, int numIndices) {
         List<Integer> indices = new ArrayList<>();

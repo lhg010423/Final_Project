@@ -200,7 +200,7 @@ public class AdminServiceImpl implements AdminService{
             
             url += "/"+exam.getExamId();
             
-            log.info("url 주소는 어떻게 되지? "+url);
+            log.info("서비스impl url 주소는 어떻게 되지? "+url);
             
             try {
                

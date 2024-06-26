@@ -124,6 +124,7 @@ public class MemberServiceImpl implements MemberService{
 			
 			result = 1;
 		}
+		
 		return result;
 	}
 

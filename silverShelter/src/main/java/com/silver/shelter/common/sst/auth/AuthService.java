@@ -11,8 +11,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @PropertySource("classpath:/config.properties") // config.properties 파일로부터 프로퍼티를 로드합니다.
+@Slf4j
 public class AuthService {
 
     // config.properties 파일로부터 clientId 값을 주입받습니다.
@@ -32,6 +35,8 @@ public class AuthService {
 
             // POST 요청에 포함될 폼 데이터를 작성합니다. 
             String formBody = "client_id={YOUR_CLIENT_ID}&client_secret={YOUR_CLIENT_SECRET}";
+            
+            log.info("STT가 문제임1");
 
             // HttpRequest 객체를 생성합니다. URI와 헤더, 그리고 폼 데이터를 설정합니다.
             HttpRequest request = HttpRequest.newBuilder()
@@ -39,6 +44,8 @@ public class AuthService {
                     .header("Content-Type", "application/x-www-form-urlencoded") // Content-Type 헤더를 설정합니다.
                     .POST(HttpRequest.BodyPublishers.ofString(formBody)) // POST 요청으로 폼 데이터를 전송합니다.
                     .build();
+            
+            log.info("STT가 문제임2");
 
             // HttpRequest를 보내고, HttpResponse 객체를 받습니다.
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

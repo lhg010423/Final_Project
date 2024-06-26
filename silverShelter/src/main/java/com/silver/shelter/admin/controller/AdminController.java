@@ -54,8 +54,6 @@ public class AdminController {
 		return "admin/adminMain";
 	}
 	
-	
-	
 
 	/** 회원 정보 조회 및 검색
 	 * @param cp
@@ -223,7 +221,6 @@ public class AdminController {
 	public Map<String, Object> adminDocument(
 			@RequestBody Map<String, Integer> paramMap
 			) {
-		
 		// js로 다시 보낼 map
 		Map<String, Object> map = new HashMap<>();
 		
@@ -269,6 +266,10 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("updateAdminDocument")
 	public int updateAdminDocument(@RequestBody Map<String, Integer> map) {
+		
+		log.info("업데이트어드민 {}" , map.get("examId"));
+		
+		log.info("result {}", service.updateAdminDocument(map.get("examId")));
 
 		return service.updateAdminDocument(map.get("examId"));
 	}
@@ -282,16 +283,21 @@ public class AdminController {
 	@PostMapping("signUpAdminDocument")
 	public int signUpAdminDocument(@RequestBody Map<String, Integer> map) {
 		
+		log.info("어떻게 얻어 오는 중? == {}",map);
+		
 		String url = service.signUpAdminDocument("signUp",map.get("examId"));
 		
 		log.info("url 주소는? : "+ url);
 		
+		
 		if(url != null) {
 			
 			return 1;
+			
+		} else {
+			return 0;
 		}
 		
-		return 0;
 	}
 
 	
@@ -585,23 +591,11 @@ public class AdminController {
 		
 		model.addAttribute("board", board);
 		
-		return "/admin/boardUpdate";
+		return "admin/boardUpdate";
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/** 요양사 관리
 	 * @return
 	 */
