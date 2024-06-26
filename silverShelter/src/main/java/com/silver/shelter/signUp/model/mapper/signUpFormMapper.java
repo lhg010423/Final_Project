@@ -19,5 +19,7 @@ public interface signUpFormMapper {
 	 */
 	int signUpForm(Member inputMember);
 
+	int signUpForm2(Member inputMember);
+
 
 }
