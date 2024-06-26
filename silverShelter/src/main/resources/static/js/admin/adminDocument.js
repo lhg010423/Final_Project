@@ -3,6 +3,9 @@
 // 중복이 안된다. 버튼을 클래스명으로 불러와서 querySelectAll으로 가져온다 forEach문도 반복문때문에 쓰는거다
 
 // 심사 서류 게시글 상세조회 버튼 클릭 - 회원 이름 클릭하면 작동됨
+
+let examStatusBtn = document.getElementById("examStatusBtn");
+
 document.querySelectorAll(".examName").forEach(button => {
     button.addEventListener("click", e => {
 
@@ -35,7 +38,8 @@ document.querySelectorAll(".examName").forEach(button => {
                 
                 
                 // 상세페이지 버튼에 회원을 구분하는 심사 번호 값 넣기
-                updateButtonValue(examId);
+                //updateButtonValue(examId);
+                examStatusBtn.name = examId;
 
 
             }
@@ -46,103 +50,59 @@ document.querySelectorAll(".examName").forEach(button => {
     })
 })
 
-function updateButtonValue(examId) {
-    console.log("버튼에서 ",examId);
-    var button = document.getElementById("examStatusBtn");
-    button.name = examId;
-}
+// function updateButtonValue(examId) {
+//     console.log("버튼에서 ",examId);
+//     var button = document.getElementById("examStatusBtn");
+//     button.name = examId;
+// }
 
-// const examStatusBtn = document.querySelector("#examStatusBtn");
 
-// examStatusBtn.addEventListener("click", (e) => {
-//     fetch("/admin/updateAdminDocument", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ "examId": e.target.name })
-//     })
-//     .then(resp => resp.json())
-//     .then(result => {
-//         if (result == 0) {
-//             alert("서류심사 실패");
-//         } else {
-//             alert("서류 심사 통과");
+//const examStatusBtn = document.querySelector("#examStatusBtn");
 
-//             fetch("/admin/signUpAdminDocument", {
-//                 method: "POST",
-//                 headers: { "Content-Type": "application/json" },
-//                 body: JSON.stringify({ "examId": e.target.name })
-//             })
-//             .then(resp2 => resp2.json())
-//             .then(count => {
-//                 console.log("값이 어떻게 넘어오려나", count);
+examStatusBtn.addEventListener("click", (e) => {    
 
-//                 if (count > 0) {
-//                     alert("이메일이 전송되었습니다.");
-//                     location.reload(); // 페이지를 새로 고침
-//                 } else {
-//                     alert("이메일 전송 실패..");
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error("이메일 전송 요청 중 오류가 발생했습니다:", error);
-//                 alert("이메일 전송 실패..");
-//             });
-//         }
-//     })
-//     .catch(error => {
-//         console.error("서류심사 요청 중 오류가 발생했습니다:", error);
-//         alert("서류심사 실패");
-//     });
-// });
-
-examStatusBtn.addEventListener("click", (e) => {
-    
+    console.log("examId : ", e.target.name);
 
     fetch("/admin/updateAdminDocument", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
         body: JSON.stringify({"examId" : e.target.name})
     })
-    .then(resp => resp.json())
+    .then(resp => resp.text())
     .then(result => {
 
+        console.log("updateAdminDocument : ", result);
+
         if(result == 0) {
-            alert("서류심사 실패")
+            alert("서류심사 실패");
         
         } else{
-            alert("서류 심사 통과")
+            alert("서류 심사 통과");
+            e.preventDefault();
 
             fetch("/admin/signUpAdminDocument",{
                 method : "POST",
                 headers : {"Content-Type" : "application/json"},
                 body: JSON.stringify({"examId" : e.target.name})              
             })
-            .then(resp2 => resp2.json())
+            .then(resp2 => resp2.text())
             .then(count => {
-                console.log("값이 어떻게 넘어오려나",count);
+                console.log("signUpAdminDocument : ",count);
 
-                if(count > 0){
-                    alert("이메일이 전송되었습니다.")
-
-                    location.reload(); // 페이지를 새로 고침
-                
-                } else {
-                    
-                    alert("이메일 전송 실패..")
-
+                if(count == 0){
+                    alert("이메일 전송 실패..");
                     return;
+                    
+                } else {
+                    alert("이메일이 전송되었습니다.");
                 }
             })
-            .catch(error => {
-                console.error("이메일 전송 요청 중 오류가 발생했습니다:", error);
-                alert("이메일 전송 중 오류..");
-            })
+
         }
+
+
+
     })
-    .catch(error => {
-        console.error("서류심사 요청 중 오류가 발생했습니다:", error);
-        alert("서류심사 중 오류 발생");
-    });
+
     
 });
-

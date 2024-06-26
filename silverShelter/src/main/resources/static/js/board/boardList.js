@@ -15,33 +15,38 @@ if(insertBtn != null) {
 }
 
 // 상단 게시판이동하는 a태그 클릭시 밑줄이 유지되는 코드
-document.addEventListener("DOMContentLoaded", function() {
-    const links = document.querySelectorAll('.boardHeader a');
-    const defaultBoardCode = '1';
+// document.addEventListener("DOMContentLoaded", function() {
+//     const links = document.querySelectorAll('.boardHeader a');
+//     const defaultBoardCode = '1';
+//     let storedBoardCode = localStorage.getItem('activeBoardCode') || defaultBoardCode;
 
-    // 모든 링크에서 'active' 클래스 제거
-    function removeActiveClasses() {
-        links.forEach(link => link.classList.remove('active'));
-    }
+//     // 모든 링크에서 'active' 클래스 제거
+//     function removeActiveClasses() {
+//         links.forEach(link => link.classList.remove('active'));
+//     }
 
-    links.forEach(link => {
+//     // 로컬 저장소에 저장된 값에 맞는 링크에 'active' 클래스 추가
+//     function setActiveLink(boardCode) {
+//         removeActiveClasses();
+//         links.forEach(link => {
+//             if (link.href.includes(`boardCode=${boardCode}`)) {
+//                 link.classList.add('active');
+//             }
+//         });
+//     }
 
-        // 기본 활성화할 링크에 'active' 클래스 추가
-        if(link.href.inclues(defaultBoardCode)) {
-            link.classList.add('active');
-        }
+//     // 초기 로드 시 활성 링크 설정
+//     setActiveLink(storedBoardCode);
 
-        link.addEventListener('click', function(e) {
-            // 기본 링크 동작을 방지
-            e.preventDefault();
+//     links.forEach(link => {
+//         link.addEventListener('click', function(event) {
+//             // 클릭된 링크의 boardCode 값을 로컬 저장소에 저장
+//             const urlParams = new URLSearchParams(this.href.split('?')[1]);
+//             const boardCode = urlParams.get('boardCode');
+//             localStorage.setItem('activeBoardCode', boardCode);
 
-            // 모든 링크에서 'active' 클래스 제거
-            removeActiveClasses();
-            // links.forEach(link => link.classList.remove('active'));
-
-            // 클릭된 링크에 'active' 클래스 추가
-            this.classList.add('active');
-
-        })
-    })
-})
+//             // 페이지 이동이 일어나기 전에 active 클래스 설정
+//             setActiveLink(boardCode);
+//         });
+//     });
+// });

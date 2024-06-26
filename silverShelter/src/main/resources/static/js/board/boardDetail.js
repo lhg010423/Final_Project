@@ -23,11 +23,12 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
+
                 const currentUrl = window.location.href;
                 const newUrl = currentUrl.replace('/boardUpdate', '');
                 alert("수정되었습니다.")
                 location.href = newUrl;
-                          
+
             } else {
 
                 alert("수정 실패");
@@ -86,12 +87,12 @@ if(deleteBtn != null) {
                 }
             })
 
-        }
-
     })
-
-
 }
+
+
+
+
 
 // 좋아요 클릭 했을 때
 document.querySelector("#boardLike").addEventListener("click", e => {

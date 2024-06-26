@@ -139,6 +139,7 @@ public class BoardController {
 		
 		// 조회 결과가 없을 때
 		if(board == null) {
+			// 수정@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			path = "redirect:/board/" + boardCode;
 			
 		} else {
@@ -306,7 +307,7 @@ public class BoardController {
 		
 		if(boardNo > 0) {
 			// /board/1/2000
-			path = "/board/" + boardCode + "/" + boardNo; // 상세 조회
+			path = "board/" + boardCode + "/" + boardNo; // 상세 조회
 			message = "게시글이 작성 되었습니다";
 			
 		} else {

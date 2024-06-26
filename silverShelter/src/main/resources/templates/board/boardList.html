@@ -20,6 +20,7 @@
     <main>
         <th:block th:replace="~{common/headerNav}"></th:block>
 
+
         <!-- <img src="/images/main/main.png" class="main"> -->
         <th:block th:replace="~{common/mainNav}"></th:block>
 
@@ -31,13 +32,25 @@
                 <th:block th:each="boardType : ${application.boardTypeList}">
                     <a th:text="${boardType.boardName}"
                         th:href="@{/board/{boardCode}(boardCode=${boardType.boardCode})}"
-                        th:classappend="${boardType.boardCode == 1 ? 'active' : ''}">게시판 이름</a>
-                </th:block>
+                        >게시판 이름</a>
 
+                    <!-- <h1 th:text="${boardType.boardName}"></h1>     -->
+                        <!-- th:classappend="${boardType.boardCode == ${currentBoardCode} ? 'active' : ''}" -->
+                        <!-- <div>Current Board Code: <span th:text="${currentBoardCode}">1</span></div> -->
+                </th:block>
+                    
                 <th:block th:unless="${application.boardTypeList}">
                     <h1>값 없음</h1>
                 </th:block>
+
+                <!-- <th:block th:if="${application.boardTypeList.boardCode} == 1">
+                    <h2 th:text="공지게시판"></h2>
+                </th:block> -->
             </div>
+
+            <!-- 게시판 이동 a태그 밑 게시글 제목 -->
+            <!-- <div class="boardHeader-name" th:each="boardType : ${application.boardTypeList}">
+            </div> -->
     
             <!-- 상단 a태그 공간을 제외한 나머지 공간 전부 -->
             <div class="boardBody">
@@ -82,8 +95,15 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="btn-area">
-                    <button id="insertBtn" th:if="${session.loginMember}">글쓰기</button>
+                <div class="btn-area" th:if="${session.loginMember != null}">
+                    <!-- <button id="insertBtn" th:if="${application.boardTypeList} == 1 ? true : false">글쓰기</button> -->
+
+                     <!-- boardCode가 1이고, memberRole이 1일 때만 버튼 표시 -->
+                    <button id="insertBtn" th:if="${currentBoardCode == 1 and session.loginMember.memberRole == 1}">글쓰기</button>
+
+                    <!-- boardCode가 1이 아니면 로그인한 사용자에게 버튼 표시 -->
+                    <button id="insertBtn" th:if="${currentBoardCode != 1}">글쓰기</button>
+
                 </div>
 
                 <div class="pagination-area">

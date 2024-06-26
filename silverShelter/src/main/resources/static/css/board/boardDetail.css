@@ -59,7 +59,8 @@ main {
     width: 800px;
     min-height: 600px;
     /* background-color: gray; */
-    border: 1px solid black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     flex-direction: column;
     padding: 30px;
     margin-top: 55px;
@@ -115,6 +116,7 @@ main {
     display: flex;
     width: 200px;
     justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* 조회수, 좋아요 마진 설정 */
