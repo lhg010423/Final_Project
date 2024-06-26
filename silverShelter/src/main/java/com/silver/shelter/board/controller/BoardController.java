@@ -371,7 +371,7 @@ public class BoardController {
 		
 		log.info("board {}" + board);
 		
-		return "/board/boardUpdate";
+		return "board/boardUpdate";
 	}
 	
 	
