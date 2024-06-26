@@ -31,7 +31,6 @@ if(updateBtn != null) {
 
                 // 수정이 완료되었음을 알리는 메시지
                 alert("수정되었습니다.");
-
                 // 새로운 주소로 이동
                 location.href = newUrl;
             } else {

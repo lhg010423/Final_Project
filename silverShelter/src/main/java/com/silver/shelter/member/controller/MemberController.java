@@ -318,7 +318,5 @@ public class MemberController {
          return "redirect:/member/secession"; // 탈퇴 페이지로 다시 리디렉션
       }
       
-      
-      
    }
 }
