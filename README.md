@@ -1,22 +1,20 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=E9D427&height=150&section=header&text=Golden%20Prestige&fontSize=45" />
-
+<div align=center>
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=E9D427&height=150&section=header&text=Golden%20Prestige&fontSize=45" />
+</div>
 
 
 <div align=center>
 	KH 정보교육원 Final Project💻
 		<br>
 		<br>
-	Team SilverShelter
+	<h3><b>Team SilverShelter</b>💻💻</h3>
 		<br>
 		<br>
-		<br>
-	팀장 김선규: 👩🏽 /SeonKyuKimm
-		<br>
-	팀원 박수찬 : 🧒 /gorru135
-		<br>
-	팀원 이형구 : 🧒 /lhg010423
-		<br>
-	팀원 최윤정 : 👩 /choiyunjung88
+	<h4>　　팀장 김선규 : 👩🏽 /SeonKyuKimm</h4>
+	<h4>팀원 박수찬 : 🧒 /gorru135</h4>
+	<h4>팀원 이형구 : 🧒 /lhg010423</h4>  
+	<h4>　　팀원 최윤정 : 👩 /choiyunjung88</h4>
+	</h4>
 </div>
 
 <br>
@@ -54,7 +52,7 @@
 </div>
 <br><br><br>
 
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=E9D427&height=150&section=footer" />
-
+<div align=center>
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=E9D427&height=150&section=footer" />
+</div>
 
