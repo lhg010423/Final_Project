@@ -13,7 +13,7 @@ public class ExceptionController {
 		return "error/404";
 	}
 	
-	@ExceptionHandler(Exception.class)
+	//@ExceptionHandler(Exception.class)
 	public String allExceptionHandler(Exception e, Model model) {
 		
 		e.printStackTrace();
