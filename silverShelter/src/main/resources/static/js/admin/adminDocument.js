@@ -83,7 +83,7 @@ examStatusBtn.addEventListener("click", (e) => {
                 if(count > 0){
                     alert("이메일이 전송되었습니다.")
 
-                    location.href = location.pathname;
+                    location.href = location.href;
                 
                 } else {
                     
