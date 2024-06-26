@@ -83,7 +83,7 @@ public class CommentController {
 	 * @param commentNo
 	 * @return
 	 */
-	@DeleteMapping("delete")
+	@PostMapping("delete")
 	public int delete(@RequestBody int commentNo) {
 		return service.delete(commentNo);
 	}
@@ -93,7 +93,7 @@ public class CommentController {
 	 * @param comment
 	 * @return
 	 */
-	@PutMapping("update")
+	@PostMapping("update")
 	public int update(@RequestBody Comment comment) {
 		return service.update(comment);
 	}

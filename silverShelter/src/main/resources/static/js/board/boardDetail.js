@@ -15,7 +15,7 @@ if(updateBtn != null) {
         };
 
         fetch(`/board/${boardCode}/${boardNo}/boardUpdate`, {
-            method : "PUT",
+            method : "POST",
             headers : {"Content-Type" : "application/json"},
             body : JSON.stringify(obj)
         })
@@ -23,8 +23,6 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
-                // alert("수정되었습니다.")
-                // location.href="/board/" + boardCode + "/" + boardNo;
 
                 const currentUrl = window.location.href;
                 const newUrl = currentUrl.replace('/boardUpdate', '');
@@ -32,7 +30,9 @@ if(updateBtn != null) {
                 location.href = newUrl;
 
             } else {
+
                 alert("수정 실패");
+                // return;
             }
 
         })
@@ -67,6 +67,7 @@ if(deleteBtn != null) {
         if(!answer) {
             alert("삭제 취소");
             return;
+
         } else {
             
             fetch(`/board/${boardCode}/${boardNo}/boardDelete`, {
@@ -76,15 +77,16 @@ if(deleteBtn != null) {
             })
             .then(resp => resp.text())
             .then(result => {
+
                 if(result == 0 ) {
                     console.log("삭제 중 오류가 발생했습니다.");
+                
+                } else {
+                    alert("게시글이 삭제되었습니다.");
+                    location.href = `/board/${boardCode}`;
                 }
             })
-            alert("게시글이 삭제되었습니다.");
 
-        }
-
-        location.href = `/board/${boardCode}`;
     })
 }
 
