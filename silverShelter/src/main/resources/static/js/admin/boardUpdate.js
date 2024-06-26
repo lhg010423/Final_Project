@@ -16,7 +16,7 @@ if(updateBtn != null) {
 
         // boardController 그대로 쓰기
         fetch(`/board/${boardCode}/${boardNo}/boardUpdate`, {
-            method : "PUT",
+            method : "POST",
             headers : {"Content-Type" : "application/json"},
             body : JSON.stringify(obj)
         })
@@ -24,8 +24,10 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace('/boardUpdate', '');
                 alert("수정되었습니다.")
-                location.href="/admin/" + boardCode + "/" + boardNo;
+                location.href = newUrl;
             } else {
                 alert("수정 실패");
             }

@@ -3,43 +3,6 @@ const cancelBtn = document.getElementById("cancelBtn");
 const boardTitle = document.getElementById("boardTitle");
 const boardContent = document.getElementById("boardContent");
 
-// 게시글 수정하기
-if(updateBtn != null) {
-
-    updateBtn.addEventListener("click", () => {
-        
-        const obj = {
-            "boardNo"   : boardNo,
-            "boardTitle" : boardTitle.value,
-            "boardContent" : boardContent.value
-        };
-
-        fetch(`/admin/${boardCode}/${boardNo}/boardUpdate`, {
-            method : "POST",
-            headers : {"Content-Type" : "application/json"},
-            body : JSON.stringify(obj)
-        })
-        .then(resp => resp.text())
-        .then(result => {
-
-            if(result > 0) {
-                const currentUrl = window.location.href;
-                const newUrl = currentUrl.replace('/boardUpdate', '');
-                alert("수정되었습니다.")
-                location.href = newUrl;
-                         
-            } else {
-                alert("수정 실패");
-            }
-
-        })
-
-
-    })
-
-}
-
-
 // 게시글 수정 취소
 if(cancelBtn != null) {
 
@@ -85,6 +48,7 @@ if(deleteBtn != null) {
 
 
         }
+
 
     })
 
