@@ -17,7 +17,7 @@
 	<h4>　　팀원 최윤정 : 👩 /choiyunjung88</h4>
 </div>
 <details align=center>
-  <summary><b>Do🐱‍👤</b></summary>
+  <summary><b>Do🐱‍👤(Click Me!)</b></summary>
 	<h4><b>김선규</b></h4>
 	메인화면 구현 , 회원관련, 로그인, 로그아웃, 마이페이지 등<br>
  	<h4><b>박수찬</b></h4>
