@@ -54,8 +54,6 @@ public class AdminController {
 		return "admin/adminMain";
 	}
 	
-	
-	
 
 	/** 회원 정보 조회 및 검색
 	 * @param cp
@@ -585,23 +583,11 @@ public class AdminController {
 		
 		model.addAttribute("board", board);
 		
-		return "/admin/boardUpdate";
+		return "admin/boardUpdate";
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/** 요양사 관리
 	 * @return
 	 */
