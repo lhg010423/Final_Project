@@ -15,7 +15,7 @@
 	<h4>팀원 박수찬 : 🧒 /gorru135</h4>
 	<h4>팀원 이형구 : 🧒 /lhg010423</h4>  
 	<h4>　　팀원 최윤정 : 👩 /choiyunjung88</h4>
-	</h4>
+	<h4><a src="https://www.canva.com/design/DAGIpg5f1oQ/1xiZkQCfUAGFXtwoK8K9IA/edit">포트폴리오</a></h4>
 </div>
 
 <br>
