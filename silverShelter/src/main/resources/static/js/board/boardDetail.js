@@ -23,10 +23,13 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
-
-                alert("수정되었습니다.")
-                location.href="goldenprestige.store/board/" + boardCode + "/" + boardNo;
-
+                // var currentUrl = window.location.href;
+                // var newUrl = currentUrl.replace('/boardUpdate', '');
+                // alert("수정되었습니다.")
+                // location.href = newUrl;
+                location.href = location.pathname
+                + "/update";
+                          
             } else {
 
                 alert("수정 실패");
