@@ -4,7 +4,8 @@
 
 
 <div align=center>
-	KH 정보교육원 Final Project💻
+	KH 정보교육원 Final Project💻<br>
+	240520~240627
 		<br>
 		<br>
 	<h3><b>Team SilverShelter</b>💻💻</h3>
@@ -18,7 +19,31 @@
 </div>
 
 <br>
+<br>
 
+<hr>
+
+<div align=center>
+	<b>Golden Prestige 는 시니어의 복지와 건강을 지항햐는 Web Application입니다.</b>
+</div>
+
+<br>
+
+<br>
+<div align=center>
+	<p>✨✨About Us </p>
+</div>
+<div align=center>
+	- 우리 어플리케이션은 회원들의 정보를 소중히 저장합니다.<br>
+	- 우리 어플리케이션은 회원들의 건강과 복지를 지향합니다.<br>
+	- 우리 어플리케이션은 회원들의 질병에 민감히 관리합니다.<br>
+	- 우리 어플리케이션은 회원들간의 소통 방법을 제공합니다.<br>
+	- 우리 어플리케이션은 회원들에게 해당 운영을 공지합니다.
+</div>
+
+<hr>
+
+<br>
 <div align=center>
 	<p>📚Languages</p>
 </div>
