@@ -15,8 +15,22 @@
 	<h4>팀원 박수찬 : 🧒 /gorru135</h4>
 	<h4>팀원 이형구 : 🧒 /lhg010423</h4>  
 	<h4>　　팀원 최윤정 : 👩 /choiyunjung88</h4>
-	<h4><a src="https://www.canva.com/design/DAGIpg5f1oQ/1xiZkQCfUAGFXtwoK8K9IA/edit">포트폴리오</a></h4>
 </div>
+<details align=center>
+  <summary><b>Do🐱‍👤</b></summary>
+	<h4><b>김선규</b></h4>
+	메인화면 구현 , 회원관련, 로그인, 로그아웃, 마이페이지 등<br>
+ 	<h4><b>박수찬</b></h4>
+  	단지소개, 입주안내 / 신청, 회원가입 폼 이메일 전송 날씨 api<br>
+   	시설 예약 CRUD, 채팅 (Web Socket)<br>
+    	<h4><b>이형구</b></h4>
+	게시판 , 댓글 , 관리자 페이지<br>
+ 	<h4><b>최윤정</b></h4>
+	의료센터 ( 메인 , 소개 , 예약 , AI 알고리즘 기반 요양사 매칭 , 장례 UI) <br>
+
+ 	포트폴리오 (PPT) 링크 :https://www.canva.com/design/DAGIpg5f1oQ/1xiZkQCfUAGFXtwoK8K9IA/edit 
+</details>
+
 
 <br>
 <br>
