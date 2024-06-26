@@ -23,11 +23,10 @@ if(updateBtn != null) {
         .then(result => {
 
             if(result > 0) {
-                // var currentUrl = window.location.href;
-                // var newUrl = currentUrl.replace('/boardUpdate', '');
-                // alert("수정되었습니다.")
-                // location.href = newUrl;
-                location.href = location.pathname + location.search;
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace('/boardUpdate', '');
+                alert("수정되었습니다.")
+                location.href = newUrl;
                           
             } else {
 
