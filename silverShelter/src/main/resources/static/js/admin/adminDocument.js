@@ -55,50 +55,91 @@ function updateButtonValue(examId) {
 const examStatusBtn = document.querySelector("#examStatusBtn");
 
 examStatusBtn.addEventListener("click", (e) => {
-    
-
     fetch("/admin/updateAdminDocument", {
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
-        body: JSON.stringify({"examId" : e.target.name})
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "examId": e.target.name })
     })
     .then(resp => resp.json())
     .then(result => {
+        if (result == 0) {
+            alert("서류심사 실패");
+        } else {
+            alert("서류 심사 통과");
 
-        if(result == 0) {
-            alert("서류심사 실패")
-        
-        } else{
-            alert("서류 심사 통과")
-
-            fetch("/admin/signUpAdminDocument",{
-                method : "POST",
-                headers : {"Content-Type" : "application/json"},
-                body: JSON.stringify({"examId" : e.target.name})              
+            fetch("/admin/signUpAdminDocument", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "examId": e.target.name })
             })
             .then(resp2 => resp2.json())
             .then(count => {
-                console.log("값이 어떻게 넘어오려나",count);
+                console.log("값이 어떻게 넘어오려나", count);
 
-                if(count > 0){
-                    alert("이메일이 전송되었습니다.")
-
-                    location.href = location.href;
-                
+                if (count > 0) {
+                    alert("이메일이 전송되었습니다.");
+                    location.reload(); // 페이지를 새로 고침
                 } else {
-                    
-                    alert("이메일 전송 실패..")
-
-                    return;
+                    alert("이메일 전송 실패..");
                 }
             })
-
+            .catch(error => {
+                console.error("이메일 전송 요청 중 오류가 발생했습니다:", error);
+                alert("이메일 전송 실패..");
+            });
         }
-
-
-
     })
+    .catch(error => {
+        console.error("서류심사 요청 중 오류가 발생했습니다:", error);
+        alert("서류심사 실패");
+    });
+});
+
+// examStatusBtn.addEventListener("click", (e) => {
+    
+
+//     fetch("/admin/updateAdminDocument", {
+//         method : "POST",
+//         headers : {"Content-Type" : "application/json"},
+//         body: JSON.stringify({"examId" : e.target.name})
+//     })
+//     .then(resp => resp.json())
+//     .then(result => {
+
+//         if(result == 0) {
+//             alert("서류심사 실패")
+        
+//         } else{
+//             alert("서류 심사 통과")
+
+//             fetch("/admin/signUpAdminDocument",{
+//                 method : "POST",
+//                 headers : {"Content-Type" : "application/json"},
+//                 body: JSON.stringify({"examId" : e.target.name})              
+//             })
+//             .then(resp2 => resp2.json())
+//             .then(count => {
+//                 console.log("값이 어떻게 넘어오려나",count);
+
+//                 if(count > 0){
+//                     alert("이메일이 전송되었습니다.")
+
+//                     location.href = location.href;
+                
+//                 } else {
+                    
+//                     alert("이메일 전송 실패..")
+
+//                     return;
+//                 }
+//             })
+
+//         }
+
+
+
+//     })
 
     
-});
+// });
 
