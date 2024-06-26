@@ -251,7 +251,8 @@ public class BoardController {
 			commentMap = cs.commentSearchSelect(cparamMap, commentPage);
 		}
 		
-		
+		System.out.println(commentKey);
+		System.out.println(commentQuery);
 		
 		model.addAttribute("board",board);
 		model.addAttribute("author", author);
