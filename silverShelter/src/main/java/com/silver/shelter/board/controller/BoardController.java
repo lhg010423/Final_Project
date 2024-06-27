@@ -444,6 +444,9 @@ public class BoardController {
 			
 		}
 		
+		
+		System.out.println("BoardController -> commentList : "+map);
+		
 		model.addAttribute("commentList", map.get("commentList"));
 		model.addAttribute("commentCount", map.get("commentCount"));
 		model.addAttribute("pagination", map.get("pagination"));
