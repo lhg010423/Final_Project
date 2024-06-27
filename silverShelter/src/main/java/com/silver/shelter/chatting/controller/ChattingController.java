@@ -40,6 +40,7 @@ public class ChattingController {
 		return "chatting/chatting";
 	}
 	
+	// 채팅 상대 검색
     @GetMapping("selectTarget")
     @ResponseBody
 	public List<Member> selectTarget(@RequestParam("query")String query,

@@ -242,6 +242,7 @@ public class BoardController {
 		cparamMap.put("commentKey", commentKey);
 		cparamMap.put("commentQuery", commentQuery);
 		
+		System.out.println("boardNo : "+boardNo + "cp : " + commentPage);
 		
 		if(commentKey == null) {
 			
@@ -253,6 +254,8 @@ public class BoardController {
 		
 		System.out.println(commentKey);
 		System.out.println(commentQuery);
+		
+		System.out.println("commentMap : "+commentMap);
 		
 		model.addAttribute("board",board);
 		model.addAttribute("author", author);
@@ -308,7 +311,7 @@ public class BoardController {
 		
 		if(boardNo > 0) {
 			// /board/1/2000
-			path = "board/" + boardCode + "/" + boardNo; // 상세 조회
+			path = "/board/" + boardCode + "/" + boardNo; // 상세 조회
 			message = "게시글이 작성 되었습니다";
 			
 		} else {
