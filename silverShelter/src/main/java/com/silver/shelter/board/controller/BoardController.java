@@ -311,7 +311,7 @@ public class BoardController {
 		
 		if(boardNo > 0) {
 			// /board/1/2000
-			path = "board/" + boardCode + "/" + boardNo; // 상세 조회
+			path = "/board/" + boardCode + "/" + boardNo; // 상세 조회
 			message = "게시글이 작성 되었습니다";
 			
 		} else {
